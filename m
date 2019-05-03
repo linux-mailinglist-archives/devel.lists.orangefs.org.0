@@ -2,32 +2,64 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id A90BD110A7
-	for <lists+devel-orangefs@lfdr.de>; Thu,  2 May 2019 02:31:06 +0200 (CEST)
-Received: from [::1] (port=59674 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id F08A81297C
+	for <lists+devel-orangefs@lfdr.de>; Fri,  3 May 2019 10:05:28 +0200 (CEST)
+Received: from [::1] (port=40236 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.91)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hLzcv-0002EH-CT
-	for lists+devel-orangefs@lfdr.de; Wed, 01 May 2019 20:31:05 -0400
-Received: from www1036m.sakura.ne.jp ([182.48.1.36]:56871)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.91) (envelope-from <info@worldwidecapitallending.com>)
- id 1hLzcu-0002AG-GS
- for devel@lists.orangefs.org; Wed, 01 May 2019 20:31:04 -0400
-Received: from WIN-CR1TGT64VG5
- (ec2-3-112-126-74.ap-northeast-1.compute.amazonaws.com [3.112.126.74])
- (authenticated bits=0)
- by www1036m.sakura.ne.jp (8.14.9/8.14.9) with ESMTP id x420TxOH026843
- for <devel@lists.orangefs.org>; Thu, 2 May 2019 09:30:22 +0900 (JST)
- (envelope-from info@worldwidecapitallending.com)
-Message-Id: <201905020030.x420TxOH026843@www1036m.sakura.ne.jp>
-From: "Justus Chimba Ndeto" <info@worldwidecapitallending.com>
-Subject: RE: [JCN) SVN FINAN INVET:
-To: devel@lists.orangefs.org
+	id 1hMTCB-0006JY-On
+	for lists+devel-orangefs@lfdr.de; Fri, 03 May 2019 04:05:27 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:46666)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ (Exim 4.91) (envelope-from <anushka@webtrangle.us>)
+ id 1hMTCA-0006I1-RQ
+ for devel@lists.orangefs.org; Fri, 03 May 2019 04:05:26 -0400
+Received: by mail-pf1-f195.google.com with SMTP id j11so2488812pff.13
+ for <devel@lists.orangefs.org>; Fri, 03 May 2019 01:05:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=webtrangle.us; s=google;
+ h=from:to:subject:date:message-id:mime-version:thread-index
+ :content-language;
+ bh=3/m0A4Vm/BJcgNSfCK562gdaIq5BisTmgq7HVw7w93A=;
+ b=CV5tDf2sSjB7jz7GYUlr50/mI4877x63QdrBFphJcjsPve3/Bqz51YG4/Y3XCghDw/
+ pT+Az2AgIOFzm99/FC6CUkHe6fb/kGki5zwoXJ6KhCaHt1fvam/7fG6a3ExrWHXFDXgL
+ pnmEanAHKRWG3mpQqCnhsFm8KUgt+kWUt+EOA/un+vrvXV9tmlYLFYQZxYwKsCTtuPe0
+ rwwnGglhLN7X8NPzgXCzkNxeGSxhxXaCLgfeDartFzh7yDg8at2tSPQ11a0SArH0FpgE
+ q8Aa/8W858cCtf2Gzp1S8JcFvXb8Bt7B0iYWpMp4HYlEy1sN/N+X0kFTrJlhFrgjGQQQ
+ eMwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :thread-index:content-language;
+ bh=3/m0A4Vm/BJcgNSfCK562gdaIq5BisTmgq7HVw7w93A=;
+ b=clDHoEaR0SgOJBnZYt2YOq36tnukoY4rzVQRAOGqJrHqJeHdBT85XSAhYQ0Hf/7laM
+ U0mbokd/FaiGlivB3VZnK7qf3cHVDxI7JEV0W/2uGFbliC6wuWyVgc5Um9klylEfZ/DZ
+ qp+lWX1RoFyLq5TbEsWK9hRQsKCKgz9phpK5SnBZG6bj0zEwdPhwlYkgcK7AMlCQ18zy
+ q9xuV2G2meCJ9KVkYClmPl2RCFsD7XQJ1asq8jBO2I3kreDW7CBQwlX6/X/L+760+gJH
+ xAxd/ZpeKTYmbOa2wYJfLUetjdfxxXJc//1aJQFvZf0T00bWwzdlIVUY5RnfIYa8Lb8B
+ R9gw==
+X-Gm-Message-State: APjAAAUDzwy4kT0eyUWWhAAAK2IXKNUtRANQCf7TpOmhTSWazobdV/Jg
+ PiXRVddx+2xXFzXKK5Vp4dFNkij266U=
+X-Google-Smtp-Source: APXvYqw6pTylo/hxn8RzTJbRhCzbNTAJxVffsoccF1DDfA/bcgDiEfQQkIRZnWo3knLRj+sYM89npA==
+X-Received: by 2002:a62:2a55:: with SMTP id q82mr6453832pfq.90.1556870685507; 
+ Fri, 03 May 2019 01:04:45 -0700 (PDT)
+Received: from omPC ([223.179.146.50])
+ by smtp.gmail.com with ESMTPSA id m131sm3629317pfc.25.2019.05.03.01.04.43
+ for <devel@lists.orangefs.org>
+ (version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Fri, 03 May 2019 01:04:44 -0700 (PDT)
+From: "Anushka" <anushka@webtrangle.us>
+To: <devel@lists.orangefs.org>
+Subject: Proposal-iOS & Android Apps
+Date: Fri, 3 May 2019 13:34:32 +0530
+Message-ID: <54a101d50186$f6b266f0$e41734d0$@us>
 MIME-Version: 1.0
-Date: Thu, 2 May 2019 00:30:21 +0000
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AdUBhsJkDAlK3w3BTBGvhGwJrp0H9A==
+Content-Language: en-us
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.27
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
@@ -40,7 +72,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: justusnde@outlook.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -54,26 +85,23 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
- - This mail is in HTML. Some elements may be ommited in plain text. -
+Hello devel@lists.orangefs.org,
 
-Hello,
-we write to bring to your notice our investment interests and opportun=
-ities. We specialize in growth capital investments both in start up pr=
-ojects and existing businesses needing funding or Loan for expansion. =
-We seek to invest in a broad range of areas of businesses around the w=
-orld.
-We would finance any good, legitimate and viable business anywhere on =
-earth, if its fundamentals are good. Flexible options are available, r=
-anging from profits sharing joint venture, or equity participation, or=
- as Direct Foreign Investments or pure projects financing.
-We finance without asking for collateral. And the period can be varied=
-, from short to long terms, depending on each business/project's' pecu=
-liar needs and circumstances. We will like to partner with you/your co=
-mpany if you are interested in our services and if our Investment prop=
-osal above meets your investments' funding needs as we are committed t=
-o helping businesses develop and succeed.
-Kindly send us your your terms and condition through my personal email:
-justusnde@outlook.com
-Looking forward to hearing from you.
-Regards,
-Justus Chimba Ndeto.
+ 
+
+My name is Anushka, and we are a team of Professional IOS & Android Apps
+developer with 10+ years' experience based in India. Do you need a great App
+adjusted or built from scratch?
+
+ 
+
+Reply me if you need any kinds of help in mobile Apps.
+
+ 
+
+Thanks & Regards,
+
+Anushka,  
+
+Web Development Manager
+

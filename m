@@ -2,60 +2,61 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id F08A81297C
-	for <lists+devel-orangefs@lfdr.de>; Fri,  3 May 2019 10:05:28 +0200 (CEST)
-Received: from [::1] (port=40236 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3217161EB
+	for <lists+devel-orangefs@lfdr.de>; Tue,  7 May 2019 12:26:14 +0200 (CEST)
+Received: from [::1] (port=44642 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.91)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hMTCB-0006JY-On
-	for lists+devel-orangefs@lfdr.de; Fri, 03 May 2019 04:05:27 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:46666)
+	id 1hNxIb-0008Vt-MS
+	for lists+devel-orangefs@lfdr.de; Tue, 07 May 2019 06:26:13 -0400
+Received: from mail-pl1-f196.google.com ([209.85.214.196]:39580)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.91) (envelope-from <anushka@webtrangle.us>)
- id 1hMTCA-0006I1-RQ
- for devel@lists.orangefs.org; Fri, 03 May 2019 04:05:26 -0400
-Received: by mail-pf1-f195.google.com with SMTP id j11so2488812pff.13
- for <devel@lists.orangefs.org>; Fri, 03 May 2019 01:05:06 -0700 (PDT)
+ (Exim 4.91) (envelope-from <haseeb@webtrangle.us>)
+ id 1hNxIa-0008Ur-SG
+ for devel@lists.orangefs.org; Tue, 07 May 2019 06:26:12 -0400
+Received: by mail-pl1-f196.google.com with SMTP id g9so547227plm.6
+ for <devel@lists.orangefs.org>; Tue, 07 May 2019 03:25:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=webtrangle.us; s=google;
  h=from:to:subject:date:message-id:mime-version:thread-index
  :content-language;
- bh=3/m0A4Vm/BJcgNSfCK562gdaIq5BisTmgq7HVw7w93A=;
- b=CV5tDf2sSjB7jz7GYUlr50/mI4877x63QdrBFphJcjsPve3/Bqz51YG4/Y3XCghDw/
- pT+Az2AgIOFzm99/FC6CUkHe6fb/kGki5zwoXJ6KhCaHt1fvam/7fG6a3ExrWHXFDXgL
- pnmEanAHKRWG3mpQqCnhsFm8KUgt+kWUt+EOA/un+vrvXV9tmlYLFYQZxYwKsCTtuPe0
- rwwnGglhLN7X8NPzgXCzkNxeGSxhxXaCLgfeDartFzh7yDg8at2tSPQ11a0SArH0FpgE
- q8Aa/8W858cCtf2Gzp1S8JcFvXb8Bt7B0iYWpMp4HYlEy1sN/N+X0kFTrJlhFrgjGQQQ
- eMwg==
+ bh=2W6hIkXELppAvvr54N7RrTLVbgj+3qPyuGkeQsX2mLU=;
+ b=kSvLj/qXzPXD2AbHW/6LxGMUwes+QUCt0T0rdKPa8Xdpaa7z8SB5CgIujd8UwzEQxQ
+ hdyoMBsPVf6Ry56r/u7OnoX9i16tUkmOysR7p2Jc1Oe3XqxucopXu2t1QUThTWp2Ac7Y
+ 6CSFIZJhtOsxKg1/O38rXbLpAXxCCY1swH5LxY4Cl5gye/OyKUD9oPtv0ALhDzgXygi7
+ ZANDjtf9J3CCYH4V8TW9fX2bkZMm782IOwdzdvHimYkTd7V3Nh+hrQ95PVXh1Ws4DTEs
+ zsdHFZvDW1mpwB2tFGESz/5ZcCklKyzOP+e+bAW/zQL8c+RfF8VkVv1kFhM+OI4mkrHN
+ vnng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:mime-version
  :thread-index:content-language;
- bh=3/m0A4Vm/BJcgNSfCK562gdaIq5BisTmgq7HVw7w93A=;
- b=clDHoEaR0SgOJBnZYt2YOq36tnukoY4rzVQRAOGqJrHqJeHdBT85XSAhYQ0Hf/7laM
- U0mbokd/FaiGlivB3VZnK7qf3cHVDxI7JEV0W/2uGFbliC6wuWyVgc5Um9klylEfZ/DZ
- qp+lWX1RoFyLq5TbEsWK9hRQsKCKgz9phpK5SnBZG6bj0zEwdPhwlYkgcK7AMlCQ18zy
- q9xuV2G2meCJ9KVkYClmPl2RCFsD7XQJ1asq8jBO2I3kreDW7CBQwlX6/X/L+760+gJH
- xAxd/ZpeKTYmbOa2wYJfLUetjdfxxXJc//1aJQFvZf0T00bWwzdlIVUY5RnfIYa8Lb8B
- R9gw==
-X-Gm-Message-State: APjAAAUDzwy4kT0eyUWWhAAAK2IXKNUtRANQCf7TpOmhTSWazobdV/Jg
- PiXRVddx+2xXFzXKK5Vp4dFNkij266U=
-X-Google-Smtp-Source: APXvYqw6pTylo/hxn8RzTJbRhCzbNTAJxVffsoccF1DDfA/bcgDiEfQQkIRZnWo3knLRj+sYM89npA==
-X-Received: by 2002:a62:2a55:: with SMTP id q82mr6453832pfq.90.1556870685507; 
- Fri, 03 May 2019 01:04:45 -0700 (PDT)
-Received: from omPC ([223.179.146.50])
- by smtp.gmail.com with ESMTPSA id m131sm3629317pfc.25.2019.05.03.01.04.43
+ bh=2W6hIkXELppAvvr54N7RrTLVbgj+3qPyuGkeQsX2mLU=;
+ b=srVJ44wTGQv26f8y8PIjw06hGdEQC+VvsYRPRCQfIxYsV5d6SPFp6sFgflf5dEW3ly
+ WGmUgS3U6h0eFN5KBzMaa33DOthkasYn5wzfzXeHbggtmJGl/t6XRx0J3P6sjudiBM2/
+ GiQdGqzS4UkJzqoNdxx6KNS4HeBQudmwLHSCpSU7GgMRvlKbaeQxb9uQr7C0Ydlc8Bms
+ MqY2GB4N+BPOxYGLvMHjz0ngEtAtsbKtWBafuQ3+cYraorOO80P0B4opZBt76hWyJT0H
+ oVM4OLda90YY/bPAWf4aPwOv/KW7NUWpFAelfQMD+NvOpCTRVjgnQT3KA6kduziE5Kjn
+ H5IA==
+X-Gm-Message-State: APjAAAV9HXDIpLTUQXUPVmUAKTaRre5IqValvD48eOhM8+SuMnvuv7dx
+ 41alCrCU5SRlgFHeBND2qDAnXQgNJ4Y=
+X-Google-Smtp-Source: APXvYqwPdOvhhh1q5puCbqK2DAiEBDNrBDsEpBODhvpfFr3kyOBVzW0p+51vkOfUGbxq4XwPN70Ang==
+X-Received: by 2002:a17:902:e305:: with SMTP id
+ cg5mr39071410plb.112.1557224731479; 
+ Tue, 07 May 2019 03:25:31 -0700 (PDT)
+Received: from omPC ([106.215.52.51])
+ by smtp.gmail.com with ESMTPSA id z187sm9188788pfb.132.2019.05.07.03.25.29
  for <devel@lists.orangefs.org>
  (version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
- Fri, 03 May 2019 01:04:44 -0700 (PDT)
-From: "Anushka" <anushka@webtrangle.us>
+ Tue, 07 May 2019 03:25:30 -0700 (PDT)
+From: "Haseeb" <haseeb@webtrangle.us>
 To: <devel@lists.orangefs.org>
 Subject: Proposal-iOS & Android Apps
-Date: Fri, 3 May 2019 13:34:32 +0530
-Message-ID: <54a101d50186$f6b266f0$e41734d0$@us>
+Date: Tue, 7 May 2019 15:52:09 +0530
+Message-ID: <444801d504bf$5a7cf160$0f76d420$@us>
 MIME-Version: 1.0
 X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AdUBhsJkDAlK3w3BTBGvhGwJrp0H9A==
+Thread-Index: AdUEuuRY4iP0jxPvRwer+wYWU7kQmg==
 Content-Language: en-us
 Content-Type: text/plain;
 	charset="us-ascii"
@@ -89,7 +90,7 @@ Hello devel@lists.orangefs.org,
 
  
 
-My name is Anushka, and we are a team of Professional IOS & Android Apps
+My name is Haseeb, and we are a team of Professional IOS & Android Apps
 developer with 10+ years' experience based in India. Do you need a great App
 adjusted or built from scratch?
 
@@ -101,7 +102,7 @@ Reply me if you need any kinds of help in mobile Apps.
 
 Thanks & Regards,
 
-Anushka,  
+Haseeb,  
 
 Web Development Manager
 

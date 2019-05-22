@@ -2,39 +2,39 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 331CC26B75
-	for <lists+devel-orangefs@lfdr.de>; Wed, 22 May 2019 21:27:34 +0200 (CEST)
-Received: from [::1] (port=49270 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B77826BBA
+	for <lists+devel-orangefs@lfdr.de>; Wed, 22 May 2019 21:29:40 +0200 (CEST)
+Received: from [::1] (port=49526 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.91)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hTWth-0002o6-CT
-	for lists+devel-orangefs@lfdr.de; Wed, 22 May 2019 15:27:33 -0400
-Received: from mail.kernel.org ([198.145.29.99]:59508)
+	id 1hTWvj-0002uQ-Cy
+	for lists+devel-orangefs@lfdr.de; Wed, 22 May 2019 15:29:39 -0400
+Received: from mail.kernel.org ([198.145.29.99]:34524)
  by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.91) (envelope-from <sashal@kernel.org>) id 1hTWtf-0002na-H3
- for devel@lists.orangefs.org; Wed, 22 May 2019 15:27:31 -0400
+ (Exim 4.91) (envelope-from <sashal@kernel.org>) id 1hTWvh-0002tw-V1
+ for devel@lists.orangefs.org; Wed, 22 May 2019 15:29:38 -0400
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1C91E21850;
- Wed, 22 May 2019 19:26:50 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7AEB82177E;
+ Wed, 22 May 2019 19:28:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1558553210;
- bh=eZoYOpEZZXBBGLzR1IIyocDg/nlN3NiCX+nI3TnIoso=;
+ s=default; t=1558553337;
+ bh=18MxAVTl/iiuvP02E1646M/K3rUcGMjfccpCuaS7rPQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZPfIx6S0hhGYgtUv1I689FAmF1ik2c8xdXG/pCRQ4Xq9uulA2iSDq2Ws50YprFT6b
- Z/prwm3FuGmhflSPn8q4bB7K5YcMiRpLXi4zU4ZUWrhLhhM/iPyFpOan9/XmVkS37G
- blg8bi10rR80Z6XxEiQhmLUhiNqXFvG43DE1yq9I=
+ b=Vg8XdK7zhB322VjbIqvoMY94ie3pL2wDv4P+mk4urUZD7Xo2Oy7ma9qrgC4DG1vYO
+ RG+g7v7xbNWmCGy4PPEFqfIPNlRdSHOGRcLKAAkNL1XuG+RnF+piSLGtw/nA+cQ09e
+ AnvhuJC7tTa1pdiZQsfAiBDPRzzgpfAH+Zn8RPvg=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 014/244] orangefs: truncate before updating size
-Date: Wed, 22 May 2019 15:22:40 -0400
-Message-Id: <20190522192630.24917-14-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 010/167] orangefs: truncate before updating size
+Date: Wed, 22 May 2019 15:26:05 -0400
+Message-Id: <20190522192842.25858-10-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190522192630.24917-1-sashal@kernel.org>
-References: <20190522192630.24917-1-sashal@kernel.org>
+In-Reply-To: <20190522192842.25858-1-sashal@kernel.org>
+References: <20190522192842.25858-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -81,7 +81,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/fs/orangefs/inode.c b/fs/orangefs/inode.c
-index 31932879b7162..9bf2ceed4f29b 100644
+index 902b72dac41a6..d4d887af600f6 100644
 --- a/fs/orangefs/inode.c
 +++ b/fs/orangefs/inode.c
 @@ -172,7 +172,11 @@ static int orangefs_setattr_size(struct inode *inode, struct iattr *iattr)

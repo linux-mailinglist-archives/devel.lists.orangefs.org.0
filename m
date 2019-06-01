@@ -2,63 +2,56 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 670F32F8F6
-	for <lists+devel-orangefs@lfdr.de>; Thu, 30 May 2019 11:05:48 +0200 (CEST)
-Received: from [::1] (port=53534 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19F633206D
+	for <lists+devel-orangefs@lfdr.de>; Sat,  1 Jun 2019 20:24:50 +0200 (CEST)
+Received: from [::1] (port=46518 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hWH0N-0002lm-94
-	for lists+devel-orangefs@lfdr.de; Thu, 30 May 2019 05:05:47 -0400
-Received: from mail-pg1-f194.google.com ([209.85.215.194]:46438)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <blackgod016574@gmail.com>)
- id 1hWH0M-0002lI-5c
- for devel@lists.orangefs.org; Thu, 30 May 2019 05:05:46 -0400
-Received: by mail-pg1-f194.google.com with SMTP id v9so1617203pgr.13
- for <devel@lists.orangefs.org>; Thu, 30 May 2019 02:05:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:mime-version:content-disposition
- :user-agent; bh=WB3NAADDilR+pQagX0XJnxPLeHo0i5e2Cuu9jSLHh1E=;
- b=lpB1Jkw2oOAqbZBAmZSQC/b66H4fQsO13YoayB5e3p+1e8WhK+IWndHuFP9yLrK1u1
- iO9e/9gce9SWDSC+7w9NQlZ+efezCgjpg1dK0UWYmsZM9eNs1c3AzQc2AoGGPqSoyGqw
- Gu0xu4MUoTWkmXVIHGfz+NUR7iwSTs9Kodx5w/q3G30pR1EaVQjWejdEXGZPmOpOijtT
- v1YbppCuE/0Eo4vObiamodDEwECOYxujFpONtXglKwiCCNfA9DYPZSrUyA0GJPQ8W3c+
- W5YxuNW3HFH/hsk6kIDEn8pNlPXUUhKfBx+DMGnJCygcdYLdpHPwiMmjix+wxiGOWsiX
- 2c5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition:user-agent;
- bh=WB3NAADDilR+pQagX0XJnxPLeHo0i5e2Cuu9jSLHh1E=;
- b=Wai6+uHrSTNeoVLZ2ogwedh2yrlSub4QNdaiz/mSODCP8b0liI/srDYLNmOps3z3la
- XiGrrh5u7SadgdJEfxtj2l6nWdPbOkjjGcG805OPO9W+voNhSnFee5VtDlpMuQrhd6P+
- 6NhyuCShk3igQafDcfff5vajT/dkDj137SW1KQ5a6mUAiwogjsGK1nZXeb7NYSp8HKms
- CHz0Vcg92uQiVO6owA68OBwO6TJjH9unoPxet7GnIqF2BF4qTX8QbSiXSZdlrcT3ORBe
- 9f+qDqaPyOLodfJl5suL6dTVPGwX2I0RtiGebVat2IA+o3gWHo7RS3nIJulv2xA+BQpW
- cCyA==
-X-Gm-Message-State: APjAAAUxXDgKJ7rzB5Uyhqeoc51XUceNK4byBOIDenUF9lhUr3H/UHDp
- f1nWJOlLNQOKID/Ve/dOHgU=
-X-Google-Smtp-Source: APXvYqzuZM8q4NuM6xInvIKRaIVPk2x6fMdjoOxyHExzjr+fV67DncXgE2+JwgNQneEOgzBTvCU44A==
-X-Received: by 2002:a17:90a:dc86:: with SMTP id
- j6mr2336394pjv.141.1559207105150; 
- Thu, 30 May 2019 02:05:05 -0700 (PDT)
-Received: from zhanggen-UX430UQ ([66.42.35.75])
- by smtp.gmail.com with ESMTPSA id x10sm3427230pfj.136.2019.05.30.02.05.02
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 30 May 2019 02:05:04 -0700 (PDT)
-Date: Thu, 30 May 2019 17:04:55 +0800
-From: Gen Zhang <blackgod016574@gmail.com>
-To: hubcap@omnibond.com, martin@omnibond.com
-Subject: [PATCH] orangefs-debugfs: fix a missing-check bug in
- debug_string_to_mask()
-Message-ID: <20190530090455.GA3059@zhanggen-UX430UQ>
+	id 1hX8gS-0003px-3v
+	for lists+devel-orangefs@lfdr.de; Sat, 01 Jun 2019 14:24:48 -0400
+Received: from 210519.news014.com ([206.189.188.169]:46273)
+ by mm1.emwd.com with esmtp (Exim 4.92)
+ (envelope-from <news@news014.com>) id 1hX8gR-0003pe-OR
+ for devel@lists.orangefs.org; Sat, 01 Jun 2019 14:24:47 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=certs; d=news014.com;
+ h=Date:To:From:Reply-To:Subject:Message-ID:List-Unsubscribe:List-Id:MIME-Version:Content-Type;
+ i=news@news014.com; bh=smOS132WaNRF5eraX79u7oJU+yI=;
+ b=dhtKr9fhxDENI1JirxnDJI5LYT9mS+pXKuRCiIJjZTxc2YRgIfU7RHXdVBFBN4c/jr7SocmY+6qR
+ b4fOSwsR54UKFhOR6gwxW1i1dwPDOy+3pDRzcaz2+Ge9Mz1cQoSJbNjQARgk0EGX/NLeHUVmUKPa
+ 0jml2iDAuMs/j+Eiw3izweDuUeKsDvvv9drokFUazw3jrbsmnUp9AH1QesOfGYrRKqYCLci/Trxq
+ 1vfDJ4n2T0UZccxWvaU1DDuR1twfQpz28Rx8OxdbKgqm7mUMGWvS9HtF+vamsFXZyTSKpz2ddVwU
+ hUfBjZ8aH23RdC9uvKA00IgyCnDG3oveoC0FjA==
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=certs; d=news014.com;
+ b=Fu0MTVv8/8r7/nRGclprbp7z1ZNsT9l16wGOuVqfx8k9mwLspz9UM8LiddwLeaXyEmoPVFkO5rLv
+ rw9+s9YM4tzAaTpxhmOmnUuW8K0JmfNVmluld3U97HKfhy3BfzhvuKcH8dB9gMupBhL4BX6lRbEf
+ JmCKlpn84rFmq4xgb/80KSgck/Zhv+06wsuaOeYAWqtwMxsPpmhET/P3SofnusDQZf9nYHB6p/51
+ jYlfEZsuCA78Y5W6V41bumKHd4LwISlFlWya6NNLg9tMMTDond7OsNrxKNvE9TZ7gKYv4zZ4aaDn
+ PZuTmgTdXjMhH0MwbalRbcsN8Rrhv5oWqAPQbA==;
+Date: Sat, 1 Jun 2019 18:24:06 +0000
+To: "Customers_li@mail.com" <devel@lists.orangefs.org>
+From: =?utf-8?Q?Customers=E2=84=A2?= <news@news014.com>
+Subject: Re: Hey
+Message-ID: <6fee210f9e8256f472eb7cd21e5a0462@news014.com>
+X-Hneq-Campaign-Uid: mn6425ca1t234
+X-Hneq-Subscriber-Uid: oo830273z9907
+X-Hneq-Customer-Uid: vy755nk3wz5b4
+X-Hneq-Customer-Gid: 2
+X-Hneq-Delivery-Sid: 2
+X-Hneq-Tracking-Did: 2
+X-Report-Abuse: Please report abuse for this campaign here:
+ http://tr.news014.com/hu-appd/index.php/campaigns/mn6425ca1t234/report-abuse/sj99032psd73c/oo830273z9907
+Feedback-ID: mn6425ca1t234:oo830273z9907:sj99032psd73c:vy755nk3wz5b4
+Precedence: bulk
+X-Hneq-EBS: http://tr.news014.com/hu-appd/index.php/lists/block-address
+X-Sender: news@news014.com
+X-Receiver: devel@lists.orangefs.org
+X-Hneq-Mailer: PHPMailer - 5.2.21
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.24 (2015-08-30)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.27
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
-Precedence: list
 List-Id: <devel.lists.orangefs.org>
 List-Unsubscribe: <http://lists.orangefs.org/mailman/options/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=unsubscribe>
@@ -67,7 +60,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, devel@lists.orangefs.org
+Reply-To: =?utf-8?Q?Customers=E2=84=A2?= <noreply@news014.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -81,22 +74,17 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-In debug_string_to_mask(), 'strsep_fodder' is allocated by kstrdup().
-It returns NULL when fails. So 'strsep_fodder' should be checked.
-
-Signed-off-by: Gen Zhang <blackgod016574.gmail>
----
-diff --git a/fs/orangefs/orangefs-debugfs.c b/fs/orangefs/orangefs-debugfs.c
-index 87b1a6f..a9a9aac 100644
---- a/fs/orangefs/orangefs-debugfs.c
-+++ b/fs/orangefs/orangefs-debugfs.c
-@@ -888,6 +888,8 @@ static void debug_string_to_mask(char *debug_string, void *mask, int type)
- 	char *unchecked_keyword;
- 	int i;
- 	char *strsep_fodder = kstrdup(debug_string, GFP_KERNEL);
-+	if (!strsep_fodder)
-+		return;
- 	char *original_pointer;
- 	int element_count = 0;
- 	struct client_debug_mask *c_mask = NULL;
+Hey, Dan from Customers=C2=A9 is here.
+  =20
+Wanted to share Super Guys, which I found one week ago. =20
+Let=E2=80=99s be quick. :) We have said it a MILLION TIMES=E2=80=A6 (Well, =
+maybe
+not a million, but it sure feels like it) =20
+TRAFFIC is one of the most important parts of ANY Squarespace store.
+=20
+You can either pay ($2000+++) for it with Facebook or Google Ads=E2=80=
+=A6
+Or try the Customers=C2=A9 App.
+(And save that $2000!) =20
+>>>>> Squarespace: We earned $1580 and Paid Just $30 for Ads
 

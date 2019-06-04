@@ -2,45 +2,45 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19F633206D
-	for <lists+devel-orangefs@lfdr.de>; Sat,  1 Jun 2019 20:24:50 +0200 (CEST)
-Received: from [::1] (port=46518 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id A148233D9A
+	for <lists+devel-orangefs@lfdr.de>; Tue,  4 Jun 2019 05:46:38 +0200 (CEST)
+Received: from [::1] (port=46660 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hX8gS-0003px-3v
-	for lists+devel-orangefs@lfdr.de; Sat, 01 Jun 2019 14:24:48 -0400
-Received: from 210519.news014.com ([206.189.188.169]:46273)
+	id 1hY0PF-0006X4-DB
+	for lists+devel-orangefs@lfdr.de; Mon, 03 Jun 2019 23:46:37 -0400
+Received: from 210519.news014.com ([206.189.188.169]:49282)
  by mm1.emwd.com with esmtp (Exim 4.92)
- (envelope-from <news@news014.com>) id 1hX8gR-0003pe-OR
- for devel@lists.orangefs.org; Sat, 01 Jun 2019 14:24:47 -0400
+ (envelope-from <news@news014.com>) id 1hY0PD-0006WY-Vw
+ for devel@lists.orangefs.org; Mon, 03 Jun 2019 23:46:36 -0400
 DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=certs; d=news014.com;
  h=Date:To:From:Reply-To:Subject:Message-ID:List-Unsubscribe:List-Id:MIME-Version:Content-Type;
- i=news@news014.com; bh=smOS132WaNRF5eraX79u7oJU+yI=;
- b=dhtKr9fhxDENI1JirxnDJI5LYT9mS+pXKuRCiIJjZTxc2YRgIfU7RHXdVBFBN4c/jr7SocmY+6qR
- b4fOSwsR54UKFhOR6gwxW1i1dwPDOy+3pDRzcaz2+Ge9Mz1cQoSJbNjQARgk0EGX/NLeHUVmUKPa
- 0jml2iDAuMs/j+Eiw3izweDuUeKsDvvv9drokFUazw3jrbsmnUp9AH1QesOfGYrRKqYCLci/Trxq
- 1vfDJ4n2T0UZccxWvaU1DDuR1twfQpz28Rx8OxdbKgqm7mUMGWvS9HtF+vamsFXZyTSKpz2ddVwU
- hUfBjZ8aH23RdC9uvKA00IgyCnDG3oveoC0FjA==
+ i=news@news014.com; bh=qvNyFf6n//73GXNBikCDm+N458I=;
+ b=QqZhwT9KXdVFjdg/RnR4aCrCQPJ+utCCCavGmWTwuVw2Q28AdNeV6fU+LGDXewX+QmQfCF3/O7tK
+ 4lEbYcq1QIFAoJooNiaB75w72sQmvcPil+hR/S/gTDy6440IKm9B1PZ+N8R2ud3jbyqlGDhoOpA2
+ oOjq+l5GkJA2MM6Qer8CbKDbmIrqxC0pDjZZVZEc1PNU0U7Uni4O2N9JBARLQWevh49L9F+KSBbD
+ l8MJV4IbNMy1f8KEBi3+Zv3gqTa1gkFHJZUi7eE45BepDIeZeKj+/Ul29hwdAQrFKtX9O5QVNueL
+ K4OeCrOfiQwUwuPa+OEG6IG2Kkmr7PDWCtK0fw==
 DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=certs; d=news014.com;
- b=Fu0MTVv8/8r7/nRGclprbp7z1ZNsT9l16wGOuVqfx8k9mwLspz9UM8LiddwLeaXyEmoPVFkO5rLv
- rw9+s9YM4tzAaTpxhmOmnUuW8K0JmfNVmluld3U97HKfhy3BfzhvuKcH8dB9gMupBhL4BX6lRbEf
- JmCKlpn84rFmq4xgb/80KSgck/Zhv+06wsuaOeYAWqtwMxsPpmhET/P3SofnusDQZf9nYHB6p/51
- jYlfEZsuCA78Y5W6V41bumKHd4LwISlFlWya6NNLg9tMMTDond7OsNrxKNvE9TZ7gKYv4zZ4aaDn
- PZuTmgTdXjMhH0MwbalRbcsN8Rrhv5oWqAPQbA==;
-Date: Sat, 1 Jun 2019 18:24:06 +0000
+ b=jMXAsF7WfT08MuKl1/VMnWMq+kf1A19Bt/8MiGnU4GxXtVXxBSlBtHRJt5fcgvfQOD4FsHRaFxSc
+ wv3BnrHvzzntEGjkFxm4ir+7c2+QQ0OqI/x6Ly+NSHAXDN1ZD3DYcPsZ1UzLTPBVIEDSMbVFERA6
+ 8ZvvnX6SfnUarVUouO/IGCbZauvugF+wD3fjJjzAARg2OCbDmd0FPaHLoZuagADxBDLygM3OqKPs
+ 6jCSZNj3RHATg2VJsLZautWqQoVRCBwkONHLJW7iZZka6HHkOfV3eY4h1Sn/w/R1bWQyIzGbZ7dc
+ J3RNzweQXd4pRxSW1AYhB1Tgp8ZWzEK7eGbgDw==;
+Date: Tue, 4 Jun 2019 03:45:54 +0000
 To: "Customers_li@mail.com" <devel@lists.orangefs.org>
 From: =?utf-8?Q?Customers=E2=84=A2?= <news@news014.com>
 Subject: Re: Hey
-Message-ID: <6fee210f9e8256f472eb7cd21e5a0462@news014.com>
-X-Hneq-Campaign-Uid: mn6425ca1t234
+Message-ID: <de0630357bfbb1462eb05ad402178bc0@news014.com>
+X-Hneq-Campaign-Uid: tr885dl3o5be6
 X-Hneq-Subscriber-Uid: oo830273z9907
 X-Hneq-Customer-Uid: vy755nk3wz5b4
 X-Hneq-Customer-Gid: 2
 X-Hneq-Delivery-Sid: 2
 X-Hneq-Tracking-Did: 2
 X-Report-Abuse: Please report abuse for this campaign here:
- http://tr.news014.com/hu-appd/index.php/campaigns/mn6425ca1t234/report-abuse/sj99032psd73c/oo830273z9907
-Feedback-ID: mn6425ca1t234:oo830273z9907:sj99032psd73c:vy755nk3wz5b4
+ http://tr.news014.com/hu-appd/index.php/campaigns/tr885dl3o5be6/report-abuse/sj99032psd73c/oo830273z9907
+Feedback-ID: tr885dl3o5be6:oo830273z9907:sj99032psd73c:vy755nk3wz5b4
 Precedence: bulk
 X-Hneq-EBS: http://tr.news014.com/hu-appd/index.php/lists/block-address
 X-Sender: news@news014.com

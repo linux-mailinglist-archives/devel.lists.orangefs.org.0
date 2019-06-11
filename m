@@ -2,56 +2,79 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F55E39A06
-	for <lists+devel-orangefs@lfdr.de>; Sat,  8 Jun 2019 03:25:51 +0200 (CEST)
-Received: from [::1] (port=36928 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 509783C292
+	for <lists+devel-orangefs@lfdr.de>; Tue, 11 Jun 2019 06:47:13 +0200 (CEST)
+Received: from [::1] (port=47328 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hZQ7B-0003IV-FB
-	for lists+devel-orangefs@lfdr.de; Fri, 07 Jun 2019 21:25:49 -0400
-Received: from 210519.news014.com ([206.189.188.169]:33080)
- by mm1.emwd.com with esmtp (Exim 4.92)
- (envelope-from <news@news014.com>) id 1hZQ7A-0003Fs-7n
- for devel@lists.orangefs.org; Fri, 07 Jun 2019 21:25:48 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=certs; d=news014.com;
- h=Date:To:From:Reply-To:Subject:Message-ID:List-Unsubscribe:List-Id:MIME-Version:Content-Type;
- i=news@news014.com; bh=HqilDIGJE0FDHxYSIxO6FFAMFOA=;
- b=bIRSHMrTNI1EmYJUxiimJhY/KkQZRBLy83Gnj8hSXKIvCBjYBbtWjy9SHyevgoZ6Q5606npiSUf2
- 7rBq8GLI1F7r6yk62Rq0Sty9ojJmdtPnbEU+CAGxYWW8E4+eemkOE5j+UyWa/pI93UK/Ed3djGVC
- Z+oTW1UOTE3gmjHMtjvA+7cFX9ItuErdM9L6VNfxjrUkekDwmLbma0jDAIDoYQg8xZS4LdWLMAo8
- KeDSfjg5COGQ0iUP2RiaAunSgT4veewjDZ2wi/gTVXb5k2ZSl/H57mBXVk/w0s0TPCSfuFBhugw6
- piX/ST+2iDmnw4IIGByCZx0lxetzbDMYeEw8Zg==
-DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=certs; d=news014.com;
- b=M0AjGL/2ZGoenITwYD6FpYdKnFucAtHgmO4/QitliB//OahenQsbQgrouFI/MBoEiEQJg7sT7YuY
- NHB82o/LJgC5A5yTCmAJulfSHCHckPqtIQjVlqjrwnfVjHoMilaU6Qe2dnMl7PFMc5Qm74Whg9nE
- hDdO6xDWMhTbxAY58Afz92+xjm6WjNWjTLqevXNskEOyWO28zLBz64duAt5NgdA5y9Ux0na0aQoo
- jdulwUl/fORIGlSbLV5fN2iOGEsy+SjqjlHXKMK91y9wYDQlkrG5Bd1ILBLmf6UCPxhmsMDCoUWl
- sK2KG9FcOlbA9B+uWnD0yn6HfK2PGTQa/+0+Tw==;
-Date: Sat, 8 Jun 2019 01:25:07 +0000
-To: "Customers_li@mail.com" <devel@lists.orangefs.org>
-From: Dan Wolter <news@news014.com>
-Subject: Re: Here is your Order
-Message-ID: <377403210ebc0068063dcc6fd8c49ae5@news014.com>
-X-Hneq-Campaign-Uid: de779qltn2006
-X-Hneq-Subscriber-Uid: oo830273z9907
-X-Hneq-Customer-Uid: vy755nk3wz5b4
-X-Hneq-Customer-Gid: 2
-X-Hneq-Delivery-Sid: 2
-X-Hneq-Tracking-Did: 2
-X-Report-Abuse: Please report abuse for this campaign here:
- http://tr.news014.com/hu-appd/index.php/campaigns/de779qltn2006/report-abuse/sj99032psd73c/oo830273z9907
-Feedback-ID: de779qltn2006:oo830273z9907:sj99032psd73c:vy755nk3wz5b4
-Precedence: bulk
-X-Hneq-EBS: http://tr.news014.com/hu-appd/index.php/lists/block-address
-X-Sender: news@news014.com
-X-Receiver: devel@lists.orangefs.org
-X-Hneq-Mailer: PHPMailer - 5.2.21
+	id 1haYgh-0003Ji-UI
+	for lists+devel-orangefs@lfdr.de; Tue, 11 Jun 2019 00:47:11 -0400
+Received: from userp2120.oracle.com ([156.151.31.85]:34330)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <darrick.wong@oracle.com>)
+ id 1haYgf-0003GN-Vg
+ for devel@lists.orangefs.org; Tue, 11 Jun 2019 00:47:10 -0400
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5B4hbqV168941;
+ Tue, 11 Jun 2019 04:46:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=subject : from : to :
+ cc : date : message-id : mime-version : content-type :
+ content-transfer-encoding; s=corp-2018-07-02;
+ bh=pN1LjauC+CPRpWSlRyHgYDY9uUd71KnW85D+Xgmc0hA=;
+ b=Wbxv9JvX5jua5fmuVf4WLo6oJ0xopMG6S8aXI4zN/zs6GcRiHLoYZHkBF5Ah+etbHjTV
+ t4okax2hJ3ZVZLDfOnry0LnaCkQXAxd8eqpU+iocpvfiiR1CWCg1NzVCJmaIfvWHV194
+ QtqmADNFWvMmnihKxYNSgBTszEjVDoaUqvNZfvuCZjzUhsySldlo6UNBrTBJvmTEgx1f
+ n+Vqqb4e4J8Mjiq9yPSu2kbcM443RIt0eblRTUvtpGYSQuclN4ep0QiNQ/dHErKEUpk9
+ FkRZvBXQI3KN8CkkvkA43MSVuLyOkec/HAUj8mptHg+pR+i+IldvyaD5z8t5XdDV16Zd UA== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2120.oracle.com with ESMTP id 2t05nqjh5g-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 11 Jun 2019 04:46:16 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5B4k8F4173710;
+ Tue, 11 Jun 2019 04:46:15 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3020.oracle.com with ESMTP id 2t0p9r34ed-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 11 Jun 2019 04:46:15 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5B4kFaV174053;
+ Tue, 11 Jun 2019 04:46:15 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3020.oracle.com with ESMTP id 2t0p9r34e7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 11 Jun 2019 04:46:15 +0000
+Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5B4kCRS002575;
+ Tue, 11 Jun 2019 04:46:12 GMT
+Received: from localhost (/67.169.218.210)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Mon, 10 Jun 2019 21:46:11 -0700
+Subject: [PATCH v3 0/6] vfs: make immutable files actually immutable
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: matthew.garrett@nebula.com, yuchao0@huawei.com, tytso@mit.edu,
+ darrick.wong@oracle.com, ard.biesheuvel@linaro.org,
+ josef@toxicpanda.com, clm@fb.com, adilger.kernel@dilger.ca,
+ viro@zeniv.linux.org.uk, jack@suse.com, dsterba@suse.com,
+ jaegeuk@kernel.org, jk@ozlabs.org
+Date: Mon, 10 Jun 2019 21:46:09 -0700
+Message-ID: <156022836912.3227213.13598042497272336695.stgit@magnolia>
+User-Agent: StGit/0.17.1-dirty
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.27
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9284
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906110033
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
+Precedence: list
 List-Id: <devel.lists.orangefs.org>
 List-Unsubscribe: <http://lists.orangefs.org/mailman/options/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=unsubscribe>
@@ -60,7 +83,12 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: Dan Wolter <noreply@news014.com>
+Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ linux-kernel@vger.kernel.org, reiserfs-devel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-mm@kvack.org, linux-nilfs@vger.kernel.org, linux-mtd@lists.infradead.org,
+ ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -74,17 +102,47 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hey, Dan from Customers=C2=A9 is here.
-  =20
-Wanted to share Super Guys, which I found one week ago. =20
-Let=E2=80=99s be quick. :) We have said it a MILLION TIMES=E2=80=A6 (Well, =
-maybe
-not a million, but it sure feels like it) =20
-TRAFFIC is one of the most important parts of ANY Squarespace store.
-=20
-You can either pay ($2000+++) for it with Facebook or Google Ads=E2=80=
-=A6
-Or try the Customers=C2=A9 App.
-(And save that $2000!) =20
->>>>> Squarespace: We earned $1580 and Paid Just $30 for Ads
+Hi all,
+
+The chattr(1) manpage has this to say about the immutable bit that
+system administrators can set on files:
+
+"A file with the 'i' attribute cannot be modified: it cannot be deleted
+or renamed, no link can be created to this file, most of the file's
+metadata can not be modified, and the file can not be opened in write
+mode."
+
+Given the clause about how the file 'cannot be modified', it is
+surprising that programs holding writable file descriptors can continue
+to write to and truncate files after the immutable flag has been set,
+but they cannot call other things such as utimes, fallocate, unlink,
+link, setxattr, or reflink.
+
+Since the immutable flag is only settable by administrators, resolve
+this inconsistent behavior in favor of the documented behavior -- once
+the flag is set, the file cannot be modified, period.  We presume that
+administrators must be trusted to know what they're doing, and that
+cutting off programs with writable fds will probably break them.
+
+Therefore, add immutability checks to the relevant VFS functions, then
+refactor the SETFLAGS and FSSETXATTR implementations to use common
+argument checking functions so that we can then force pagefaults on all
+the file data when setting immutability.
+
+Note that various distro manpages points out the inconsistent behavior
+of the various Linux filesystems w.r.t. immutable.  This fixes all that.
+
+If you're going to start using this mess, you probably ought to just
+pull from my git trees, which are linked below.
+
+This has been lightly tested with fstests.  Enjoy!
+Comments and questions are, as always, welcome.
+
+--D
+
+kernel git tree:
+https://git.kernel.org/cgit/linux/kernel/git/djwong/xfs-linux.git/log/?h=immutable-files
+
+fstests git tree:
+https://git.kernel.org/cgit/linux/kernel/git/djwong/xfstests-dev.git/log/?h=immutable-files
 

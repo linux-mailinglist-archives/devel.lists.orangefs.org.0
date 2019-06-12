@@ -2,55 +2,42 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB0074193D
-	for <lists+devel-orangefs@lfdr.de>; Wed, 12 Jun 2019 02:06:02 +0200 (CEST)
-Received: from [::1] (port=34022 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 995EB42AD6
+	for <lists+devel-orangefs@lfdr.de>; Wed, 12 Jun 2019 17:22:52 +0200 (CEST)
+Received: from [::1] (port=41124 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1haqm8-00022C-LZ
-	for lists+devel-orangefs@lfdr.de; Tue, 11 Jun 2019 20:06:00 -0400
-Received: from mail-lj1-f196.google.com ([209.85.208.196]:46262)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <alexei.starovoitov@gmail.com>)
- id 1haqm7-00021O-JS
- for devel@lists.orangefs.org; Tue, 11 Jun 2019 20:05:59 -0400
-Received: by mail-lj1-f196.google.com with SMTP id v24so9057032ljg.13
- for <devel@lists.orangefs.org>; Tue, 11 Jun 2019 17:05:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=twnhTVYd7tn35O7vvlIa3XEgKYk2/zieh7kgQ5Ms1VY=;
- b=iDBd+Nyh60vWHvSGtVHWVETugM2fnnm+FqmmiJZ56NZHl6V9Aty9AmjFW8CRdEnVVB
- aGKuXc3BMI1WRmMN59ZmT1r6kVO7qzb4q1bDpYmpS/ZUrVuenxbQGoF2Qv4WS5P5xTYu
- MgUGL2vvXlsZ04GvxKv4oWOnyz8mNGE24H+bdBFJTo0aHTJ0k0u+7bh9tcE9VNAMwAtH
- iKtxqCy1DSmKDdJUUU93WbsyygyX8RtwvZ5Owd5cCDJ9ZU6yAlx8+gKU6PDNIGy1Yrds
- 5FOvUqOWwAWAd5bt0eEYz6DGK7Ot7sHrl6lNbuwYOmPXTEQ7T1WTuP7Qnyr0A/A07xpx
- QkCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=twnhTVYd7tn35O7vvlIa3XEgKYk2/zieh7kgQ5Ms1VY=;
- b=hRpEoqLYyz4kf2bjryXttONmLSK/jCObsnK9uWzSmSZcpkTlNQcCLJMegNZ1t3FqHo
- 6Ge8O5trNzAzdqD+dUZ20Fe6Vni30b81xiz9HSW7ZBS1eAtjy/YUt+gonUtmRBqvIE46
- krCro3z1jlETuI5/Kr/VbR5+HzCxMwLN4pua6hV0Bz7lxhgAB3agxypHZZ+Dl/8M2bQc
- qmI0UXcmILmILSgFatYmhSWZTf8hM9Ab5AY42k5xS0GlP/DnIoK95hJfQP9dMP7O9KZc
- PVqlDxfnb3NwvKDr2/aGE0jjx5oHcfEx57aCqWfRl3Lvc9NXSiyc19/4pGJiR7c/QSnS
- qx2A==
-X-Gm-Message-State: APjAAAXqjJWI5HNYkVTrdQf2Q0EkbfMjZPDwF3deYlgkp8P3Nzr0ltFy
- wpsGEK+xhcIN1/FEwTG776KZbIANxD2Gd5Rrk5g=
-X-Google-Smtp-Source: APXvYqyO/Oi3PmoK5iJ0YzdPrMw5xZcqUF1R75rhMCOs6SLJy8NUkUXX4LUB1wFJr6ZxPQT0SJAlgxYZrwxAPMCixo8=
-X-Received: by 2002:a2e:298a:: with SMTP id p10mr12710225ljp.74.1560297918252; 
- Tue, 11 Jun 2019 17:05:18 -0700 (PDT)
+	id 1hb55N-00050g-89
+	for lists+devel-orangefs@lfdr.de; Wed, 12 Jun 2019 11:22:49 -0400
+Received: from mail.kernel.org ([198.145.29.99]:51732)
+ by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
+ (Exim 4.92) (envelope-from <gregkh@linuxfoundation.org>)
+ id 1hb55M-0004tR-BV
+ for devel@lists.orangefs.org; Wed, 12 Jun 2019 11:22:48 -0400
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+ [83.86.89.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id F099A20874;
+ Wed, 12 Jun 2019 15:22:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1560352927;
+ bh=sGDr0c3FXFGlriyHe0pkvtCv8nBvdEdsriVfk7ngCf0=;
+ h=Date:From:To:Cc:Subject:From;
+ b=x28B0ljOTVX17p88EOlZQCmB0BdNswxqUl8WyRwR0HwrC4rrBx/8IIDvcJwXUrMr1
+ IOKE/G+oBFpTfFxPKarTwk9TlFclsDwHu1O+ViSOW0n4gJv30HdEcJ/kibShOBI97V
+ kSah0fpV42VAqbSxZ0BX59lPhxBG+KVLfpj9uHZ0=
+Date: Wed, 12 Jun 2019 17:22:04 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Mike Marshall <hubcap@omnibond.com>,
+ Martin Brandenburg <martin@omnibond.com>
+Subject: [PATCH] orangefs: no need to check return value of debugfs_create
+ functions
+Message-ID: <20190612152204.GA17511@kroah.com>
 MIME-Version: 1.0
-References: <20190611193836.2772-1-shyam.saini@amarulasolutions.com>
-In-Reply-To: <20190611193836.2772-1-shyam.saini@amarulasolutions.com>
-From: Alexei Starovoitov <alexei.starovoitov@gmail.com>
-Date: Tue, 11 Jun 2019 17:05:06 -0700
-Message-ID: <CAADnVQKwvfuoyDEu+rB8=btOi33LdrUvk4EkQM86sDpDG61kew@mail.gmail.com>
-Subject: Re: [PATCH V2] include: linux: Regularise the use of FIELD_SIZEOF
- macro
-To: Shyam Saini <shyam.saini@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.12.0 (2019-05-25)
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -62,15 +49,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Kernel Hardening <kernel-hardening@lists.openwall.com>,
- Network Development <netdev@vger.kernel.org>, intel-gfx@lists.freedesktop.org,
- linux-mips@vger.kernel.org, dri-devel@lists.freedesktop.org,
- LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
- linux-sctp@vger.kernel.org, devel@lists.orangefs.org,
- Andrew Morton <akpm@linux-foundation.org>, linux-ext4@vger.kernel.org,
- intel-gvt-dev@lists.freedesktop.org, bpf <bpf@vger.kernel.org>,
- linux-arm-kernel@lists.infradead.org, mayhs11saini@gmail.com
+Cc: devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -84,18 +63,87 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Tue, Jun 11, 2019 at 5:00 PM Shyam Saini
-<shyam.saini@amarulasolutions.com> wrote:
->
-> Currently, there are 3 different macros, namely sizeof_field, SIZEOF_FIELD
-> and FIELD_SIZEOF which are used to calculate the size of a member of
-> structure, so to bring uniformity in entire kernel source tree lets use
-> FIELD_SIZEOF and replace all occurrences of other two macros with this.
->
-> For this purpose, redefine FIELD_SIZEOF in include/linux/stddef.h and
-> tools/testing/selftests/bpf/bpf_util.h and remove its defination from
-> include/linux/kernel.h
+When calling debugfs functions, there is no need to ever check the
+return value.  The function can work or not, but the code logic should
+never do something different based on this.
 
-please dont. bpf_util.h is a user space header.
-Please leave it as-is.
+Cc: Mike Marshall <hubcap@omnibond.com>
+Cc: Martin Brandenburg <martin@omnibond.com>
+Cc: devel@lists.orangefs.org
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ fs/orangefs/orangefs-debugfs.c | 35 ++++------------------------------
+ 1 file changed, 4 insertions(+), 31 deletions(-)
+
+diff --git a/fs/orangefs/orangefs-debugfs.c b/fs/orangefs/orangefs-debugfs.c
+index 87b1a6fce628..7723f581017d 100644
+--- a/fs/orangefs/orangefs-debugfs.c
++++ b/fs/orangefs/orangefs-debugfs.c
+@@ -99,7 +99,6 @@ static char *debug_help_string;
+ static char client_debug_string[ORANGEFS_MAX_DEBUG_STRING_LEN];
+ static char client_debug_array_string[ORANGEFS_MAX_DEBUG_STRING_LEN];
+ 
+-static struct dentry *help_file_dentry;
+ static struct dentry *client_debug_dentry;
+ static struct dentry *debug_dir;
+ 
+@@ -183,20 +182,9 @@ int orangefs_debugfs_init(int debug_mask)
+ 		(unsigned long long)orangefs_gossip_debug_mask);
+ 
+ 	debug_dir = debugfs_create_dir("orangefs", NULL);
+-	if (!debug_dir) {
+-		pr_info("%s: debugfs_create_dir failed.\n", __func__);
+-		goto out;
+-	}
+ 
+-	help_file_dentry = debugfs_create_file(ORANGEFS_KMOD_DEBUG_HELP_FILE,
+-				  0444,
+-				  debug_dir,
+-				  debug_help_string,
+-				  &debug_help_fops);
+-	if (!help_file_dentry) {
+-		pr_info("%s: debugfs_create_file failed.\n", __func__);
+-		goto out;
+-	}
++	debugfs_create_file(ORANGEFS_KMOD_DEBUG_HELP_FILE, 0444, debug_dir,
++			    debug_help_string, &debug_help_fops);
+ 
+ 	orangefs_debug_disabled = 0;
+ 
+@@ -230,17 +218,8 @@ static int orangefs_kernel_debug_init(void)
+ 		pr_info("%s: overflow 1!\n", __func__);
+ 	}
+ 
+-	ret = debugfs_create_file(ORANGEFS_KMOD_DEBUG_FILE,
+-				  0444,
+-				  debug_dir,
+-				  k_buffer,
+-				  &kernel_debug_fops);
+-	if (!ret) {
+-		pr_info("%s: failed to create %s.\n",
+-			__func__,
+-			ORANGEFS_KMOD_DEBUG_FILE);
+-		goto out;
+-	}
++	debugfs_create_file(ORANGEFS_KMOD_DEBUG_FILE, 0444, debug_dir, k_buffer,
++			    &kernel_debug_fops);
+ 
+ 	rc = 0;
+ 
+@@ -353,12 +332,6 @@ static int orangefs_client_debug_init(void)
+ 						  debug_dir,
+ 						  c_buffer,
+ 						  &kernel_debug_fops);
+-	if (!client_debug_dentry) {
+-		pr_info("%s: failed to create updated %s.\n",
+-			__func__,
+-			ORANGEFS_CLIENT_DEBUG_FILE);
+-		goto out;
+-	}
+ 
+ 	rc = 0;
+ 
+-- 
+2.22.0
+
 

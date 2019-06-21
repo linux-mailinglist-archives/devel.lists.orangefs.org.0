@@ -2,52 +2,76 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD4FB4DE36
-	for <lists+devel-orangefs@lfdr.de>; Fri, 21 Jun 2019 02:55:21 +0200 (CEST)
-Received: from [::1] (port=42266 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 606764F186
+	for <lists+devel-orangefs@lfdr.de>; Sat, 22 Jun 2019 01:57:58 +0200 (CEST)
+Received: from [::1] (port=57966 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1he7po-0002Cv-ND
-	for lists+devel-orangefs@lfdr.de; Thu, 20 Jun 2019 20:55:20 -0400
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11]:37974
- helo=outgoing.mit.edu)
+	id 1heTPp-0000Kk-0Y
+	for lists+devel-orangefs@lfdr.de; Fri, 21 Jun 2019 19:57:57 -0400
+Received: from userp2120.oracle.com ([156.151.31.85]:37944)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <tytso@mit.edu>) id 1he7pn-0002Ac-EU
- for devel@lists.orangefs.org; Thu, 20 Jun 2019 20:55:19 -0400
-Received: from callcc.thunk.org (guestnat-104-133-0-109.corp.google.com
- [104.133.0.109] (may be forged)) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x5L0sK0h000800
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 20 Jun 2019 20:54:21 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 28403420484; Thu, 20 Jun 2019 20:54:20 -0400 (EDT)
-Date: Thu, 20 Jun 2019 20:54:20 -0400
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: "Darrick J. Wong" <darrick.wong@oracle.com>
-Subject: Re: [PATCH 1/6] mm/fs: don't allow writes to immutable files
-Message-ID: <20190621005420.GH4650@mit.edu>
-Mail-Followup-To: Theodore Ts'o <tytso@mit.edu>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- matthew.garrett@nebula.com, yuchao0@huawei.com,
- ard.biesheuvel@linaro.org, josef@toxicpanda.com, clm@fb.com,
- adilger.kernel@dilger.ca, viro@zeniv.linux.org.uk, jack@suse.com,
- dsterba@suse.com, jaegeuk@kernel.org, jk@ozlabs.org,
- reiserfs-devel@vger.kernel.org, linux-efi@vger.kernel.org,
- devel@lists.orangefs.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-mm@kvack.org, linux-nilfs@vger.kernel.org,
- linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-btrfs@vger.kernel.org
-References: <156022836912.3227213.13598042497272336695.stgit@magnolia>
- <156022837711.3227213.11787906519006016743.stgit@magnolia>
- <20190620215212.GG4650@mit.edu> <20190620221306.GD5375@magnolia>
+ (Exim 4.92) (envelope-from <darrick.wong@oracle.com>)
+ id 1heTPn-0000Jf-PN
+ for devel@lists.orangefs.org; Fri, 21 Jun 2019 19:57:55 -0400
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5LNt5Xd059348;
+ Fri, 21 Jun 2019 23:56:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=subject : from : to :
+ cc : date : message-id : mime-version : content-type :
+ content-transfer-encoding; s=corp-2018-07-02;
+ bh=fawPQY/UISfSH6DvrztcWabWXm47TtXieQJWSELxOKQ=;
+ b=VYwNeL6ibPXVTEVoRkPUTgHJCT2wzrlt5vhgzdSSWt3OQjBNDlvSlcMAel/+5/qiR1of
+ h2fH3k9W374Ek5nhUZh18oW2OLVU8FOtFCEtIVH579hK6M1M54/APh5/t3SUPGKy7t9V
+ zr4flVMsY+8M+/9Er2kArmiUZJYRUJeMUa6Z3FeKdWFkw5uKS18otDCNc6AjwWI6ftkm
+ Qf7O4LpTTnOL9WPw64vBXu6TFLd4bcXU3WYyHNH2O8UezLzZ+yDrtb1pzL64XMboTNNv
+ P0vzfKCxcw4dY1NwEQj5N4JcCQ2pFTiMWGgyRXLO/ijggAoaKJ7wtQ0X968LtP9NJ5HD 2A== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by userp2120.oracle.com with ESMTP id 2t7809rqup-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 21 Jun 2019 23:56:57 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5LNtKaA167994;
+ Fri, 21 Jun 2019 23:56:57 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3030.oracle.com with ESMTP id 2t7rdy0604-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 21 Jun 2019 23:56:57 +0000
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5LNuue9170472;
+ Fri, 21 Jun 2019 23:56:56 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3030.oracle.com with ESMTP id 2t7rdy05yy-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 21 Jun 2019 23:56:56 +0000
+Received: from abhmp0002.oracle.com (abhmp0002.oracle.com [141.146.116.8])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5LNurk8019074;
+ Fri, 21 Jun 2019 23:56:53 GMT
+Received: from localhost (/10.159.131.214)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Fri, 21 Jun 2019 16:56:53 -0700
+Subject: [PATCH v4 0/7] vfs: make immutable files actually immutable
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: matthew.garrett@nebula.com, yuchao0@huawei.com, tytso@mit.edu,
+ darrick.wong@oracle.com, ard.biesheuvel@linaro.org,
+ josef@toxicpanda.com, clm@fb.com, adilger.kernel@dilger.ca,
+ viro@zeniv.linux.org.uk, jack@suse.com, dsterba@suse.com,
+ jaegeuk@kernel.org, jk@ozlabs.org
+Date: Fri, 21 Jun 2019 16:56:50 -0700
+Message-ID: <156116141046.1664939.11424021489724835645.stgit@magnolia>
+User-Agent: StGit/0.17.1-dirty
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190620221306.GD5375@magnolia>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9295
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906210182
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -59,15 +83,12 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org, yuchao0@huawei.com,
- linux-mm@kvack.org, clm@fb.com, adilger.kernel@dilger.ca,
- matthew.garrett@nebula.com, linux-nilfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, devel@lists.orangefs.org, josef@toxicpanda.com,
- reiserfs-devel@vger.kernel.org, viro@zeniv.linux.org.uk, dsterba@suse.com,
- jaegeuk@kernel.org, ard.biesheuvel@linaro.org, linux-kernel@vger.kernel.org,
+Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ linux-kernel@vger.kernel.org, reiserfs-devel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- jk@ozlabs.org, jack@suse.com, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com
+ linux-mm@kvack.org, linux-nilfs@vger.kernel.org, linux-mtd@lists.infradead.org,
+ ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -81,30 +102,53 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Thu, Jun 20, 2019 at 03:13:06PM -0700, Darrick J. Wong wrote:
-> > I note that this patch doesn't allow writes to swap files.  So Amir's
-> > generic/554 test will still fail for those file systems that don't use
-> > copy_file_range.
-> 
-> I didn't add any IS_SWAPFILE checks here, so I'm not sure to what you're
-> referring?
+Hi all,
 
-Sorry, my bad; I mistyped.  What I should have said is this patch
-doesn't *prohibit* writes to swap files....
+The chattr(1) manpage has this to say about the immutable bit that
+system administrators can set on files:
 
-(And so Amir's generic/554 test, even modified so it allow reads from
-swapfiles, but not writes, when using copy_file_range, is still
-failing for ext4.  I was looking to see if I could remove it from my
-exclude list, but not yet.  :-)
+"A file with the 'i' attribute cannot be modified: it cannot be deleted
+or renamed, no link can be created to this file, most of the file's
+metadata can not be modified, and the file can not be opened in write
+mode."
 
-> > I'm indifferent as to whether you add a new patch, or include that
-> > change in this patch, but perhaps we should fix this while we're
-> > making changes in these code paths?
-> 
-> The swapfile patches should be in a separate patch, which I was planning
-> to work on but hadn't really gotten around to it.
+Given the clause about how the file 'cannot be modified', it is
+surprising that programs holding writable file descriptors can continue
+to write to and truncate files after the immutable flag has been set,
+but they cannot call other things such as utimes, fallocate, unlink,
+link, setxattr, or reflink.
 
-Ok, great, thanks!!
+Since the immutable flag is only settable by administrators, resolve
+this inconsistent behavior in favor of the documented behavior -- once
+the flag is set, the file cannot be modified, period.  We presume that
+administrators must be trusted to know what they're doing, and that
+cutting off programs with writable fds will probably break them.
 
-				- Ted
+Therefore, add immutability checks to the relevant VFS functions, then
+refactor the SETFLAGS and FSSETXATTR implementations to use common
+argument checking functions so that we can then force pagefaults on all
+the file data when setting immutability.
+
+Note that various distro manpages points out the inconsistent behavior
+of the various Linux filesystems w.r.t. immutable.  This fixes all that.
+
+I also discovered that userspace programs can write and create writable
+memory mappings to active swap files.  This is extremely bad because
+this allows anyone with write privileges to corrupt system memory.  The
+final patch in this series closes off that hole, at least for swap
+files.
+
+If you're going to start using this mess, you probably ought to just
+pull from my git trees, which are linked below.
+
+This has been lightly tested with fstests.  Enjoy!
+Comments and questions are, as always, welcome.
+
+--D
+
+kernel git tree:
+https://git.kernel.org/cgit/linux/kernel/git/djwong/xfs-linux.git/log/?h=immutable-files
+
+fstests git tree:
+https://git.kernel.org/cgit/linux/kernel/git/djwong/xfstests-dev.git/log/?h=immutable-files
 

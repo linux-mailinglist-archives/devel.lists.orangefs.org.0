@@ -2,59 +2,63 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id E892355774
-	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 20:56:04 +0200 (CEST)
-Received: from [::1] (port=55470 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFE4655903
+	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 22:38:26 +0200 (CEST)
+Received: from [::1] (port=37300 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hfqbs-0004QE-4W
-	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 14:56:04 -0400
-Received: from mail-yw1-f68.google.com ([209.85.161.68]:41077)
+	id 1hfsCv-0001Cp-LD
+	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 16:38:25 -0400
+Received: from mail-pl1-f196.google.com ([209.85.214.196]:34330)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <hubcap@omnibond.com>) id 1hfqbr-0004PI-HR
- for devel@lists.orangefs.org; Tue, 25 Jun 2019 14:56:03 -0400
-Received: by mail-yw1-f68.google.com with SMTP id y185so7994630ywy.8
- for <devel@lists.orangefs.org>; Tue, 25 Jun 2019 11:55:43 -0700 (PDT)
+ (Exim 4.92) (envelope-from <adilger@dilger.ca>) id 1hfsCt-0001Bx-Ld
+ for devel@lists.orangefs.org; Tue, 25 Jun 2019 16:38:23 -0400
+Received: by mail-pl1-f196.google.com with SMTP id i2so90202plt.1
+ for <devel@lists.orangefs.org>; Tue, 25 Jun 2019 13:38:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=omnibond-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=YoWQjtvkCeSVA1kdmqc11ysNxmHPU03GqQotMHxDp2U=;
- b=JYQNOBN93vshA1tG3sDASUASg0IgzYx8xGpNBbiFRHkUwh3oZdl9OlCx6jtrKyS1PA
- CrWyYZ0jKnkrirlUqW6deRq7Fi6sW4Rq7eUgopdxHjU0QgcSHpvnnweYhXypKLiZZ8vR
- cuf6eyKxBAOFtGHE/zKQbWG3mZn2Wr8Hi+aiv/FAG+RF4izFWbaYnBMO5ymEVTPlxI6o
- GvXxL0SVizG6nae8EeWBXNJsx5f76Ti+nvMB1QSd1ziILN0yR33OlN0W+m7qyFqpJ5Sg
- HCuiwnpaCzlQslCfLzZHyriG7QbIAsi4t7cY765LFqIKVeUOnfdvuu6dRL8/eLhFKxJD
- 9o4g==
+ d=dilger-ca.20150623.gappssmtp.com; s=20150623;
+ h=from:message-id:mime-version:subject:date:in-reply-to:cc:to
+ :references; bh=k9wVBI3MNSxJVQhODLuSRbOf+SmT1l1K5RRF5+DdhGM=;
+ b=i0tlux+8FNEu0ugkEvUUlD4zKy+jo4LmPTngoA6r4KZwHDBk4l5v9aHPUQEnX49/5g
+ z/5lU03hiGUesQ1zP/lPDO/M9fU515Y8oNEl0EKjwdC7dNyZmZQEQEJzGU548pSrAizw
+ AlBCGdOUNg8gVK9FeesIiFWJzJ6YbgT5nrsBvzAUmh99yf7q8hQlgwIm8HPdOmToZugA
+ nEmrM6blVwgyo7dN5eFPje1f1HwAtA+5XwodCP1ntkD5mvR/FwjSqB5AJn7YMTtfEeor
+ 5bhYLcubsCaGOlgF0onarHD40ER7JyKcO4a/eslTTHQKCN3GB1Tra4WgBV7T6KYa0chE
+ ps9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=YoWQjtvkCeSVA1kdmqc11ysNxmHPU03GqQotMHxDp2U=;
- b=LM6rw6GVBTCvvqjx5BKslKaBx87+Ojh2CVtz0KJMxHiCDm4BrT+ZzKqr5gwCGcYqol
- DLDvH9SrEPj933FWiaOOfgtE52Dnm0dP50hF9CWnBfx01alimVyMNqBrqoRId8CosdMp
- zphC+pfa9HPsPqGZVcezUp4nDL3oz0aSAqoZz4ccREoWlaQDZcO8z1kuaQxT7Nki4nqP
- LDAJLAG8YV4/yyih5fdiOpwuKIvgQNMcHCyLHbnMe61VNGJxHqrb0CTUPntW/tAG/Ea6
- fRcyxOO5VIzk/wo/gCatEhfK81B/wNz7/wGOtGmlv7zpUB5xX6iHUKJLo2pz5pOmJJYE
- Sqmg==
-X-Gm-Message-State: APjAAAVeK4xvB2l3j3Euw0TjNaNs6pvqlCT2w3OLGLRMwL3nHs4qmjgi
- cBdaFOVOomGlrRyzDV539As+Ij3CtGNWRyUTos42tQ==
-X-Google-Smtp-Source: APXvYqzrnRLAsUllxL7vPOP5CM7N8fL1sWjlkqRDPfbOcLxlOi/xZjJsQ1aD+hFTQ8G5wxrFE8DwHOAM7ic7kFMTk6c=
-X-Received: by 2002:a81:5cd6:: with SMTP id q205mr121944ywb.13.1561488922875; 
- Tue, 25 Jun 2019 11:55:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190511132700.4862-1-colin.king@canonical.com>
- <CAOg9mSQt42NQu-3nwZOCGOPx45y7G8aaiDaVe4SwotGnD9iY1A@mail.gmail.com>
- <20190521150311.GL31203@kadam>
-In-Reply-To: <20190521150311.GL31203@kadam>
-From: Mike Marshall <hubcap@omnibond.com>
-Date: Tue, 25 Jun 2019 14:55:11 -0400
-Message-ID: <CAOg9mSQmV=BDMpTNLJvb4QBr=f96qg4Hr9qu=bB6xZubB+1LZQ@mail.gmail.com>
-Subject: Re: [PATCH] orangefs: remove redundant assignment to variable
- buffer_index
-To: Dan Carpenter <dan.carpenter@oracle.com>,
- Mike Marshall <hubcap@omnibond.com>, 
- linux-fsdevel <linux-fsdevel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+ h=x-gm-message-state:from:message-id:mime-version:subject:date
+ :in-reply-to:cc:to:references;
+ bh=k9wVBI3MNSxJVQhODLuSRbOf+SmT1l1K5RRF5+DdhGM=;
+ b=bpjirlTybiQHiUiB9NvSy41WAG2eHBFGNsFUXl/T7nw10QKNWazTLOyYqtfDrLrloo
+ 0SIbm4GCjwvhjTpAyRqfQQIXAh8VCUajaKK5uMWbYy0M8+Zm1mxM78kKdQLuUSAcFk/+
+ 66aCf0yqfLRyRH8wkSFQTsRS1cLBgrblrk4JHNdZCCJ3cMJjZKCsh0ojUcEJZA/p7WU4
+ e/+vklgk5zAQK6sqtWUWOzl7qSJt6n+ZDEfzMOPnYYxMKA3iTncWGvbV+hz3LILQuLzu
+ LhQXp8cECZKfQi7HXOI3tVaje3U84ZuXVA3m6mNjSxz0CvdM3+QlMyWfAb5jK0uP1dyM
+ r7cg==
+X-Gm-Message-State: APjAAAXz9burLfrnT9iPds/oymLIW5CCaF9mky7mZ1Kp4dxbi1qcJsI2
+ DlxetkcQhD/p/pHmkPrWcyFEPA==
+X-Google-Smtp-Source: APXvYqxrr/uL0yeWv0l0AFEkJ0fiuFxZszwvIRMBTgsPNJXwasc7ZXW/q9+Il/kiADkCo486i0NA9w==
+X-Received: by 2002:a17:902:f216:: with SMTP id
+ gn22mr690564plb.118.1561495062448; 
+ Tue, 25 Jun 2019 13:37:42 -0700 (PDT)
+Received: from cabot.adilger.ext (S0106a84e3fe4b223.cg.shawcable.net.
+ [70.77.216.213])
+ by smtp.gmail.com with ESMTPSA id m4sm4145961pff.108.2019.06.25.13.37.40
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 25 Jun 2019 13:37:41 -0700 (PDT)
+From: Andreas Dilger <adilger@dilger.ca>
+Message-Id: <E84C8EBC-8341-49E5-8EED-0980D158CD50@dilger.ca>
+Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
+Subject: Re: [PATCH v4 0/7] vfs: make immutable files actually immutable
+Date: Tue, 25 Jun 2019 14:37:37 -0600
+In-Reply-To: <20190625180326.GC2230847@magnolia>
+To: "Darrick J. Wong" <darrick.wong@oracle.com>
+References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
+ <20190625103631.GB30156@infradead.org> <20190625180326.GC2230847@magnolia>
+X-Mailer: Apple Mail (2.3273)
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -66,8 +70,19 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Colin King <colin.king@canonical.com>, kernel-janitors@vger.kernel.org,
- LKML <linux-kernel@vger.kernel.org>, devel@lists.orangefs.org
+Cc: linux-efi@vger.kernel.org, linux-btrfs <linux-btrfs@vger.kernel.org>,
+ yuchao0@huawei.com, linux-mm <linux-mm@kvack.org>, Chris Mason <clm@fb.com>,
+ linux-mtd@lists.infradead.org, matthew.garrett@nebula.com,
+ linux-nilfs@vger.kernel.org, Christoph Hellwig <hch@infradead.org>,
+ Ext4 Developers List <linux-ext4@vger.kernel.org>, devel@lists.orangefs.org,
+ Josef Bacik <josef@toxicpanda.com>, reiserfs-devel@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, dsterba@suse.com,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
+ ard.biesheuvel@linaro.org,
+ Linux List Kernel Mailing <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs <linux-xfs@vger.kernel.org>,
+ jk@ozlabs.org, Jan Kara <jack@suse.com>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>, ocfs2-devel@oss.oracle.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -81,50 +96,71 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
->> The only explanation I can think of is that you guys are discussing
->> different code. :P
+On Jun 25, 2019, at 12:03 PM, Darrick J. Wong <darrick.wong@oracle.com> wrote:
+> 
+> On Tue, Jun 25, 2019 at 03:36:31AM -0700, Christoph Hellwig wrote:
+>> On Fri, Jun 21, 2019 at 04:56:50PM -0700, Darrick J. Wong wrote:
+>>> Hi all,
+>>> 
+>>> The chattr(1) manpage has this to say about the immutable bit that
+>>> system administrators can set on files:
+>>> 
+>>> "A file with the 'i' attribute cannot be modified: it cannot be deleted
+>>> or renamed, no link can be created to this file, most of the file's
+>>> metadata can not be modified, and the file can not be opened in write
+>>> mode."
+>>> 
+>>> Given the clause about how the file 'cannot be modified', it is
+>>> surprising that programs holding writable file descriptors can continue
+>>> to write to and truncate files after the immutable flag has been set,
+>>> but they cannot call other things such as utimes, fallocate, unlink,
+>>> link, setxattr, or reflink.
+>> 
+>> I still think living code beats documentation.  And as far as I can
+>> tell the immutable bit never behaved as documented or implemented
+>> in this series on Linux, and it originated on Linux.
+> 
+> The behavior has never been consistent -- since the beginning you can
+> keep write()ing to a fd after the file becomes immutable, but you can't
+> ftruncate() it.  I would really like to make the behavior consistent.
+> Since the authors of nearly every new system call and ioctl since the
+> late 1990s have interpreted S_IMMUTABLE to mean "immutable takes effect
+> everywhere immediately" I resolved the inconsistency in favor of that
+> interpretation.
+> 
+> I asked Ted what he thought that that userspace having the ability to
+> continue writing to an immutable file, and he thought it was an
+> implementation bug that had been there for 25 years.  Even he thought
+> that immutable should take effect immediately everywhere.
+> 
+>> If you want  hard cut off style immutable flag it should really be a
+>> new API, but I don't really see the point.  It isn't like the usual
+>> workload is to set the flag on a file actively in use.
+> 
+> FWIW Ted also thought that since it's rare for admins to set +i on a
+> file actively in use we could just change it without forcing everyone
+> onto a new api.
 
-My response contained several conflations :-) ...
+On the flip side, it is possible to continue to write to an open fd
+after removing the write permission, and this is a problem we've hit
+in the real world with NFS export, so real applications do this.
 
-The code in file.c that Colin has flagged does indeed have buffer_index
-being initialized needlessly, and the assignment noted by Dan is also
-needless. There's even a second needless assignment done in another
-place in the same function. While the code around them has changed over
-time, these now needless manipulations of buffer_index are not new. I'll
-get rid of them.
+It may be the same case with immutable files, where an application sets
+the immutable flag immediately after creation, but continues to write
+until it closes the file, so that the file can't be modified by other
+processes, and there isn't a risk that the file is missing the immutable
+flag if the writing process dies before setting it at the end.
 
->> You often send these patches before they hit linux-next so I had skipped
->> reviewing this one when you sent it.
+Cheers, Andreas
 
-I know Linus is likely to refuse pull requests for stuff that
-has not been through linux-next, so I make sure stuff has been
-there at least a few days before asking for it to be pulled.
-"A few days" is long enough for robots to see it, perhaps not
-long enough for humans. I especially appreciate the human review. One of
-the good things about Orangefs is that it is easy to install and configure,
-especially for testing. Documentation/filesystems/orangefs.txt has
-instructions for dnf installing orangefs on Fedora, and also how to download
-a source tarball and install from that.
 
--Mike
 
-On Tue, May 21, 2019 at 11:04 AM Dan Carpenter <dan.carpenter@oracle.com> wrote:
->
-> On Thu, May 16, 2019 at 12:06:31PM -0400, Mike Marshall wrote:
-> > Hi Colin...
-> >
-> > Thanks for the patch. Before I initialized buffer_index, Dan Williams sent
-> > in a warning that a particular error path could try to use ibuffer_index
-> > uninitialized. I could induce the problem he described with one
-> > of the xfstests resulting in a crashed kernel. I will try to refactor
-> > the code to fix the problem some other way than initializing
-> > buffer_index in the declaration.
-> >
->
-> The only explanation I can think of is that you guys are discussing
-> different code.  :P
->
-> regards,
-> dan carpenter
->
 
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 873 bytes
+Desc: Message signed with OpenPGP
+URL: <http://lists.orangefs.org/pipermail/devel_lists.orangefs.org/attachments/20190625/bbdf3c99/attachment.asc>

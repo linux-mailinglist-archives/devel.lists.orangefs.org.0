@@ -2,50 +2,75 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3C1C55058
-	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 15:29:05 +0200 (CEST)
-Received: from [::1] (port=53238 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BB33556BA
+	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 20:04:45 +0200 (CEST)
+Received: from [::1] (port=48764 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hflVQ-0007Du-S7
-	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 09:29:04 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:49504)
+	id 1hfpoC-0001di-4Y
+	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 14:04:44 -0400
+Received: from userp2130.oracle.com ([156.151.31.86]:43266)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <peterz@infradead.org>)
- id 1hflVP-0007Cu-Ns
- for devel@lists.orangefs.org; Tue, 25 Jun 2019 09:29:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vCL2IOPiHU9kJW2bBZYOqxawmR17SekCCFnRDcOOjFE=; b=g0ITzi4aEbR6lSdnqiy2ElfSg
- g779gyAaI7Ux0091eXAVoKggjsFo/t+M6NWIocT8AMgHmAAh0yh80ypR6Qbrn/+LZz95Bc5tDvCen
- z4EMW1PvzMzmn7ebko6NG+ty+dz11z5vxAH09EtqjAX8ydZyEpvMqdktJcGUrgc2Dgx66WDRoalDB
- qnMzX1ROanw2yW2oUXHPcEvjQ3b3DC0dOeSFFur1rAygN3R9e1t4x90/HNJodZAxXJkupMEfn77Fm
- hpkVJrCMUlq/fbnIZCSHsL7NRYfw+QRUFFHQvO2QCLXRHQbEJ1FO9NQzzkv9ouNrzplrkLdnx7Roh
- OV0fobmDw==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=hirez.programming.kicks-ass.net)
- by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
- id 1hflU2-0000AO-GD; Tue, 25 Jun 2019 13:27:38 +0000
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id ED4AC209FCA10; Tue, 25 Jun 2019 15:27:36 +0200 (CEST)
-Date: Tue, 25 Jun 2019 15:27:36 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Andreas Gruenbacher <agruenba@redhat.com>
-Subject: Re: [RFC][PATCH] wake_up_var() memory ordering
-Message-ID: <20190625132736.GZ3419@hirez.programming.kicks-ass.net>
-References: <20190624165012.GH3436@hirez.programming.kicks-ass.net>
- <CAHc6FU7j5iW7WQoxN_OSfvK4zxv_MxTWJpiNsqFW8TEDMX1rjw@mail.gmail.com>
- <20190625103430.GW3402@hirez.programming.kicks-ass.net>
- <CAHc6FU6zUCdQZ1AfN2KYcPYVKc5bwvc0bD7=-KZpFXws+F9QZQ@mail.gmail.com>
+ (Exim 4.92) (envelope-from <darrick.wong@oracle.com>)
+ id 1hfpoB-0001cr-Eo
+ for devel@lists.orangefs.org; Tue, 25 Jun 2019 14:04:43 -0400
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5PHwd8B149230;
+ Tue, 25 Jun 2019 18:03:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2018-07-02;
+ bh=q3PQ3FdT4Cu9ZFxkmPMEB5w+ChSGz6mW1jtUBkoDAvw=;
+ b=ksyT2XyNq/sBFuNf0kcEOahW5dSfpRm2xoyvLHIl5Mejyeb4JLMflOsVy5quxvpN67j2
+ IsKXQAf1HGSoM5FioAjK6ozKyUInygd/ml7l4zpRXtxh/UWz20oKY/FTMlcYaDZBA7N9
+ MY/zMgGVdosxoetsazUmPfKqNstqSPWvasVhjypJJqeFcHhDaP62mxpCpMaNSfCtaBX3
+ JdFoGt472fc1h8ZFinUmpgHsBMZcZBqagXk/T9NnnQ5VQ3pfbtpwxQaYR4yLbxZKG58n
+ MOx1qf1doyupoPytNdwt2e/QYdozJOX4KCvtmdKWmiW/VFWoTbAzfyslOGA2S3jKu5TS Qg== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2130.oracle.com with ESMTP id 2t9brt61nv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 25 Jun 2019 18:03:42 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5PI2jR6140649;
+ Tue, 25 Jun 2019 18:03:41 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3020.oracle.com with ESMTP id 2t9p6ub7ds-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 25 Jun 2019 18:03:41 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5PI3fsX143158;
+ Tue, 25 Jun 2019 18:03:41 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by aserp3020.oracle.com with ESMTP id 2t9p6ub7dj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 25 Jun 2019 18:03:41 +0000
+Received: from abhmp0002.oracle.com (abhmp0002.oracle.com [141.146.116.8])
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x5PI3VCg025882;
+ Tue, 25 Jun 2019 18:03:31 GMT
+Received: from localhost (/67.169.218.210)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Tue, 25 Jun 2019 11:03:31 -0700
+Date: Tue, 25 Jun 2019 11:03:26 -0700
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: Christoph Hellwig <hch@infradead.org>
+Subject: Re: [PATCH v4 0/7] vfs: make immutable files actually immutable
+Message-ID: <20190625180326.GC2230847@magnolia>
+References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
+ <20190625103631.GB30156@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAHc6FU6zUCdQZ1AfN2KYcPYVKc5bwvc0bD7=-KZpFXws+F9QZQ@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20190625103631.GB30156@infradead.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9299
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=904 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906250136
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -57,37 +82,16 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-cachefs@redhat.com, Mike Snitzer <snitzer@redhat.com>,
- linux-aio@kvack.org, David Airlie <airlied@linux.ie>,
- samba-technical <samba-technical@lists.samba.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Will Deacon <will.deacon@arm.com>, dri-devel@lists.freedesktop.org,
- David Howells <dhowells@redhat.com>, Chris Mason <clm@fb.com>,
- dm-devel@redhat.com, keyrings@vger.kernel.org, Ingo Molnar <mingo@redhat.com>,
- linux-afs@lists.infradead.org, Alasdair Kergon <agk@redhat.com>,
- linux-cifs@vger.kernel.org, rds-devel@oss.oracle.com,
- linux-rdma@vger.kernel.org, James Morris <jmorris@namei.org>,
- cluster-devel <cluster-devel@redhat.com>, Antti Palosaari <crope@iki.fi>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Paul McKenney <paulmck@linux.vnet.ibm.com>, intel-gfx@lists.freedesktop.org,
- devel@lists.orangefs.org, "Serge E. Hallyn" <serge@hallyn.com>,
- Santosh Shilimkar <santosh.shilimkar@oracle.com>,
- Johan Hedberg <johan.hedberg@gmail.com>, Marcel Holtmann <marcel@holtmann.org>,
- Sean Wang <sean.wang@mediatek.com>, Josef Bacik <josef@toxicpanda.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- linux-mediatek@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, David Sterba <dsterba@suse.com>,
- MauroCarvalho Chehab <mchehab@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- linux-arm-kernel@lists.infradead.org, "J. Bruce Fields" <bfields@fieldses.org>,
- Linux NFS Mailing List <linux-nfs@vger.kernel.org>, netdev@vger.kernel.org,
- Jeff Layton <jlayton@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
- "David S. Miller" <davem@davemloft.net>, Steve French <sfrench@samba.org>,
- linux-bluetooth@vger.kernel.org, LSM <linux-security-module@vger.kernel.org>,
- Benjamin LaHaise <bcrl@kvack.org>, Daniel Vetter <daniel@ffwll.ch>,
- Bob Peterson <rpeterso@redhat.com>, linux-media@vger.kernel.org,
- Anna Schumaker <anna.schumaker@netapp.com>, linux-btrfs@vger.kernel.org
+Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org, yuchao0@huawei.com,
+ linux-mm@kvack.org, clm@fb.com, adilger.kernel@dilger.ca,
+ matthew.garrett@nebula.com, linux-nilfs@vger.kernel.org,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org, josef@toxicpanda.com,
+ reiserfs-devel@vger.kernel.org, viro@zeniv.linux.org.uk, dsterba@suse.com,
+ jaegeuk@kernel.org, tytso@mit.edu, ard.biesheuvel@linaro.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, jk@ozlabs.org, jack@suse.com,
+ linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
+ ocfs2-devel@oss.oracle.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -101,24 +105,48 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Tue, Jun 25, 2019 at 02:12:22PM +0200, Andreas Gruenbacher wrote:
-
-> > Only if we do as David suggested and make clean_and_wake_up_bit()
-> > provide the RELEASE barrier.
+On Tue, Jun 25, 2019 at 03:36:31AM -0700, Christoph Hellwig wrote:
+> On Fri, Jun 21, 2019 at 04:56:50PM -0700, Darrick J. Wong wrote:
+> > Hi all,
+> > 
+> > The chattr(1) manpage has this to say about the immutable bit that
+> > system administrators can set on files:
+> > 
+> > "A file with the 'i' attribute cannot be modified: it cannot be deleted
+> > or renamed, no link can be created to this file, most of the file's
+> > metadata can not be modified, and the file can not be opened in write
+> > mode."
+> > 
+> > Given the clause about how the file 'cannot be modified', it is
+> > surprising that programs holding writable file descriptors can continue
+> > to write to and truncate files after the immutable flag has been set,
+> > but they cannot call other things such as utimes, fallocate, unlink,
+> > link, setxattr, or reflink.
 > 
-> (It's clear_and_wake_up_bit, not clean_and_wake_up_bit.)
+> I still think living code beats documentation.  And as far as I can
+> tell the immutable bit never behaved as documented or implemented
+> in this series on Linux, and it originated on Linux.
 
-Yes, typing hard.
+The behavior has never been consistent -- since the beginning you can
+keep write()ing to a fd after the file becomes immutable, but you can't
+ftruncate() it.  I would really like to make the behavior consistent.
+Since the authors of nearly every new system call and ioctl since the
+late 1990s have interpreted S_IMMUTABLE to mean "immutable takes effect
+everywhere immediately" I resolved the inconsistency in favor of that
+interpretation.
 
-> > That is, currently clear_and_wake_up_bit() is
-> >
-> >         clear_bit()
-> >         smp_mb__after_atomic();
-> >         wake_up_bit();
-> >
+I asked Ted what he thought that that userspace having the ability to
+continue writing to an immutable file, and he thought it was an
+implementation bug that had been there for 25 years.  Even he thought
+that immutable should take effect immediately everywhere.
 
-> Now I'm confused because clear_and_wake_up_bit() in mainline does use
-> clear_bit_unlock(), so it's the exact opposite of what you just said.
+> If you want  hard cut off style immutable flag it should really be a
+> new API, but I don't really see the point.  It isn't like the usual
+> workload is to set the flag on a file actively in use.
 
-Argh; clearly I couldn't read. And then yes, you're right.
+FWIW Ted also thought that since it's rare for admins to set +i on a
+file actively in use we could just change it without forcing everyone
+onto a new api.
+
+--D
 

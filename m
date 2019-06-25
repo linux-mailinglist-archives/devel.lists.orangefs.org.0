@@ -2,39 +2,44 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EDC65240C
-	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 09:08:51 +0200 (CEST)
-Received: from [::1] (port=47680 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id F41375254F
+	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 09:52:19 +0200 (CEST)
+Received: from [::1] (port=47994 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hffZS-0006CF-15
-	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 03:08:50 -0400
-Received: from mx2.suse.de ([195.135.220.15]:34828 helo=mx1.suse.de)
+	id 1hfgFX-0007Ke-7I
+	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 03:52:19 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:45090)
  by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <jack@suse.cz>) id 1hffZP-0006BJ-Ud
- for devel@lists.orangefs.org; Tue, 25 Jun 2019 03:08:48 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 05584ADF2;
- Tue, 25 Jun 2019 07:08:05 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id E62D81E2F23; Tue, 25 Jun 2019 09:08:04 +0200 (CEST)
-Date: Tue, 25 Jun 2019 09:08:04 +0200
-From: Jan Kara <jack@suse.cz>
-To: "Darrick J. Wong" <darrick.wong@oracle.com>
-Subject: Re: [Ocfs2-devel] [PATCH 2/7] vfs: flush and wait for io when
- setting the immutable flag via SETFLAGS
-Message-ID: <20190625070804.GA31527@quack2.suse.cz>
-References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
- <156116142734.1664939.5074567130774423066.stgit@magnolia>
- <20190624113737.GG32376@quack2.suse.cz>
- <20190624215817.GE1611011@magnolia>
- <20190625030439.GA5379@magnolia>
+ (Exim 4.92) (envelope-from <dhowells@redhat.com>) id 1hfgFW-0007Jn-5Q
+ for devel@lists.orangefs.org; Tue, 25 Jun 2019 03:52:18 -0400
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id D5019307D932;
+ Tue, 25 Jun 2019 07:51:26 +0000 (UTC)
+Received: from warthog.procyon.org.uk (ovpn-120-57.rdu2.redhat.com
+ [10.10.120.57])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AC7AF6085B;
+ Tue, 25 Jun 2019 07:51:02 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+From: David Howells <dhowells@redhat.com>
+In-Reply-To: <20190624165012.GH3436@hirez.programming.kicks-ass.net>
+References: <20190624165012.GH3436@hirez.programming.kicks-ass.net>
+To: Peter Zijlstra <peterz@infradead.org>
+Subject: Re: [RFC][PATCH] wake_up_var() memory ordering
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190625030439.GA5379@magnolia>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <32378.1561449061.1@warthog.procyon.org.uk>
+Date: Tue, 25 Jun 2019 08:51:01 +0100
+Message-ID: <32379.1561449061@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.48]); Tue, 25 Jun 2019 07:51:37 +0000 (UTC)
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -46,16 +51,36 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-efi@vger.kernel.org, Jan Kara <jack@suse.cz>, yuchao0@huawei.com,
- linux-mm@kvack.org, clm@fb.com, adilger.kernel@dilger.ca,
- ocfs2-devel@oss.oracle.com, matthew.garrett@nebula.com,
- linux-nilfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- devel@lists.orangefs.org, josef@toxicpanda.com, reiserfs-devel@vger.kernel.org,
- viro@zeniv.linux.org.uk, dsterba@suse.com, jaegeuk@kernel.org, tytso@mit.edu,
- ard.biesheuvel@linaro.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- jk@ozlabs.org, jack@suse.com, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
+Cc: linux-cachefs@redhat.com, Mike Snitzer <snitzer@redhat.com>,
+ linux-aio@kvack.org, David Airlie <airlied@linux.ie>,
+ samba-technical@lists.samba.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Will Deacon <will.deacon@arm.com>, dri-devel@lists.freedesktop.org,
+ dhowells@redhat.com, Chris Mason <clm@fb.com>, dm-devel@redhat.com,
+ keyrings@vger.kernel.org, Ingo Molnar <mingo@redhat.com>,
+ linux-afs@lists.infradead.org, Alasdair Kergon <agk@redhat.com>,
+ linux-cifs@vger.kernel.org, rds-devel@oss.oracle.com,
+ Andreas Gruenbacher <agruenba@redhat.com>, linux-rdma@vger.kernel.org,
+ James Morris <jmorris@namei.org>, cluster-devel@redhat.com,
+ Antti Palosaari <crope@iki.fi>, Matthias Brugger <matthias.bgg@gmail.com>,
+ Paul McKenney <paulmck@linux.vnet.ibm.com>, intel-gfx@lists.freedesktop.org,
+ devel@lists.orangefs.org, "Serge E. Hallyn" <serge@hallyn.com>,
+ Santosh Shilimkar <santosh.shilimkar@oracle.com>,
+ Johan Hedberg <johan.hedberg@gmail.com>, Marcel Holtmann <marcel@holtmann.org>,
+ Sean Wang <sean.wang@mediatek.com>, Josef Bacik <josef@toxicpanda.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, linux-fsdevel@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, David Sterba <dsterba@suse.com>,
+ MauroCarvalho Chehab <mchehab@kernel.org>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ linux-arm-kernel@lists.infradead.org, "J. Bruce Fields" <bfields@fieldses.org>,
+ linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
+ Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
+ "David S. Miller" <davem@davemloft.net>, Steve French <sfrench@samba.org>,
+ linux-bluetooth@vger.kernel.org, linux-security-module@vger.kernel.org,
+ Benjamin LaHaise <bcrl@kvack.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Bob Peterson <rpeterso@redhat.com>, linux-media@vger.kernel.org,
+ Anna Schumaker <anna.schumaker@netapp.com>, linux-btrfs@vger.kernel.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -69,94 +94,54 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Mon 24-06-19 20:04:39, Darrick J. Wong wrote:
-> On Mon, Jun 24, 2019 at 02:58:17PM -0700, Darrick J. Wong wrote:
-> > On Mon, Jun 24, 2019 at 01:37:37PM +0200, Jan Kara wrote:
-> > > On Fri 21-06-19 16:57:07, Darrick J. Wong wrote:
-> > > > From: Darrick J. Wong <darrick.wong@oracle.com>
-> > > > 
-> > > > When we're using FS_IOC_SETFLAGS to set the immutable flag on a file, we
-> > > > need to ensure that userspace can't continue to write the file after the
-> > > > file becomes immutable.  To make that happen, we have to flush all the
-> > > > dirty pagecache pages to disk to ensure that we can fail a page fault on
-> > > > a mmap'd region, wait for pending directio to complete, and hope the
-> > > > caller locked out any new writes by holding the inode lock.
-> > > > 
-> > > > Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
-> > > 
-> > > Seeing the way this worked out, is there a reason to have separate
-> > > vfs_ioc_setflags_flush_data() instead of folding the functionality in
-> > > vfs_ioc_setflags_check() (possibly renaming it to
-> > > vfs_ioc_setflags_prepare() to indicate it does already some changes)? I
-> > > don't see any place that would need these two separated...
-> > 
-> > XFS needs them to be separated.
-> > 
-> > If we even /think/ that we're going to be setting the immutable flag
-> > then we need to grab the IOLOCK and the MMAPLOCK to prevent further
-> > writes while we drain all the directio writes and dirty data.  IO
-> > completions for the write draining can take the ILOCK, which means that
-> > we can't have grabbed it yet.
-> > 
-> > Next, we grab the ILOCK so we can check the new flags against the inode
-> > and then update the inode core.
-> > 
-> > For most filesystems I think it suffices to inode_lock and then do both,
-> > though.
-> 
-> Heh, lol, that applies to fssetxattr, not to setflags, because xfs
-> setflags implementation open-codes the relevant fssetxattr pieces.
-> So for setflags we can combine both parts into a single _prepare
-> function.
+Peter Zijlstra <peterz@infradead.org> wrote:
 
-Yeah. Also for fssetxattr we could use the prepare helper at least for
-ext4, f2fs, and btrfs where the situation isn't so complex as for xfs to
-save some boilerplate code.
+> I tried using wake_up_var() today and accidentally noticed that it
+> didn't imply an smp_mb() and specifically requires it through
+> wake_up_bit() / waitqueue_active().
 
-								Honza
+Thinking about it again, I'm not sure why you need to add the barrier when
+wake_up() (which this is a wrapper around) is required to impose a barrier at
+the front if there's anything to wake up (ie. the wait queue isn't empty).
 
-> > > > +/*
-> > > > + * Flush all pending IO and dirty mappings before setting S_IMMUTABLE on an
-> > > > + * inode via FS_IOC_SETFLAGS.  If the flush fails we'll clear the flag before
-> > > > + * returning error.
-> > > > + *
-> > > > + * Note: the caller should be holding i_mutex, or else be sure that
-> > > > + * they have exclusive access to the inode structure.
-> > > > + */
-> > > > +static inline int vfs_ioc_setflags_flush_data(struct inode *inode, int flags)
-> > > > +{
-> > > > +	int ret;
-> > > > +
-> > > > +	if (!vfs_ioc_setflags_need_flush(inode, flags))
-> > > > +		return 0;
-> > > > +
-> > > > +	inode_set_flags(inode, S_IMMUTABLE, S_IMMUTABLE);
-> > > > +	ret = inode_flush_data(inode);
-> > > > +	if (ret)
-> > > > +		inode_set_flags(inode, 0, S_IMMUTABLE);
-> > > > +	return ret;
-> > > > +}
-> > > 
-> > > Also this sets S_IMMUTABLE whenever vfs_ioc_setflags_need_flush() returns
-> > > true. That is currently the right thing but seems like a landmine waiting
-> > > to trip? So I'd just drop the vfs_ioc_setflags_need_flush() abstraction to
-> > > make it clear what's going on.
-> > 
-> > Ok.
-> > 
-> > --D
-> > 
-> > > 
-> > > 								Honza
-> > > -- 
-> > > Jan Kara <jack@suse.com>
-> > > SUSE Labs, CR
-> > 
-> > _______________________________________________
-> > Ocfs2-devel mailing list
-> > Ocfs2-devel@oss.oracle.com
-> > https://oss.oracle.com/mailman/listinfo/ocfs2-devel
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+If this is insufficient, does it make sense just to have wake_up*() functions
+do an unconditional release or full barrier right at the front, rather than it
+being conditional on something being woken up?
+
+> @@ -619,9 +614,7 @@ static int dvb_usb_fe_sleep(struct dvb_frontend *fe)
+>  err:
+>  	if (!adap->suspend_resume_active) {
+>  		adap->active_fe = -1;
+
+I'm wondering if there's a missing barrier here.  Should the clear_bit() on
+the next line be clear_bit_unlock() or clear_bit_release()?
+
+> -		clear_bit(ADAP_SLEEP, &adap->state_bits);
+> -		smp_mb__after_atomic();
+> -		wake_up_bit(&adap->state_bits, ADAP_SLEEP);
+> +		clear_and_wake_up_bit(ADAP_SLEEP, &adap->state_bits);
+>  	}
+>  
+>  	dev_dbg(&d->udev->dev, "%s: ret=%d\n", __func__, ret);
+> diff --git a/fs/afs/fs_probe.c b/fs/afs/fs_probe.c
+> index cfe62b154f68..377ee07d5f76 100644
+> --- a/fs/afs/fs_probe.c
+> +++ b/fs/afs/fs_probe.c
+> @@ -18,6 +18,7 @@ static bool afs_fs_probe_done(struct afs_server *server)
+>  
+>  	wake_up_var(&server->probe_outstanding);
+>  	clear_bit_unlock(AFS_SERVER_FL_PROBING, &server->flags);
+> +	smp_mb__after_atomic();
+>  	wake_up_bit(&server->flags, AFS_SERVER_FL_PROBING);
+>  	return true;
+>  }
+
+Looking at this and the dvb one, does it make sense to stick the release
+semantics of clear_bit_unlock() into clear_and_wake_up_bit()?
+
+Also, should clear_bit_unlock() be renamed to clear_bit_release() (and
+similarly test_and_set_bit_lock() -> test_and_set_bit_acquire()) if we seem to
+be trying to standardise on that terminology.
+
+David
 

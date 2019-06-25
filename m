@@ -2,47 +2,50 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22E2B54E82
-	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 14:13:17 +0200 (CEST)
-Received: from [::1] (port=44308 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3C1C55058
+	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 15:29:05 +0200 (CEST)
+Received: from [::1] (port=53238 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hfkK3-00039r-VI
-	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 08:13:15 -0400
-Received: from mail-oi1-f194.google.com ([209.85.167.194]:36507)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <agruenba@redhat.com>) id 1hfkK2-000396-KS
- for devel@lists.orangefs.org; Tue, 25 Jun 2019 08:13:14 -0400
-Received: by mail-oi1-f194.google.com with SMTP id w7so12305518oic.3
- for <devel@lists.orangefs.org>; Tue, 25 Jun 2019 05:12:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=xtX13vSVbmx57mGL/Q0hXK8kpnRo7HFPa5oOdLxipaM=;
- b=Pm9OZ/BSzmMOFjgNbXKK/3+syqY6ag1xqcJxcngtNK2L51SFQ1nkVeSPhhVhhIqzmq
- pafTCowOAOUlOAeMgjAkokXeHnJt+aoFtlRf2XvRoWGEkMQPOMZdvahMM9mX4O9fXoBy
- LTyOCJkNb9PGsByCagcZQZMOZbanvpmBzzEoGo8Jk/qhkjdhx1V2/jvkK3Wf2w8MgBi8
- npzkGFuMUYnfHbwbL6S+4aODQTai1WRhDswCBWtHT+21Q+A7cfUWl4JEemzrmUxne73y
- UnZdyJKyUVvVw27/01C69P2qr5FFylvmRy8rkHjdq83ymaAkDenMZFqekY8hIg4MYseW
- iglA==
-X-Gm-Message-State: APjAAAUTl5OOmhWH6uqt7RfJnZihCeoWZzx074/sw6e/4ltCx0AG74IH
- dG8HD8bqOx3YFXn1QNGSzJ59wAIB4Kn+dye0+SyxYQ==
-X-Google-Smtp-Source: APXvYqzIF0shhnL3kTWbxYnFTIfJoQ9NWdzzlYJbdr7wT1RELz57W5jZU6ihqAiJYZbsgta0nM0Q5SDLuZyhNwwIoP0=
-X-Received: by 2002:aca:b58b:: with SMTP id
- e133mr14182998oif.147.1561464753642; 
- Tue, 25 Jun 2019 05:12:33 -0700 (PDT)
-MIME-Version: 1.0
+	id 1hflVQ-0007Du-S7
+	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 09:29:04 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:49504)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <peterz@infradead.org>)
+ id 1hflVP-0007Cu-Ns
+ for devel@lists.orangefs.org; Tue, 25 Jun 2019 09:29:03 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=vCL2IOPiHU9kJW2bBZYOqxawmR17SekCCFnRDcOOjFE=; b=g0ITzi4aEbR6lSdnqiy2ElfSg
+ g779gyAaI7Ux0091eXAVoKggjsFo/t+M6NWIocT8AMgHmAAh0yh80ypR6Qbrn/+LZz95Bc5tDvCen
+ z4EMW1PvzMzmn7ebko6NG+ty+dz11z5vxAH09EtqjAX8ydZyEpvMqdktJcGUrgc2Dgx66WDRoalDB
+ qnMzX1ROanw2yW2oUXHPcEvjQ3b3DC0dOeSFFur1rAygN3R9e1t4x90/HNJodZAxXJkupMEfn77Fm
+ hpkVJrCMUlq/fbnIZCSHsL7NRYfw+QRUFFHQvO2QCLXRHQbEJ1FO9NQzzkv9ouNrzplrkLdnx7Roh
+ OV0fobmDw==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=hirez.programming.kicks-ass.net)
+ by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+ id 1hflU2-0000AO-GD; Tue, 25 Jun 2019 13:27:38 +0000
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id ED4AC209FCA10; Tue, 25 Jun 2019 15:27:36 +0200 (CEST)
+Date: Tue, 25 Jun 2019 15:27:36 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Andreas Gruenbacher <agruenba@redhat.com>
+Subject: Re: [RFC][PATCH] wake_up_var() memory ordering
+Message-ID: <20190625132736.GZ3419@hirez.programming.kicks-ass.net>
 References: <20190624165012.GH3436@hirez.programming.kicks-ass.net>
  <CAHc6FU7j5iW7WQoxN_OSfvK4zxv_MxTWJpiNsqFW8TEDMX1rjw@mail.gmail.com>
  <20190625103430.GW3402@hirez.programming.kicks-ass.net>
-In-Reply-To: <20190625103430.GW3402@hirez.programming.kicks-ass.net>
-From: Andreas Gruenbacher <agruenba@redhat.com>
-Date: Tue, 25 Jun 2019 14:12:22 +0200
-Message-ID: <CAHc6FU6zUCdQZ1AfN2KYcPYVKc5bwvc0bD7=-KZpFXws+F9QZQ@mail.gmail.com>
-Subject: Re: [RFC][PATCH] wake_up_var() memory ordering
-To: Peter Zijlstra <peterz@infradead.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAHc6FU6zUCdQZ1AfN2KYcPYVKc5bwvc0bD7=-KZpFXws+F9QZQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAHc6FU6zUCdQZ1AfN2KYcPYVKc5bwvc0bD7=-KZpFXws+F9QZQ@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -98,57 +101,24 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Tue, 25 Jun 2019 at 12:36, Peter Zijlstra <peterz@infradead.org> wrote:
-> On Tue, Jun 25, 2019 at 11:19:35AM +0200, Andreas Gruenbacher wrote:
-> > > diff --git a/fs/gfs2/glops.c b/fs/gfs2/glops.c
-> > > index cf4c767005b1..666629ea5da7 100644
-> > > --- a/fs/gfs2/glops.c
-> > > +++ b/fs/gfs2/glops.c
-> > > @@ -227,6 +227,7 @@ static void gfs2_clear_glop_pending(struct gfs2_inode *ip)
-> > >                 return;
-> > >
-> > >         clear_bit_unlock(GIF_GLOP_PENDING, &ip->i_flags);
-> > > +       smp_mb__after_atomic();
-> > >         wake_up_bit(&ip->i_flags, GIF_GLOP_PENDING);
+On Tue, Jun 25, 2019 at 02:12:22PM +0200, Andreas Gruenbacher wrote:
+
+> > Only if we do as David suggested and make clean_and_wake_up_bit()
+> > provide the RELEASE barrier.
+> 
+> (It's clear_and_wake_up_bit, not clean_and_wake_up_bit.)
+
+Yes, typing hard.
+
+> > That is, currently clear_and_wake_up_bit() is
 > >
-> > This should become clear_and_wake_up_bit as well, right? There are
-> > several more instances of the same pattern.
->
-> Only if we do as David suggested and make clean_and_wake_up_bit()
-> provide the RELEASE barrier.
+> >         clear_bit()
+> >         smp_mb__after_atomic();
+> >         wake_up_bit();
+> >
 
-(It's clear_and_wake_up_bit, not clean_and_wake_up_bit.)
+> Now I'm confused because clear_and_wake_up_bit() in mainline does use
+> clear_bit_unlock(), so it's the exact opposite of what you just said.
 
-> That is, currently clear_and_wake_up_bit() is
->
->         clear_bit()
->         smp_mb__after_atomic();
->         wake_up_bit();
->
-> But the above is:
->
->         clear_bit_unlock();
->         smp_mb__after_atomic();
->         wake_up_bit()
->
-> the difference is that _unlock() uses RELEASE semantics, where
-> clear_bit() does not.
->
-> The difference is illustrated with something like:
->
->         cond = true;
->         clear_bit()
->         smp_mb__after_atomic();
->         wake_up_bit();
->
-> In this case, a remote CPU can first observe the clear_bit() and then
-> the 'cond = true' store. When we use clear_bit_unlock() this is not
-> possible, because the RELEASE barrier ensures that everything before,
-> stays before.
-
-Now I'm confused because clear_and_wake_up_bit() in mainline does use
-clear_bit_unlock(), so it's the exact opposite of what you just said.
-
-Thanks,
-Andreas
+Argh; clearly I couldn't read. And then yes, you're right.
 

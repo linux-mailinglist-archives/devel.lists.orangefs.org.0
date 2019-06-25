@@ -2,75 +2,59 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BB33556BA
-	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 20:04:45 +0200 (CEST)
-Received: from [::1] (port=48764 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id E892355774
+	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 20:56:04 +0200 (CEST)
+Received: from [::1] (port=55470 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hfpoC-0001di-4Y
-	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 14:04:44 -0400
-Received: from userp2130.oracle.com ([156.151.31.86]:43266)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <darrick.wong@oracle.com>)
- id 1hfpoB-0001cr-Eo
- for devel@lists.orangefs.org; Tue, 25 Jun 2019 14:04:43 -0400
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5PHwd8B149230;
- Tue, 25 Jun 2019 18:03:42 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=corp-2018-07-02;
- bh=q3PQ3FdT4Cu9ZFxkmPMEB5w+ChSGz6mW1jtUBkoDAvw=;
- b=ksyT2XyNq/sBFuNf0kcEOahW5dSfpRm2xoyvLHIl5Mejyeb4JLMflOsVy5quxvpN67j2
- IsKXQAf1HGSoM5FioAjK6ozKyUInygd/ml7l4zpRXtxh/UWz20oKY/FTMlcYaDZBA7N9
- MY/zMgGVdosxoetsazUmPfKqNstqSPWvasVhjypJJqeFcHhDaP62mxpCpMaNSfCtaBX3
- JdFoGt472fc1h8ZFinUmpgHsBMZcZBqagXk/T9NnnQ5VQ3pfbtpwxQaYR4yLbxZKG58n
- MOx1qf1doyupoPytNdwt2e/QYdozJOX4KCvtmdKWmiW/VFWoTbAzfyslOGA2S3jKu5TS Qg== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2130.oracle.com with ESMTP id 2t9brt61nv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 25 Jun 2019 18:03:42 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5PI2jR6140649;
- Tue, 25 Jun 2019 18:03:41 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by aserp3020.oracle.com with ESMTP id 2t9p6ub7ds-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 25 Jun 2019 18:03:41 +0000
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
- by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5PI3fsX143158;
- Tue, 25 Jun 2019 18:03:41 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
- by aserp3020.oracle.com with ESMTP id 2t9p6ub7dj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 25 Jun 2019 18:03:41 +0000
-Received: from abhmp0002.oracle.com (abhmp0002.oracle.com [141.146.116.8])
- by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x5PI3VCg025882;
- Tue, 25 Jun 2019 18:03:31 GMT
-Received: from localhost (/67.169.218.210)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 25 Jun 2019 11:03:31 -0700
-Date: Tue, 25 Jun 2019 11:03:26 -0700
-From: "Darrick J. Wong" <darrick.wong@oracle.com>
-To: Christoph Hellwig <hch@infradead.org>
-Subject: Re: [PATCH v4 0/7] vfs: make immutable files actually immutable
-Message-ID: <20190625180326.GC2230847@magnolia>
-References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
- <20190625103631.GB30156@infradead.org>
+	id 1hfqbs-0004QE-4W
+	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 14:56:04 -0400
+Received: from mail-yw1-f68.google.com ([209.85.161.68]:41077)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ (Exim 4.92) (envelope-from <hubcap@omnibond.com>) id 1hfqbr-0004PI-HR
+ for devel@lists.orangefs.org; Tue, 25 Jun 2019 14:56:03 -0400
+Received: by mail-yw1-f68.google.com with SMTP id y185so7994630ywy.8
+ for <devel@lists.orangefs.org>; Tue, 25 Jun 2019 11:55:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=omnibond-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=YoWQjtvkCeSVA1kdmqc11ysNxmHPU03GqQotMHxDp2U=;
+ b=JYQNOBN93vshA1tG3sDASUASg0IgzYx8xGpNBbiFRHkUwh3oZdl9OlCx6jtrKyS1PA
+ CrWyYZ0jKnkrirlUqW6deRq7Fi6sW4Rq7eUgopdxHjU0QgcSHpvnnweYhXypKLiZZ8vR
+ cuf6eyKxBAOFtGHE/zKQbWG3mZn2Wr8Hi+aiv/FAG+RF4izFWbaYnBMO5ymEVTPlxI6o
+ GvXxL0SVizG6nae8EeWBXNJsx5f76Ti+nvMB1QSd1ziILN0yR33OlN0W+m7qyFqpJ5Sg
+ HCuiwnpaCzlQslCfLzZHyriG7QbIAsi4t7cY765LFqIKVeUOnfdvuu6dRL8/eLhFKxJD
+ 9o4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=YoWQjtvkCeSVA1kdmqc11ysNxmHPU03GqQotMHxDp2U=;
+ b=LM6rw6GVBTCvvqjx5BKslKaBx87+Ojh2CVtz0KJMxHiCDm4BrT+ZzKqr5gwCGcYqol
+ DLDvH9SrEPj933FWiaOOfgtE52Dnm0dP50hF9CWnBfx01alimVyMNqBrqoRId8CosdMp
+ zphC+pfa9HPsPqGZVcezUp4nDL3oz0aSAqoZz4ccREoWlaQDZcO8z1kuaQxT7Nki4nqP
+ LDAJLAG8YV4/yyih5fdiOpwuKIvgQNMcHCyLHbnMe61VNGJxHqrb0CTUPntW/tAG/Ea6
+ fRcyxOO5VIzk/wo/gCatEhfK81B/wNz7/wGOtGmlv7zpUB5xX6iHUKJLo2pz5pOmJJYE
+ Sqmg==
+X-Gm-Message-State: APjAAAVeK4xvB2l3j3Euw0TjNaNs6pvqlCT2w3OLGLRMwL3nHs4qmjgi
+ cBdaFOVOomGlrRyzDV539As+Ij3CtGNWRyUTos42tQ==
+X-Google-Smtp-Source: APXvYqzrnRLAsUllxL7vPOP5CM7N8fL1sWjlkqRDPfbOcLxlOi/xZjJsQ1aD+hFTQ8G5wxrFE8DwHOAM7ic7kFMTk6c=
+X-Received: by 2002:a81:5cd6:: with SMTP id q205mr121944ywb.13.1561488922875; 
+ Tue, 25 Jun 2019 11:55:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190625103631.GB30156@infradead.org>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9299
- signatures=668687
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=904 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
- definitions=main-1906250136
+References: <20190511132700.4862-1-colin.king@canonical.com>
+ <CAOg9mSQt42NQu-3nwZOCGOPx45y7G8aaiDaVe4SwotGnD9iY1A@mail.gmail.com>
+ <20190521150311.GL31203@kadam>
+In-Reply-To: <20190521150311.GL31203@kadam>
+From: Mike Marshall <hubcap@omnibond.com>
+Date: Tue, 25 Jun 2019 14:55:11 -0400
+Message-ID: <CAOg9mSQmV=BDMpTNLJvb4QBr=f96qg4Hr9qu=bB6xZubB+1LZQ@mail.gmail.com>
+Subject: Re: [PATCH] orangefs: remove redundant assignment to variable
+ buffer_index
+To: Dan Carpenter <dan.carpenter@oracle.com>,
+ Mike Marshall <hubcap@omnibond.com>, 
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -82,16 +66,8 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org, yuchao0@huawei.com,
- linux-mm@kvack.org, clm@fb.com, adilger.kernel@dilger.ca,
- matthew.garrett@nebula.com, linux-nilfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, devel@lists.orangefs.org, josef@toxicpanda.com,
- reiserfs-devel@vger.kernel.org, viro@zeniv.linux.org.uk, dsterba@suse.com,
- jaegeuk@kernel.org, tytso@mit.edu, ard.biesheuvel@linaro.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, jk@ozlabs.org, jack@suse.com,
- linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
- ocfs2-devel@oss.oracle.com
+Cc: Colin King <colin.king@canonical.com>, kernel-janitors@vger.kernel.org,
+ LKML <linux-kernel@vger.kernel.org>, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -105,48 +81,50 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Tue, Jun 25, 2019 at 03:36:31AM -0700, Christoph Hellwig wrote:
-> On Fri, Jun 21, 2019 at 04:56:50PM -0700, Darrick J. Wong wrote:
-> > Hi all,
-> > 
-> > The chattr(1) manpage has this to say about the immutable bit that
-> > system administrators can set on files:
-> > 
-> > "A file with the 'i' attribute cannot be modified: it cannot be deleted
-> > or renamed, no link can be created to this file, most of the file's
-> > metadata can not be modified, and the file can not be opened in write
-> > mode."
-> > 
-> > Given the clause about how the file 'cannot be modified', it is
-> > surprising that programs holding writable file descriptors can continue
-> > to write to and truncate files after the immutable flag has been set,
-> > but they cannot call other things such as utimes, fallocate, unlink,
-> > link, setxattr, or reflink.
-> 
-> I still think living code beats documentation.  And as far as I can
-> tell the immutable bit never behaved as documented or implemented
-> in this series on Linux, and it originated on Linux.
+>> The only explanation I can think of is that you guys are discussing
+>> different code. :P
 
-The behavior has never been consistent -- since the beginning you can
-keep write()ing to a fd after the file becomes immutable, but you can't
-ftruncate() it.  I would really like to make the behavior consistent.
-Since the authors of nearly every new system call and ioctl since the
-late 1990s have interpreted S_IMMUTABLE to mean "immutable takes effect
-everywhere immediately" I resolved the inconsistency in favor of that
-interpretation.
+My response contained several conflations :-) ...
 
-I asked Ted what he thought that that userspace having the ability to
-continue writing to an immutable file, and he thought it was an
-implementation bug that had been there for 25 years.  Even he thought
-that immutable should take effect immediately everywhere.
+The code in file.c that Colin has flagged does indeed have buffer_index
+being initialized needlessly, and the assignment noted by Dan is also
+needless. There's even a second needless assignment done in another
+place in the same function. While the code around them has changed over
+time, these now needless manipulations of buffer_index are not new. I'll
+get rid of them.
 
-> If you want  hard cut off style immutable flag it should really be a
-> new API, but I don't really see the point.  It isn't like the usual
-> workload is to set the flag on a file actively in use.
+>> You often send these patches before they hit linux-next so I had skipped
+>> reviewing this one when you sent it.
 
-FWIW Ted also thought that since it's rare for admins to set +i on a
-file actively in use we could just change it without forcing everyone
-onto a new api.
+I know Linus is likely to refuse pull requests for stuff that
+has not been through linux-next, so I make sure stuff has been
+there at least a few days before asking for it to be pulled.
+"A few days" is long enough for robots to see it, perhaps not
+long enough for humans. I especially appreciate the human review. One of
+the good things about Orangefs is that it is easy to install and configure,
+especially for testing. Documentation/filesystems/orangefs.txt has
+instructions for dnf installing orangefs on Fedora, and also how to download
+a source tarball and install from that.
 
---D
+-Mike
+
+On Tue, May 21, 2019 at 11:04 AM Dan Carpenter <dan.carpenter@oracle.com> wrote:
+>
+> On Thu, May 16, 2019 at 12:06:31PM -0400, Mike Marshall wrote:
+> > Hi Colin...
+> >
+> > Thanks for the patch. Before I initialized buffer_index, Dan Williams sent
+> > in a warning that a particular error path could try to use ibuffer_index
+> > uninitialized. I could induce the problem he described with one
+> > of the xfstests resulting in a crashed kernel. I will try to refactor
+> > the code to fix the problem some other way than initializing
+> > buffer_index in the declaration.
+> >
+>
+> The only explanation I can think of is that you guys are discussing
+> different code.  :P
+>
+> regards,
+> dan carpenter
+>
 

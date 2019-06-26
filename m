@@ -2,63 +2,75 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFE4655903
-	for <lists+devel-orangefs@lfdr.de>; Tue, 25 Jun 2019 22:38:26 +0200 (CEST)
-Received: from [::1] (port=37300 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 904B555EA3
+	for <lists+devel-orangefs@lfdr.de>; Wed, 26 Jun 2019 04:34:07 +0200 (CEST)
+Received: from [::1] (port=41894 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hfsCv-0001Cp-LD
-	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 16:38:25 -0400
-Received: from mail-pl1-f196.google.com ([209.85.214.196]:34330)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <adilger@dilger.ca>) id 1hfsCt-0001Bx-Ld
- for devel@lists.orangefs.org; Tue, 25 Jun 2019 16:38:23 -0400
-Received: by mail-pl1-f196.google.com with SMTP id i2so90202plt.1
- for <devel@lists.orangefs.org>; Tue, 25 Jun 2019 13:38:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dilger-ca.20150623.gappssmtp.com; s=20150623;
- h=from:message-id:mime-version:subject:date:in-reply-to:cc:to
- :references; bh=k9wVBI3MNSxJVQhODLuSRbOf+SmT1l1K5RRF5+DdhGM=;
- b=i0tlux+8FNEu0ugkEvUUlD4zKy+jo4LmPTngoA6r4KZwHDBk4l5v9aHPUQEnX49/5g
- z/5lU03hiGUesQ1zP/lPDO/M9fU515Y8oNEl0EKjwdC7dNyZmZQEQEJzGU548pSrAizw
- AlBCGdOUNg8gVK9FeesIiFWJzJ6YbgT5nrsBvzAUmh99yf7q8hQlgwIm8HPdOmToZugA
- nEmrM6blVwgyo7dN5eFPje1f1HwAtA+5XwodCP1ntkD5mvR/FwjSqB5AJn7YMTtfEeor
- 5bhYLcubsCaGOlgF0onarHD40ER7JyKcO4a/eslTTHQKCN3GB1Tra4WgBV7T6KYa0chE
- ps9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:message-id:mime-version:subject:date
- :in-reply-to:cc:to:references;
- bh=k9wVBI3MNSxJVQhODLuSRbOf+SmT1l1K5RRF5+DdhGM=;
- b=bpjirlTybiQHiUiB9NvSy41WAG2eHBFGNsFUXl/T7nw10QKNWazTLOyYqtfDrLrloo
- 0SIbm4GCjwvhjTpAyRqfQQIXAh8VCUajaKK5uMWbYy0M8+Zm1mxM78kKdQLuUSAcFk/+
- 66aCf0yqfLRyRH8wkSFQTsRS1cLBgrblrk4JHNdZCCJ3cMJjZKCsh0ojUcEJZA/p7WU4
- e/+vklgk5zAQK6sqtWUWOzl7qSJt6n+ZDEfzMOPnYYxMKA3iTncWGvbV+hz3LILQuLzu
- LhQXp8cECZKfQi7HXOI3tVaje3U84ZuXVA3m6mNjSxz0CvdM3+QlMyWfAb5jK0uP1dyM
- r7cg==
-X-Gm-Message-State: APjAAAXz9burLfrnT9iPds/oymLIW5CCaF9mky7mZ1Kp4dxbi1qcJsI2
- DlxetkcQhD/p/pHmkPrWcyFEPA==
-X-Google-Smtp-Source: APXvYqxrr/uL0yeWv0l0AFEkJ0fiuFxZszwvIRMBTgsPNJXwasc7ZXW/q9+Il/kiADkCo486i0NA9w==
-X-Received: by 2002:a17:902:f216:: with SMTP id
- gn22mr690564plb.118.1561495062448; 
- Tue, 25 Jun 2019 13:37:42 -0700 (PDT)
-Received: from cabot.adilger.ext (S0106a84e3fe4b223.cg.shawcable.net.
- [70.77.216.213])
- by smtp.gmail.com with ESMTPSA id m4sm4145961pff.108.2019.06.25.13.37.40
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 25 Jun 2019 13:37:41 -0700 (PDT)
-From: Andreas Dilger <adilger@dilger.ca>
-Message-Id: <E84C8EBC-8341-49E5-8EED-0980D158CD50@dilger.ca>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Subject: Re: [PATCH v4 0/7] vfs: make immutable files actually immutable
-Date: Tue, 25 Jun 2019 14:37:37 -0600
-In-Reply-To: <20190625180326.GC2230847@magnolia>
-To: "Darrick J. Wong" <darrick.wong@oracle.com>
-References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
- <20190625103631.GB30156@infradead.org> <20190625180326.GC2230847@magnolia>
-X-Mailer: Apple Mail (2.3273)
-Content-Type: text/plain; charset="us-ascii"
+	id 1hfxl8-00059M-Rl
+	for lists+devel-orangefs@lfdr.de; Tue, 25 Jun 2019 22:34:06 -0400
+Received: from aserp2120.oracle.com ([141.146.126.78]:53206)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <darrick.wong@oracle.com>)
+ id 1hfxl7-00058G-FN
+ for devel@lists.orangefs.org; Tue, 25 Jun 2019 22:34:05 -0400
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5Q2TYh8026692;
+ Wed, 26 Jun 2019 02:33:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=mime-version :
+ message-id : date : from : to : cc : subject : content-type :
+ content-transfer-encoding; s=corp-2018-07-02;
+ bh=fawPQY/UISfSH6DvrztcWabWXm47TtXieQJWSELxOKQ=;
+ b=G/aYnUXEphMoz0tS57JlzzJidDTnCP3JwQDBotgjzdUejbyDPYJP0ww7UIoJ9qziXtze
+ V8WfKNQm07ANAuCm8B36a/SSrlnF4iTQcfj6+NLwHRqJVTP47OZew3gQAlm23ALl0Umk
+ xq3Im7dO6UOb8iISWt8zfUFMNhrviliNGlkVCg5a0cfeb27h0Drq5G4rl1p6MZONDA9T
+ LOJ0700Z6AtHwS+rK56pnb/hADrt/VxtC4zKanyLYIE10jvKJ1zJCdEbZq2d2Ps/KjeI
+ pOTljCBSvtHNdPtMRfVj73W2qgv94B8p+0UE9rS1oOhD12Oac8PGEIcskWt9iHiUUTuy 2A== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by aserp2120.oracle.com with ESMTP id 2t9c9pqjk5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 26 Jun 2019 02:33:08 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5Q2Wj2o020612;
+ Wed, 26 Jun 2019 02:33:07 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3020.oracle.com with ESMTP id 2t9p6uh2eh-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 26 Jun 2019 02:33:07 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5Q2X7If021156;
+ Wed, 26 Jun 2019 02:33:07 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+ by aserp3020.oracle.com with ESMTP id 2t9p6uh2ec-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 26 Jun 2019 02:33:07 +0000
+Received: from abhmp0020.oracle.com (abhmp0020.oracle.com [141.146.116.26])
+ by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x5Q2X6O7021146;
+ Wed, 26 Jun 2019 02:33:06 GMT
+Received: from localhost (/10.159.230.235) by default (Oracle Beehive Gateway
+ v4.0) with ESMTP ; Tue, 25 Jun 2019 19:32:55 -0700
+USER-AGENT: StGit/0.17.1-dirty
+MIME-Version: 1.0
+Message-ID: <156151637248.2283603.8458727861336380714.stgit@magnolia>
+Date: Tue, 25 Jun 2019 19:32:52 -0700 (PDT)
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: matthew.garrett@nebula.com, yuchao0@huawei.com, tytso@mit.edu,
+ darrick.wong@oracle.com, ard.biesheuvel@linaro.org,
+ josef@toxicpanda.com, hch@infradead.org, clm@fb.com,
+ adilger.kernel@dilger.ca, viro@zeniv.linux.org.uk, jack@suse.com,
+ dsterba@suse.com, jaegeuk@kernel.org, jk@ozlabs.org
+Subject: [PATCH v5 0/5] vfs: make immutable files actually immutable
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9299
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906260027
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -70,19 +82,12 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-efi@vger.kernel.org, linux-btrfs <linux-btrfs@vger.kernel.org>,
- yuchao0@huawei.com, linux-mm <linux-mm@kvack.org>, Chris Mason <clm@fb.com>,
- linux-mtd@lists.infradead.org, matthew.garrett@nebula.com,
- linux-nilfs@vger.kernel.org, Christoph Hellwig <hch@infradead.org>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>, devel@lists.orangefs.org,
- Josef Bacik <josef@toxicpanda.com>, reiserfs-devel@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>, dsterba@suse.com,
- Jaegeuk Kim <jaegeuk@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
- ard.biesheuvel@linaro.org,
- Linux List Kernel Mailing <linux-kernel@vger.kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs <linux-xfs@vger.kernel.org>,
- jk@ozlabs.org, Jan Kara <jack@suse.com>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>, ocfs2-devel@oss.oracle.com
+Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ linux-kernel@vger.kernel.org, reiserfs-devel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-mm@kvack.org, linux-nilfs@vger.kernel.org, linux-mtd@lists.infradead.org,
+ ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -96,71 +101,53 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Jun 25, 2019, at 12:03 PM, Darrick J. Wong <darrick.wong@oracle.com> wrote:
-> 
-> On Tue, Jun 25, 2019 at 03:36:31AM -0700, Christoph Hellwig wrote:
->> On Fri, Jun 21, 2019 at 04:56:50PM -0700, Darrick J. Wong wrote:
->>> Hi all,
->>> 
->>> The chattr(1) manpage has this to say about the immutable bit that
->>> system administrators can set on files:
->>> 
->>> "A file with the 'i' attribute cannot be modified: it cannot be deleted
->>> or renamed, no link can be created to this file, most of the file's
->>> metadata can not be modified, and the file can not be opened in write
->>> mode."
->>> 
->>> Given the clause about how the file 'cannot be modified', it is
->>> surprising that programs holding writable file descriptors can continue
->>> to write to and truncate files after the immutable flag has been set,
->>> but they cannot call other things such as utimes, fallocate, unlink,
->>> link, setxattr, or reflink.
->> 
->> I still think living code beats documentation.  And as far as I can
->> tell the immutable bit never behaved as documented or implemented
->> in this series on Linux, and it originated on Linux.
-> 
-> The behavior has never been consistent -- since the beginning you can
-> keep write()ing to a fd after the file becomes immutable, but you can't
-> ftruncate() it.  I would really like to make the behavior consistent.
-> Since the authors of nearly every new system call and ioctl since the
-> late 1990s have interpreted S_IMMUTABLE to mean "immutable takes effect
-> everywhere immediately" I resolved the inconsistency in favor of that
-> interpretation.
-> 
-> I asked Ted what he thought that that userspace having the ability to
-> continue writing to an immutable file, and he thought it was an
-> implementation bug that had been there for 25 years.  Even he thought
-> that immutable should take effect immediately everywhere.
-> 
->> If you want  hard cut off style immutable flag it should really be a
->> new API, but I don't really see the point.  It isn't like the usual
->> workload is to set the flag on a file actively in use.
-> 
-> FWIW Ted also thought that since it's rare for admins to set +i on a
-> file actively in use we could just change it without forcing everyone
-> onto a new api.
+Hi all,
 
-On the flip side, it is possible to continue to write to an open fd
-after removing the write permission, and this is a problem we've hit
-in the real world with NFS export, so real applications do this.
+The chattr(1) manpage has this to say about the immutable bit that
+system administrators can set on files:
 
-It may be the same case with immutable files, where an application sets
-the immutable flag immediately after creation, but continues to write
-until it closes the file, so that the file can't be modified by other
-processes, and there isn't a risk that the file is missing the immutable
-flag if the writing process dies before setting it at the end.
+"A file with the 'i' attribute cannot be modified: it cannot be deleted
+or renamed, no link can be created to this file, most of the file's
+metadata can not be modified, and the file can not be opened in write
+mode."
 
-Cheers, Andreas
+Given the clause about how the file 'cannot be modified', it is
+surprising that programs holding writable file descriptors can continue
+to write to and truncate files after the immutable flag has been set,
+but they cannot call other things such as utimes, fallocate, unlink,
+link, setxattr, or reflink.
 
+Since the immutable flag is only settable by administrators, resolve
+this inconsistent behavior in favor of the documented behavior -- once
+the flag is set, the file cannot be modified, period.  We presume that
+administrators must be trusted to know what they're doing, and that
+cutting off programs with writable fds will probably break them.
 
+Therefore, add immutability checks to the relevant VFS functions, then
+refactor the SETFLAGS and FSSETXATTR implementations to use common
+argument checking functions so that we can then force pagefaults on all
+the file data when setting immutability.
 
+Note that various distro manpages points out the inconsistent behavior
+of the various Linux filesystems w.r.t. immutable.  This fixes all that.
 
+I also discovered that userspace programs can write and create writable
+memory mappings to active swap files.  This is extremely bad because
+this allows anyone with write privileges to corrupt system memory.  The
+final patch in this series closes off that hole, at least for swap
+files.
 
--------------- next part --------------
-A non-text attachment was scrubbed...
-Name: signature.asc
-Type: application/pgp-signature
-Size: 873 bytes
-Desc: Message signed with OpenPGP
-URL: <http://lists.orangefs.org/pipermail/devel_lists.orangefs.org/attachments/20190625/bbdf3c99/attachment.asc>
+If you're going to start using this mess, you probably ought to just
+pull from my git trees, which are linked below.
+
+This has been lightly tested with fstests.  Enjoy!
+Comments and questions are, as always, welcome.
+
+--D
+
+kernel git tree:
+https://git.kernel.org/cgit/linux/kernel/git/djwong/xfs-linux.git/log/?h=immutable-files
+
+fstests git tree:
+https://git.kernel.org/cgit/linux/kernel/git/djwong/xfstests-dev.git/log/?h=immutable-files
+

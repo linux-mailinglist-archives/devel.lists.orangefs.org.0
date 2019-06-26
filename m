@@ -2,83 +2,76 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50A0E56CFA
-	for <lists+devel-orangefs@lfdr.de>; Wed, 26 Jun 2019 16:57:26 +0200 (CEST)
-Received: from [::1] (port=56300 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11B6456ECD
+	for <lists+devel-orangefs@lfdr.de>; Wed, 26 Jun 2019 18:31:49 +0200 (CEST)
+Received: from [::1] (port=43326 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hg9MT-0000KF-4M
-	for lists+devel-orangefs@lfdr.de; Wed, 26 Jun 2019 10:57:25 -0400
-Received: from youngberry.canonical.com ([91.189.89.112]:50670)
- by mm1.emwd.com with esmtps (TLSv1:AES256-SHA:256) (Exim 4.92)
- (envelope-from <colin.king@canonical.com>) id 1hg9MS-0000Iu-J1
- for devel@lists.orangefs.org; Wed, 26 Jun 2019 10:57:24 -0400
-Received: from 1.general.cking.uk.vpn ([10.172.193.212])
- by youngberry.canonical.com with esmtpsa (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.76) (envelope-from <colin.king@canonical.com>)
- id 1hg9Ln-0007ls-0V; Wed, 26 Jun 2019 14:56:43 +0000
-Subject: Re: [PATCH] orangefs: remove redundant assignment to variable
- buffer_index
-To: Dan Carpenter <dan.carpenter@oracle.com>,
- Mike Marshall <hubcap@omnibond.com>
-References: <20190511132700.4862-1-colin.king@canonical.com>
- <CAOg9mSQt42NQu-3nwZOCGOPx45y7G8aaiDaVe4SwotGnD9iY1A@mail.gmail.com>
- <20190521150311.GL31203@kadam>
- <CAOg9mSQmV=BDMpTNLJvb4QBr=f96qg4Hr9qu=bB6xZubB+1LZQ@mail.gmail.com>
- <20190626061801.GA18776@kadam>
-From: Colin Ian King <colin.king@canonical.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=colin.king@canonical.com; prefer-encrypt=mutual; keydata=
- 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
-Message-ID: <712efbc2-1c10-8e6e-7517-16fa57cb8709@canonical.com>
-Date: Wed, 26 Jun 2019 15:56:42 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.1
+	id 1hgApo-0004vG-0Q
+	for lists+devel-orangefs@lfdr.de; Wed, 26 Jun 2019 12:31:48 -0400
+Received: from userp2130.oracle.com ([156.151.31.86]:38566)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <darrick.wong@oracle.com>)
+ id 1hgApn-0004v2-7H
+ for devel@lists.orangefs.org; Wed, 26 Jun 2019 12:31:47 -0400
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5QGU4Wg004218;
+ Wed, 26 Jun 2019 16:30:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2018-07-02;
+ bh=Mz7em8B5BcTHywkzCrR8lugIdy2ootcWo4w3RRWBYaM=;
+ b=N/a93ebuSSKM+1UIO0buPOjR9AvCbLsHhw01AwBMp/XW9BUb98JLnzoJbLgwOZFWmGyw
+ hJdpkR7HkvPCAWlWLDnQsdQatbUdssqmn37SwPrTcAyE+/9x/iin4aJ6YtVFtP1GNmmr
+ W4gQLbQG2SBcdOy5QNpDSE2/3fIVqQVrn7mZXub6KhldCj8Zzx/yQQ7a5EH7pzSZXmup
+ IrJvp7zWK9kXgRoeoC8dGqS2tKAzLiR74Ta5S5LQWYLQBZWpbM10fUskgAys8/96vQdr
+ G26RY/thy8CrA4lCa0mPtRoigi2YSG7nQksiKL4VCeGiPZV6yAFAimBMe+B5DQlWGUUd ig== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2130.oracle.com with ESMTP id 2t9brtbf85-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 26 Jun 2019 16:30:39 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5QGRxdd192423;
+ Wed, 26 Jun 2019 16:28:38 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3020.oracle.com with ESMTP id 2t9p6uvctr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 26 Jun 2019 16:28:38 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5QGScxQ193859;
+ Wed, 26 Jun 2019 16:28:38 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by aserp3020.oracle.com with ESMTP id 2t9p6uvctj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 26 Jun 2019 16:28:38 +0000
+Received: from abhmp0004.oracle.com (abhmp0004.oracle.com [141.146.116.10])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5QGSZWS032167;
+ Wed, 26 Jun 2019 16:28:35 GMT
+Received: from localhost (/10.159.137.246)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 26 Jun 2019 09:28:35 -0700
+Date: Wed, 26 Jun 2019 09:28:31 -0700
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: Al Viro <viro@zeniv.linux.org.uk>
+Subject: Re: [PATCH 5/5] vfs: don't allow writes to swap files
+Message-ID: <20190626162831.GF5171@magnolia>
+References: <156151637248.2283603.8458727861336380714.stgit@magnolia>
+ <156151641177.2283603.7806026378321236401.stgit@magnolia>
+ <20190626035151.GA10613@ZenIV.linux.org.uk>
 MIME-Version: 1.0
-In-Reply-To: <20190626061801.GA18776@kadam>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190626035151.GA10613@ZenIV.linux.org.uk>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9300
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906260193
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -90,9 +83,15 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- kernel-janitors@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- devel@lists.orangefs.org
+Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org, yuchao0@huawei.com,
+ linux-mm@kvack.org, clm@fb.com, adilger.kernel@dilger.ca,
+ matthew.garrett@nebula.com, linux-nilfs@vger.kernel.org, hch@infradead.org,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org, josef@toxicpanda.com,
+ reiserfs-devel@vger.kernel.org, dsterba@suse.com, jaegeuk@kernel.org,
+ tytso@mit.edu, ard.biesheuvel@linaro.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ jk@ozlabs.org, jack@suse.com, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -106,32 +105,58 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 26/06/2019 07:18, Dan Carpenter wrote:
-> On Tue, Jun 25, 2019 at 02:55:11PM -0400, Mike Marshall wrote:
->>>> You often send these patches before they hit linux-next so I had skipped
->>>> reviewing this one when you sent it.
->>
->> I know Linus is likely to refuse pull requests for stuff that
->> has not been through linux-next, so I make sure stuff has been
->> there at least a few days before asking for it to be pulled.
->> "A few days" is long enough for robots to see it, perhaps not
->> long enough for humans. I especially appreciate the human review. One of
->> the good things about Orangefs is that it is easy to install and configure,
->> especially for testing. Documentation/filesystems/orangefs.txt has
->> instructions for dnf installing orangefs on Fedora, and also how to download
->> a source tarball and install from that.
+On Wed, Jun 26, 2019 at 04:51:51AM +0100, Al Viro wrote:
+> On Tue, Jun 25, 2019 at 07:33:31PM -0700, Darrick J. Wong wrote:
+> > --- a/fs/attr.c
+> > +++ b/fs/attr.c
+> > @@ -236,6 +236,9 @@ int notify_change(struct dentry * dentry, struct iattr * attr, struct inode **de
+> >  	if (IS_IMMUTABLE(inode))
+> >  		return -EPERM;
+> >  
+> > +	if (IS_SWAPFILE(inode))
+> > +		return -ETXTBSY;
+> > +
+> >  	if ((ia_valid & (ATTR_MODE | ATTR_UID | ATTR_GID | ATTR_TIMES_SET)) &&
+> >  	    IS_APPEND(inode))
+> >  		return -EPERM;
 > 
-> No, no, that comment was to Colin.  It's good that he's sending patches
-> for all the trees as soon as possible like the zero day bot does.  But
-> it does make it hard to review at times.
-> 
-> regards,
-> dan carpenter
-> 
-Indeed, I normally work against the latest code landing in linux-next,
-so apologies for any confusion.  Anyhow, by the look of it these minor
-nitpicks still need addressing (really low priority), so shall I leave
-that with you Mike to sort out?
+> Er...  So why exactly is e.g. chmod(2) forbidden for swapfiles?  Or touch(1),
+> for that matter...
 
-Colin
+Oops, that check is overly broad; I think the only attribute change we
+need to filter here is ATTR_SIZE.... which we could do unconditionally
+in inode_newsize_ok.
+
+What's the use case for allowing userspace to increase the size of an
+active swapfile?  I don't see any; the kernel has a permanent lease on
+the file space mapping (at least until swapoff)...
+
+> > diff --git a/mm/swapfile.c b/mm/swapfile.c
+> > index 596ac98051c5..1ca4ee8c2d60 100644
+> > --- a/mm/swapfile.c
+> > +++ b/mm/swapfile.c
+> > @@ -3165,6 +3165,19 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+> >  	if (error)
+> >  		goto bad_swap;
+> >  
+> > +	/*
+> > +	 * Flush any pending IO and dirty mappings before we start using this
+> > +	 * swap file.
+> > +	 */
+> > +	if (S_ISREG(inode->i_mode)) {
+> > +		inode->i_flags |= S_SWAPFILE;
+> > +		error = inode_drain_writes(inode);
+> > +		if (error) {
+> > +			inode->i_flags &= ~S_SWAPFILE;
+> > +			goto bad_swap;
+> > +		}
+> > +	}
+> 
+> Why are swap partitions any less worthy of protection?
+
+Hmm, yeah, S_SWAPFILE should apply to block devices too.  I figured that
+the mantra of "sane tools will open block devices with O_EXCL" should
+have sufficed, but there's really no reason to allow that either.
+
+--D
 

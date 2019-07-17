@@ -2,47 +2,45 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F62B6FE7E
-	for <lists+devel-orangefs@lfdr.de>; Mon, 22 Jul 2019 13:09:03 +0200 (CEST)
-Received: from [::1] (port=56494 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61B707069E
+	for <lists+devel-orangefs@lfdr.de>; Mon, 22 Jul 2019 19:17:05 +0200 (CEST)
+Received: from [::1] (port=46562 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hpWBi-0003nT-Hr
-	for lists+devel-orangefs@lfdr.de; Mon, 22 Jul 2019 07:09:02 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:38778)
+	id 1hpbvs-0001u8-3t
+	for lists+devel-orangefs@lfdr.de; Mon, 22 Jul 2019 13:17:04 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:44896)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
  (Exim 4.92) (envelope-from <mchehab@bombadil.infradead.org>)
- id 1hpWBh-0003es-8M
- for devel@lists.orangefs.org; Mon, 22 Jul 2019 07:09:01 -0400
+ id 1hnhSw-0000Nb-UL
+ for devel@lists.orangefs.org; Wed, 17 Jul 2019 06:47:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AS5oxtIdo2yG09411/sIu1r84zBQ65Tq3DN/Tw97Q3I=; b=KQtnhzelgtCOjykf4X/wmsmthe
- vwKSBc8Slqm/Em4pBgQCuY5vrdmMSj2BrFDZ8UzAhToyj6TasMxX54nmDjyUVIF57ywWAY/poC/RE
- ZisqG6sD4WK/VEZei77B6pg7MIwtOJffs02wrd8wfRDwMhSeEIGUmX6tM7OXtaM6gSpnWcseL8m8O
- 2Is8FMHcToyp7Nf5Z8thvk/ubuCSV6na7Zsa08VzVGWw762fzOcxhm+zc/BRHzEAjuJIRlCcuDARx
- POGO4i8dW12OzwwxMSCbXHhZrNALAvl6T9Qtg/F8nTjl1cyX/H1tuhBGVxcL744pkDT276rTZZ6s4
- lv9c4r/g==;
-Received: from 177.157.124.3.dynamic.adsl.gvt.net.br ([177.157.124.3]
- helo=bombadil.infradead.org)
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=6madoRsEGOkNJQ5i41ZYA1AFte8dqIqQA3/GyJvcIdQ=; b=JvPRmMJY7kJTHCKSYgSS8WcJe
+ 5GRtAZjdI+Wg1VGOzqR7G24PjaAt9XUKT6BUZ5SiAEZp45zkDfYeNHihk73SwghNQQqcbdpYd9J+u
+ wD0u7SYzb6YpFkPDG9l9wOPGf4cJ+5Ooky03siuhDq/kqcdH6NilRvI8QNo9aOpz2QyyhkBsSsamo
+ D2Zin5oZTsCLC31IghAvbEO3rW90DO6kmg/lIO06Lte95XnutVLoaQsQKt3dqLxtbsoz0rMOapb+t
+ rza16ZMKCZJexLT883d/hvx0GLiIR1ShBe69Ik+Gxg0ut/AlpZj4K1BlkokTZZqaSCw6lCrZ+jANL
+ 93UQSdkBQ==;
+Received: from [191.33.154.161] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
- id 1hpWAe-000252-HC; Mon, 22 Jul 2019 11:07:57 +0000
+ id 1hnhRz-0006Le-Qa; Wed, 17 Jul 2019 10:46:20 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
  (envelope-from <mchehab@bombadil.infradead.org>)
- id 1hpWAa-00041Q-B7; Mon, 22 Jul 2019 08:07:52 -0300
+ id 1hnhRw-0002jo-Pf; Wed, 17 Jul 2019 07:46:16 -0300
 From: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 To: 
-Subject: [PATCH 13/22] docs: fs: convert docs without extension to ReST
-Date: Mon, 22 Jul 2019 08:07:40 -0300
-Message-Id: <1254cdba5f4e8254a4ead829502d07d8d7cff3d2.1563792334.git.mchehab+samsung@kernel.org>
+Subject: [PATCH] docs: fs: convert porting to ReST
+Date: Wed, 17 Jul 2019 07:46:15 -0300
+Message-Id: <f67f410a6a8ec9e4627fbcdf3237964cb6f3c90b.1563360223.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <cover.1563792333.git.mchehab+samsung@kernel.org>
-References: <cover.1563792333.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 22 Jul 2019 13:17:02 -0400
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -54,10 +52,11 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, linux-cifs@vger.kernel.org,
- Jonathan Corbet <corbet@lwn.net>, samba-technical@lists.samba.org,
- Steve French <sfrench@samba.org>,
- Mauro Carvalho Chehab <mchehab+samsung@kernel.org>, devel@lists.orangefs.org
+Cc: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>,
+ Dave Chinner <david@fromorbit.com>, Al Viro <viro@zeniv.linux.org.uk>,
+ Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+ Ian Kent <raven@themaw.net>, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -71,920 +70,1588 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-There are 3 remaining files without an extension inside the fs docs
-dir.
+Manually convert porting to ReST.
 
-Manually convert them to ReST.
+This file has its own proper style, except that, after a while,
+its style gets violated and whitespaces are placed on
+different creative ways.
 
-In the case of the nfs/exporting.rst file, as the nfs docs
-aren't ported yet, I opted to convert and add a :orphan: there,
-with should be removed when it gets added into a nfs-specific
-part of the fs documentation.
+As Sphinx and ReST are very sentitive to whitespace differences,
+I had to opt if each entry after required/mandatory/... fields
+should start with zero spaces or with a tab. I opted to start them
+all from the zero position, in order to avoid needing to break lines
+with more than 80 columns, with would make harder for review.
+
+Most of the other changes at porting.rst were made to use a
+notation with works nice as a text file while also produce a good html
+output after being parsed.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- ...irectory-locking => directory-locking.rst} |  40 ++-
- Documentation/filesystems/index.rst           |   2 +
- .../filesystems/{Locking => locking.rst}      | 257 ++++++++++++------
- .../nfs/{Exporting => exporting.rst}          |  31 ++-
- Documentation/filesystems/vfs.rst             |   2 +-
- fs/cifs/export.c                              |   2 +-
- fs/exportfs/expfs.c                           |   2 +-
- fs/isofs/export.c                             |   2 +-
- fs/orangefs/file.c                            |   2 +-
- include/linux/dcache.h                        |   2 +-
- include/linux/exportfs.h                      |   2 +-
- 11 files changed, 225 insertions(+), 119 deletions(-)
- rename Documentation/filesystems/{directory-locking => directory-locking.rst} (86%)
- rename Documentation/filesystems/{Locking => locking.rst} (79%)
- rename Documentation/filesystems/nfs/{Exporting => exporting.rst} (91%)
 
-diff --git a/Documentation/filesystems/directory-locking b/Documentation/filesystems/directory-locking.rst
-similarity index 86%
-rename from Documentation/filesystems/directory-locking
-rename to Documentation/filesystems/directory-locking.rst
-index 4e32cb961e5b..de12016ee419 100644
---- a/Documentation/filesystems/directory-locking
-+++ b/Documentation/filesystems/directory-locking.rst
-@@ -1,12 +1,17 @@
--	Locking scheme used for directory operations is based on two
-+=================
-+Directory Locking
-+=================
-+
-+
-+Locking scheme used for directory operations is based on two
- kinds of locks - per-inode (->i_rwsem) and per-filesystem
- (->s_vfs_rename_mutex).
- 
--	When taking the i_rwsem on multiple non-directory objects, we
-+When taking the i_rwsem on multiple non-directory objects, we
- always acquire the locks in order by increasing address.  We'll call
- that "inode pointer" order in the following.
- 
--	For our purposes all operations fall in 5 classes:
-+For our purposes all operations fall in 5 classes:
- 
- 1) read access.  Locking rules: caller locks directory we are accessing.
- The lock is taken shared.
-@@ -27,25 +32,29 @@ NB: we might get away with locking the the source (and target in exchange
- case) shared.
- 
- 5) link creation.  Locking rules:
-+
- 	* lock parent
- 	* check that source is not a directory
- 	* lock source
- 	* call the method.
-+
- All locks are exclusive.
- 
- 6) cross-directory rename.  The trickiest in the whole bunch.  Locking
- rules:
-+
- 	* lock the filesystem
- 	* lock parents in "ancestors first" order.
- 	* find source and target.
- 	* if old parent is equal to or is a descendent of target
--		fail with -ENOTEMPTY
-+	  fail with -ENOTEMPTY
- 	* if new parent is equal to or is a descendent of source
--		fail with -ELOOP
-+	  fail with -ELOOP
- 	* If it's an exchange, lock both the source and the target.
- 	* If the target exists, lock it.  If the source is a non-directory,
- 	  lock it.  If we need to lock both, do so in inode pointer order.
- 	* call the method.
-+
- All ->i_rwsem are taken exclusive.  Again, we might get away with locking
- the the source (and target in exchange case) shared.
- 
-@@ -54,10 +63,11 @@ read, modified or removed by method will be locked by caller.
- 
- 
- If no directory is its own ancestor, the scheme above is deadlock-free.
-+
- Proof:
- 
- 	First of all, at any moment we have a partial ordering of the
--objects - A < B iff A is an ancestor of B.
-+	objects - A < B iff A is an ancestor of B.
- 
- 	That ordering can change.  However, the following is true:
- 
-@@ -77,32 +87,32 @@ objects - A < B iff A is an ancestor of B.
-     non-directory object, except renames, which take locks on source and
-     target in inode pointer order in the case they are not directories.)
- 
--	Now consider the minimal deadlock.  Each process is blocked on
-+Now consider the minimal deadlock.  Each process is blocked on
- attempt to acquire some lock and already holds at least one lock.  Let's
- consider the set of contended locks.  First of all, filesystem lock is
- not contended, since any process blocked on it is not holding any locks.
- Thus all processes are blocked on ->i_rwsem.
- 
--	By (3), any process holding a non-directory lock can only be
-+By (3), any process holding a non-directory lock can only be
- waiting on another non-directory lock with a larger address.  Therefore
- the process holding the "largest" such lock can always make progress, and
- non-directory objects are not included in the set of contended locks.
- 
--	Thus link creation can't be a part of deadlock - it can't be
-+Thus link creation can't be a part of deadlock - it can't be
- blocked on source and it means that it doesn't hold any locks.
- 
--	Any contended object is either held by cross-directory rename or
-+Any contended object is either held by cross-directory rename or
- has a child that is also contended.  Indeed, suppose that it is held by
- operation other than cross-directory rename.  Then the lock this operation
- is blocked on belongs to child of that object due to (1).
- 
--	It means that one of the operations is cross-directory rename.
-+It means that one of the operations is cross-directory rename.
- Otherwise the set of contended objects would be infinite - each of them
- would have a contended child and we had assumed that no object is its
- own descendent.  Moreover, there is exactly one cross-directory rename
- (see above).
- 
--	Consider the object blocking the cross-directory rename.  One
-+Consider the object blocking the cross-directory rename.  One
- of its descendents is locked by cross-directory rename (otherwise we
- would again have an infinite set of contended objects).  But that
- means that cross-directory rename is taking locks out of order.  Due
-@@ -112,7 +122,7 @@ try to acquire lock on descendent before the lock on ancestor.
- Contradiction.  I.e.  deadlock is impossible.  Q.E.D.
- 
- 
--	These operations are guaranteed to avoid loop creation.  Indeed,
-+These operations are guaranteed to avoid loop creation.  Indeed,
- the only operation that could introduce loops is cross-directory rename.
- Since the only new (parent, child) pair added by rename() is (new parent,
- source), such loop would have to contain these objects and the rest of it
-@@ -123,13 +133,13 @@ new parent had been equal to or a descendent of source since the moment when
- we had acquired filesystem lock and rename() would fail with -ELOOP in that
- case.
- 
--	While this locking scheme works for arbitrary DAGs, it relies on
-+While this locking scheme works for arbitrary DAGs, it relies on
- ability to check that directory is a descendent of another object.  Current
- implementation assumes that directory graph is a tree.  This assumption is
- also preserved by all operations (cross-directory rename on a tree that would
- not introduce a cycle will leave it a tree and link() fails for directories).
- 
--	Notice that "directory" in the above == "anything that might have
-+Notice that "directory" in the above == "anything that might have
- children", so if we are going to introduce hybrid objects we will need
- either to make sure that link(2) doesn't work for them or to make changes
- in is_subdir() that would make it work even in presence of such beasts.
-diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystems/index.rst
-index 2de2fe2ab078..08320c35d03b 100644
---- a/Documentation/filesystems/index.rst
-+++ b/Documentation/filesystems/index.rst
-@@ -20,6 +20,8 @@ algorithms work.
-    path-lookup
-    api-summary
-    splice
-+   locking
-+   directory-locking
- 
- Filesystem support layers
- =========================
-diff --git a/Documentation/filesystems/Locking b/Documentation/filesystems/locking.rst
-similarity index 79%
-rename from Documentation/filesystems/Locking
-rename to Documentation/filesystems/locking.rst
-index 204dd3ea36bb..fc3a0704553c 100644
---- a/Documentation/filesystems/Locking
-+++ b/Documentation/filesystems/locking.rst
-@@ -1,14 +1,22 @@
--	The text below describes the locking rules for VFS-related methods.
-+=======
-+Locking
-+=======
-+
-+The text below describes the locking rules for VFS-related methods.
- It is (believed to be) up-to-date. *Please*, if you change anything in
- prototypes or locking protocols - update this file. And update the relevant
- instances in the tree, don't leave that to maintainers of filesystems/devices/
- etc. At the very least, put the list of dubious cases in the end of this file.
- Don't turn it into log - maintainers of out-of-the-tree code are supposed to
- be able to use diff(1).
--	Thing currently missing here: socket operations. Alexey?
- 
----------------------------- dentry_operations --------------------------
--prototypes:
-+Thing currently missing here: socket operations. Alexey?
-+
-+dentry_operations
-+=================
-+
-+prototypes::
-+
- 	int (*d_revalidate)(struct dentry *, unsigned int);
- 	int (*d_weak_revalidate)(struct dentry *, unsigned int);
- 	int (*d_hash)(const struct dentry *, struct qstr *);
-@@ -24,23 +32,30 @@ prototypes:
- 	struct dentry *(*d_real)(struct dentry *, const struct inode *);
- 
- locking rules:
--		rename_lock	->d_lock	may block	rcu-walk
--d_revalidate:	no		no		yes (ref-walk)	maybe
--d_weak_revalidate:no		no		yes	 	no
--d_hash		no		no		no		maybe
--d_compare:	yes		no		no		maybe
--d_delete:	no		yes		no		no
--d_init:	no		no		yes		no
--d_release:	no		no		yes		no
--d_prune:        no              yes             no              no
--d_iput:		no		no		yes		no
--d_dname:	no		no		no		no
--d_automount:	no		no		yes		no
--d_manage:	no		no		yes (ref-walk)	maybe
--d_real		no		no		yes 		no
- 
----------------------------- inode_operations --------------------------- 
--prototypes:
-+================== ===========	========	==============	========
-+ops		   rename_lock	->d_lock	may block	rcu-walk
-+================== ===========	========	==============	========
-+d_revalidate:	   no		no		yes (ref-walk)	maybe
-+d_weak_revalidate: no		no		yes	 	no
-+d_hash		   no		no		no		maybe
-+d_compare:	   yes		no		no		maybe
-+d_delete:	   no		yes		no		no
-+d_init:		   no		no		yes		no
-+d_release:	   no		no		yes		no
-+d_prune:           no		yes		no		no
-+d_iput:		   no		no		yes		no
-+d_dname:	   no		no		no		no
-+d_automount:	   no		no		yes		no
-+d_manage:	   no		no		yes (ref-walk)	maybe
-+d_real		   no		no		yes 		no
-+================== ===========	========	==============	========
-+
-+inode_operations
-+================
-+
-+prototypes::
-+
- 	int (*create) (struct inode *,struct dentry *,umode_t, bool);
- 	struct dentry * (*lookup) (struct inode *,struct dentry *, unsigned int);
- 	int (*link) (struct dentry *,struct inode *,struct dentry *);
-@@ -68,7 +83,10 @@ prototypes:
- 
- locking rules:
- 	all may block
--		i_rwsem(inode)
-+
-+============	=============================================
-+ops		i_rwsem(inode)
-+============	=============================================
- lookup:		shared
- create:		exclusive
- link:		exclusive (both)
-@@ -89,17 +107,21 @@ fiemap:		no
- update_time:	no
- atomic_open:	exclusive
- tmpfile:	no
-+============	=============================================
- 
- 
- 	Additionally, ->rmdir(), ->unlink() and ->rename() have ->i_rwsem
- 	exclusive on victim.
- 	cross-directory ->rename() has (per-superblock) ->s_vfs_rename_sem.
- 
--See Documentation/filesystems/directory-locking for more detailed discussion
-+See Documentation/filesystems/directory-locking.rst for more detailed discussion
- of the locking scheme for directory operations.
- 
------------------------- xattr_handler operations -----------------------
--prototypes:
-+xattr_handler operations
-+========================
-+
-+prototypes::
-+
- 	bool (*list)(struct dentry *dentry);
- 	int (*get)(const struct xattr_handler *handler, struct dentry *dentry,
- 		   struct inode *inode, const char *name, void *buffer,
-@@ -110,13 +132,20 @@ prototypes:
- 
- locking rules:
- 	all may block
--		i_rwsem(inode)
-+
-+=====		==============
-+ops		i_rwsem(inode)
-+=====		==============
- list:		no
- get:		no
- set:		exclusive
-+=====		==============
-+
-+super_operations
-+================
-+
-+prototypes::
- 
----------------------------- super_operations ---------------------------
--prototypes:
- 	struct inode *(*alloc_inode)(struct super_block *sb);
- 	void (*free_inode)(struct inode *);
- 	void (*destroy_inode)(struct inode *);
-@@ -138,7 +167,10 @@ prototypes:
- 
- locking rules:
- 	All may block [not true, see below]
--			s_umount
-+
-+======================	============	========================
-+ops			s_umount	note
-+======================	============	========================
- alloc_inode:
- free_inode:				called from RCU callback
- destroy_inode:
-@@ -157,6 +189,7 @@ show_options:		no		(namespace_sem)
- quota_read:		no		(see below)
- quota_write:		no		(see below)
- bdev_try_to_free_page:	no		(see below)
-+======================	============	========================
- 
- ->statfs() has s_umount (shared) when called by ustat(2) (native or
- compat), but that's an accident of bad API; s_umount is used to pin
-@@ -164,31 +197,44 @@ the superblock down when we only have dev_t given us by userland to
- identify the superblock.  Everything else (statfs(), fstatfs(), etc.)
- doesn't hold it when calling ->statfs() - superblock is pinned down
- by resolving the pathname passed to syscall.
-+
- ->quota_read() and ->quota_write() functions are both guaranteed to
- be the only ones operating on the quota file by the quota code (via
- dqio_sem) (unless an admin really wants to screw up something and
- writes to quota files with quotas on). For other details about locking
- see also dquot_operations section.
-+
- ->bdev_try_to_free_page is called from the ->releasepage handler of
- the block device inode.  See there for more details.
- 
----------------------------- file_system_type ---------------------------
--prototypes:
-+file_system_type
-+================
-+
-+prototypes::
-+
- 	struct dentry *(*mount) (struct file_system_type *, int,
- 		       const char *, void *);
- 	void (*kill_sb) (struct super_block *);
-+
- locking rules:
--		may block
-+
-+=======		=========
-+ops		may block
-+=======		=========
- mount		yes
- kill_sb		yes
-+=======		=========
- 
- ->mount() returns ERR_PTR or the root dentry; its superblock should be locked
- on return.
-+
- ->kill_sb() takes a write-locked superblock, does all shutdown work on it,
- unlocks and drops the reference.
- 
----------------------------- address_space_operations --------------------------
--prototypes:
-+address_space_operations
-+========================
-+prototypes::
-+
- 	int (*writepage)(struct page *page, struct writeback_control *wbc);
- 	int (*readpage)(struct file *, struct page *);
- 	int (*writepages)(struct address_space *, struct writeback_control *);
-@@ -218,14 +264,16 @@ prototypes:
- locking rules:
- 	All except set_page_dirty and freepage may block
- 
--			PageLocked(page)	i_rwsem
-+======================	======================== =========
-+ops			PageLocked(page)	 i_rwsem
-+======================	======================== =========
- writepage:		yes, unlocks (see below)
- readpage:		yes, unlocks
- writepages:
- set_page_dirty		no
- readpages:
--write_begin:		locks the page		exclusive
--write_end:		yes, unlocks		exclusive
-+write_begin:		locks the page		 exclusive
-+write_end:		yes, unlocks		 exclusive
- bmap:
- invalidatepage:		yes
- releasepage:		yes
-@@ -239,17 +287,18 @@ is_partially_uptodate:	yes
- error_remove_page:	yes
- swap_activate:		no
- swap_deactivate:	no
-+======================	======================== =========
- 
--	->write_begin(), ->write_end() and ->readpage() may be called from
-+->write_begin(), ->write_end() and ->readpage() may be called from
- the request handler (/dev/loop).
- 
--	->readpage() unlocks the page, either synchronously or via I/O
-+->readpage() unlocks the page, either synchronously or via I/O
- completion.
- 
--	->readpages() populates the pagecache with the passed pages and starts
-+->readpages() populates the pagecache with the passed pages and starts
- I/O against them.  They come unlocked upon I/O completion.
- 
--	->writepage() is used for two purposes: for "memory cleansing" and for
-+->writepage() is used for two purposes: for "memory cleansing" and for
- "sync".  These are quite different operations and the behaviour may differ
- depending upon the mode.
- 
-@@ -297,70 +346,81 @@ will leave the page itself marked clean but it will be tagged as dirty in the
- radix tree.  This incoherency can lead to all sorts of hard-to-debug problems
- in the filesystem like having dirty inodes at umount and losing written data.
- 
--	->writepages() is used for periodic writeback and for syscall-initiated
-+->writepages() is used for periodic writeback and for syscall-initiated
- sync operations.  The address_space should start I/O against at least
--*nr_to_write pages.  *nr_to_write must be decremented for each page which is
--written.  The address_space implementation may write more (or less) pages
--than *nr_to_write asks for, but it should try to be reasonably close.  If
--nr_to_write is NULL, all dirty pages must be written.
-+``*nr_to_write`` pages.  ``*nr_to_write`` must be decremented for each page
-+which is written.  The address_space implementation may write more (or less)
-+pages than ``*nr_to_write`` asks for, but it should try to be reasonably close.
-+If nr_to_write is NULL, all dirty pages must be written.
- 
- writepages should _only_ write pages which are present on
- mapping->io_pages.
- 
--	->set_page_dirty() is called from various places in the kernel
-+->set_page_dirty() is called from various places in the kernel
- when the target page is marked as needing writeback.  It may be called
- under spinlock (it cannot block) and is sometimes called with the page
- not locked.
- 
--	->bmap() is currently used by legacy ioctl() (FIBMAP) provided by some
-+->bmap() is currently used by legacy ioctl() (FIBMAP) provided by some
- filesystems and by the swapper. The latter will eventually go away.  Please,
- keep it that way and don't breed new callers.
- 
--	->invalidatepage() is called when the filesystem must attempt to drop
-+->invalidatepage() is called when the filesystem must attempt to drop
- some or all of the buffers from the page when it is being truncated. It
- returns zero on success. If ->invalidatepage is zero, the kernel uses
- block_invalidatepage() instead.
- 
--	->releasepage() is called when the kernel is about to try to drop the
-+->releasepage() is called when the kernel is about to try to drop the
- buffers from the page in preparation for freeing it.  It returns zero to
- indicate that the buffers are (or may be) freeable.  If ->releasepage is zero,
- the kernel assumes that the fs has no private interest in the buffers.
- 
--	->freepage() is called when the kernel is done dropping the page
-+->freepage() is called when the kernel is done dropping the page
- from the page cache.
- 
--	->launder_page() may be called prior to releasing a page if
-+->launder_page() may be called prior to releasing a page if
- it is still found to be dirty. It returns zero if the page was successfully
- cleaned, or an error value if not. Note that in order to prevent the page
- getting mapped back in and redirtied, it needs to be kept locked
- across the entire operation.
- 
--	->swap_activate will be called with a non-zero argument on
-+->swap_activate will be called with a non-zero argument on
- files backing (non block device backed) swapfiles. A return value
- of zero indicates success, in which case this file can be used for
- backing swapspace. The swapspace operations will be proxied to the
- address space operations.
- 
--	->swap_deactivate() will be called in the sys_swapoff()
-+->swap_deactivate() will be called in the sys_swapoff()
- path after ->swap_activate() returned success.
- 
------------------------- file_lock_operations ------------------------------
--prototypes:
-+file_lock_operations
+This patch is against next-20190717
+
+ Documentation/filesystems/porting     | 686 ---------------------
+ Documentation/filesystems/porting.rst | 841 ++++++++++++++++++++++++++
+ fs/orangefs/orangefs-kernel.h         |   2 +-
+ 3 files changed, 842 insertions(+), 687 deletions(-)
+ delete mode 100644 Documentation/filesystems/porting
+ create mode 100644 Documentation/filesystems/porting.rst
+
+diff --git a/Documentation/filesystems/porting b/Documentation/filesystems/porting
+deleted file mode 100644
+index 209672010fb4..000000000000
+--- a/Documentation/filesystems/porting
++++ /dev/null
+@@ -1,686 +0,0 @@
+-Changes since 2.5.0:
+-
+----
+-[recommended]
+-
+-New helpers: sb_bread(), sb_getblk(), sb_find_get_block(), set_bh(),
+-	sb_set_blocksize() and sb_min_blocksize().
+-
+-Use them.
+-
+-(sb_find_get_block() replaces 2.4's get_hash_table())
+-
+----
+-[recommended]
+-
+-New methods: ->alloc_inode() and ->destroy_inode().
+-
+-Remove inode->u.foo_inode_i
+-Declare
+-	struct foo_inode_info {
+-		/* fs-private stuff */
+-		struct inode vfs_inode;
+-	};
+-	static inline struct foo_inode_info *FOO_I(struct inode *inode)
+-	{
+-		return list_entry(inode, struct foo_inode_info, vfs_inode);
+-	}
+-
+-Use FOO_I(inode) instead of &inode->u.foo_inode_i;
+-
+-Add foo_alloc_inode() and foo_destroy_inode() - the former should allocate
+-foo_inode_info and return the address of ->vfs_inode, the latter should free
+-FOO_I(inode) (see in-tree filesystems for examples).
+-
+-Make them ->alloc_inode and ->destroy_inode in your super_operations.
+-
+-Keep in mind that now you need explicit initialization of private data
+-typically between calling iget_locked() and unlocking the inode.
+-
+-At some point that will become mandatory.
+-
+----
+-[mandatory]
+-
+-Change of file_system_type method (->read_super to ->get_sb)
+-
+-->read_super() is no more.  Ditto for DECLARE_FSTYPE and DECLARE_FSTYPE_DEV.
+-
+-Turn your foo_read_super() into a function that would return 0 in case of
+-success and negative number in case of error (-EINVAL unless you have more
+-informative error value to report).  Call it foo_fill_super().  Now declare
+-
+-int foo_get_sb(struct file_system_type *fs_type,
+-	int flags, const char *dev_name, void *data, struct vfsmount *mnt)
+-{
+-	return get_sb_bdev(fs_type, flags, dev_name, data, foo_fill_super,
+-			   mnt);
+-}
+-
+-(or similar with s/bdev/nodev/ or s/bdev/single/, depending on the kind of
+-filesystem).
+-
+-Replace DECLARE_FSTYPE... with explicit initializer and have ->get_sb set as
+-foo_get_sb.
+-
+----
+-[mandatory]
+-
+-Locking change: ->s_vfs_rename_sem is taken only by cross-directory renames.
+-Most likely there is no need to change anything, but if you relied on
+-global exclusion between renames for some internal purpose - you need to
+-change your internal locking.  Otherwise exclusion warranties remain the
+-same (i.e. parents and victim are locked, etc.).
+-
+----
+-[informational]
+-
+-Now we have the exclusion between ->lookup() and directory removal (by
+-->rmdir() and ->rename()).  If you used to need that exclusion and do
+-it by internal locking (most of filesystems couldn't care less) - you
+-can relax your locking.
+-
+----
+-[mandatory]
+-
+-->lookup(), ->truncate(), ->create(), ->unlink(), ->mknod(), ->mkdir(),
+-->rmdir(), ->link(), ->lseek(), ->symlink(), ->rename()
+-and ->readdir() are called without BKL now.  Grab it on entry, drop upon return
+-- that will guarantee the same locking you used to have.  If your method or its
+-parts do not need BKL - better yet, now you can shift lock_kernel() and
+-unlock_kernel() so that they would protect exactly what needs to be
+-protected.
+-
+----
+-[mandatory]
+-
+-BKL is also moved from around sb operations. BKL should have been shifted into
+-individual fs sb_op functions.  If you don't need it, remove it.
+-
+----
+-[informational]
+-
+-check for ->link() target not being a directory is done by callers.  Feel
+-free to drop it...
+-
+----
+-[informational]
+-
+-->link() callers hold ->i_mutex on the object we are linking to.  Some of your
+-problems might be over...
+-
+----
+-[mandatory]
+-
+-new file_system_type method - kill_sb(superblock).  If you are converting
+-an existing filesystem, set it according to ->fs_flags:
+-	FS_REQUIRES_DEV		-	kill_block_super
+-	FS_LITTER		-	kill_litter_super
+-	neither			-	kill_anon_super
+-FS_LITTER is gone - just remove it from fs_flags.
+-
+----
+-[mandatory]
+-
+-	FS_SINGLE is gone (actually, that had happened back when ->get_sb()
+-went in - and hadn't been documented ;-/).  Just remove it from fs_flags
+-(and see ->get_sb() entry for other actions).
+-
+----
+-[mandatory]
+-
+-->setattr() is called without BKL now.  Caller _always_ holds ->i_mutex, so
+-watch for ->i_mutex-grabbing code that might be used by your ->setattr().
+-Callers of notify_change() need ->i_mutex now.
+-
+----
+-[recommended]
+-
+-New super_block field "struct export_operations *s_export_op" for
+-explicit support for exporting, e.g. via NFS.  The structure is fully
+-documented at its declaration in include/linux/fs.h, and in
+-Documentation/filesystems/nfs/Exporting.
+-
+-Briefly it allows for the definition of decode_fh and encode_fh operations
+-to encode and decode filehandles, and allows the filesystem to use
+-a standard helper function for decode_fh, and provide file-system specific
+-support for this helper, particularly get_parent.
+-
+-It is planned that this will be required for exporting once the code
+-settles down a bit.
+-
+-[mandatory]
+-
+-s_export_op is now required for exporting a filesystem.
+-isofs, ext2, ext3, resierfs, fat
+-can be used as examples of very different filesystems.
+-
+----
+-[mandatory]
+-
+-iget4() and the read_inode2 callback have been superseded by iget5_locked()
+-which has the following prototype,
+-
+-    struct inode *iget5_locked(struct super_block *sb, unsigned long ino,
+-				int (*test)(struct inode *, void *),
+-				int (*set)(struct inode *, void *),
+-				void *data);
+-
+-'test' is an additional function that can be used when the inode
+-number is not sufficient to identify the actual file object. 'set'
+-should be a non-blocking function that initializes those parts of a
+-newly created inode to allow the test function to succeed. 'data' is
+-passed as an opaque value to both test and set functions.
+-
+-When the inode has been created by iget5_locked(), it will be returned with the
+-I_NEW flag set and will still be locked.  The filesystem then needs to finalize
+-the initialization. Once the inode is initialized it must be unlocked by
+-calling unlock_new_inode().
+-
+-The filesystem is responsible for setting (and possibly testing) i_ino
+-when appropriate. There is also a simpler iget_locked function that
+-just takes the superblock and inode number as arguments and does the
+-test and set for you.
+-
+-e.g.
+-	inode = iget_locked(sb, ino);
+-	if (inode->i_state & I_NEW) {
+-		err = read_inode_from_disk(inode);
+-		if (err < 0) {
+-			iget_failed(inode);
+-			return err;
+-		}
+-		unlock_new_inode(inode);
+-	}
+-
+-Note that if the process of setting up a new inode fails, then iget_failed()
+-should be called on the inode to render it dead, and an appropriate error
+-should be passed back to the caller.
+-
+----
+-[recommended]
+-
+-->getattr() finally getting used.  See instances in nfs, minix, etc.
+-
+----
+-[mandatory]
+-
+-->revalidate() is gone.  If your filesystem had it - provide ->getattr()
+-and let it call whatever you had as ->revlidate() + (for symlinks that
+-had ->revalidate()) add calls in ->follow_link()/->readlink().
+-
+----
+-[mandatory]
+-
+-->d_parent changes are not protected by BKL anymore.  Read access is safe
+-if at least one of the following is true:
+-	* filesystem has no cross-directory rename()
+-	* we know that parent had been locked (e.g. we are looking at
+-->d_parent of ->lookup() argument).
+-	* we are called from ->rename().
+-	* the child's ->d_lock is held
+-Audit your code and add locking if needed.  Notice that any place that is
+-not protected by the conditions above is risky even in the old tree - you
+-had been relying on BKL and that's prone to screwups.  Old tree had quite
+-a few holes of that kind - unprotected access to ->d_parent leading to
+-anything from oops to silent memory corruption.
+-
+----
+-[mandatory]
+-
+-	FS_NOMOUNT is gone.  If you use it - just set SB_NOUSER in flags
+-(see rootfs for one kind of solution and bdev/socket/pipe for another).
+-
+----
+-[recommended]
+-
+-	Use bdev_read_only(bdev) instead of is_read_only(kdev).  The latter
+-is still alive, but only because of the mess in drivers/s390/block/dasd.c.
+-As soon as it gets fixed is_read_only() will die.
+-
+----
+-[mandatory]
+-
+-->permission() is called without BKL now. Grab it on entry, drop upon
+-return - that will guarantee the same locking you used to have.  If
+-your method or its parts do not need BKL - better yet, now you can
+-shift lock_kernel() and unlock_kernel() so that they would protect
+-exactly what needs to be protected.
+-
+----
+-[mandatory]
+-
+-->statfs() is now called without BKL held.  BKL should have been
+-shifted into individual fs sb_op functions where it's not clear that
+-it's safe to remove it.  If you don't need it, remove it.
+-
+----
+-[mandatory]
+-
+-	is_read_only() is gone; use bdev_read_only() instead.
+-
+----
+-[mandatory]
+-
+-	destroy_buffers() is gone; use invalidate_bdev().
+-
+----
+-[mandatory]
+-
+-	fsync_dev() is gone; use fsync_bdev().  NOTE: lvm breakage is
+-deliberate; as soon as struct block_device * is propagated in a reasonable
+-way by that code fixing will become trivial; until then nothing can be
+-done.
+-
+-[mandatory]
+-
+-	block truncatation on error exit from ->write_begin, and ->direct_IO
+-moved from generic methods (block_write_begin, cont_write_begin,
+-nobh_write_begin, blockdev_direct_IO*) to callers.  Take a look at
+-ext2_write_failed and callers for an example.
+-
+-[mandatory]
+-
+-	->truncate is gone.  The whole truncate sequence needs to be
+-implemented in ->setattr, which is now mandatory for filesystems
+-implementing on-disk size changes.  Start with a copy of the old inode_setattr
+-and vmtruncate, and the reorder the vmtruncate + foofs_vmtruncate sequence to
+-be in order of zeroing blocks using block_truncate_page or similar helpers,
+-size update and on finally on-disk truncation which should not fail.
+-setattr_prepare (which used to be inode_change_ok) now includes the size checks
+-for ATTR_SIZE and must be called in the beginning of ->setattr unconditionally.
+-
+-[mandatory]
+-
+-	->clear_inode() and ->delete_inode() are gone; ->evict_inode() should
+-be used instead.  It gets called whenever the inode is evicted, whether it has
+-remaining links or not.  Caller does *not* evict the pagecache or inode-associated
+-metadata buffers; the method has to use truncate_inode_pages_final() to get rid
+-of those. Caller makes sure async writeback cannot be running for the inode while
+-(or after) ->evict_inode() is called.
+-
+-	->drop_inode() returns int now; it's called on final iput() with
+-inode->i_lock held and it returns true if filesystems wants the inode to be
+-dropped.  As before, generic_drop_inode() is still the default and it's been
+-updated appropriately.  generic_delete_inode() is also alive and it consists
+-simply of return 1.  Note that all actual eviction work is done by caller after
+-->drop_inode() returns.
+-
+-	As before, clear_inode() must be called exactly once on each call of
+-->evict_inode() (as it used to be for each call of ->delete_inode()).  Unlike
+-before, if you are using inode-associated metadata buffers (i.e.
+-mark_buffer_dirty_inode()), it's your responsibility to call
+-invalidate_inode_buffers() before clear_inode().
+-
+-	NOTE: checking i_nlink in the beginning of ->write_inode() and bailing out
+-if it's zero is not *and* *never* *had* *been* enough.  Final unlink() and iput()
+-may happen while the inode is in the middle of ->write_inode(); e.g. if you blindly
+-free the on-disk inode, you may end up doing that while ->write_inode() is writing
+-to it.
+-
+----
+-[mandatory]
+-
+-	.d_delete() now only advises the dcache as to whether or not to cache
+-unreferenced dentries, and is now only called when the dentry refcount goes to
+-0. Even on 0 refcount transition, it must be able to tolerate being called 0,
+-1, or more times (eg. constant, idempotent).
+-
+----
+-[mandatory]
+-
+-	.d_compare() calling convention and locking rules are significantly
+-changed. Read updated documentation in Documentation/filesystems/vfs.rst (and
+-look at examples of other filesystems) for guidance.
+-
+----
+-[mandatory]
+-
+-	.d_hash() calling convention and locking rules are significantly
+-changed. Read updated documentation in Documentation/filesystems/vfs.rst (and
+-look at examples of other filesystems) for guidance.
+-
+----
+-[mandatory]
+-	dcache_lock is gone, replaced by fine grained locks. See fs/dcache.c
+-for details of what locks to replace dcache_lock with in order to protect
+-particular things. Most of the time, a filesystem only needs ->d_lock, which
+-protects *all* the dcache state of a given dentry.
+-
+---
+-[mandatory]
+-
+-	Filesystems must RCU-free their inodes, if they can have been accessed
+-via rcu-walk path walk (basically, if the file can have had a path name in the
+-vfs namespace).
+-
+-	Even though i_dentry and i_rcu share storage in a union, we will
+-initialize the former in inode_init_always(), so just leave it alone in
+-the callback.  It used to be necessary to clean it there, but not anymore
+-(starting at 3.2).
+-
+---
+-[recommended]
+-	vfs now tries to do path walking in "rcu-walk mode", which avoids
+-atomic operations and scalability hazards on dentries and inodes (see
+-Documentation/filesystems/path-lookup.txt). d_hash and d_compare changes
+-(above) are examples of the changes required to support this. For more complex
+-filesystem callbacks, the vfs drops out of rcu-walk mode before the fs call, so
+-no changes are required to the filesystem. However, this is costly and loses
+-the benefits of rcu-walk mode. We will begin to add filesystem callbacks that
+-are rcu-walk aware, shown below. Filesystems should take advantage of this
+-where possible.
+-
+---
+-[mandatory]
+-	d_revalidate is a callback that is made on every path element (if
+-the filesystem provides it), which requires dropping out of rcu-walk mode. This
+-may now be called in rcu-walk mode (nd->flags & LOOKUP_RCU). -ECHILD should be
+-returned if the filesystem cannot handle rcu-walk. See
+-Documentation/filesystems/vfs.rst for more details.
+-
+-	permission is an inode permission check that is called on many or all
+-directory inodes on the way down a path walk (to check for exec permission). It
+-must now be rcu-walk aware (mask & MAY_NOT_BLOCK).  See
+-Documentation/filesystems/vfs.rst for more details.
+- 
+---
+-[mandatory]
+-	In ->fallocate() you must check the mode option passed in.  If your
+-filesystem does not support hole punching (deallocating space in the middle of a
+-file) you must return -EOPNOTSUPP if FALLOC_FL_PUNCH_HOLE is set in mode.
+-Currently you can only have FALLOC_FL_PUNCH_HOLE with FALLOC_FL_KEEP_SIZE set,
+-so the i_size should not change when hole punching, even when puching the end of
+-a file off.
+-
+---
+-[mandatory]
+-	->get_sb() is gone.  Switch to use of ->mount().  Typically it's just
+-a matter of switching from calling get_sb_... to mount_... and changing the
+-function type.  If you were doing it manually, just switch from setting ->mnt_root
+-to some pointer to returning that pointer.  On errors return ERR_PTR(...).
+-
+---
+-[mandatory]
+-	->permission() and generic_permission()have lost flags
+-argument; instead of passing IPERM_FLAG_RCU we add MAY_NOT_BLOCK into mask.
+-	generic_permission() has also lost the check_acl argument; ACL checking
+-has been taken to VFS and filesystems need to provide a non-NULL ->i_op->get_acl
+-to read an ACL from disk.
+-
+---
+-[mandatory]
+-	If you implement your own ->llseek() you must handle SEEK_HOLE and
+-SEEK_DATA.  You can hanle this by returning -EINVAL, but it would be nicer to
+-support it in some way.  The generic handler assumes that the entire file is
+-data and there is a virtual hole at the end of the file.  So if the provided
+-offset is less than i_size and SEEK_DATA is specified, return the same offset.
+-If the above is true for the offset and you are given SEEK_HOLE, return the end
+-of the file.  If the offset is i_size or greater return -ENXIO in either case.
+-
+-[mandatory]
+-	If you have your own ->fsync() you must make sure to call
+-filemap_write_and_wait_range() so that all dirty pages are synced out properly.
+-You must also keep in mind that ->fsync() is not called with i_mutex held
+-anymore, so if you require i_mutex locking you must make sure to take it and
+-release it yourself.
+-
+---
+-[mandatory]
+-	d_alloc_root() is gone, along with a lot of bugs caused by code
+-misusing it.  Replacement: d_make_root(inode).  On success d_make_root(inode)
+-allocates and returns a new dentry instantiated with the passed in inode.
+-On failure NULL is returned and the passed in inode is dropped so the reference
+-to inode is consumed in all cases and failure handling need not do any cleanup
+-for the inode.  If d_make_root(inode) is passed a NULL inode it returns NULL
+-and also requires no further error handling. Typical usage is:
+-
+-	inode = foofs_new_inode(....);
+-	s->s_root = d_make_inode(inode);
+-	if (!s->s_root)
+-		/* Nothing needed for the inode cleanup */
+-		return -ENOMEM;
+-	...
+-
+---
+-[mandatory]
+-	The witch is dead!  Well, 2/3 of it, anyway.  ->d_revalidate() and
+-->lookup() do *not* take struct nameidata anymore; just the flags.
+---
+-[mandatory]
+-	->create() doesn't take struct nameidata *; unlike the previous
+-two, it gets "is it an O_EXCL or equivalent?" boolean argument.  Note that
+-local filesystems can ignore tha argument - they are guaranteed that the
+-object doesn't exist.  It's remote/distributed ones that might care...
+---
+-[mandatory]
+-	FS_REVAL_DOT is gone; if you used to have it, add ->d_weak_revalidate()
+-in your dentry operations instead.
+---
+-[mandatory]
+-	vfs_readdir() is gone; switch to iterate_dir() instead
+---
+-[mandatory]
+-	->readdir() is gone now; switch to ->iterate()
+-[mandatory]
+-	vfs_follow_link has been removed.  Filesystems must use nd_set_link
+-	from ->follow_link for normal symlinks, or nd_jump_link for magic
+-	/proc/<pid> style links.
+---
+-[mandatory]
+-	iget5_locked()/ilookup5()/ilookup5_nowait() test() callback used to be
+-	called with both ->i_lock and inode_hash_lock held; the former is *not*
+-	taken anymore, so verify that your callbacks do not rely on it (none
+-	of the in-tree instances did).  inode_hash_lock is still held,
+-	of course, so they are still serialized wrt removal from inode hash,
+-	as well as wrt set() callback of iget5_locked().
+---
+-[mandatory]
+-	d_materialise_unique() is gone; d_splice_alias() does everything you
+-	need now.  Remember that they have opposite orders of arguments ;-/
+---
+-[mandatory]
+-	f_dentry is gone; use f_path.dentry, or, better yet, see if you can avoid
+-	it entirely.
+---
+-[mandatory]
+-	never call ->read() and ->write() directly; use __vfs_{read,write} or
+-	wrappers; instead of checking for ->write or ->read being NULL, look for
+-	FMODE_CAN_{WRITE,READ} in file->f_mode.
+---
+-[mandatory]
+-	do _not_ use new_sync_{read,write} for ->read/->write; leave it NULL
+-	instead.
+---
+-[mandatory]
+-	->aio_read/->aio_write are gone.  Use ->read_iter/->write_iter.
+----
+-[recommended]
+-	for embedded ("fast") symlinks just set inode->i_link to wherever the
+-	symlink body is and use simple_follow_link() as ->follow_link().
+---
+-[mandatory]
+-	calling conventions for ->follow_link() have changed.  Instead of returning
+-	cookie and using nd_set_link() to store the body to traverse, we return
+-	the body to traverse and store the cookie using explicit void ** argument.
+-	nameidata isn't passed at all - nd_jump_link() doesn't need it and
+-	nd_[gs]et_link() is gone.
+---
+-[mandatory]
+-	calling conventions for ->put_link() have changed.  It gets inode instead of
+-	dentry,  it does not get nameidata at all and it gets called only when cookie
+-	is non-NULL.  Note that link body isn't available anymore, so if you need it,
+-	store it as cookie.
+---
+-[mandatory]
+-	any symlink that might use page_follow_link_light/page_put_link() must
+-	have inode_nohighmem(inode) called before anything might start playing with
+-	its pagecache.  No highmem pages should end up in the pagecache of such
+-	symlinks.  That includes any preseeding that might be done during symlink
+-	creation.  __page_symlink() will honour the mapping gfp flags, so once
+-	you've done inode_nohighmem() it's safe to use, but if you allocate and
+-	insert the page manually, make sure to use the right gfp flags.
+---
+-[mandatory]
+-	->follow_link() is replaced with ->get_link(); same API, except that
+-		* ->get_link() gets inode as a separate argument
+-		* ->get_link() may be called in RCU mode - in that case NULL
+-		  dentry is passed
+---
+-[mandatory]
+-	->get_link() gets struct delayed_call *done now, and should do
+-	set_delayed_call() where it used to set *cookie.
+-	->put_link() is gone - just give the destructor to set_delayed_call()
+-	in ->get_link().
+---
+-[mandatory]
+-	->getxattr() and xattr_handler.get() get dentry and inode passed separately.
+-	dentry might be yet to be attached to inode, so do _not_ use its ->d_inode
+-	in the instances.  Rationale: !@#!@# security_d_instantiate() needs to be
+-	called before we attach dentry to inode.
+---
+-[mandatory]
+-	symlinks are no longer the only inodes that do *not* have i_bdev/i_cdev/
+-	i_pipe/i_link union zeroed out at inode eviction.  As the result, you can't
+-	assume that non-NULL value in ->i_nlink at ->destroy_inode() implies that
+-	it's a symlink.  Checking ->i_mode is really needed now.  In-tree we had
+-	to fix shmem_destroy_callback() that used to take that kind of shortcut;
+-	watch out, since that shortcut is no longer valid.
+---
+-[mandatory]
+-	->i_mutex is replaced with ->i_rwsem now.  inode_lock() et.al. work as
+-	they used to - they just take it exclusive.  However, ->lookup() may be
+-	called with parent locked shared.  Its instances must not
+-		* use d_instantiate) and d_rehash() separately - use d_add() or
+-		  d_splice_alias() instead.
+-		* use d_rehash() alone - call d_add(new_dentry, NULL) instead.
+-		* in the unlikely case when (read-only) access to filesystem
+-		  data structures needs exclusion for some reason, arrange it
+-		  yourself.  None of the in-tree filesystems needed that.
+-		* rely on ->d_parent and ->d_name not changing after dentry has
+-		  been fed to d_add() or d_splice_alias().  Again, none of the
+-		  in-tree instances relied upon that.
+-	We are guaranteed that lookups of the same name in the same directory
+-	will not happen in parallel ("same" in the sense of your ->d_compare()).
+-	Lookups on different names in the same directory can and do happen in
+-	parallel now.
+---
+-[recommended]
+-	->iterate_shared() is added; it's a parallel variant of ->iterate().
+-	Exclusion on struct file level is still provided (as well as that
+-	between it and lseek on the same struct file), but if your directory
+-	has been opened several times, you can get these called in parallel.
+-	Exclusion between that method and all directory-modifying ones is
+-	still provided, of course.
+-
+-	Often enough ->iterate() can serve as ->iterate_shared() without any
+-	changes - it is a read-only operation, after all.  If you have any
+-	per-inode or per-dentry in-core data structures modified by ->iterate(),
+-	you might need something to serialize the access to them.  If you
+-	do dcache pre-seeding, you'll need to switch to d_alloc_parallel() for
+-	that; look for in-tree examples.
+-
+-	Old method is only used if the new one is absent; eventually it will
+-	be removed.  Switch while you still can; the old one won't stay.
+---
+-[mandatory]
+-	->atomic_open() calls without O_CREAT may happen in parallel.
+---
+-[mandatory]
+-	->setxattr() and xattr_handler.set() get dentry and inode passed separately.
+-	dentry might be yet to be attached to inode, so do _not_ use its ->d_inode
+-	in the instances.  Rationale: !@#!@# security_d_instantiate() needs to be
+-	called before we attach dentry to inode and !@#!@##!@$!$#!@#$!@$!@$ smack
+-	->d_instantiate() uses not just ->getxattr() but ->setxattr() as well.
+---
+-[mandatory]
+-	->d_compare() doesn't get parent as a separate argument anymore.  If you
+-	used it for finding the struct super_block involved, dentry->d_sb will
+-	work just as well; if it's something more complicated, use dentry->d_parent.
+-	Just be careful not to assume that fetching it more than once will yield
+-	the same value - in RCU mode it could change under you.
+---
+-[mandatory]
+-	->rename() has an added flags argument.  Any flags not handled by the
+-        filesystem should result in EINVAL being returned.
+---
+-[recommended]
+-	->readlink is optional for symlinks.  Don't set, unless filesystem needs
+-	to fake something for readlink(2).
+---
+-[mandatory]
+-	->getattr() is now passed a struct path rather than a vfsmount and
+-	dentry separately, and it now has request_mask and query_flags arguments
+-	to specify the fields and sync type requested by statx.  Filesystems not
+-	supporting any statx-specific features may ignore the new arguments.
+---
+-[mandatory]
+-	->atomic_open() calling conventions have changed.  Gone is int *opened,
+-	along with FILE_OPENED/FILE_CREATED.  In place of those we have
+-	FMODE_OPENED/FMODE_CREATED, set in file->f_mode.  Additionally, return
+-	value for 'called finish_no_open(), open it yourself' case has become
+-	0, not 1.  Since finish_no_open() itself is returning 0 now, that part
+-	does not need any changes in ->atomic_open() instances.
+---
+-[mandatory]
+-	alloc_file() has become static now; two wrappers are to be used instead.
+-	alloc_file_pseudo(inode, vfsmount, name, flags, ops) is for the cases
+-	when dentry needs to be created; that's the majority of old alloc_file()
+-	users.  Calling conventions: on success a reference to new struct file
+-	is returned and callers reference to inode is subsumed by that.  On
+-	failure, ERR_PTR() is returned and no caller's references are affected,
+-	so the caller needs to drop the inode reference it held.
+-	alloc_file_clone(file, flags, ops) does not affect any caller's references.
+-	On success you get a new struct file sharing the mount/dentry with the
+-	original, on failure - ERR_PTR().
+---
+-[mandatory]
+-	->clone_file_range() and ->dedupe_file_range have been replaced with
+-	->remap_file_range().  See Documentation/filesystems/vfs.rst for more
+-	information.
+---
+-[recommended]
+-	->lookup() instances doing an equivalent of
+-		if (IS_ERR(inode))
+-			return ERR_CAST(inode);
+-		return d_splice_alias(inode, dentry);
+-	don't need to bother with the check - d_splice_alias() will do the
+-	right thing when given ERR_PTR(...) as inode.  Moreover, passing NULL
+-	inode to d_splice_alias() will also do the right thing (equivalent of
+-	d_add(dentry, NULL); return NULL;), so that kind of special cases
+-	also doesn't need a separate treatment.
+---
+-[strongly recommended]
+-	take the RCU-delayed parts of ->destroy_inode() into a new method -
+-	->free_inode().  If ->destroy_inode() becomes empty - all the better,
+-	just get rid of it.  Synchronous work (e.g. the stuff that can't
+-	be done from an RCU callback, or any WARN_ON() where we want the
+-	stack trace) *might* be movable to ->evict_inode(); however,
+-	that goes only for the things that are not needed to balance something
+-	done by ->alloc_inode().  IOW, if it's cleaning up the stuff that
+-	might have accumulated over the life of in-core inode, ->evict_inode()
+-	might be a fit.
+-
+-	Rules for inode destruction:
+-		* if ->destroy_inode() is non-NULL, it gets called
+-		* if ->free_inode() is non-NULL, it gets scheduled by call_rcu()
+-		* combination of NULL ->destroy_inode and NULL ->free_inode is
+-		  treated as NULL/free_inode_nonrcu, to preserve the compatibility.
+-
+-	Note that the callback (be it via ->free_inode() or explicit call_rcu()
+-	in ->destroy_inode()) is *NOT* ordered wrt superblock destruction;
+-	as the matter of fact, the superblock and all associated structures
+-	might be already gone.  The filesystem driver is guaranteed to be still
+-	there, but that's it.  Freeing memory in the callback is fine; doing
+-	more than that is possible, but requires a lot of care and is best
+-	avoided.
+---
+-[mandatory]
+-	DCACHE_RCUACCESS is gone; having an RCU delay on dentry freeing is the
+-	default.  DCACHE_NORCU opts out, and only d_alloc_pseudo() has any
+-	business doing so.
+---
+-[mandatory]
+-	d_alloc_pseudo() is internal-only; uses outside of alloc_file_pseudo() are
+-	very suspect (and won't work in modules).  Such uses are very likely to
+-	be misspelled d_alloc_anon().
+diff --git a/Documentation/filesystems/porting.rst b/Documentation/filesystems/porting.rst
+new file mode 100644
+index 000000000000..73913d7b9c5f
+--- /dev/null
++++ b/Documentation/filesystems/porting.rst
+@@ -0,0 +1,841 @@
++====================
++Changes since 2.5.0:
 +====================
 +
-+prototypes::
++---
 +
- 	void (*fl_copy_lock)(struct file_lock *, struct file_lock *);
- 	void (*fl_release_private)(struct file_lock *);
- 
- 
- locking rules:
--			inode->i_lock	may block
++**recommended**
 +
-+===================	=============	=========
-+ops			inode->i_lock	may block
-+===================	=============	=========
- fl_copy_lock:		yes		no
--fl_release_private:	maybe		maybe[1]
-+fl_release_private:	maybe		maybe[1]_
-+===================	=============	=========
- 
--[1]:	->fl_release_private for flock or POSIX locks is currently allowed
--to block. Leases however can still be freed while the i_lock is held and
--so fl_release_private called on a lease should not block.
-+.. [1]:
-+   ->fl_release_private for flock or POSIX locks is currently allowed
-+   to block. Leases however can still be freed while the i_lock is held and
-+   so fl_release_private called on a lease should not block.
++New helpers: sb_bread(), sb_getblk(), sb_find_get_block(), set_bh(),
++sb_set_blocksize() and sb_min_blocksize().
 +
-+lock_manager_operations
-+=======================
++Use them.
 +
-+prototypes::
- 
------------------------- lock_manager_operations ---------------------------
--prototypes:
- 	void (*lm_notify)(struct file_lock *);  /* unblock callback */
- 	int (*lm_grant)(struct file_lock *, struct file_lock *, int);
- 	void (*lm_break)(struct file_lock *); /* break_lease callback */
-@@ -368,24 +428,33 @@ prototypes:
- 
- locking rules:
- 
--			inode->i_lock	blocked_lock_lock	may block
-+==========		=============	=================	=========
-+ops			inode->i_lock	blocked_lock_lock	may block
-+==========		=============	=================	=========
- lm_notify:		yes		yes			no
- lm_grant:		no		no			no
- lm_break:		yes		no			no
- lm_change		yes		no			no
-+==========		=============	=================	=========
++(sb_find_get_block() replaces 2.4's get_hash_table())
 +
-+buffer_head
-+===========
++---
 +
-+prototypes::
- 
----------------------------- buffer_head -----------------------------------
--prototypes:
- 	void (*b_end_io)(struct buffer_head *bh, int uptodate);
- 
- locking rules:
--	called from interrupts. In other words, extreme care is needed here.
++**recommended**
 +
-+called from interrupts. In other words, extreme care is needed here.
- bh is locked, but that's all warranties we have here. Currently only RAID1,
- highmem, fs/buffer.c, and fs/ntfs/aops.c are providing these. Block devices
- call this method upon the IO completion.
- 
----------------------------- block_device_operations -----------------------
--prototypes:
-+block_device_operations
-+=======================
-+prototypes::
++New methods: ->alloc_inode() and ->destroy_inode().
 +
- 	int (*open) (struct block_device *, fmode_t);
- 	int (*release) (struct gendisk *, fmode_t);
- 	int (*ioctl) (struct block_device *, fmode_t, unsigned, unsigned long);
-@@ -399,7 +468,10 @@ prototypes:
- 	void (*swap_slot_free_notify) (struct block_device *, unsigned long);
- 
- locking rules:
--			bd_mutex
++Remove inode->u.foo_inode_i
 +
-+======================= ===================
-+ops			bd_mutex
-+======================= ===================
- open:			yes
- release:		yes
- ioctl:			no
-@@ -410,6 +482,7 @@ unlock_native_capacity:	no
- revalidate_disk:	no
- getgeo:			no
- swap_slot_free_notify:	no	(see below)
-+======================= ===================
- 
- media_changed, unlock_native_capacity and revalidate_disk are called only from
- check_disk_change().
-@@ -418,8 +491,11 @@ swap_slot_free_notify is called with swap_lock and sometimes the page lock
- held.
- 
- 
----------------------------- file_operations -------------------------------
--prototypes:
-+file_operations
-+===============
++Declare::
 +
-+prototypes::
++	struct foo_inode_info {
++		/* fs-private stuff */
++		struct inode vfs_inode;
++	};
++	static inline struct foo_inode_info *FOO_I(struct inode *inode)
++	{
++		return list_entry(inode, struct foo_inode_info, vfs_inode);
++	}
 +
- 	loff_t (*llseek) (struct file *, loff_t, int);
- 	ssize_t (*read) (struct file *, char __user *, size_t, loff_t *);
- 	ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *);
-@@ -455,7 +531,6 @@ prototypes:
- 			size_t, unsigned int);
- 	int (*setlease)(struct file *, long, struct file_lock **, void **);
- 	long (*fallocate)(struct file *, int, loff_t, loff_t);
--};
- 
- locking rules:
- 	All may block.
-@@ -490,8 +565,11 @@ in sys_read() and friends.
- the lease within the individual filesystem to record the result of the
- operation
- 
----------------------------- dquot_operations -------------------------------
--prototypes:
-+dquot_operations
-+================
++Use FOO_I(inode) instead of &inode->u.foo_inode_i;
 +
-+prototypes::
++Add foo_alloc_inode() and foo_destroy_inode() - the former should allocate
++foo_inode_info and return the address of ->vfs_inode, the latter should free
++FOO_I(inode) (see in-tree filesystems for examples).
 +
- 	int (*write_dquot) (struct dquot *);
- 	int (*acquire_dquot) (struct dquot *);
- 	int (*release_dquot) (struct dquot *);
-@@ -503,20 +581,26 @@ a proper locking wrt the filesystem and call the generic quota operations.
- 
- What filesystem should expect from the generic quota functions:
- 
--		FS recursion	Held locks when called
-+==============	============	=========================
-+ops		FS recursion	Held locks when called
-+==============	============	=========================
- write_dquot:	yes		dqonoff_sem or dqptr_sem
- acquire_dquot:	yes		dqonoff_sem or dqptr_sem
- release_dquot:	yes		dqonoff_sem or dqptr_sem
- mark_dirty:	no		-
- write_info:	yes		dqonoff_sem
-+==============	============	=========================
- 
- FS recursion means calling ->quota_read() and ->quota_write() from superblock
- operations.
- 
- More details about quota locking can be found in fs/dquot.c.
- 
----------------------------- vm_operations_struct -----------------------------
--prototypes:
-+vm_operations_struct
-+====================
++Make them ->alloc_inode and ->destroy_inode in your super_operations.
 +
-+prototypes::
++Keep in mind that now you need explicit initialization of private data
++typically between calling iget_locked() and unlocking the inode.
 +
- 	void (*open)(struct vm_area_struct*);
- 	void (*close)(struct vm_area_struct*);
- 	vm_fault_t (*fault)(struct vm_area_struct*, struct vm_fault *);
-@@ -525,7 +609,10 @@ prototypes:
- 	int (*access)(struct vm_area_struct *, unsigned long, void*, int, int);
- 
- locking rules:
--		mmap_sem	PageLocked(page)
++At some point that will become mandatory.
 +
-+=============	========	===========================
-+ops		mmap_sem	PageLocked(page)
-+=============	========	===========================
- open:		yes
- close:		yes
- fault:		yes		can return with page locked
-@@ -533,8 +620,9 @@ map_pages:	yes
- page_mkwrite:	yes		can return with page locked
- pfn_mkwrite:	yes
- access:		yes
-+=============	========	===========================
- 
--	->fault() is called when a previously not present pte is about
-+->fault() is called when a previously not present pte is about
- to be faulted in. The filesystem must find and return the page associated
- with the passed in "pgoff" in the vm_fault structure. If it is possible that
- the page may be truncated and/or invalidated, then the filesystem must lock
-@@ -542,7 +630,7 @@ the page, then ensure it is not already truncated (the page lock will block
- subsequent truncate), and then return with VM_FAULT_LOCKED, and the page
- locked. The VM will unlock the page.
- 
--	->map_pages() is called when VM asks to map easy accessible pages.
-+->map_pages() is called when VM asks to map easy accessible pages.
- Filesystem should find and map pages associated with offsets from "start_pgoff"
- till "end_pgoff". ->map_pages() is called with page table locked and must
- not block.  If it's not possible to reach a page without blocking,
-@@ -551,25 +639,26 @@ page table entry. Pointer to entry associated with the page is passed in
- "pte" field in vm_fault structure. Pointers to entries for other offsets
- should be calculated relative to "pte".
- 
--	->page_mkwrite() is called when a previously read-only pte is
-+->page_mkwrite() is called when a previously read-only pte is
- about to become writeable. The filesystem again must ensure that there are
- no truncate/invalidate races, and then return with the page locked. If
- the page has been truncated, the filesystem should not look up a new page
- like the ->fault() handler, but simply return with VM_FAULT_NOPAGE, which
- will cause the VM to retry the fault.
- 
--	->pfn_mkwrite() is the same as page_mkwrite but when the pte is
-+->pfn_mkwrite() is the same as page_mkwrite but when the pte is
- VM_PFNMAP or VM_MIXEDMAP with a page-less entry. Expected return is
- VM_FAULT_NOPAGE. Or one of the VM_FAULT_ERROR types. The default behavior
- after this call is to make the pte read-write, unless pfn_mkwrite returns
- an error.
- 
--	->access() is called when get_user_pages() fails in
-+->access() is called when get_user_pages() fails in
- access_process_vm(), typically used to debug a process through
- /proc/pid/mem or ptrace.  This function is needed only for
- VM_IO | VM_PFNMAP VMAs.
- 
--================================================================================
-+--------------------------------------------------------------------------------
++---
 +
- 			Dubious stuff
- 
- (if you break something or notice that it is broken and do not fix it yourself
-diff --git a/Documentation/filesystems/nfs/Exporting b/Documentation/filesystems/nfs/exporting.rst
-similarity index 91%
-rename from Documentation/filesystems/nfs/Exporting
-rename to Documentation/filesystems/nfs/exporting.rst
-index 63889149f532..33d588a01ace 100644
---- a/Documentation/filesystems/nfs/Exporting
-+++ b/Documentation/filesystems/nfs/exporting.rst
-@@ -1,3 +1,4 @@
-+:orphan:
- 
- Making Filesystems Exportable
- =============================
-@@ -42,9 +43,9 @@ filehandle fragment, there is no automatic creation of a path prefix
- for the object.  This leads to two related but distinct features of
- the dcache that are not needed for normal filesystem access.
- 
--1/ The dcache must sometimes contain objects that are not part of the
-+1. The dcache must sometimes contain objects that are not part of the
-    proper prefix. i.e that are not connected to the root.
--2/ The dcache must be prepared for a newly found (via ->lookup) directory
-+2. The dcache must be prepared for a newly found (via ->lookup) directory
-    to already have a (non-connected) dentry, and must be able to move
-    that dentry into place (based on the parent and name in the
-    ->lookup).   This is particularly needed for directories as
-@@ -52,7 +53,7 @@ the dcache that are not needed for normal filesystem access.
- 
- To implement these features, the dcache has:
- 
--a/ A dentry flag DCACHE_DISCONNECTED which is set on
-+a. A dentry flag DCACHE_DISCONNECTED which is set on
-    any dentry that might not be part of the proper prefix.
-    This is set when anonymous dentries are created, and cleared when a
-    dentry is noticed to be a child of a dentry which is in the proper
-@@ -71,48 +72,52 @@ a/ A dentry flag DCACHE_DISCONNECTED which is set on
-    dentries.  That guarantees that we won't need to hunt them down upon
-    umount.
- 
--b/ A primitive for creation of secondary roots - d_obtain_root(inode).
-+b. A primitive for creation of secondary roots - d_obtain_root(inode).
-    Those do _not_ bear DCACHE_DISCONNECTED.  They are placed on the
-    per-superblock list (->s_roots), so they can be located at umount
-    time for eviction purposes.
- 
--c/ Helper routines to allocate anonymous dentries, and to help attach
-+c. Helper routines to allocate anonymous dentries, and to help attach
-    loose directory dentries at lookup time. They are:
++**mandatory**
 +
-     d_obtain_alias(inode) will return a dentry for the given inode.
-       If the inode already has a dentry, one of those is returned.
++Change of file_system_type method (->read_super to ->get_sb)
 +
-       If it doesn't, a new anonymous (IS_ROOT and
--        DCACHE_DISCONNECTED) dentry is allocated and attached.
-+      DCACHE_DISCONNECTED) dentry is allocated and attached.
++->read_super() is no more.  Ditto for DECLARE_FSTYPE and DECLARE_FSTYPE_DEV.
 +
-       In the case of a directory, care is taken that only one dentry
-       can ever be attached.
++Turn your foo_read_super() into a function that would return 0 in case of
++success and negative number in case of error (-EINVAL unless you have more
++informative error value to report).  Call it foo_fill_super().  Now declare::
 +
-     d_splice_alias(inode, dentry) will introduce a new dentry into the tree;
-       either the passed-in dentry or a preexisting alias for the given inode
-       (such as an anonymous one created by d_obtain_alias), if appropriate.
-       It returns NULL when the passed-in dentry is used, following the calling
-       convention of ->lookup.
-- 
++  int foo_get_sb(struct file_system_type *fs_type,
++	int flags, const char *dev_name, void *data, struct vfsmount *mnt)
++  {
++	return get_sb_bdev(fs_type, flags, dev_name, data, foo_fill_super,
++			   mnt);
++  }
 +
- Filesystem Issues
- -----------------
- 
- For a filesystem to be exportable it must:
-- 
--   1/ provide the filehandle fragment routines described below.
--   2/ make sure that d_splice_alias is used rather than d_add
++(or similar with s/bdev/nodev/ or s/bdev/single/, depending on the kind of
++filesystem).
 +
-+   1. provide the filehandle fragment routines described below.
-+   2. make sure that d_splice_alias is used rather than d_add
-       when ->lookup finds an inode for a given parent and name.
- 
--      If inode is NULL, d_splice_alias(inode, dentry) is equivalent to
-+      If inode is NULL, d_splice_alias(inode, dentry) is equivalent to::
- 
- 		d_add(dentry, inode), NULL
- 
-       Similarly, d_splice_alias(ERR_PTR(err), dentry) = ERR_PTR(err)
- 
--      Typically the ->lookup routine will simply end with a:
-+      Typically the ->lookup routine will simply end with a::
- 
- 		return d_splice_alias(inode, dentry);
- 	}
- 
- 
- 
--  A file system implementation declares that instances of the filesystem
-+A file system implementation declares that instances of the filesystem
- are exportable by setting the s_export_op field in the struct
- super_block.  This field must point to a "struct export_operations"
- struct which has the following members:
-diff --git a/Documentation/filesystems/vfs.rst b/Documentation/filesystems/vfs.rst
-index 0f85ab21c2ca..7d4d09dd5e6d 100644
---- a/Documentation/filesystems/vfs.rst
-+++ b/Documentation/filesystems/vfs.rst
-@@ -20,7 +20,7 @@ kernel which allows different filesystem implementations to coexist.
- 
- VFS system calls open(2), stat(2), read(2), write(2), chmod(2) and so on
- are called from a process context.  Filesystem locking is described in
--the document Documentation/filesystems/Locking.
-+the document Documentation/filesystems/locking.rst.
- 
- 
- Directory Entry Cache (dcache)
-diff --git a/fs/cifs/export.c b/fs/cifs/export.c
-index ce8b7f677c58..eb0bb8ca8e63 100644
---- a/fs/cifs/export.c
-+++ b/fs/cifs/export.c
-@@ -24,7 +24,7 @@
-  */
- 
-  /*
--  * See Documentation/filesystems/nfs/Exporting
-+  * See Documentation/filesystems/nfs/exporting.rst
-   * and examples in fs/exportfs
-   *
-   * Since cifs is a network file system, an "fsid" must be included for
-diff --git a/fs/exportfs/expfs.c b/fs/exportfs/expfs.c
-index f0e549783caf..09bc68708d28 100644
---- a/fs/exportfs/expfs.c
-+++ b/fs/exportfs/expfs.c
-@@ -7,7 +7,7 @@
-  * and for mapping back from file handles to dentries.
-  *
-  * For details on why we do all the strange and hairy things in here
-- * take a look at Documentation/filesystems/nfs/Exporting.
-+ * take a look at Documentation/filesystems/nfs/exporting.rst.
-  */
- #include <linux/exportfs.h>
- #include <linux/fs.h>
-diff --git a/fs/isofs/export.c b/fs/isofs/export.c
-index 85a9093769a9..35768a63fb1d 100644
---- a/fs/isofs/export.c
-+++ b/fs/isofs/export.c
-@@ -10,7 +10,7 @@
-  *
-  * The following files are helpful:
-  *
-- *     Documentation/filesystems/nfs/Exporting
-+ *     Documentation/filesystems/nfs/exporting.rst
-  *     fs/exportfs/expfs.c.
-  */
- 
-diff --git a/fs/orangefs/file.c b/fs/orangefs/file.c
-index 960f9a3c012d..a5612abc0936 100644
---- a/fs/orangefs/file.c
-+++ b/fs/orangefs/file.c
-@@ -555,7 +555,7 @@ static int orangefs_fsync(struct file *file,
-  * Change the file pointer position for an instance of an open file.
-  *
-  * \note If .llseek is overriden, we must acquire lock as described in
-- *       Documentation/filesystems/Locking.
-+ *       Documentation/filesystems/locking.rst.
-  *
-  * Future upgrade could support SEEK_DATA and SEEK_HOLE but would
-  * require much changes to the FS
-diff --git a/include/linux/dcache.h b/include/linux/dcache.h
-index 9451011ac014..10090f11ab95 100644
---- a/include/linux/dcache.h
-+++ b/include/linux/dcache.h
-@@ -151,7 +151,7 @@ struct dentry_operations {
++Replace DECLARE_FSTYPE... with explicit initializer and have ->get_sb set as
++foo_get_sb.
++
++---
++
++**mandatory**
++
++Locking change: ->s_vfs_rename_sem is taken only by cross-directory renames.
++Most likely there is no need to change anything, but if you relied on
++global exclusion between renames for some internal purpose - you need to
++change your internal locking.  Otherwise exclusion warranties remain the
++same (i.e. parents and victim are locked, etc.).
++
++---
++
++**informational**
++
++Now we have the exclusion between ->lookup() and directory removal (by
++->rmdir() and ->rename()).  If you used to need that exclusion and do
++it by internal locking (most of filesystems couldn't care less) - you
++can relax your locking.
++
++---
++
++**mandatory**
++
++->lookup(), ->truncate(), ->create(), ->unlink(), ->mknod(), ->mkdir(),
++->rmdir(), ->link(), ->lseek(), ->symlink(), ->rename()
++and ->readdir() are called without BKL now.  Grab it on entry, drop upon return
++- that will guarantee the same locking you used to have.  If your method or its
++parts do not need BKL - better yet, now you can shift lock_kernel() and
++unlock_kernel() so that they would protect exactly what needs to be
++protected.
++
++---
++
++**mandatory**
++
++BKL is also moved from around sb operations. BKL should have been shifted into
++individual fs sb_op functions.  If you don't need it, remove it.
++
++---
++
++**informational**
++
++check for ->link() target not being a directory is done by callers.  Feel
++free to drop it...
++
++---
++
++**informational**
++
++->link() callers hold ->i_mutex on the object we are linking to.  Some of your
++problems might be over...
++
++---
++
++**mandatory**
++
++new file_system_type method - kill_sb(superblock).  If you are converting
++an existing filesystem, set it according to ->fs_flags::
++
++	FS_REQUIRES_DEV		-	kill_block_super
++	FS_LITTER		-	kill_litter_super
++	neither			-	kill_anon_super
++
++FS_LITTER is gone - just remove it from fs_flags.
++
++---
++
++**mandatory**
++
++FS_SINGLE is gone (actually, that had happened back when ->get_sb()
++went in - and hadn't been documented ;-/).  Just remove it from fs_flags
++(and see ->get_sb() entry for other actions).
++
++---
++
++**mandatory**
++
++->setattr() is called without BKL now.  Caller _always_ holds ->i_mutex, so
++watch for ->i_mutex-grabbing code that might be used by your ->setattr().
++Callers of notify_change() need ->i_mutex now.
++
++---
++
++**recommended**
++
++New super_block field ``struct export_operations *s_export_op`` for
++explicit support for exporting, e.g. via NFS.  The structure is fully
++documented at its declaration in include/linux/fs.h, and in
++Documentation/filesystems/nfs/Exporting.
++
++Briefly it allows for the definition of decode_fh and encode_fh operations
++to encode and decode filehandles, and allows the filesystem to use
++a standard helper function for decode_fh, and provide file-system specific
++support for this helper, particularly get_parent.
++
++It is planned that this will be required for exporting once the code
++settles down a bit.
++
++**mandatory**
++
++s_export_op is now required for exporting a filesystem.
++isofs, ext2, ext3, resierfs, fat
++can be used as examples of very different filesystems.
++
++---
++
++**mandatory**
++
++iget4() and the read_inode2 callback have been superseded by iget5_locked()
++which has the following prototype::
++
++    struct inode *iget5_locked(struct super_block *sb, unsigned long ino,
++				int (*test)(struct inode *, void *),
++				int (*set)(struct inode *, void *),
++				void *data);
++
++'test' is an additional function that can be used when the inode
++number is not sufficient to identify the actual file object. 'set'
++should be a non-blocking function that initializes those parts of a
++newly created inode to allow the test function to succeed. 'data' is
++passed as an opaque value to both test and set functions.
++
++When the inode has been created by iget5_locked(), it will be returned with the
++I_NEW flag set and will still be locked.  The filesystem then needs to finalize
++the initialization. Once the inode is initialized it must be unlocked by
++calling unlock_new_inode().
++
++The filesystem is responsible for setting (and possibly testing) i_ino
++when appropriate. There is also a simpler iget_locked function that
++just takes the superblock and inode number as arguments and does the
++test and set for you.
++
++e.g.::
++
++	inode = iget_locked(sb, ino);
++	if (inode->i_state & I_NEW) {
++		err = read_inode_from_disk(inode);
++		if (err < 0) {
++			iget_failed(inode);
++			return err;
++		}
++		unlock_new_inode(inode);
++	}
++
++Note that if the process of setting up a new inode fails, then iget_failed()
++should be called on the inode to render it dead, and an appropriate error
++should be passed back to the caller.
++
++---
++
++**recommended**
++
++->getattr() finally getting used.  See instances in nfs, minix, etc.
++
++---
++
++**mandatory**
++
++->revalidate() is gone.  If your filesystem had it - provide ->getattr()
++and let it call whatever you had as ->revlidate() + (for symlinks that
++had ->revalidate()) add calls in ->follow_link()/->readlink().
++
++---
++
++**mandatory**
++
++->d_parent changes are not protected by BKL anymore.  Read access is safe
++if at least one of the following is true:
++
++	* filesystem has no cross-directory rename()
++	* we know that parent had been locked (e.g. we are looking at
++	  ->d_parent of ->lookup() argument).
++	* we are called from ->rename().
++	* the child's ->d_lock is held
++
++Audit your code and add locking if needed.  Notice that any place that is
++not protected by the conditions above is risky even in the old tree - you
++had been relying on BKL and that's prone to screwups.  Old tree had quite
++a few holes of that kind - unprotected access to ->d_parent leading to
++anything from oops to silent memory corruption.
++
++---
++
++**mandatory**
++
++FS_NOMOUNT is gone.  If you use it - just set SB_NOUSER in flags
++(see rootfs for one kind of solution and bdev/socket/pipe for another).
++
++---
++
++**recommended**
++
++Use bdev_read_only(bdev) instead of is_read_only(kdev).  The latter
++is still alive, but only because of the mess in drivers/s390/block/dasd.c.
++As soon as it gets fixed is_read_only() will die.
++
++---
++
++**mandatory**
++
++->permission() is called without BKL now. Grab it on entry, drop upon
++return - that will guarantee the same locking you used to have.  If
++your method or its parts do not need BKL - better yet, now you can
++shift lock_kernel() and unlock_kernel() so that they would protect
++exactly what needs to be protected.
++
++---
++
++**mandatory**
++
++->statfs() is now called without BKL held.  BKL should have been
++shifted into individual fs sb_op functions where it's not clear that
++it's safe to remove it.  If you don't need it, remove it.
++
++---
++
++**mandatory**
++
++is_read_only() is gone; use bdev_read_only() instead.
++
++---
++
++**mandatory**
++
++destroy_buffers() is gone; use invalidate_bdev().
++
++---
++
++**mandatory**
++
++fsync_dev() is gone; use fsync_bdev().  NOTE: lvm breakage is
++deliberate; as soon as struct block_device * is propagated in a reasonable
++way by that code fixing will become trivial; until then nothing can be
++done.
++
++**mandatory**
++
++block truncatation on error exit from ->write_begin, and ->direct_IO
++moved from generic methods (block_write_begin, cont_write_begin,
++nobh_write_begin, blockdev_direct_IO*) to callers.  Take a look at
++ext2_write_failed and callers for an example.
++
++**mandatory**
++
++->truncate is gone.  The whole truncate sequence needs to be
++implemented in ->setattr, which is now mandatory for filesystems
++implementing on-disk size changes.  Start with a copy of the old inode_setattr
++and vmtruncate, and the reorder the vmtruncate + foofs_vmtruncate sequence to
++be in order of zeroing blocks using block_truncate_page or similar helpers,
++size update and on finally on-disk truncation which should not fail.
++setattr_prepare (which used to be inode_change_ok) now includes the size checks
++for ATTR_SIZE and must be called in the beginning of ->setattr unconditionally.
++
++**mandatory**
++
++->clear_inode() and ->delete_inode() are gone; ->evict_inode() should
++be used instead.  It gets called whenever the inode is evicted, whether it has
++remaining links or not.  Caller does *not* evict the pagecache or inode-associated
++metadata buffers; the method has to use truncate_inode_pages_final() to get rid
++of those. Caller makes sure async writeback cannot be running for the inode while
++(or after) ->evict_inode() is called.
++
++->drop_inode() returns int now; it's called on final iput() with
++inode->i_lock held and it returns true if filesystems wants the inode to be
++dropped.  As before, generic_drop_inode() is still the default and it's been
++updated appropriately.  generic_delete_inode() is also alive and it consists
++simply of return 1.  Note that all actual eviction work is done by caller after
++->drop_inode() returns.
++
++As before, clear_inode() must be called exactly once on each call of
++->evict_inode() (as it used to be for each call of ->delete_inode()).  Unlike
++before, if you are using inode-associated metadata buffers (i.e.
++mark_buffer_dirty_inode()), it's your responsibility to call
++invalidate_inode_buffers() before clear_inode().
++
++NOTE: checking i_nlink in the beginning of ->write_inode() and bailing out
++if it's zero is not *and* *never* *had* *been* enough.  Final unlink() and iput()
++may happen while the inode is in the middle of ->write_inode(); e.g. if you blindly
++free the on-disk inode, you may end up doing that while ->write_inode() is writing
++to it.
++
++---
++
++**mandatory**
++
++.d_delete() now only advises the dcache as to whether or not to cache
++unreferenced dentries, and is now only called when the dentry refcount goes to
++0. Even on 0 refcount transition, it must be able to tolerate being called 0,
++1, or more times (eg. constant, idempotent).
++
++---
++
++**mandatory**
++
++.d_compare() calling convention and locking rules are significantly
++changed. Read updated documentation in Documentation/filesystems/vfs.rst (and
++look at examples of other filesystems) for guidance.
++
++---
++
++**mandatory**
++
++.d_hash() calling convention and locking rules are significantly
++changed. Read updated documentation in Documentation/filesystems/vfs.rst (and
++look at examples of other filesystems) for guidance.
++
++---
++
++**mandatory**
++
++dcache_lock is gone, replaced by fine grained locks. See fs/dcache.c
++for details of what locks to replace dcache_lock with in order to protect
++particular things. Most of the time, a filesystem only needs ->d_lock, which
++protects *all* the dcache state of a given dentry.
++
++---
++
++**mandatory**
++
++Filesystems must RCU-free their inodes, if they can have been accessed
++via rcu-walk path walk (basically, if the file can have had a path name in the
++vfs namespace).
++
++Even though i_dentry and i_rcu share storage in a union, we will
++initialize the former in inode_init_always(), so just leave it alone in
++the callback.  It used to be necessary to clean it there, but not anymore
++(starting at 3.2).
++
++---
++
++**recommended**
++
++vfs now tries to do path walking in "rcu-walk mode", which avoids
++atomic operations and scalability hazards on dentries and inodes (see
++Documentation/filesystems/path-lookup.txt). d_hash and d_compare changes
++(above) are examples of the changes required to support this. For more complex
++filesystem callbacks, the vfs drops out of rcu-walk mode before the fs call, so
++no changes are required to the filesystem. However, this is costly and loses
++the benefits of rcu-walk mode. We will begin to add filesystem callbacks that
++are rcu-walk aware, shown below. Filesystems should take advantage of this
++where possible.
++
++---
++
++**mandatory**
++
++d_revalidate is a callback that is made on every path element (if
++the filesystem provides it), which requires dropping out of rcu-walk mode. This
++may now be called in rcu-walk mode (nd->flags & LOOKUP_RCU). -ECHILD should be
++returned if the filesystem cannot handle rcu-walk. See
++Documentation/filesystems/vfs.rst for more details.
++
++permission is an inode permission check that is called on many or all
++directory inodes on the way down a path walk (to check for exec permission). It
++must now be rcu-walk aware (mask & MAY_NOT_BLOCK).  See
++Documentation/filesystems/vfs.rst for more details.
++
++---
++
++**mandatory**
++
++In ->fallocate() you must check the mode option passed in.  If your
++filesystem does not support hole punching (deallocating space in the middle of a
++file) you must return -EOPNOTSUPP if FALLOC_FL_PUNCH_HOLE is set in mode.
++Currently you can only have FALLOC_FL_PUNCH_HOLE with FALLOC_FL_KEEP_SIZE set,
++so the i_size should not change when hole punching, even when puching the end of
++a file off.
++
++---
++
++**mandatory**
++
++->get_sb() is gone.  Switch to use of ->mount().  Typically it's just
++a matter of switching from calling ``get_sb_``... to ``mount_``... and changing
++the function type.  If you were doing it manually, just switch from setting
++->mnt_root to some pointer to returning that pointer.  On errors return
++ERR_PTR(...).
++
++---
++
++**mandatory**
++
++->permission() and generic_permission()have lost flags
++argument; instead of passing IPERM_FLAG_RCU we add MAY_NOT_BLOCK into mask.
++
++generic_permission() has also lost the check_acl argument; ACL checking
++has been taken to VFS and filesystems need to provide a non-NULL ->i_op->get_acl
++to read an ACL from disk.
++
++---
++
++**mandatory**
++
++If you implement your own ->llseek() you must handle SEEK_HOLE and
++SEEK_DATA.  You can hanle this by returning -EINVAL, but it would be nicer to
++support it in some way.  The generic handler assumes that the entire file is
++data and there is a virtual hole at the end of the file.  So if the provided
++offset is less than i_size and SEEK_DATA is specified, return the same offset.
++If the above is true for the offset and you are given SEEK_HOLE, return the end
++of the file.  If the offset is i_size or greater return -ENXIO in either case.
++
++**mandatory**
++
++If you have your own ->fsync() you must make sure to call
++filemap_write_and_wait_range() so that all dirty pages are synced out properly.
++You must also keep in mind that ->fsync() is not called with i_mutex held
++anymore, so if you require i_mutex locking you must make sure to take it and
++release it yourself.
++
++---
++
++**mandatory**
++
++d_alloc_root() is gone, along with a lot of bugs caused by code
++misusing it.  Replacement: d_make_root(inode).  The difference is,
++d_make_root() drops the reference to inode if dentry allocation fails.
++
++---
++
++**mandatory**
++
++The witch is dead!  Well, 2/3 of it, anyway.  ->d_revalidate() and
++->lookup() do *not* take struct nameidata anymore; just the flags.
++
++---
++
++**mandatory**
++
++->create() doesn't take ``struct nameidata *``; unlike the previous
++two, it gets "is it an O_EXCL or equivalent?" boolean argument.  Note that
++local filesystems can ignore tha argument - they are guaranteed that the
++object doesn't exist.  It's remote/distributed ones that might care...
++
++---
++
++**mandatory**
++
++FS_REVAL_DOT is gone; if you used to have it, add ->d_weak_revalidate()
++in your dentry operations instead.
++
++---
++
++**mandatory**
++
++vfs_readdir() is gone; switch to iterate_dir() instead
++
++---
++
++**mandatory**
++
++->readdir() is gone now; switch to ->iterate()
++
++**mandatory**
++
++vfs_follow_link has been removed.  Filesystems must use nd_set_link
++from ->follow_link for normal symlinks, or nd_jump_link for magic
++/proc/<pid> style links.
++
++---
++
++**mandatory**
++
++iget5_locked()/ilookup5()/ilookup5_nowait() test() callback used to be
++called with both ->i_lock and inode_hash_lock held; the former is *not*
++taken anymore, so verify that your callbacks do not rely on it (none
++of the in-tree instances did).  inode_hash_lock is still held,
++of course, so they are still serialized wrt removal from inode hash,
++as well as wrt set() callback of iget5_locked().
++
++---
++
++**mandatory**
++
++d_materialise_unique() is gone; d_splice_alias() does everything you
++need now.  Remember that they have opposite orders of arguments ;-/
++
++---
++
++**mandatory**
++
++f_dentry is gone; use f_path.dentry, or, better yet, see if you can avoid
++it entirely.
++
++---
++
++**mandatory**
++
++never call ->read() and ->write() directly; use __vfs_{read,write} or
++wrappers; instead of checking for ->write or ->read being NULL, look for
++FMODE_CAN_{WRITE,READ} in file->f_mode.
++
++---
++
++**mandatory**
++
++do _not_ use new_sync_{read,write} for ->read/->write; leave it NULL
++instead.
++
++---
++
++**mandatory**
++	->aio_read/->aio_write are gone.  Use ->read_iter/->write_iter.
++
++---
++
++**recommended**
++
++for embedded ("fast") symlinks just set inode->i_link to wherever the
++symlink body is and use simple_follow_link() as ->follow_link().
++
++---
++
++**mandatory**
++
++calling conventions for ->follow_link() have changed.  Instead of returning
++cookie and using nd_set_link() to store the body to traverse, we return
++the body to traverse and store the cookie using explicit void ** argument.
++nameidata isn't passed at all - nd_jump_link() doesn't need it and
++nd_[gs]et_link() is gone.
++
++---
++
++**mandatory**
++
++calling conventions for ->put_link() have changed.  It gets inode instead of
++dentry,  it does not get nameidata at all and it gets called only when cookie
++is non-NULL.  Note that link body isn't available anymore, so if you need it,
++store it as cookie.
++
++---
++
++**mandatory**
++
++any symlink that might use page_follow_link_light/page_put_link() must
++have inode_nohighmem(inode) called before anything might start playing with
++its pagecache.  No highmem pages should end up in the pagecache of such
++symlinks.  That includes any preseeding that might be done during symlink
++creation.  __page_symlink() will honour the mapping gfp flags, so once
++you've done inode_nohighmem() it's safe to use, but if you allocate and
++insert the page manually, make sure to use the right gfp flags.
++
++---
++
++**mandatory**
++
++->follow_link() is replaced with ->get_link(); same API, except that
++
++	* ->get_link() gets inode as a separate argument
++	* ->get_link() may be called in RCU mode - in that case NULL
++	  dentry is passed
++
++---
++
++**mandatory**
++
++->get_link() gets struct delayed_call ``*done`` now, and should do
++set_delayed_call() where it used to set ``*cookie``.
++
++->put_link() is gone - just give the destructor to set_delayed_call()
++in ->get_link().
++
++---
++
++**mandatory**
++
++->getxattr() and xattr_handler.get() get dentry and inode passed separately.
++dentry might be yet to be attached to inode, so do _not_ use its ->d_inode
++in the instances.  Rationale: !@#!@# security_d_instantiate() needs to be
++called before we attach dentry to inode.
++
++---
++
++**mandatory**
++
++symlinks are no longer the only inodes that do *not* have i_bdev/i_cdev/
++i_pipe/i_link union zeroed out at inode eviction.  As the result, you can't
++assume that non-NULL value in ->i_nlink at ->destroy_inode() implies that
++it's a symlink.  Checking ->i_mode is really needed now.  In-tree we had
++to fix shmem_destroy_callback() that used to take that kind of shortcut;
++watch out, since that shortcut is no longer valid.
++
++---
++
++**mandatory**
++
++->i_mutex is replaced with ->i_rwsem now.  inode_lock() et.al. work as
++they used to - they just take it exclusive.  However, ->lookup() may be
++called with parent locked shared.  Its instances must not
++
++	* use d_instantiate) and d_rehash() separately - use d_add() or
++	    d_splice_alias() instead.
++	* use d_rehash() alone - call d_add(new_dentry, NULL) instead.
++	* in the unlikely case when (read-only) access to filesystem
++	    data structures needs exclusion for some reason, arrange it
++	    yourself.  None of the in-tree filesystems needed that.
++	* rely on ->d_parent and ->d_name not changing after dentry has
++	    been fed to d_add() or d_splice_alias().  Again, none of the
++	    in-tree instances relied upon that.
++
++We are guaranteed that lookups of the same name in the same directory
++will not happen in parallel ("same" in the sense of your ->d_compare()).
++Lookups on different names in the same directory can and do happen in
++parallel now.
++
++---
++
++**recommended**
++
++->iterate_shared() is added; it's a parallel variant of ->iterate().
++Exclusion on struct file level is still provided (as well as that
++between it and lseek on the same struct file), but if your directory
++has been opened several times, you can get these called in parallel.
++Exclusion between that method and all directory-modifying ones is
++still provided, of course.
++
++Often enough ->iterate() can serve as ->iterate_shared() without any
++changes - it is a read-only operation, after all.  If you have any
++per-inode or per-dentry in-core data structures modified by ->iterate(),
++you might need something to serialize the access to them.  If you
++do dcache pre-seeding, you'll need to switch to d_alloc_parallel() for
++that; look for in-tree examples.
++
++Old method is only used if the new one is absent; eventually it will
++be removed.  Switch while you still can; the old one won't stay.
++
++---
++
++**mandatory**
++
++->atomic_open() calls without O_CREAT may happen in parallel.
++
++---
++
++**mandatory**
++
++->setxattr() and xattr_handler.set() get dentry and inode passed separately.
++dentry might be yet to be attached to inode, so do _not_ use its ->d_inode
++in the instances.  Rationale: !@#!@# security_d_instantiate() needs to be
++called before we attach dentry to inode and !@#!@##!@$!$#!@#$!@$!@$ smack
++->d_instantiate() uses not just ->getxattr() but ->setxattr() as well.
++
++---
++
++**mandatory**
++
++->d_compare() doesn't get parent as a separate argument anymore.  If you
++used it for finding the struct super_block involved, dentry->d_sb will
++work just as well; if it's something more complicated, use dentry->d_parent.
++Just be careful not to assume that fetching it more than once will yield
++the same value - in RCU mode it could change under you.
++
++---
++
++**mandatory**
++
++->rename() has an added flags argument.  Any flags not handled by the
++filesystem should result in EINVAL being returned.
++
++---
++
++
++**recommended**
++
++->readlink is optional for symlinks.  Don't set, unless filesystem needs
++to fake something for readlink(2).
++
++---
++
++**mandatory**
++
++->getattr() is now passed a struct path rather than a vfsmount and
++dentry separately, and it now has request_mask and query_flags arguments
++to specify the fields and sync type requested by statx.  Filesystems not
++supporting any statx-specific features may ignore the new arguments.
++
++---
++
++**mandatory**
++
++->atomic_open() calling conventions have changed.  Gone is ``int *opened``,
++along with FILE_OPENED/FILE_CREATED.  In place of those we have
++FMODE_OPENED/FMODE_CREATED, set in file->f_mode.  Additionally, return
++value for 'called finish_no_open(), open it yourself' case has become
++0, not 1.  Since finish_no_open() itself is returning 0 now, that part
++does not need any changes in ->atomic_open() instances.
++
++---
++
++**mandatory**
++
++alloc_file() has become static now; two wrappers are to be used instead.
++alloc_file_pseudo(inode, vfsmount, name, flags, ops) is for the cases
++when dentry needs to be created; that's the majority of old alloc_file()
++users.  Calling conventions: on success a reference to new struct file
++is returned and callers reference to inode is subsumed by that.  On
++failure, ERR_PTR() is returned and no caller's references are affected,
++so the caller needs to drop the inode reference it held.
++alloc_file_clone(file, flags, ops) does not affect any caller's references.
++On success you get a new struct file sharing the mount/dentry with the
++original, on failure - ERR_PTR().
++
++---
++
++**mandatory**
++
++->clone_file_range() and ->dedupe_file_range have been replaced with
++->remap_file_range().  See Documentation/filesystems/vfs.rst for more
++information.
++
++---
++
++**recommended**
++
++->lookup() instances doing an equivalent of::
++
++	if (IS_ERR(inode))
++		return ERR_CAST(inode);
++	return d_splice_alias(inode, dentry);
++
++don't need to bother with the check - d_splice_alias() will do the
++right thing when given ERR_PTR(...) as inode.  Moreover, passing NULL
++inode to d_splice_alias() will also do the right thing (equivalent of
++d_add(dentry, NULL); return NULL;), so that kind of special cases
++also doesn't need a separate treatment.
++
++---
++
++**strongly recommended**
++
++take the RCU-delayed parts of ->destroy_inode() into a new method -
++->free_inode().  If ->destroy_inode() becomes empty - all the better,
++just get rid of it.  Synchronous work (e.g. the stuff that can't
++be done from an RCU callback, or any WARN_ON() where we want the
++stack trace) *might* be movable to ->evict_inode(); however,
++that goes only for the things that are not needed to balance something
++done by ->alloc_inode().  IOW, if it's cleaning up the stuff that
++might have accumulated over the life of in-core inode, ->evict_inode()
++might be a fit.
++
++Rules for inode destruction:
++
++	* if ->destroy_inode() is non-NULL, it gets called
++	* if ->free_inode() is non-NULL, it gets scheduled by call_rcu()
++	* combination of NULL ->destroy_inode and NULL ->free_inode is
++	    treated as NULL/free_inode_nonrcu, to preserve the compatibility.
++
++Note that the callback (be it via ->free_inode() or explicit call_rcu()
++in ->destroy_inode()) is *NOT* ordered wrt superblock destruction;
++as the matter of fact, the superblock and all associated structures
++might be already gone.  The filesystem driver is guaranteed to be still
++there, but that's it.  Freeing memory in the callback is fine; doing
++more than that is possible, but requires a lot of care and is best
++avoided.
++
++---
++
++**mandatory**
++
++DCACHE_RCUACCESS is gone; having an RCU delay on dentry freeing is the
++default.  DCACHE_NORCU opts out, and only d_alloc_pseudo() has any
++business doing so.
++
++---
++
++**mandatory**
++
++d_alloc_pseudo() is internal-only; uses outside of alloc_file_pseudo() are
++very suspect (and won't work in modules).  Such uses are very likely to
++be misspelled d_alloc_anon().
+diff --git a/fs/orangefs/orangefs-kernel.h b/fs/orangefs/orangefs-kernel.h
+index 58158d286a0c..5a42b35c3e17 100644
+--- a/fs/orangefs/orangefs-kernel.h
++++ b/fs/orangefs/orangefs-kernel.h
+@@ -248,7 +248,7 @@ struct orangefs_read_options {
+ extern struct orangefs_stats orangefs_stats;
  
  /*
-  * Locking rules for dentry_operations callbacks are to be found in
-- * Documentation/filesystems/Locking. Keep it updated!
-+ * Documentation/filesystems/locking.rst. Keep it updated!
-  *
-  * FUrther descriptions are found in Documentation/filesystems/vfs.rst.
-  * Keep it updated too!
-diff --git a/include/linux/exportfs.h b/include/linux/exportfs.h
-index 0d3037419bc7..cf6571fc9c01 100644
---- a/include/linux/exportfs.h
-+++ b/include/linux/exportfs.h
-@@ -139,7 +139,7 @@ struct fid {
-  * @get_parent:     find the parent of a given directory
-  * @commit_metadata: commit metadata changes to stable storage
-  *
-- * See Documentation/filesystems/nfs/Exporting for details on how to use
-+ * See Documentation/filesystems/nfs/exporting.rst for details on how to use
-  * this interface correctly.
-  *
-  * encode_fh:
+- * NOTE: See Documentation/filesystems/porting for information
++ * NOTE: See Documentation/filesystems/porting.rst for information
+  * on implementing FOO_I and properly accessing fs private data
+  */
+ static inline struct orangefs_inode_s *ORANGEFS_I(struct inode *inode)
 -- 
 2.21.0
+
 
 

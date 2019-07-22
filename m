@@ -2,42 +2,45 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61B707069E
+	by mail.lfdr.de (Postfix) with ESMTPS id 696A67069F
 	for <lists+devel-orangefs@lfdr.de>; Mon, 22 Jul 2019 19:17:05 +0200 (CEST)
-Received: from [::1] (port=46562 helo=mm1.emwd.com)
+Received: from [::1] (port=46564 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hpbvs-0001u8-3t
+	id 1hpbvs-0001uG-5Y
 	for lists+devel-orangefs@lfdr.de; Mon, 22 Jul 2019 13:17:04 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:44896)
+Received: from bombadil.infradead.org ([198.137.202.133]:38422)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
  (Exim 4.92) (envelope-from <mchehab@bombadil.infradead.org>)
- id 1hnhSw-0000Nb-UL
- for devel@lists.orangefs.org; Wed, 17 Jul 2019 06:47:19 -0400
+ id 1hpWBN-0003em-26
+ for devel@lists.orangefs.org; Mon, 22 Jul 2019 07:08:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6madoRsEGOkNJQ5i41ZYA1AFte8dqIqQA3/GyJvcIdQ=; b=JvPRmMJY7kJTHCKSYgSS8WcJe
- 5GRtAZjdI+Wg1VGOzqR7G24PjaAt9XUKT6BUZ5SiAEZp45zkDfYeNHihk73SwghNQQqcbdpYd9J+u
- wD0u7SYzb6YpFkPDG9l9wOPGf4cJ+5Ooky03siuhDq/kqcdH6NilRvI8QNo9aOpz2QyyhkBsSsamo
- D2Zin5oZTsCLC31IghAvbEO3rW90DO6kmg/lIO06Lte95XnutVLoaQsQKt3dqLxtbsoz0rMOapb+t
- rza16ZMKCZJexLT883d/hvx0GLiIR1ShBe69Ik+Gxg0ut/AlpZj4K1BlkokTZZqaSCw6lCrZ+jANL
- 93UQSdkBQ==;
-Received: from [191.33.154.161] (helo=bombadil.infradead.org)
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=TuhrYRW0fJTmblobQRK9pn1y7AgbVKo1ZovBryj1BUQ=; b=kntz0iPWCq2ZNKaMwCqNP+OF/P
+ 9JdFoNGCYMV3V6is3pLW9p6UW2yJljRgPk+qO7B0D62H7iGfQf3x9RW0Ri7VuxZvA2BbOQc7LG9IM
+ 3S5AaeMTEe4PVQKg3C0ebFqYRAM5EhzRoKFXPEP9UxHWFJ9tcHpCCnJDLWxaq/CFhectbK6kp/2kI
+ 5WCA/Lo22p3fdQaL4dtxTXtghGrBDNwpZk8vTfhWIvZxWhPV3IirADdvWNw73QFXmRh3+9cVU1/oi
+ VGstA6LZRk3F1LeBVwy/Euc5TkgeiEjU9voIBs4YY0YgkijXGPQ0Hy9XGzW1fkP9a6h34xDu9UzG0
+ DvPJw2KQ==;
+Received: from 177.157.124.3.dynamic.adsl.gvt.net.br ([177.157.124.3]
+ helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
- id 1hnhRz-0006Le-Qa; Wed, 17 Jul 2019 10:46:20 +0000
+ id 1hpWAe-000253-Hn; Mon, 22 Jul 2019 11:07:57 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
  (envelope-from <mchehab@bombadil.infradead.org>)
- id 1hnhRw-0002jo-Pf; Wed, 17 Jul 2019 07:46:16 -0300
+ id 1hpWAa-00041W-C4; Mon, 22 Jul 2019 08:07:52 -0300
 From: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 To: 
-Subject: [PATCH] docs: fs: convert porting to ReST
-Date: Wed, 17 Jul 2019 07:46:15 -0300
-Message-Id: <f67f410a6a8ec9e4627fbcdf3237964cb6f3c90b.1563360223.git.mchehab+samsung@kernel.org>
+Subject: [PATCH 14/22] docs: fs: convert porting to ReST
+Date: Mon, 22 Jul 2019 08:07:41 -0300
+Message-Id: <07c2b9fa5b0586e5b870a8a3353a019b5ca0bc12.1563792334.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <cover.1563792333.git.mchehab+samsung@kernel.org>
+References: <cover.1563792333.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 22 Jul 2019 13:17:02 -0400
@@ -53,10 +56,7 @@ List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
 Cc: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- Dave Chinner <david@fromorbit.com>, Al Viro <viro@zeniv.linux.org.uk>,
- Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
- Ian Kent <raven@themaw.net>, devel@lists.orangefs.org
+ Mauro Carvalho Chehab <mchehab+samsung@kernel.org>, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -70,11 +70,9 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Manually convert porting to ReST.
-
 This file has its own proper style, except that, after a while,
-its style gets violated and whitespaces are placed on
-different creative ways.
+the coding style gets violated and whitespaces are placed on
+different ways.
 
 As Sphinx and ReST are very sentitive to whitespace differences,
 I had to opt if each entry after required/mandatory/... fields
@@ -82,25 +80,36 @@ should start with zero spaces or with a tab. I opted to start them
 all from the zero position, in order to avoid needing to break lines
 with more than 80 columns, with would make harder for review.
 
-Most of the other changes at porting.rst were made to use a
+Most of the other changes at porting.rst were made to use an unified
 notation with works nice as a text file while also produce a good html
 output after being parsed.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
-
-This patch is against next-20190717
-
+ Documentation/filesystems/index.rst   |   2 +
  Documentation/filesystems/porting     | 686 ---------------------
- Documentation/filesystems/porting.rst | 841 ++++++++++++++++++++++++++
+ Documentation/filesystems/porting.rst | 852 ++++++++++++++++++++++++++
  fs/orangefs/orangefs-kernel.h         |   2 +-
- 3 files changed, 842 insertions(+), 687 deletions(-)
+ 4 files changed, 855 insertions(+), 687 deletions(-)
  delete mode 100644 Documentation/filesystems/porting
  create mode 100644 Documentation/filesystems/porting.rst
 
+diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystems/index.rst
+index 08320c35d03b..96653ebefd7e 100644
+--- a/Documentation/filesystems/index.rst
++++ b/Documentation/filesystems/index.rst
+@@ -23,6 +23,8 @@ algorithms work.
+    locking
+    directory-locking
+ 
++   porting
++
+ Filesystem support layers
+ =========================
+ 
 diff --git a/Documentation/filesystems/porting b/Documentation/filesystems/porting
 deleted file mode 100644
-index 209672010fb4..000000000000
+index 6b7a41cfcaed..000000000000
 --- a/Documentation/filesystems/porting
 +++ /dev/null
 @@ -1,686 +0,0 @@
@@ -542,7 +551,7 @@ index 209672010fb4..000000000000
 -and also requires no further error handling. Typical usage is:
 -
 -	inode = foofs_new_inode(....);
--	s->s_root = d_make_inode(inode);
+-	s->s_root = d_make_root(inode);
 -	if (!s->s_root)
 -		/* Nothing needed for the inode cleanup */
 -		return -ENOMEM;
@@ -792,10 +801,10 @@ index 209672010fb4..000000000000
 -	be misspelled d_alloc_anon().
 diff --git a/Documentation/filesystems/porting.rst b/Documentation/filesystems/porting.rst
 new file mode 100644
-index 000000000000..73913d7b9c5f
+index 000000000000..66aa521e6376
 --- /dev/null
 +++ b/Documentation/filesystems/porting.rst
-@@ -0,0 +1,841 @@
+@@ -0,0 +1,852 @@
 +====================
 +Changes since 2.5.0:
 +====================
@@ -1282,8 +1291,19 @@ index 000000000000..73913d7b9c5f
 +**mandatory**
 +
 +d_alloc_root() is gone, along with a lot of bugs caused by code
-+misusing it.  Replacement: d_make_root(inode).  The difference is,
-+d_make_root() drops the reference to inode if dentry allocation fails.
++misusing it.  Replacement: d_make_root(inode).  On success d_make_root(inode)
++allocates and returns a new dentry instantiated with the passed in inode.
++On failure NULL is returned and the passed in inode is dropped so the reference
++to inode is consumed in all cases and failure handling need not do any cleanup
++for the inode.  If d_make_root(inode) is passed a NULL inode it returns NULL
++and also requires no further error handling. Typical usage is::
++
++	inode = foofs_new_inode(....);
++	s->s_root = d_make_root(inode);
++	if (!s->s_root)
++		/* Nothing needed for the inode cleanup */
++		return -ENOMEM;
++	...
 +
 +---
 +
@@ -1458,14 +1478,14 @@ index 000000000000..73913d7b9c5f
 +called with parent locked shared.  Its instances must not
 +
 +	* use d_instantiate) and d_rehash() separately - use d_add() or
-+	    d_splice_alias() instead.
++	  d_splice_alias() instead.
 +	* use d_rehash() alone - call d_add(new_dentry, NULL) instead.
 +	* in the unlikely case when (read-only) access to filesystem
-+	    data structures needs exclusion for some reason, arrange it
-+	    yourself.  None of the in-tree filesystems needed that.
++	  data structures needs exclusion for some reason, arrange it
++	  yourself.  None of the in-tree filesystems needed that.
 +	* rely on ->d_parent and ->d_name not changing after dentry has
-+	    been fed to d_add() or d_splice_alias().  Again, none of the
-+	    in-tree instances relied upon that.
++	  been fed to d_add() or d_splice_alias().  Again, none of the
++	  in-tree instances relied upon that.
 +
 +We are guaranteed that lookups of the same name in the same directory
 +will not happen in parallel ("same" in the sense of your ->d_compare()).
@@ -1612,7 +1632,7 @@ index 000000000000..73913d7b9c5f
 +	* if ->destroy_inode() is non-NULL, it gets called
 +	* if ->free_inode() is non-NULL, it gets scheduled by call_rcu()
 +	* combination of NULL ->destroy_inode and NULL ->free_inode is
-+	    treated as NULL/free_inode_nonrcu, to preserve the compatibility.
++	  treated as NULL/free_inode_nonrcu, to preserve the compatibility.
 +
 +Note that the callback (be it via ->free_inode() or explicit call_rcu()
 +in ->destroy_inode()) is *NOT* ordered wrt superblock destruction;
@@ -1638,10 +1658,10 @@ index 000000000000..73913d7b9c5f
 +very suspect (and won't work in modules).  Such uses are very likely to
 +be misspelled d_alloc_anon().
 diff --git a/fs/orangefs/orangefs-kernel.h b/fs/orangefs/orangefs-kernel.h
-index 58158d286a0c..5a42b35c3e17 100644
+index 572dd29fbd54..34a6c99fa29b 100644
 --- a/fs/orangefs/orangefs-kernel.h
 +++ b/fs/orangefs/orangefs-kernel.h
-@@ -248,7 +248,7 @@ struct orangefs_read_options {
+@@ -246,7 +246,7 @@ struct orangefs_read_options {
  extern struct orangefs_stats orangefs_stats;
  
  /*
@@ -1652,6 +1672,5 @@ index 58158d286a0c..5a42b35c3e17 100644
  static inline struct orangefs_inode_s *ORANGEFS_I(struct inode *inode)
 -- 
 2.21.0
-
 
 

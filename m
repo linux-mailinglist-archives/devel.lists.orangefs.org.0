@@ -2,58 +2,58 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D6547E83A
-	for <lists+devel-orangefs@lfdr.de>; Fri,  2 Aug 2019 04:21:01 +0200 (CEST)
-Received: from [::1] (port=50914 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 485987E83B
+	for <lists+devel-orangefs@lfdr.de>; Fri,  2 Aug 2019 04:21:02 +0200 (CEST)
+Received: from [::1] (port=50928 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1htNBk-0007mR-DB
-	for lists+devel-orangefs@lfdr.de; Thu, 01 Aug 2019 22:21:00 -0400
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:34913)
+	id 1htNBl-0007mo-Fd
+	for lists+devel-orangefs@lfdr.de; Thu, 01 Aug 2019 22:21:01 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:34049)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
  (Exim 4.92) (envelope-from <john.hubbard@gmail.com>)
- id 1htNBj-0007im-03
- for devel@lists.orangefs.org; Thu, 01 Aug 2019 22:20:59 -0400
-Received: by mail-pg1-f196.google.com with SMTP id s1so28936217pgr.2
- for <devel@lists.orangefs.org>; Thu, 01 Aug 2019 19:20:38 -0700 (PDT)
+ id 1htNBk-0007in-JW
+ for devel@lists.orangefs.org; Thu, 01 Aug 2019 22:21:00 -0400
+Received: by mail-pl1-f195.google.com with SMTP id i2so33032753plt.1
+ for <devel@lists.orangefs.org>; Thu, 01 Aug 2019 19:20:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=8SOviSW3O4erJ4o/T7vOdTDRu8uyyXM9kIDmKsHyj7c=;
- b=fX9VH11/xtmCZY5ktyfRXv+8oFT24qnzRAke9R5fEGSeD2IzOy84ZG8im/eaEUg8Lt
- YkXZtAgFC41AXSsr/ysnzaRAFRybM7sVVSGjTeMscCtwe6TgKQtIwxVTNVhX+CyOlaHj
- zyT65gbiAfpxTAt1YaJp886/lI6PgypiCjw7omXplGhR0qwXivcLAeNmtsNmtXQS2+4w
- xqKa+JcZGRrR5eWJB589WBbm/hXzKEauxkOa/UURNDAyCoi6UPYtZRE7atesr45WwiIq
- ErXdMxUJmMSia9/QMT7Nme9zP4x0BmIDxW3018QpZobBFVGv7P1VjjU6MaObsA2EybjP
- VU2g==
+ bh=pwlX9Z4uen7Ts0pUwmBLgDhtihaB/D0UZN8JDoMe4ZA=;
+ b=cXVKp+Dgxhj784uTGfvPyG1yYJG0TluF022pFhUyHpRdik351Pihe9of7XZeuP0Vwt
+ h/i6WlGcIKVNKfHSeDSEUHKJX3j3X/NshFFci/lhMH4/SgEjIokRiJ+YouFN6I+GBm4y
+ zUjQOfq6557LaDfB1SW3dyyvMia7x+7GSnkQpaKA5dSoAhqdxSb/NVVqK5YIHjTvA0IX
+ 6H4EsdOomJX2kg/hRhJVVxm3sX/zmn87r9Fum/tKlkDFYTmAnDUVoJ7rlCgUuzHH8DwS
+ QuPnhojZwqXr2XSW6HhlWm7VIgfEjZi50Ea1bZ4R+3m+Y3fnnezSFaVuWGen2JpYqC8g
+ nI5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=8SOviSW3O4erJ4o/T7vOdTDRu8uyyXM9kIDmKsHyj7c=;
- b=rbNw4ffkDCwSRz+l0wIz08m/Wnl0AzCsyuwLdtyaJgazSCA5o29MjILqNDiGLeMeyk
- yp8jETPGcrt3sVIfZYVzwBddmBKkJ1ED7jASeycdPEau/u6hxQ2e/OHASFHfvt4gY/Ed
- fuhCLecmHwcycugBjAkWjhQE7W9DElCCypk57KxItmlmEc0sx/uOsUGJ8CyG2dmtCRtW
- 58feDSFjCJmmG2IvnXWAZrNcGsayy8xZp7sBEqbslAuWJVzWL7YyFMH9X1b0bWZ4fdrT
- AFAFcEHsrCeiv7f/b68Folb9DH3LwFuSsU12UzacZkkU53fc/hQNKj/x3djqPkR9rLhh
- 7LRw==
-X-Gm-Message-State: APjAAAXi3bFA0YUlRIKilurIzN+roWaH5kL5JONajQNk/0aXJJsQYsXQ
- o/Pi0wAYZFcrVWPrAp7cFxA=
-X-Google-Smtp-Source: APXvYqy6SxWBaLdRR2vg6Lx/woJAETS/7eDG5dTzML6C7DLLIiEKJ1wWpgVv8K7hxMNjNoQ+Y+s8Dw==
-X-Received: by 2002:a17:90a:8c92:: with SMTP id
- b18mr1836391pjo.97.1564712418017; 
- Thu, 01 Aug 2019 19:20:18 -0700 (PDT)
+ bh=pwlX9Z4uen7Ts0pUwmBLgDhtihaB/D0UZN8JDoMe4ZA=;
+ b=P1QQtGykOVCdldsyE+PqcRwCzIg0K9MypLisGfGnAwI4e9LIruwd7h3Zi28rZSt1eU
+ cuB7NzTBOiECeYTOg2LG94/iI9Mis8UcD2ce18zEsC5zfO1/ivrZLhDBupnB18d/WCeX
+ 0YVsHyWlcWsA4msuTZLjFxsH1O7RHdNgrVNCspJDGZovvAacXEz6/CeqaBWD+m2zjjYn
+ wtUUhdjTbOuG9c7XOMqiIxE2R67V8rkkmr2TQPmYbTnC77RV+RY2DPadlMcIMoI+Zni5
+ TdpTzq1rovhSoF3+NrcQ5PeGIkEiqDBiLeaW0ew9HhhZRaN6pYbiSsXmRN8YbDzf14gn
+ binQ==
+X-Gm-Message-State: APjAAAXr3EsovASbw3msox8HYKuT7ekLBhDcMtX3ogmmizb8Yel6mgKU
+ trddBnfk2+Cz+8d/zocXGLI=
+X-Google-Smtp-Source: APXvYqzjw3eL+xmFFeLCY8pAtt0uU+dboybjV0Tj2XnMiuSE8KPva7u+GlTOi6iXLJ1oNBX2ZlUCDA==
+X-Received: by 2002:a17:902:a413:: with SMTP id
+ p19mr129958448plq.134.1564712419691; 
+ Thu, 01 Aug 2019 19:20:19 -0700 (PDT)
 Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
  by smtp.gmail.com with ESMTPSA id
- u9sm38179744pgc.5.2019.08.01.19.20.16
+ u9sm38179744pgc.5.2019.08.01.19.20.18
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 01 Aug 2019 19:20:17 -0700 (PDT)
+ Thu, 01 Aug 2019 19:20:19 -0700 (PDT)
 From: john.hubbard@gmail.com
 X-Google-Original-From: jhubbard@nvidia.com
 To: Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH 04/34] x86/kvm: convert put_page() to put_user_page*()
-Date: Thu,  1 Aug 2019 19:19:35 -0700
-Message-Id: <20190802022005.5117-5-jhubbard@nvidia.com>
+Subject: [PATCH 05/34] drm/etnaviv: convert release_pages() to put_user_pages()
+Date: Thu,  1 Aug 2019 19:19:36 -0700
+Message-Id: <20190802022005.5117-6-jhubbard@nvidia.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190802022005.5117-1-jhubbard@nvidia.com>
 References: <20190802022005.5117-1-jhubbard@nvidia.com>
@@ -86,12 +86,12 @@ Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
  linux-media@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
  intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
  =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
- linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
- netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- linux-xfs@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>,
- linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Paolo Bonzini <pbonzini@redhat.com>
+ Borislav Petkov <bp@alien8.de>, linux-rpi-kernel@lists.infradead.org,
+ Dan Williams <dan.j.williams@intel.com>, linux-arm-kernel@lists.infradead.org,
+ linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
+ LKML <linux-kernel@vger.kernel.org>, linux-xfs@vger.kernel.org,
+ Thomas Gleixner <tglx@linutronix.de>, linux-crypto@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -108,7 +108,8 @@ X-Source-Dir:
 From: John Hubbard <jhubbard@nvidia.com>
 
 For pages that were retained via get_user_pages*(), release those pages
-via the new put_user_page*() routines, instead of via put_page().
+via the new put_user_page*() routines, instead of via put_page() or
+release_pages().
 
 This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
 ("mm: introduce put_user_page*(), placeholder versions").
@@ -118,59 +119,37 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>
 Cc: "Radim Krčmář" <rkrcmar@redhat.com>
 Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Borislav Petkov <bp@alien8.de>
 Cc: "H. Peter Anvin" <hpa@zytor.com>
 Cc: x86@kernel.org
 Cc: kvm@vger.kernel.org
 Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 ---
- arch/x86/kvm/svm.c  | 4 ++--
- virt/kvm/kvm_main.c | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/kvm/svm.c b/arch/x86/kvm/svm.c
-index 7eafc6907861..ff93c923ed36 100644
---- a/arch/x86/kvm/svm.c
-+++ b/arch/x86/kvm/svm.c
-@@ -1827,7 +1827,7 @@ static struct page **sev_pin_memory(struct kvm *kvm, unsigned long uaddr,
- 
- err:
- 	if (npinned > 0)
--		release_pages(pages, npinned);
-+		put_user_pages(pages, npinned);
- 
- 	kvfree(pages);
- 	return NULL;
-@@ -1838,7 +1838,7 @@ static void sev_unpin_memory(struct kvm *kvm, struct page **pages,
- {
- 	struct kvm_sev_info *sev = &to_kvm_svm(kvm)->sev_info;
- 
--	release_pages(pages, npages);
-+	put_user_pages(pages, npages);
- 	kvfree(pages);
- 	sev->pages_locked -= npages;
- }
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 887f3b0c2b60..4b6a596ea8e9 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -1499,7 +1499,7 @@ static int hva_to_pfn_slow(unsigned long addr, bool *async, bool write_fault,
- 
- 		if (__get_user_pages_fast(addr, 1, 1, &wpage) == 1) {
- 			*writable = true;
--			put_page(page);
-+			put_user_page(page);
- 			page = wpage;
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
+index e8778ebb72e6..a0144a5ee325 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
++++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
+@@ -686,7 +686,7 @@ static int etnaviv_gem_userptr_get_pages(struct etnaviv_gem_object *etnaviv_obj)
+ 		ret = get_user_pages_fast(ptr, num_pages,
+ 					  !userptr->ro ? FOLL_WRITE : 0, pages);
+ 		if (ret < 0) {
+-			release_pages(pvec, pinned);
++			put_user_pages(pvec, pinned);
+ 			kvfree(pvec);
+ 			return ret;
  		}
- 	}
-@@ -1831,7 +1831,7 @@ EXPORT_SYMBOL_GPL(kvm_release_page_clean);
- void kvm_release_pfn_clean(kvm_pfn_t pfn)
- {
- 	if (!is_error_noslot_pfn(pfn) && !kvm_is_reserved_pfn(pfn))
--		put_page(pfn_to_page(pfn));
-+		put_user_page(pfn_to_page(pfn));
- }
- EXPORT_SYMBOL_GPL(kvm_release_pfn_clean);
+@@ -710,7 +710,7 @@ static void etnaviv_gem_userptr_release(struct etnaviv_gem_object *etnaviv_obj)
+ 	if (etnaviv_obj->pages) {
+ 		int npages = etnaviv_obj->base.size >> PAGE_SHIFT;
  
+-		release_pages(etnaviv_obj->pages, npages);
++		put_user_pages(etnaviv_obj->pages, npages);
+ 		kvfree(etnaviv_obj->pages);
+ 	}
+ }
 -- 
 2.22.0
 

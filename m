@@ -2,35 +2,41 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB08A7F71B
-	for <lists+devel-orangefs@lfdr.de>; Fri,  2 Aug 2019 14:42:31 +0200 (CEST)
-Received: from [::1] (port=56744 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93C2F7FC0D
+	for <lists+devel-orangefs@lfdr.de>; Fri,  2 Aug 2019 16:23:16 +0200 (CEST)
+Received: from [::1] (port=54334 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1htWtC-0007w8-QT
-	for lists+devel-orangefs@lfdr.de; Fri, 02 Aug 2019 08:42:30 -0400
-Received: from mx2.suse.de ([195.135.220.15]:53716 helo=mx1.suse.de)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <jack@suse.cz>) id 1htWtB-0007vg-Kk
- for devel@lists.orangefs.org; Fri, 02 Aug 2019 08:42:29 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 20E6FAF94;
- Fri,  2 Aug 2019 12:41:48 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id F40A51E3F4D; Fri,  2 Aug 2019 14:41:46 +0200 (CEST)
-Date: Fri, 2 Aug 2019 14:41:46 +0200
-From: Jan Kara <jack@suse.cz>
-To: Michal Hocko <mhocko@kernel.org>
-Subject: Re: [PATCH 00/34] put_user_pages(): miscellaneous call sites
-Message-ID: <20190802124146.GL25064@quack2.suse.cz>
+	id 1htYSh-0007z7-QM
+	for lists+devel-orangefs@lfdr.de; Fri, 02 Aug 2019 10:23:15 -0400
+Received: from mga05.intel.com ([192.55.52.43]:57297)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <keith.busch@intel.com>)
+ id 1htYSf-0007yj-R8
+ for devel@lists.orangefs.org; Fri, 02 Aug 2019 10:23:13 -0400
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 02 Aug 2019 07:22:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,338,1559545200"; d="scan'208";a="167245949"
+Received: from unknown (HELO localhost.localdomain) ([10.232.112.69])
+ by orsmga008.jf.intel.com with ESMTP; 02 Aug 2019 07:22:29 -0700
+Date: Fri, 2 Aug 2019 08:19:52 -0600
+From: Keith Busch <keith.busch@intel.com>
+To: john.hubbard@gmail.com
+Subject: Re: [PATCH 26/34] mm/gup_benchmark.c: convert put_page() to
+ put_user_page*()
+Message-ID: <20190802141952.GA18214@localhost.localdomain>
 References: <20190802022005.5117-1-jhubbard@nvidia.com>
- <20190802091244.GD6461@dhcp22.suse.cz>
+ <20190802022005.5117-27-jhubbard@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20190802091244.GD6461@dhcp22.suse.cz>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20190802022005.5117-27-jhubbard@nvidia.com>
+User-Agent: Mutt/1.9.1 (2017-09-22)
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -43,22 +49,26 @@ List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
 Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+ "Michael S . Tsirkin" <mst@redhat.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
- Dan Williams <dan.j.williams@intel.com>, devel@driverdev.osuosl.org,
- rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
+ sparclinux@vger.kernel.org, Dan Carpenter <dan.carpenter@oracle.com>,
+ Ira Weiny <ira.weiny@intel.com>, Dan Williams <dan.j.williams@intel.com>,
+ devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
+ linux-rdma@vger.kernel.org, x86@kernel.org, YueHaibing <yuehaibing@huawei.com>,
  amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
  Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
  devel@lists.orangefs.org, linux-media@vger.kernel.org,
  John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
- john.hubbard@gmail.com, linux-block@vger.kernel.org,
+ linux-block@vger.kernel.org,
  =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
  linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
  linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -72,34 +82,43 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Fri 02-08-19 11:12:44, Michal Hocko wrote:
-> On Thu 01-08-19 19:19:31, john.hubbard@gmail.com wrote:
-> [...]
-> > 2) Convert all of the call sites for get_user_pages*(), to
-> > invoke put_user_page*(), instead of put_page(). This involves dozens of
-> > call sites, and will take some time.
+On Thu, Aug 01, 2019 at 07:19:57PM -0700, john.hubbard@gmail.com wrote:
+> From: John Hubbard <jhubbard@nvidia.com>
 > 
-> How do we make sure this is the case and it will remain the case in the
-> future? There must be some automagic to enforce/check that. It is simply
-> not manageable to do it every now and then because then 3) will simply
-> be never safe.
+> For pages that were retained via get_user_pages*(), release those pages
+> via the new put_user_page*() routines, instead of via put_page() or
+> release_pages().
 > 
-> Have you considered coccinele or some other scripted way to do the
-> transition? I have no idea how to deal with future changes that would
-> break the balance though.
+> This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
+> ("mm: introduce put_user_page*(), placeholder versions").
+> 
+> Cc: Dan Carpenter <dan.carpenter@oracle.com>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: Keith Busch <keith.busch@intel.com>
+> Cc: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
+> Cc: Michael S. Tsirkin <mst@redhat.com>
+> Cc: YueHaibing <yuehaibing@huawei.com>
+> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 
-Yeah, that's why I've been suggesting at LSF/MM that we may need to create
-a gup wrapper - say vaddr_pin_pages() - and track which sites dropping
-references got converted by using this wrapper instead of gup. The
-counterpart would then be more logically named as unpin_page() or whatever
-instead of put_user_page().  Sure this is not completely foolproof (you can
-create new callsite using vaddr_pin_pages() and then just drop refs using
-put_page()) but I suppose it would be a high enough barrier for missed
-conversions... Thoughts?
+Looks fine.
 
-								Honza
+Reviewed-by: Keith Busch <keith.busch@intel.com>
 
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+>  mm/gup_benchmark.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/mm/gup_benchmark.c b/mm/gup_benchmark.c
+> index 7dd602d7f8db..515ac8eeb6ee 100644
+> --- a/mm/gup_benchmark.c
+> +++ b/mm/gup_benchmark.c
+> @@ -79,7 +79,7 @@ static int __gup_benchmark_ioctl(unsigned int cmd,
+>  	for (i = 0; i < nr_pages; i++) {
+>  		if (!pages[i])
+>  			break;
+> -		put_page(pages[i]);
+> +		put_user_page(pages[i]);
+>  	}
+>  	end_time = ktime_get();
+>  	gup->put_delta_usec = ktime_us_delta(end_time, start_time);
+> -- 
 

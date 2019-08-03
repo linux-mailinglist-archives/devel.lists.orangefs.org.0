@@ -2,78 +2,60 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5217803BC
-	for <lists+devel-orangefs@lfdr.de>; Sat,  3 Aug 2019 03:33:26 +0200 (CEST)
-Received: from [::1] (port=54836 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D41B803DD
+	for <lists+devel-orangefs@lfdr.de>; Sat,  3 Aug 2019 03:42:24 +0200 (CEST)
+Received: from [::1] (port=55798 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1htivF-00031m-Ll
-	for lists+devel-orangefs@lfdr.de; Fri, 02 Aug 2019 21:33:25 -0400
-Received: from userp2120.oracle.com ([156.151.31.85]:33068)
+	id 1htj3v-0003L9-7W
+	for lists+devel-orangefs@lfdr.de; Fri, 02 Aug 2019 21:42:23 -0400
+Received: from hqemgate14.nvidia.com ([216.228.121.143]:14546)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <calum.mackay@oracle.com>)
- id 1htivD-00031T-MC
- for devel@lists.orangefs.org; Fri, 02 Aug 2019 21:33:23 -0400
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x731TjiM041024;
- Sat, 3 Aug 2019 01:30:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=cc : subject : to :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2018-07-02;
- bh=PzG5W+xMCPCqX5V/WwOxL0iZTAvQCXHlqgOKkoOg1MQ=;
- b=2UsMaGPWcwZDgPtPG4vvO4o2+XprVDs5YewZlGJ99NG/oeu5neHqgRolXDdQUDZF8YMI
- IxYI2JZfBcSTSH5fID80qQTk2RWiC2i2+JKhPWGaFknkpOXtRCnVCla7UCXQjDJ07TcC
- Y8zIof10PGpETzEquU4Ep6o2lM98f1fWi0d++c5eyIcbTbo8lM/F3e4I2lqnL2U/DsCA
- 8mUjAebH6kYb0xf2V8EwArlSIvwpZUBAi4UxsNctBmeyR2rpJRijKuOrdEc0RMfPWfzX
- anPCkdDrm0pEBpPwYOnfJAsFmVDpXvcG9fkUEJAY/0LPZMTheZ3JVp0D915Q7k5fKIRC kQ== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by userp2120.oracle.com with ESMTP id 2u0f8rn4cg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 03 Aug 2019 01:30:13 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x731SCbQ177888;
- Sat, 3 Aug 2019 01:28:12 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by aserp3030.oracle.com with ESMTP id 2u50aa8apf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sat, 03 Aug 2019 01:28:12 +0000
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [127.0.0.1])
- by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x731SC7W177834;
- Sat, 3 Aug 2019 01:28:12 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
- by aserp3030.oracle.com with ESMTP id 2u50aa8ap0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 03 Aug 2019 01:28:12 +0000
-Received: from abhmp0017.oracle.com (abhmp0017.oracle.com [141.146.116.23])
- by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x731S6LT032689;
- Sat, 3 Aug 2019 01:28:06 GMT
-Received: from mbp2018.cdmnet.org (/82.27.120.181)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Fri, 02 Aug 2019 18:28:05 -0700
+ (Exim 4.92) (envelope-from <jhubbard@nvidia.com>) id 1htj3t-0003Ko-Et
+ for devel@lists.orangefs.org; Fri, 02 Aug 2019 21:42:21 -0400
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate14.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5d44e6540001>; Fri, 02 Aug 2019 18:41:40 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Fri, 02 Aug 2019 18:41:39 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Fri, 02 Aug 2019 18:41:39 -0700
+Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Sat, 3 Aug
+ 2019 01:41:38 +0000
 Subject: Re: [PATCH 31/34] nfs: convert put_page() to put_user_page*()
-To: john.hubbard@gmail.com, Andrew Morton <akpm@linux-foundation.org>
+To: Calum Mackay <calum.mackay@oracle.com>, <john.hubbard@gmail.com>, Andrew
+ Morton <akpm@linux-foundation.org>
 References: <20190802022005.5117-1-jhubbard@nvidia.com>
  <20190802022005.5117-32-jhubbard@nvidia.com>
-From: Calum Mackay <calum.mackay@oracle.com>
-Organization: Oracle
-Message-ID: <1738cb1e-15d8-0bbe-5362-341664f6efc8@oracle.com>
-Date: Sat, 3 Aug 2019 02:27:55 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:70.0)
- Gecko/20100101 Thunderbird/70.0a1
+ <1738cb1e-15d8-0bbe-5362-341664f6efc8@oracle.com>
+X-Nvconfidentiality: public
+From: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <db136399-ed87-56ea-bd6e-e5d29b145eda@nvidia.com>
+Date: Fri, 2 Aug 2019 18:41:38 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190802022005.5117-32-jhubbard@nvidia.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9337
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1906280000
- definitions=main-1908030013
+In-Reply-To: <1738cb1e-15d8-0bbe-5362-341664f6efc8@oracle.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL104.nvidia.com (172.18.146.11) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1564796500; bh=zc1wJBCk6oa4TZJ5kpnxYLs8I/mCQFC0KqXiV/MQqAc=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=OLRFKsHoXBw1TGfx4yjE0Mz6/NwSHjUP/99RYZUV8BmAJcU3vy970b00AWaqBbqwn
+ eDliId8mLescIf+v3MwQ2SrvN7VrnEwLTirEIw8jXzAjeXgqN3dtxI2Suyrp0L+f3G
+ YPfLBq5YLuEzykUeYyNQ/IXUTk0ew3pKoxF86cxfpvc0Iih+8axjrF9wmXCYOssEh/
+ dFyCupj1u3LqFaTu0iXYZzaL8I/Fkdd+Hdao45WQIFetVoCK43sV9CCZfHZ6uY+1an
+ 0Rm4XSFjiP2H1hfdLpXkesSoEJK75cPPtD+8sANcEv6R5DjbxYeg7dbcB8wnnzerOG
+ BX10+9E+Fxe0Q==
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -89,15 +71,14 @@ Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
- calum.mackay@oracle.com, devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
- linux-rdma@vger.kernel.org, x86@kernel.org, amd-gfx@lists.freedesktop.org,
- Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
- linux-media@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
- intel-gfx@lists.freedesktop.org, Dan Williams <dan.j.williams@intel.com>,
- linux-block@vger.kernel.org,
+ ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
+ rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
+ amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
+ devel@lists.orangefs.org, linux-media@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
  =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
+ linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
  linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
@@ -116,47 +97,70 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 02/08/2019 3:20 am, john.hubbard@gmail.com wrote:
-> From: John Hubbard <jhubbard@nvidia.com>
-> 
-> For pages that were retained via get_user_pages*(), release those pages
-> via the new put_user_page*() routines, instead of via put_page() or
-> release_pages().
-> 
-> This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
-> ("mm: introduce put_user_page*(), placeholder versions").
-> 
-> Cc: Trond Myklebust <trond.myklebust@hammerspace.com>
-> Cc: Anna Schumaker <anna.schumaker@netapp.com>
-> Cc: linux-nfs@vger.kernel.org
-> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
-> ---
->   fs/nfs/direct.c | 4 +---
->   1 file changed, 1 insertion(+), 3 deletions(-)
-> 
-> diff --git a/fs/nfs/direct.c b/fs/nfs/direct.c
-> index 0cb442406168..b00b89dda3c5 100644
-> --- a/fs/nfs/direct.c
-> +++ b/fs/nfs/direct.c
-> @@ -278,9 +278,7 @@ ssize_t nfs_direct_IO(struct kiocb *iocb, struct iov_iter *iter)
->   
->   static void nfs_direct_release_pages(struct page **pages, unsigned int npages)
->   {
-> -	unsigned int i;
-> -	for (i = 0; i < npages; i++)
-> -		put_page(pages[i]);
-> +	put_user_pages(pages, npages);
->   }
+On 8/2/19 6:27 PM, Calum Mackay wrote:
+> On 02/08/2019 3:20 am, john.hubbard@gmail.com wrote:
+...=20
+> Since it's static, and only called twice, might it be better to change it=
+s two callers [nfs_direct_{read,write}_schedule_iovec()] to call put_user_p=
+ages() directly, and remove nfs_direct_release_pages() entirely?
+>=20
+> thanks,
+> calum.
+>=20
+>=20
+>> =C2=A0 =C2=A0 void nfs_init_cinfo_from_dreq(struct nfs_commit_info *cinf=
+o,
+>>
+=20
+Hi Calum,
 
-Since it's static, and only called twice, might it be better to change 
-its two callers [nfs_direct_{read,write}_schedule_iovec()] to call 
-put_user_pages() directly, and remove nfs_direct_release_pages() entirely?
+Absolutely! Is it OK to add your reviewed-by, with the following incrementa=
+l
+patch made to this one?
+
+diff --git a/fs/nfs/direct.c b/fs/nfs/direct.c
+index b00b89dda3c5..c0c1b9f2c069 100644
+--- a/fs/nfs/direct.c
++++ b/fs/nfs/direct.c
+@@ -276,11 +276,6 @@ ssize_t nfs_direct_IO(struct kiocb *iocb, struct iov_i=
+ter *iter)
+        return nfs_file_direct_write(iocb, iter);
+ }
+=20
+-static void nfs_direct_release_pages(struct page **pages, unsigned int npa=
+ges)
+-{
+-       put_user_pages(pages, npages);
+-}
+-
+ void nfs_init_cinfo_from_dreq(struct nfs_commit_info *cinfo,
+                              struct nfs_direct_req *dreq)
+ {
+@@ -510,7 +505,7 @@ static ssize_t nfs_direct_read_schedule_iovec(struct nf=
+s_direct_req *dreq,
+                        pos +=3D req_len;
+                        dreq->bytes_left -=3D req_len;
+                }
+-               nfs_direct_release_pages(pagevec, npages);
++               put_user_pages(pagevec, npages);
+                kvfree(pagevec);
+                if (result < 0)
+                        break;
+@@ -933,7 +928,7 @@ static ssize_t nfs_direct_write_schedule_iovec(struct n=
+fs_direct_req *dreq,
+                        pos +=3D req_len;
+                        dreq->bytes_left -=3D req_len;
+                }
+-               nfs_direct_release_pages(pagevec, npages);
++               put_user_pages(pagevec, npages);
+                kvfree(pagevec);
+                if (result < 0)
+                        break;
+
+
 
 thanks,
-calum.
-
-
->   
->   void nfs_init_cinfo_from_dreq(struct nfs_commit_info *cinfo,
-> 
+--=20
+John Hubbard
+NVIDIA
 

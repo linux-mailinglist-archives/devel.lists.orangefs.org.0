@@ -2,57 +2,58 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4801180D4B
-	for <lists+devel-orangefs@lfdr.de>; Mon,  5 Aug 2019 00:50:24 +0200 (CEST)
-Received: from [::1] (port=45988 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E2DB80D4C
+	for <lists+devel-orangefs@lfdr.de>; Mon,  5 Aug 2019 00:50:26 +0200 (CEST)
+Received: from [::1] (port=46002 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1huPKZ-0002Pd-HN
-	for lists+devel-orangefs@lfdr.de; Sun, 04 Aug 2019 18:50:23 -0400
-Received: from mail-pg1-f193.google.com ([209.85.215.193]:46506)
+	id 1huPKb-0002Q3-Jm
+	for lists+devel-orangefs@lfdr.de; Sun, 04 Aug 2019 18:50:25 -0400
+Received: from mail-pf1-f194.google.com ([209.85.210.194]:37803)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
  (Exim 4.92) (envelope-from <john.hubbard@gmail.com>)
- id 1huPKY-0002Dt-EK
- for devel@lists.orangefs.org; Sun, 04 Aug 2019 18:50:22 -0400
-Received: by mail-pg1-f193.google.com with SMTP id w3so1455097pgt.13
- for <devel@lists.orangefs.org>; Sun, 04 Aug 2019 15:50:02 -0700 (PDT)
+ id 1huPKa-0002EJ-52
+ for devel@lists.orangefs.org; Sun, 04 Aug 2019 18:50:24 -0400
+Received: by mail-pf1-f194.google.com with SMTP id 19so38589673pfa.4
+ for <devel@lists.orangefs.org>; Sun, 04 Aug 2019 15:50:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=6zqhiQUR/t5HSZML/x55nFGZKGW5GK1LULKEmO0k7kA=;
- b=hu5YrExV2sbaBMNc30Tq7LBcjGDWN6fA4XsdWSIq37Gwal4TYkzXoLBSc1aN7i+AE1
- bVIm03I7zSnUPoNc0DrhbAQOAdTqkzN/WZ5+3xyT5kplICRjLk7gnM7AiECUFxJQtYf8
- l/vpyueUrdUTa6ElP3ExxKx8ue3ogMcet3zTMrly4eFXGYC31urxAGlYkrOSMCRCSnIc
- Arzc564JY6ON2HabMEPBcS/dFGMN4ODa4koUgN5YXXQfy4c5GL3kiXmJTl6qra2xMUY4
- X0U+ntdMZNCalKgfycF+64XZ+c1uJzhUDj8x9G9dxye9pgPlZzglleDcPGTS1gL3JdjR
- +zXA==
+ bh=JsaN0a6ImilSblrGqgWWjtVL4aaUVqoBD3LMggUShuU=;
+ b=JnEMIs3nTK87TbKIsk78nYiw0PTY0ejtc4/1iVy6auz4dRHpNyRxFRwH1QA1daWzTN
+ aXj9jYYTXz8+AYgGcMfTPEBfeFGtB4kpRaO8Pk0E6cwtra6dbEcp5zLBIuE/7ypkwlfT
+ SpsJZfWDoouD9Zux+JSra/B270Q5FO6OQn2iMY62H9YA77q4YnCIt/dO49LC8oE1+DV3
+ b+TloTS62XLmGXLlvmUrAcvGMvg3D8t/Jyb83QK6eNN0dmLM2VXZUouulBv1uv5lB+bU
+ bCC0pVKtYc9eHNJ+luk9voAPhlxcPRRn3LwajJw/0mnVI63KipX9TSVsdQUN1tD1p56o
+ UI1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=6zqhiQUR/t5HSZML/x55nFGZKGW5GK1LULKEmO0k7kA=;
- b=EGX+CToLJ3bP7iAEqvNsv/TNSFNdxlIYNP8l3V7U04Q+3fCVD5vfNsYCSfmsUYdr/W
- hl4VV7qemsDZ/P/m7wWISRXpNJ+JkwNk/hAuIp5JsM5moVbiGcuyY3EnzYjNMA2cmcZ8
- vo4/ELvW2uzfZvRyKu9tuvETXeO/c7OrrVlUDHbQ+SzMunnUJsFadh12JNZngkcZE2as
- 6GdZfuph0rPxtq//he3dfyY3DoJcu/5SlOQM+Oh/aWgYCXZtwfcfMokshAvsnnG46mo6
- 1PBopmAbj26VE733b6mygKYJuI/T+IgLX7L9Qm3a46x3M5rXi5ofqlviCZL+xDQnBLgN
- gWMw==
-X-Gm-Message-State: APjAAAWsDHBLbA/7bu7rB9P9nwQcJux1i2QFnEkmqxbTEA2T2/xptMAp
- XbvxVFhftRNFh5YQ7h+leHM=
-X-Google-Smtp-Source: APXvYqzKlxaRYSDqTrQ5Buu3RAMAQLfm5nyXOzRFCQZdRK9SX2nPkzOnWKnTtQrduQ4tH9q8VfqmlA==
-X-Received: by 2002:a62:b408:: with SMTP id h8mr68625605pfn.46.1564958981600; 
- Sun, 04 Aug 2019 15:49:41 -0700 (PDT)
+ bh=JsaN0a6ImilSblrGqgWWjtVL4aaUVqoBD3LMggUShuU=;
+ b=hwdK6NAj8xPRurvbFD4/99fENFNy8C3uKI+PK0VX7Mw/k/E80svKouGBChMmeLUtay
+ I/ABbYAX7h6olVTtNScwerg+eCWbWAMZdoJ5slEJh5mvWjTCspkyON9lv9y58PWjVPnM
+ BFEoPBFTgjjbkyfp0PvPUJbGuv0N7o6IyQUl4EkMjd56hRrD74ermb/4tr7CP4UFmOJC
+ dADbvzvOUgQoCKXvFQAVoHC30I6tybTBortRN9qQnevL4Jkq4k8jmKLfuH/j6zNyUqQJ
+ 4lX8FwwWZLgrse2FzIJloxtMNlkKwQuE1J3qC88KTdFixb2SqCx/Aceb1LpClKIudYZO
+ pPXQ==
+X-Gm-Message-State: APjAAAXtQqLke7v8HD/Thq/uFFcE7/4OxWj8QQn7nf8jkWUbQVQwOSWi
+ vEAoRtS2qLFr+t8dYQWR4bA=
+X-Google-Smtp-Source: APXvYqyPw77rNCbZJ7kQ+m4UN8hP7cU/4bhOvRnVoHevKNRjma2a+EIazJKEeGo0aqshVanFUuFV/w==
+X-Received: by 2002:aa7:8acb:: with SMTP id b11mr67847354pfd.109.1564958983244; 
+ Sun, 04 Aug 2019 15:49:43 -0700 (PDT)
 Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
  by smtp.gmail.com with ESMTPSA id
- r6sm35946836pjb.22.2019.08.04.15.49.39
+ r6sm35946836pjb.22.2019.08.04.15.49.41
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Sun, 04 Aug 2019 15:49:41 -0700 (PDT)
+ Sun, 04 Aug 2019 15:49:42 -0700 (PDT)
 From: john.hubbard@gmail.com
 X-Google-Original-From: jhubbard@nvidia.com
 To: Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH v2 14/34] oradax: convert put_page() to put_user_page*()
-Date: Sun,  4 Aug 2019 15:48:55 -0700
-Message-Id: <20190804224915.28669-15-jhubbard@nvidia.com>
+Subject: [PATCH v2 15/34] staging/vc04_services: convert put_page() to
+ put_user_page*()
+Date: Sun,  4 Aug 2019 15:48:56 -0700
+Message-Id: <20190804224915.28669-16-jhubbard@nvidia.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190804224915.28669-1-jhubbard@nvidia.com>
 References: <20190804224915.28669-1-jhubbard@nvidia.com>
@@ -70,27 +71,27 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-fbdev@vger.kernel.org, Rob Gardner <rob.gardner@oracle.com>,
- Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
- Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- Wei Yongjun <weiyongjun1@huawei.com>, sparclinux@vger.kernel.org,
- Ira Weiny <ira.weiny@intel.com>, ceph-devel@vger.kernel.org,
- devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
- Jonathan Corbet <corbet@lwn.net>, linux-rdma@vger.kernel.org, x86@kernel.org,
+ sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
+ ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
+ rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org,
+ Suniel Mahesh <sunil.m@techveda.org>, x86@kernel.org,
  amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, Andy Shevchenko <andy.shevchenko@gmail.com>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Mihaela Muraru <mihaela.muraru21@gmail.com>,
  xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
- linux-media@vger.kernel.org, Jonathan Helman <jonathan.helman@oracle.com>,
+ linux-media@vger.kernel.org, Stefan Wahren <stefan.wahren@i2se.com>,
  John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
- linux-block@vger.kernel.org,
+ Kishore KP <kishore.p@techveda.org>, linux-block@vger.kernel.org,
  =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
  linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
- linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
+ Sidong Yang <realwakka@gmail.com>, linux-arm-kernel@lists.infradead.org,
+ linux-nfs@vger.kernel.org, Eric Anholt <eric@anholt.net>,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, "David S . Miller" <davem@davemloft.net>
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-fsdevel@vger.kernel.org,
+ Al Viro <viro@zeniv.linux.org.uk>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -113,31 +114,51 @@ release_pages().
 This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
 ("mm: introduce put_user_page*(), placeholder versions").
 
-Cc: David S. Miller <davem@davemloft.net>
-Cc: Jonathan Helman <jonathan.helman@oracle.com>
-Cc: Rob Gardner <rob.gardner@oracle.com>
-Cc: Andy Shevchenko <andy.shevchenko@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Wei Yongjun <weiyongjun1@huawei.com>
-Cc: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Cc: sparclinux@vger.kernel.org
+Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+Cc: Eric Anholt <eric@anholt.net>
+Cc: Stefan Wahren <stefan.wahren@i2se.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Mihaela Muraru <mihaela.muraru21@gmail.com>
+Cc: Suniel Mahesh <sunil.m@techveda.org>
+Cc: Al Viro <viro@zeniv.linux.org.uk>
+Cc: Sidong Yang <realwakka@gmail.com>
+Cc: Kishore KP <kishore.p@techveda.org>
+Cc: linux-rpi-kernel@lists.infradead.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: devel@driverdev.osuosl.org
 Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 ---
- drivers/sbus/char/oradax.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../vc04_services/interface/vchiq_arm/vchiq_2835_arm.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/sbus/char/oradax.c b/drivers/sbus/char/oradax.c
-index 8af216287a84..029e619992fc 100644
---- a/drivers/sbus/char/oradax.c
-+++ b/drivers/sbus/char/oradax.c
-@@ -412,7 +412,7 @@ static void dax_unlock_pages(struct dax_ctx *ctx, int ccb_index, int nelem)
- 				dax_dbg("freeing page %p", p);
- 				if (j == OUT)
- 					set_page_dirty(p);
--				put_page(p);
-+				put_user_page(p);
- 				ctx->pages[i][j] = NULL;
- 			}
+diff --git a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_2835_arm.c b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_2835_arm.c
+index 61c69f353cdb..ec92b4c50e95 100644
+--- a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_2835_arm.c
++++ b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_2835_arm.c
+@@ -336,10 +336,7 @@ cleanup_pagelistinfo(struct vchiq_pagelist_info *pagelistinfo)
+ 	}
+ 
+ 	if (pagelistinfo->pages_need_release) {
+-		unsigned int i;
+-
+-		for (i = 0; i < pagelistinfo->num_pages; i++)
+-			put_page(pagelistinfo->pages[i]);
++		put_user_pages(pagelistinfo->pages, pagelistinfo->num_pages);
+ 	}
+ 
+ 	dma_free_coherent(g_dev, pagelistinfo->pagelist_buffer_size,
+@@ -454,10 +451,7 @@ create_pagelist(char __user *buf, size_t count, unsigned short type)
+ 				       __func__, actual_pages, num_pages);
+ 
+ 			/* This is probably due to the process being killed */
+-			while (actual_pages > 0) {
+-				actual_pages--;
+-				put_page(pages[actual_pages]);
+-			}
++			put_user_pages(pages, actual_pages);
+ 			cleanup_pagelistinfo(pagelistinfo);
+ 			return NULL;
  		}
 -- 
 2.22.0

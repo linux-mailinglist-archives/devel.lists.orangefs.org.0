@@ -2,35 +2,39 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95FB8810C8
-	for <lists+devel-orangefs@lfdr.de>; Mon,  5 Aug 2019 06:16:13 +0200 (CEST)
-Received: from [::1] (port=41924 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 000BB8232F
+	for <lists+devel-orangefs@lfdr.de>; Mon,  5 Aug 2019 18:53:55 +0200 (CEST)
+Received: from [::1] (port=48038 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1huUPs-00048a-L6
-	for lists+devel-orangefs@lfdr.de; Mon, 05 Aug 2019 00:16:12 -0400
-Received: from mx2.suse.de ([195.135.220.15]:59518 helo=mx1.suse.de)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <jgross@suse.com>) id 1huUPq-00048L-SX
- for devel@lists.orangefs.org; Mon, 05 Aug 2019 00:16:10 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 56732ACC1;
- Mon,  5 Aug 2019 04:15:29 +0000 (UTC)
-Subject: Re: [PATCH v2 20/34] xen: convert put_page() to put_user_page*()
-To: john.hubbard@gmail.com, Andrew Morton <akpm@linux-foundation.org>
+	id 1hugF9-0007mp-4W
+	for lists+devel-orangefs@lfdr.de; Mon, 05 Aug 2019 12:53:55 -0400
+Received: from mga09.intel.com ([134.134.136.24]:36835)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <rodrigo.vivi@intel.com>)
+ id 1hugF7-0007mS-SU
+ for devel@lists.orangefs.org; Mon, 05 Aug 2019 12:53:54 -0400
+X-Amp-Result: UNSCANNABLE
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 05 Aug 2019 09:53:12 -0700
+X-IronPort-AV: E=Sophos;i="5.64,350,1559545200"; d="scan'208";a="168030649"
+Received: from rdvivi-losangeles.jf.intel.com (HELO intel.com) ([10.7.196.65])
+ by orsmga008-auth.jf.intel.com with
+ ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 05 Aug 2019 09:53:12 -0700
+Date: Mon, 5 Aug 2019 09:53:46 -0700
+From: Rodrigo Vivi <rodrigo.vivi@intel.com>
+To: john.hubbard@gmail.com
+Subject: Re: [PATCH v2 06/34] drm/i915: convert put_page() to put_user_page*()
+Message-ID: <20190805165346.GB25953@intel.com>
 References: <20190804224915.28669-1-jhubbard@nvidia.com>
- <20190804224915.28669-21-jhubbard@nvidia.com>
-From: Juergen Gross <jgross@suse.com>
-Message-ID: <82afb221-52a2-b399-46f5-0ee1f21c3417@suse.com>
-Date: Mon, 5 Aug 2019 06:15:27 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ <20190804224915.28669-7-jhubbard@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20190804224915.28669-21-jhubbard@nvidia.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: de-DE
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190804224915.28669-7-jhubbard@nvidia.com>
+User-Agent: Mutt/1.11.3 (2019-02-01)
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -43,23 +47,22 @@ List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
 Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
- Dan Williams <dan.j.williams@intel.com>, devel@driverdev.osuosl.org,
- rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
- amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
- devel@lists.orangefs.org, linux-media@vger.kernel.org,
- John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
- linux-block@vger.kernel.org,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
+ David Airlie <airlied@linux.ie>, Dave Hansen <dave.hansen@linux.intel.com>,
+ Dave Chinner <david@fromorbit.com>, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, sparclinux@vger.kernel.org,
+ Ira Weiny <ira.weiny@intel.com>, Dan Williams <dan.j.williams@intel.com>,
+ devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
+ linux-rdma@vger.kernel.org, x86@kernel.org, amd-gfx@lists.freedesktop.org,
+ Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+ xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
+ linux-media@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
+ intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
+ =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
  linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
  linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -73,7 +76,7 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 05.08.19 00:49, john.hubbard@gmail.com wrote:
+On Sun, Aug 04, 2019 at 03:48:47PM -0700, john.hubbard@gmail.com wrote:
 > From: John Hubbard <jhubbard@nvidia.com>
 > 
 > For pages that were retained via get_user_pages*(), release those pages
@@ -83,24 +86,64 @@ On 05.08.19 00:49, john.hubbard@gmail.com wrote:
 > This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
 > ("mm: introduce put_user_page*(), placeholder versions").
 > 
-> This also handles pages[i] == NULL cases, thanks to an approach
-> that is actually written by Juergen Gross.
+> This is a merge-able version of the fix, because it restricts
+> itself to put_user_page() and put_user_pages(), both of which
+> have not changed their APIs. Later, i915_gem_userptr_put_pages()
+> can be simplified to use put_user_pages_dirty_lock().
+
+Thanks for that.
+with this version we won't have any conflict.
+
+Ack for going through mm tree.
+
 > 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Cc: Jani Nikula <jani.nikula@linux.intel.com>
+> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: intel-gfx@lists.freedesktop.org
+> Cc: dri-devel@lists.freedesktop.org
 > Signed-off-by: John Hubbard <jhubbard@nvidia.com>
-> 
-> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Cc: xen-devel@lists.xenproject.org
 > ---
+>  drivers/gpu/drm/i915/gem/i915_gem_userptr.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> Hi Juergen,
+> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_userptr.c b/drivers/gpu/drm/i915/gem/i915_gem_userptr.c
+> index 2caa594322bc..76dda2923cf1 100644
+> --- a/drivers/gpu/drm/i915/gem/i915_gem_userptr.c
+> +++ b/drivers/gpu/drm/i915/gem/i915_gem_userptr.c
+> @@ -527,7 +527,7 @@ __i915_gem_userptr_get_pages_worker(struct work_struct *_work)
+>  	}
+>  	mutex_unlock(&obj->mm.lock);
+>  
+> -	release_pages(pvec, pinned);
+> +	put_user_pages(pvec, pinned);
+>  	kvfree(pvec);
+>  
+>  	i915_gem_object_put(obj);
+> @@ -640,7 +640,7 @@ static int i915_gem_userptr_get_pages(struct drm_i915_gem_object *obj)
+>  		__i915_gem_userptr_set_active(obj, true);
+>  
+>  	if (IS_ERR(pages))
+> -		release_pages(pvec, pinned);
+> +		put_user_pages(pvec, pinned);
+>  	kvfree(pvec);
+>  
+>  	return PTR_ERR_OR_ZERO(pages);
+> @@ -675,7 +675,7 @@ i915_gem_userptr_put_pages(struct drm_i915_gem_object *obj,
+>  			set_page_dirty_lock(page);
+>  
+>  		mark_page_accessed(page);
+> -		put_page(page);
+> +		put_user_page(page);
+>  	}
+>  	obj->mm.dirty = false;
+>  
+> -- 
+> 2.22.0
 > 
-> Say, this is *exactly* what you proposed in your gup.patch, so
-> I've speculatively added your Signed-off-by above, but need your
-> approval before that's final. Let me know please...
-
-Yes, that's fine with me.
-
-
-Juergen
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 

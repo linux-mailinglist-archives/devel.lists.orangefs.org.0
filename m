@@ -2,57 +2,58 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179B083F5F
-	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:35:21 +0200 (CEST)
-Received: from [::1] (port=55958 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27DB983F65
+	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:35:23 +0200 (CEST)
+Received: from [::1] (port=55972 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hvArI-0000C0-95
-	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:35:20 -0400
-Received: from mail-pg1-f194.google.com ([209.85.215.194]:42639)
+	id 1hvArK-0000CS-BY
+	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:35:22 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:38824)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
  (Exim 4.92) (envelope-from <john.hubbard@gmail.com>)
- id 1hvArG-0008TT-IS
- for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:35:18 -0400
-Received: by mail-pg1-f194.google.com with SMTP id t132so42536316pgb.9
- for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:34:58 -0700 (PDT)
+ id 1hvArI-0008UG-6F
+ for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:35:20 -0400
+Received: by mail-pl1-f195.google.com with SMTP id az7so38558734plb.5
+ for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:34:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=66nLgLSrAAtLnk7heFQOXwTIycZbzywZGh2gpdUQtHA=;
- b=hGadGekT36tWWF2x+rPXatg5Phju1cJkPhVohpTnvU9xcLgSYz3c/H9JfBuvb/eqpQ
- gJm9ULhd1h25PBFy4ZlpC+tAGAEAzuKiPxwK1X6/dMDelBe1FYe+sUe691h23Hpm09qn
- NtkXw7G9BBhwySB0UzQpKOHO5RlAvdX8JQycevy+XDQPWxcX8dLLfHqYFlfiIf28POCQ
- XQLWbzezNK3qTnHI7eGrMbtyoSKY/W2T3jkcfT5nC0QYcZ+CMjkTw7ZL3pOdyAZGwJLx
- tXBADMMsq1ukRK67JdNPKq0uGvf0IBEzyL0wmcyHhzZLuqxNXwAHA+z0PFrP2wNDYOQy
- 6sYA==
+ bh=46lxAY1z81U+mrrESVpVIrQ+fWJc6iHl4OExj8KwBEA=;
+ b=WuyyNqtpvvlvZwulsOSyl6jjDfFZFL7/Zx5rMnqGOdxDRsEuGcdgN1IewvAvlX+Ui3
+ X7btLnm2F40F8RrpBhgVrMU3HOKje9DtE5nK+fpNzyjny+e0S7JZDS2kjkLoxOZDXhQl
+ 8/grXg9y3uP/GW5F5PAwd4bWzrVFH3BCp78Eig9BKFd6aIXye5gDuBBhD5viuX1OApXQ
+ 9VIP+L4AUKM2VFr2nldHjLjmSVNA49QX09uR5xAkxNN9xQUujG5Q/Q0AKTjDZbsxdlOq
+ g4tQx0EnIYd52Zy5p9V4faNYnaj9xyaWhFJDGaxmSVhObIkgzad4uex02Ars3KOUlzef
+ YWIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=66nLgLSrAAtLnk7heFQOXwTIycZbzywZGh2gpdUQtHA=;
- b=QKy6P69VPAU3CCS6sPRrz/DH/NXj8Uh4cCKM+dkvRdPMhAXe1HUo1bbYLJOh6dsHcE
- 95f1pGX2Rk0UzL8qsaqTjup0JXnIC/zjFft0aKrQbGMdRaqkxFFK/hT6csy9JKO6vlVk
- QZFpkcqO4AcHfsryrzsm33jlaPe0MPweOlQqOHb5exADKHPHNv8pA2i3k3MGPd3HkYv9
- 3zWxUXulqyJBuo6HvN0MXLwHwBOEGUV/kX7zsiPX6lDy0dZZXRijydHEf3TWNrBNSbVg
- ULvNLbFWNmkrw/J6+tPpgkEf3bl2ywMHZw9eDBfHXID1FA16PmnzIzGeXvTn5iPAX7lg
- hgxw==
-X-Gm-Message-State: APjAAAUVrXUa1KcMl8+cRQl5YAUEsVU7t8xBwYH0B3ab+9QFk3XiUnpR
- t3d9Tb+unvd3lfFgIwwjRdE=
-X-Google-Smtp-Source: APXvYqxVqy6uPNA5pMhiCuVlDYKPDVYd5IZkwA2Cp9U8q1WFZ9BX6VmEjp+QCN9e6zqU7bkXXXxyWA==
-X-Received: by 2002:aa7:9197:: with SMTP id x23mr6650509pfa.95.1565141677758; 
- Tue, 06 Aug 2019 18:34:37 -0700 (PDT)
+ bh=46lxAY1z81U+mrrESVpVIrQ+fWJc6iHl4OExj8KwBEA=;
+ b=DSCA6HKG0tAlh/QTYPRzlGKkRkCsiYGdlFn7mHm9AJCTLbK7P5ecvu7/gE+LoB0u5v
+ QnbxpV1WmB8GIUJFW87Hi/Z7BMoJsTilWc8YI//z3Ynxn2ez0IWDNsYy2jx4AuDQ2h1p
+ 2/G3EVx0UtxHeWcX+KehX3xpt3hiTn3sXn9eqlj0goh3ea1POht6Br0zY/LknL/w5LCe
+ Nz/ygVz7ixXlqG4pr2AoRc81Lkqv3SMlVoHA8r9IqJBOYt55eYHecp43ZrxKA4KiMkHp
+ ZgB9i0BbXr2VUoDmhmCmcgTxGLP69XEhlS1N68PkCz368AikcRIjPJgAXlL6MDblNe/e
+ n2OQ==
+X-Gm-Message-State: APjAAAV6SYkXm7HiljqKdOU8BjFvdcWfM68ekYAO6E1B2/FFQOCL8MdF
+ 6FWIkh6eMtZBZmTo9gWdEN0=
+X-Google-Smtp-Source: APXvYqxeu3U+gXlTZOXb8hdX/T/5F9QSVWlhZwpRfNn+ISG+GmBUrBJWAvgFajanndvmV9JUd/JHZg==
+X-Received: by 2002:a17:902:a606:: with SMTP id
+ u6mr5434497plq.275.1565141679262; 
+ Tue, 06 Aug 2019 18:34:39 -0700 (PDT)
 Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
  by smtp.gmail.com with ESMTPSA id
- u69sm111740800pgu.77.2019.08.06.18.34.36
+ u69sm111740800pgu.77.2019.08.06.18.34.37
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 06 Aug 2019 18:34:37 -0700 (PDT)
+ Tue, 06 Aug 2019 18:34:38 -0700 (PDT)
 From: john.hubbard@gmail.com
 X-Google-Original-From: jhubbard@nvidia.com
 To: Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH v3 33/41] fs/nfs: convert put_page() to put_user_page*()
-Date: Tue,  6 Aug 2019 18:33:32 -0700
-Message-Id: <20190807013340.9706-34-jhubbard@nvidia.com>
+Subject: [PATCH v3 34/41] goldfish_pipe: convert put_page() to put_user_page*()
+Date: Tue,  6 Aug 2019 18:33:33 -0700
+Message-Id: <20190807013340.9706-35-jhubbard@nvidia.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190807013340.9706-1-jhubbard@nvidia.com>
 References: <20190807013340.9706-1-jhubbard@nvidia.com>
@@ -70,25 +71,23 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Calum Mackay <calum.mackay@oracle.com>, linux-fbdev@vger.kernel.org,
- Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
  ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
  rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
  amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
- devel@lists.orangefs.org, linux-media@vger.kernel.org,
- John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
- linux-block@vger.kernel.org,
+ Jason Gunthorpe <jgg@ziepe.ca>, Roman Kiryanov <rkir@google.com>,
+ xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
+ linux-media@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
+ intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
  =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
  linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
  linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Anna Schumaker <anna.schumaker@netapp.com>
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-fsdevel@vger.kernel.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -111,52 +110,46 @@ release_pages().
 This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
 ("mm: introduce put_user_page*(), placeholder versions").
 
-Reviewed-by: Calum Mackay <calum.mackay@oracle.com>
+Note that this effectively changes the code's behavior in
+qp_release_pages(): it now ultimately calls set_page_dirty_lock(),
+instead of set_page_dirty(). This is probably more accurate.
 
-Cc: Trond Myklebust <trond.myklebust@hammerspace.com>
-Cc: Anna Schumaker <anna.schumaker@netapp.com>
-Cc: linux-nfs@vger.kernel.org
+As Christoph Hellwig put it, "set_page_dirty() is only safe if we are
+dealing with a file backed page where we have reference on the inode it
+hangs off." [1]
+
+[1] https://lore.kernel.org/r/20190723153640.GB720@lst.de
+
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Roman Kiryanov <rkir@google.com>
 Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 ---
- fs/nfs/direct.c | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+ drivers/platform/goldfish/goldfish_pipe.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/fs/nfs/direct.c b/fs/nfs/direct.c
-index 0cb442406168..c0c1b9f2c069 100644
---- a/fs/nfs/direct.c
-+++ b/fs/nfs/direct.c
-@@ -276,13 +276,6 @@ ssize_t nfs_direct_IO(struct kiocb *iocb, struct iov_iter *iter)
- 	return nfs_file_direct_write(iocb, iter);
+diff --git a/drivers/platform/goldfish/goldfish_pipe.c b/drivers/platform/goldfish/goldfish_pipe.c
+index cef0133aa47a..2bd21020e288 100644
+--- a/drivers/platform/goldfish/goldfish_pipe.c
++++ b/drivers/platform/goldfish/goldfish_pipe.c
+@@ -288,15 +288,12 @@ static int pin_user_pages(unsigned long first_page,
+ static void release_user_pages(struct page **pages, int pages_count,
+ 			       int is_write, s32 consumed_size)
+ {
+-	int i;
++	bool dirty = !is_write && consumed_size > 0;
+ 
+-	for (i = 0; i < pages_count; i++) {
+-		if (!is_write && consumed_size > 0)
+-			set_page_dirty(pages[i]);
+-		put_page(pages[i]);
+-	}
++	put_user_pages_dirty_lock(pages, pages_count, dirty);
  }
  
--static void nfs_direct_release_pages(struct page **pages, unsigned int npages)
--{
--	unsigned int i;
--	for (i = 0; i < npages; i++)
--		put_page(pages[i]);
--}
--
- void nfs_init_cinfo_from_dreq(struct nfs_commit_info *cinfo,
- 			      struct nfs_direct_req *dreq)
- {
-@@ -512,7 +505,7 @@ static ssize_t nfs_direct_read_schedule_iovec(struct nfs_direct_req *dreq,
- 			pos += req_len;
- 			dreq->bytes_left -= req_len;
- 		}
--		nfs_direct_release_pages(pagevec, npages);
-+		put_user_pages(pagevec, npages);
- 		kvfree(pagevec);
- 		if (result < 0)
- 			break;
-@@ -935,7 +928,7 @@ static ssize_t nfs_direct_write_schedule_iovec(struct nfs_direct_req *dreq,
- 			pos += req_len;
- 			dreq->bytes_left -= req_len;
- 		}
--		nfs_direct_release_pages(pagevec, npages);
-+		put_user_pages(pagevec, npages);
- 		kvfree(pagevec);
- 		if (result < 0)
- 			break;
++
+ /* Populate the call parameters, merging adjacent pages together */
+ static void populate_rw_params(struct page **pages,
+ 			       int pages_count,
 -- 
 2.22.0
 

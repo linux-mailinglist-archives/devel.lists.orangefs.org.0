@@ -2,62 +2,62 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98BE383F57
-	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:35:12 +0200 (CEST)
-Received: from [::1] (port=55890 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD38283F5B
+	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:35:14 +0200 (CEST)
+Received: from [::1] (port=55904 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hvAr9-0000A9-SJ
-	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:35:11 -0400
-Received: from mail-pg1-f195.google.com ([209.85.215.195]:37102)
+	id 1hvArB-0000Ab-VI
+	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:35:13 -0400
+Received: from mail-pg1-f193.google.com ([209.85.215.193]:42630)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
  (Exim 4.92) (envelope-from <john.hubbard@gmail.com>)
- id 1hvAr8-0008S2-Lc
- for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:35:10 -0400
-Received: by mail-pg1-f195.google.com with SMTP id d1so9724608pgp.4
- for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:34:50 -0700 (PDT)
+ id 1hvArA-0008SF-82
+ for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:35:12 -0400
+Received: by mail-pg1-f193.google.com with SMTP id t132so42536187pgb.9
+ for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:34:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=uQGOdku7Vl3REPvOJ8nTMNJxS9zoi9IIquO7PYdcYIA=;
- b=L6PrjOsrS6boUIN/DOymS83vV7YlAKPpT9Xdrfk7ax1OcCgE7PAsCiB8I3wTJde6P0
- jWSZSVN0MQGqPFzlI9I6nQdqRL1oXS8MVgrMBG2RUC/9SCRR/2JXuxH0Bc1AbFhAasOV
- xWwwBWKfNUqmzHZ9usEoeFIoZA0TFhsqfa1vxdEBmkB+UHsGh6j98UqgUEfpOkZ8azEw
- XctfU3/I30ArTXSEYH2C9KRaAbt0v2hqFYnx8WGIkLVSjGqesnYt/lo+Nif4WusFAWAo
- kwn89YnMjOOYX9/SsgW6zCkgnnE6VjyidKN7erx1BI5f02v6uid8cXohhKk4FwCmi1FI
- cYgw==
+ bh=GAYBkmVoEF3i3+udFKn42Z4HyLG0jAAiACtL32v96bk=;
+ b=SyrfptYHZmeMKLLq8uTuDSlh448/TZCFpG6Zn4FeLZy9cTZZGFbCJ1UNBJPoCIn+aW
+ ygsAzBiAVH0kcipZ4ihTHldNmhfD0znPMjSBKoUKvh0NP49BRvqIlmsIg6DT8KHAwPBe
+ 4kKUVEJdNXvGigLmpKs15CkjDKUzxh1vmFZZWbslFSuyKlpacG3oD1RXF7xFsxcwBIbL
+ 0fmLLMJWYpY6/OBVXor4D0pE1ZvktHc8OSEdcNEszsvYRmiqmzBZ8eGFZOKusFOHPIrj
+ /e89tRQCCSxcnEZ4JUtQARmnCroQo1zfhGtcxjcGVNa5FV+aQSWzJVN76YDHje0qrdo9
+ NXRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=uQGOdku7Vl3REPvOJ8nTMNJxS9zoi9IIquO7PYdcYIA=;
- b=FBlatINp+tYjEU11tpuxWaI9S5h6rsZl1PtRK7u911cN3LornbVm+v6/p7SRALjqZy
- YFP/B9JGvyw8zx8VXFixRiyNYWPBeepDl/vfhzErkXCF1NBECA11W6SSNckcNZQzISGJ
- nSm0PR/Q1OuwIalqUNhDP0Fn0WpHHQV/TNKP1Q97hZKHf5vNRmKqsTRrZWB6t/SG0f85
- On6F65DMTI0VjZ+Ds7rLDADci6w7pGf5XaDDaDAC0mUwuboH7aflhHu1TrM0mS8tDrso
- jR0SCVFlVqjrVihlp2MvGiuGQq0A7WJpTN6QfsYHjjibMkHr3wbXgcT8u3o2mA+AMv/g
- ZiVA==
-X-Gm-Message-State: APjAAAWjm1mQScN8AqzeBSh+KUi2F7YCbo29V2ffs+hykC24jaTZ4aM2
- UuZIploNekFTcmp+mA5lXMM=
-X-Google-Smtp-Source: APXvYqyaoKmDNdUJQD7xvZFSQjCmYuVY+zKJwqcOsFMJXKJ76CQxjmhpKXdBBVyw94JCP/lkY4QWYw==
-X-Received: by 2002:aa7:8f2c:: with SMTP id y12mr6988234pfr.38.1565141669837; 
- Tue, 06 Aug 2019 18:34:29 -0700 (PDT)
+ bh=GAYBkmVoEF3i3+udFKn42Z4HyLG0jAAiACtL32v96bk=;
+ b=CPppuTCUeLciOUy0uqi4Ov5X17LqQStcdpjjJ+b1nXGr7fFmaGbXibVXHhX6psOfdC
+ W+68msJnvuhTbsvIezbUBx1uOC/0vMt9DFMOcY1Ii+ub7onjzvVgZG34vPheYfMh135M
+ BCsTm1GwjXbHBZl+MpYnlUM2fcJNWJidJSqXqHqTUEZtdUsX1M4VrW4Yr5cYkEaTuLlX
+ yvqOq7J1mShJENQtkVdihbe/b8hypmEfYdi3nVm0B2aAYwL8VWkRj2Q08IEdukM9AMNc
+ esaymvdEyV77wZC20qTA1kUOxW0ttcyIwItuBx34lm9myHSvjb1U/Jq8W4ebwfxOjWkp
+ J/Yg==
+X-Gm-Message-State: APjAAAX7PZ66yEa1Yef2f3WVb0XT3lw3wKvIqo1GPBEfaeWvZP1YVqmC
+ +VsXLPeNzfLF+Sr4KKwsD7o=
+X-Google-Smtp-Source: APXvYqwmirpRx7sRgblxTdJDdZc3lNLPB7sz+os8JHE4peLsZYES+zILuE4KL76TUaGsLoa8NjKqJA==
+X-Received: by 2002:a62:ae02:: with SMTP id q2mr6578356pff.1.1565141671450;
+ Tue, 06 Aug 2019 18:34:31 -0700 (PDT)
 Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
  by smtp.gmail.com with ESMTPSA id
- u69sm111740800pgu.77.2019.08.06.18.34.28
+ u69sm111740800pgu.77.2019.08.06.18.34.29
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 06 Aug 2019 18:34:29 -0700 (PDT)
+ Tue, 06 Aug 2019 18:34:30 -0700 (PDT)
 From: john.hubbard@gmail.com
 X-Google-Original-From: jhubbard@nvidia.com
 To: Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH v3 28/41] mm/gup_benchmark.c: convert put_page() to
- put_user_page*()
-Date: Tue,  6 Aug 2019 18:33:27 -0700
-Message-Id: <20190807013340.9706-29-jhubbard@nvidia.com>
+Subject: [PATCH v3 29/41] mm/memory.c: convert put_page() to put_user_page*()
+Date: Tue,  6 Aug 2019 18:33:28 -0700
+Message-Id: <20190807013340.9706-30-jhubbard@nvidia.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190807013340.9706-1-jhubbard@nvidia.com>
 References: <20190807013340.9706-1-jhubbard@nvidia.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 X-NVConfidentiality: public
 Content-Transfer-Encoding: 8bit
 X-BeenThere: devel@lists.orangefs.org
@@ -71,26 +71,28 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>,
+Cc: linux-fbdev@vger.kernel.org, Michal Hocko <mhocko@suse.com>,
+ Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
- dri-devel@lists.freedesktop.org, Keith Busch <keith.busch@intel.com>,
- linux-mm@kvack.org, sparclinux@vger.kernel.org,
- Dan Carpenter <dan.carpenter@oracle.com>, Ira Weiny <ira.weiny@intel.com>,
- ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
- rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
- YueHaibing <yuehaibing@huawei.com>, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ Matthew Wilcox <willy@infradead.org>, sparclinux@vger.kernel.org,
+ Ira Weiny <ira.weiny@intel.com>, ceph-devel@vger.kernel.org,
+ devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
+ linux-rdma@vger.kernel.org, "Aneesh Kumar K . V" <aneesh.kumar@linux.ibm.com>,
+ x86@kernel.org, amd-gfx@lists.freedesktop.org,
  Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
- linux-media@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
+ Huang Ying <ying.huang@intel.com>, xen-devel@lists.xenproject.org,
+ devel@lists.orangefs.org, linux-media@vger.kernel.org,
+ Rik van Riel <riel@surriel.com>, John Hubbard <jhubbard@nvidia.com>,
  intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
  =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
- linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
- netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ linux-rpi-kernel@lists.infradead.org, Will Deacon <will.deacon@arm.com>,
+ Dan Williams <dan.j.williams@intel.com>, linux-arm-kernel@lists.infradead.org,
+ linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
+ LKML <linux-kernel@vger.kernel.org>, Souptick Joarder <jrdr.linux@gmail.com>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-fsdevel@vger.kernel.org,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+ linux-fsdevel@vger.kernel.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -113,32 +115,33 @@ release_pages().
 This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
 ("mm: introduce put_user_page*(), placeholder versions").
 
-Reviewed-by: Keith Busch <keith.busch@intel.com>
-
-Cc: Dan Carpenter <dan.carpenter@oracle.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Keith Busch <keith.busch@intel.com>
-Cc: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-Cc: Michael S. Tsirkin <mst@redhat.com>
-Cc: YueHaibing <yuehaibing@huawei.com>
+Cc: Aneesh Kumar K.V <aneesh.kumar@linux.ibm.com>
+Cc: Huang Ying <ying.huang@intel.com>
+Cc: Jérôme Glisse <jglisse@redhat.com>
+Cc: Matthew Wilcox <willy@infradead.org>
+Cc: Michal Hocko <mhocko@suse.com>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Rik van Riel <riel@surriel.com>
+Cc: Souptick Joarder <jrdr.linux@gmail.com>
+Cc: Will Deacon <will.deacon@arm.com>
 Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 ---
- mm/gup_benchmark.c | 2 +-
+ mm/memory.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/mm/gup_benchmark.c b/mm/gup_benchmark.c
-index 7dd602d7f8db..515ac8eeb6ee 100644
---- a/mm/gup_benchmark.c
-+++ b/mm/gup_benchmark.c
-@@ -79,7 +79,7 @@ static int __gup_benchmark_ioctl(unsigned int cmd,
- 	for (i = 0; i < nr_pages; i++) {
- 		if (!pages[i])
- 			break;
--		put_page(pages[i]);
-+		put_user_page(pages[i]);
- 	}
- 	end_time = ktime_get();
- 	gup->put_delta_usec = ktime_us_delta(end_time, start_time);
+diff --git a/mm/memory.c b/mm/memory.c
+index e2bb51b6242e..8870968496ea 100644
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -4337,7 +4337,7 @@ int __access_remote_vm(struct task_struct *tsk, struct mm_struct *mm,
+ 						    buf, maddr + offset, bytes);
+ 			}
+ 			kunmap(page);
+-			put_page(page);
++			put_user_page(page);
+ 		}
+ 		len -= bytes;
+ 		buf += bytes;
 -- 
 2.22.0
 

@@ -2,57 +2,42 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BF56841EC
-	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:50:40 +0200 (CEST)
-Received: from [::1] (port=59412 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67BC084590
+	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 09:20:26 +0200 (CEST)
+Received: from [::1] (port=47490 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hvB67-0001DB-HA
-	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:50:39 -0400
-Received: from hqemgate15.nvidia.com ([216.228.121.64]:13867)
+	id 1hvGFF-0000bX-Cv
+	for lists+devel-orangefs@lfdr.de; Wed, 07 Aug 2019 03:20:25 -0400
+Received: from mga09.intel.com ([134.134.136.24]:62897)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <jhubbard@nvidia.com>) id 1hvB66-0000Rc-2K
- for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:50:38 -0400
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqemgate15.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5d4a2e4e0000>; Tue, 06 Aug 2019 18:50:06 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Tue, 06 Aug 2019 18:49:56 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Tue, 06 Aug 2019 18:49:56 -0700
-Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 7 Aug
- 2019 01:49:55 +0000
-Subject: Re: [PATCH v3 00/39] put_user_pages(): miscellaneous call sites
-To: <john.hubbard@gmail.com>, Andrew Morton <akpm@linux-foundation.org>
+ (Exim 4.92) (envelope-from <sakari.ailus@linux.intel.com>)
+ id 1hvGFD-0000at-P5
+ for devel@lists.orangefs.org; Wed, 07 Aug 2019 03:20:23 -0400
+X-Amp-Result: UNSCANNABLE
+X-Amp-File-Uploaded: False
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+ by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 07 Aug 2019 00:19:42 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,356,1559545200"; d="scan'208";a="176880179"
+Received: from paasikivi.fi.intel.com ([10.237.72.42])
+ by orsmga003.jf.intel.com with ESMTP; 07 Aug 2019 00:19:32 -0700
+Received: by paasikivi.fi.intel.com (Postfix, from userid 1000)
+ id 9980B202CC; Wed,  7 Aug 2019 10:20:07 +0300 (EEST)
+Date: Wed, 7 Aug 2019 10:20:07 +0300
+From: Sakari Ailus <sakari.ailus@linux.intel.com>
+To: john.hubbard@gmail.com
+Subject: Re: [PATCH v3 11/41] media/v4l2-core/mm: convert put_page() to
+ put_user_page*()
+Message-ID: <20190807072007.GG21370@paasikivi.fi.intel.com>
 References: <20190807013340.9706-1-jhubbard@nvidia.com>
-From: John Hubbard <jhubbard@nvidia.com>
-X-Nvconfidentiality: public
-Message-ID: <912eb2bd-4102-05c1-5571-c261617ad30b@nvidia.com>
-Date: Tue, 6 Aug 2019 18:49:55 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ <20190807013340.9706-12-jhubbard@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20190807013340.9706-1-jhubbard@nvidia.com>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL104.nvidia.com (172.18.146.11) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1565142606; bh=Dn5BKjZ7JEBRqWgfa18GnM7OhUXy8yDZwMN3JIIxlGw=;
- h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=Ikr1Z0QmiSe2izYZJH1uqOSC6icnToC0RNMEpxuB23chpfLBCzP3w/AieqLXvDTl5
- WiAJO8Q4P7LqaICg9w9tXQj3/iPr6N76Dc9IbqJMajQoyinrqFfwgCWwW9UnKbczaL
- GaLoALYFsFwWv8Sy+VSzQYK1xKYCINe6tMld2WSk4jzjh2UDaUm/4PS/zoETIOvAHY
- Cv7DiogcZErrjHQstqfLwjbbIS2N4ESoffKtD4ugOTExuz4uGt5TgMT8y01S0TheeO
- 6qVWyeW6YYVimOARtYB9SW21zJJlrmRpt7UH+8pXV98uEPUBYTW77sxtUkB504xqpb
- D9OLrQ7tTourQ==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190807013340.9706-12-jhubbard@nvidia.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -68,18 +53,22 @@ Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
- ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
+ Dan Williams <dan.j.williams@intel.com>, devel@driverdev.osuosl.org,
  rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
  amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
- devel@lists.orangefs.org, linux-media@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Hans Verkuil <hans.verkuil@cisco.com>,
+ xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
+ linux-media@vger.kernel.org, Kees Cook <keescook@chromium.org>,
+ John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
+ linux-block@vger.kernel.org,
+ =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+ linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
  linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org
+ Souptick Joarder <jrdr.linux@gmail.com>, linux-xfs@vger.kernel.org,
+ linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, Robin Murphy <robin.murphy@arm.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -93,24 +82,30 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 8/6/19 6:32 PM, john.hubbard@gmail.com wrote:
+On Tue, Aug 06, 2019 at 06:33:10PM -0700, john.hubbard@gmail.com wrote:
 > From: John Hubbard <jhubbard@nvidia.com>
-> ...
 > 
-> John Hubbard (38):
->   mm/gup: add make_dirty arg to put_user_pages_dirty_lock()
-...
->  54 files changed, 191 insertions(+), 323 deletions(-)
+> For pages that were retained via get_user_pages*(), release those pages
+> via the new put_user_page*() routines, instead of via put_page() or
+> release_pages().
 > 
-ahem, yes, apparently this is what happens if I add a few patches while editing
-the cover letter... :) 
+> This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
+> ("mm: introduce put_user_page*(), placeholder versions").
+> 
+> Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
+> Cc: Kees Cook <keescook@chromium.org>
+> Cc: Hans Verkuil <hans.verkuil@cisco.com>
+> Cc: Sakari Ailus <sakari.ailus@linux.intel.com>
+> Cc: Jan Kara <jack@suse.cz>
+> Cc: Robin Murphy <robin.murphy@arm.com>
+> Cc: Souptick Joarder <jrdr.linux@gmail.com>
+> Cc: Dan Williams <dan.j.williams@intel.com>
+> Cc: linux-media@vger.kernel.org
+> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 
-The subject line should read "00/41", and the list of files affected here is
-therefore under-reported in this cover letter. However, the patch series itself is 
-intact and ready for submission.
+Acked-by: Sakari Ailus <sakari.ailus@linux.intel.com>
 
-thanks,
 -- 
-John Hubbard
-NVIDIA
+Sakari Ailus
+sakari.ailus@linux.intel.com
 

@@ -2,60 +2,63 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6438B83A6D
-	for <lists+devel-orangefs@lfdr.de>; Tue,  6 Aug 2019 22:40:01 +0200 (CEST)
-Received: from [::1] (port=39738 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0244B83EFE
+	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:34:28 +0200 (CEST)
+Received: from [::1] (port=55506 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hv6FU-0004NV-J9
-	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 16:40:00 -0400
-Received: from hqemgate16.nvidia.com ([216.228.121.65]:2267)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <jhubbard@nvidia.com>) id 1hv6FS-0004Ip-Oj
- for devel@lists.orangefs.org; Tue, 06 Aug 2019 16:39:58 -0400
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqemgate16.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5d49e5760000>; Tue, 06 Aug 2019 13:39:18 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Tue, 06 Aug 2019 13:39:17 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Tue, 06 Aug 2019 13:39:17 -0700
-Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 6 Aug
- 2019 20:39:16 +0000
-Subject: Re: [PATCH v2 01/34] mm/gup: add make_dirty arg to
- put_user_pages_dirty_lock()
-To: Ira Weiny <ira.weiny@intel.com>, <john.hubbard@gmail.com>
-References: <20190804224915.28669-1-jhubbard@nvidia.com>
- <20190804224915.28669-2-jhubbard@nvidia.com>
- <20190806173945.GA4748@iweiny-DESK2.sc.intel.com>
-X-Nvconfidentiality: public
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <0e232d84-e6ea-159e-91d4-77e938377161@nvidia.com>
-Date: Tue, 6 Aug 2019 13:39:16 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	id 1hvAqQ-0008R5-Ti
+	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:34:26 -0400
+Received: from mail-pf1-f193.google.com ([209.85.210.193]:44851)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ (Exim 4.92) (envelope-from <john.hubbard@gmail.com>)
+ id 1hvAqQ-0008QR-0r
+ for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:34:26 -0400
+Received: by mail-pf1-f193.google.com with SMTP id t16so42467450pfe.11
+ for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:34:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=bu6Wx/Zv0X2lMGB+6eAGD3f+7w4NebYnh9OyUltbVMY=;
+ b=WKhTC7/NleZ5wl/m99RxFU5GTYlO8sAogUyGNyjS7ZMLv3XHi007FfkG6BVCgU+Bmy
+ T3VegDJda51xUPw2saeUjZlJHGD0jnfFuo5DdnLoehQnEteNq7qwg9WXajoyYejvTwAF
+ GoigQXs4nKu7bkgKcA9QsKT4zEZIWIAY6ncKOFaNuurJf+Gx4aK/CqiHIW05060hKeLP
+ e8wzbRN6qJ6wLpjyt7VLfpX7u/mdl6LjzZdo5r3ud0s1ecFK9gapeD392yrEqXmh0P5o
+ 8Znc5GzzJt7KNlfXrbUJ4HdSTe9uwkLHHr/jg0IQMA/5DhiDN2/jW7ebfHYyXkt/VEdR
+ iveA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=bu6Wx/Zv0X2lMGB+6eAGD3f+7w4NebYnh9OyUltbVMY=;
+ b=RiUw8KguIdlGvv287JmaggwvWMWCkYf0sgQqgzOt+sbBjALw9UFHRtH2iasGZLDjIR
+ TuGQunFKfbZUDyPw0021V83xGBbSGEgMQOMhkwBPgZ0+Dzqzbzfj9QEEJiCKGQu/Q2Eo
+ PlGyL7Vf6NYadthZYZ4P1VzZJ82OFeywH+ahDTTZsaxkyy5+4MKbJm16D6t6RAcRoyIq
+ 1kqt0P0IYEGi0cSjzQuOsnZY4fZN0xE9WHTfdamIboF/+QWxZEzWNrjCw/Cddc/ZJzrB
+ JowHVOeXAn8UiHWfpdJD/ffcGl9g8cy9S9jPZprAPNiuWV4wKQ5WlJRVWgutrkwi5HPk
+ 5gvg==
+X-Gm-Message-State: APjAAAUqqs8PN42YpqQpO9vbyp/AD+mT705MUyyQFEDB6MXCYM9jMZYP
+ /X9xUNzS1NCQ4Ufiko2t2T8=
+X-Google-Smtp-Source: APXvYqxMFgcbwFS29vaoaJF5voBWzbNV95Jxnnuvuep7nQF4Lu4A+WYxlXsfFeaV5xyuM4/n9aQBGQ==
+X-Received: by 2002:a17:90a:9f0b:: with SMTP id
+ n11mr5828269pjp.98.1565141624787; 
+ Tue, 06 Aug 2019 18:33:44 -0700 (PDT)
+Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
+ by smtp.gmail.com with ESMTPSA id
+ u69sm111740800pgu.77.2019.08.06.18.33.43
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 06 Aug 2019 18:33:44 -0700 (PDT)
+From: john.hubbard@gmail.com
+X-Google-Original-From: jhubbard@nvidia.com
+To: Andrew Morton <akpm@linux-foundation.org>
+Subject: [PATCH v3 00/39] put_user_pages(): miscellaneous call sites
+Date: Tue,  6 Aug 2019 18:32:59 -0700
+Message-Id: <20190807013340.9706-1-jhubbard@nvidia.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-In-Reply-To: <20190806173945.GA4748@iweiny-DESK2.sc.intel.com>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL104.nvidia.com (172.18.146.11) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1565123958; bh=kP7gTuC3ZdPRsl2ZM8hKtRsMZoJPCXuUqs/7ZYFYlas=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=De7r6lQUtbn+GTEsMqljgVKTlQIrCw8ZESuRqc7w4LEYPASOCDyQM6KfNGQouIjYR
- fh0BckBJVbNT9AbXMQb66ZhMKSleBMpCp4Q67sEppT12m031guaO+mSQiN77Vubrty
- dLwAVLGyjRDyH8bKz/ie59UuEUjWXDBsQB9IGYcfiHyqrDkJ8dhLAwUMAPjRDqyeiY
- KJw8zEX2A8/HIUmoazoyVwItiLDzuGpYh0geDqgdodA5dwJzt0S2azlo+PhdmfDHXO
- 6GhmRkzx66GKpfVpxeAm8ztIGHTRgebRJf3i5iJHgoMtdv7J6YmmRpepQCyIfl7KA0
- CyUb7h3ZsvM+w==
+Content-Type: text/plain; charset=UTF-8
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -70,20 +73,20 @@ List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs
 Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- Matthew Wilcox <willy@infradead.org>, sparclinux@vger.kernel.org,
- Dan Williams <dan.j.williams@intel.com>, devel@driverdev.osuosl.org,
+ sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
+ ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
  rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
- amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@lst.de>,
- Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
- linux-media@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
+ devel@lists.orangefs.org, linux-media@vger.kernel.org,
+ John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
  linux-block@vger.kernel.org,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
+ =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
+ linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
  linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
+ linux-fsdevel@vger.kernel.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -97,73 +100,224 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 8/6/19 10:39 AM, Ira Weiny wrote:
-> On Sun, Aug 04, 2019 at 03:48:42PM -0700, john.hubbard@gmail.com wrote:
->> From: John Hubbard <jhubbard@nvidia.com>
-...
->> -
->>  /**
->> - * put_user_pages_dirty() - release and dirty an array of gup-pinned pages
->> - * @pages:  array of pages to be marked dirty and released.
->> + * put_user_pages_dirty_lock() - release and optionally dirty gup-pinned pages
->> + * @pages:  array of pages to be maybe marked dirty, and definitely released.
-> 
-> Better would be.
-> 
-> @pages:  array of pages to be put
+From: John Hubbard <jhubbard@nvidia.com>
 
-OK, I'll change to that wording.
+Hi,
 
-> 
->>   * @npages: number of pages in the @pages array.
->> + * @make_dirty: whether to mark the pages dirty
->>   *
->>   * "gup-pinned page" refers to a page that has had one of the get_user_pages()
->>   * variants called on that page.
->>   *
->>   * For each page in the @pages array, make that page (or its head page, if a
->> - * compound page) dirty, if it was previously listed as clean. Then, release
->> - * the page using put_user_page().
->> + * compound page) dirty, if @make_dirty is true, and if the page was previously
->> + * listed as clean. In any case, releases all pages using put_user_page(),
->> + * possibly via put_user_pages(), for the non-dirty case.
-> 
-> I don't think users of this interface need this level of detail.  I think
-> something like.
-> 
->  * For each page in the @pages array, release the page.  If @make_dirty is
->  * true, mark the page dirty prior to release.
+This consolidates everything into a "here's what's remaining for Andrew
+to add to his tree (for now)" series:
 
-Yes, it is too wordy, I'll change to that.
+* The first patch is an updated version of one that is already in the akpm tree.
 
-> 
-...
->> -void put_user_pages_dirty_lock(struct page **pages, unsigned long npages)
->> -{
->> -	__put_user_pages_dirty(pages, npages, set_page_dirty_lock);
->> +	/*
->> +	 * TODO: this can be optimized for huge pages: if a series of pages is
->> +	 * physically contiguous and part of the same compound page, then a
->> +	 * single operation to the head page should suffice.
->> +	 */
-> 
-> I think this comment belongs to the for loop below...  or just something about
-> how to make this and put_user_pages() more efficient.  It is odd, that this is
-> the same comment as in put_user_pages()...
+* The next two patches are already in the akpm tree, included here for
+  completeness.
 
-Actually I think I'll just delete the comment entirely, it's just noise really.
+* The last 5 patches are new to this series, but were previously posted.
 
-> 
-> The code is good.  So... Other than the comments.
-> 
-> Reviewed-by: Ira Weiny <ira.weiny@intel.com>
+Changes since v2:
 
+* Updated patch 1
+    * Review feedback from Ira. (This only affected the code comments.)
+      Added Ira's Reviewed-by.
 
-Thanks for the review!
+    * Review feedback: Further collapsed the siw_umem code: siw_free_plist() is
+      gone entirely.
 
+* Added 7 patches:
+    * 3 patches from the "mm/: 3 more put_user_page() conversions" series:
+	"mm/ksm: convert put_page() to put_user_page*()"
+	"mm/mempolicy.c: convert put_page() to put_user_page*()"
+	"mm/mlock.c: convert put_page() to put_user_page*()"
 
-thanks,
+    * "security/tomoyo: convert put_page() to put_user_page*()", now that
+      Tetsuo has ACK'd it for going in via Andrew's tree.
+
+    * "powerpc: convert put_page() to put_user_page*()": no reviews yet.
+
+    * two patches that were already accepted:
+	"drivers/gpu/drm/via: convert put_page() to put_user_page*()"
+	"net/xdp: convert put_page() to put_user_page*()"
+
+* Continued to omit 1 patch ("fs/io_uring.c: convert put_page() to
+  put_user_page*()"), sent separately, because Jens Axboe is putting it into his
+  tree.
+
+* Added Rodrigo Vivi's ACK for the i915 patch.
+* Added Tetsuo Handa's ACK for the security/tomoyo patch
+* Juergen Gross has verified that his Signed-off-by is valid.
+* Added Calum Mackay's Reviewed-by.
+
+Changes since v1:
+
+* 9 out of 34 patches have been reviewed or ack'd or changed:
+    * Picked up Keith's Reviewed-by for patch 26 (gup_benchmark).
+    * Picked up ACKs for patches 3, 10, 15, 16 (ceph, genwqe,
+      staging/vc04_services, drivers/tee).
+
+* Patch 6 (i915): adjusted drivers/gpu/drm/i915/gem/i915_gem_userptr.c to
+  match the latest linux.git: the code has already been fixed in linux.git,
+  as of the latest -rc, to do a set_page_dirty_lock(), instead of
+  set_page_dirty(). So all that it needs now is a conversion to
+  put_user_page(). I've done that in a way (avoiding the changed API call)
+  that allows patch 6 to go up via either Andrew's -mm tree, or the drm
+  tree, just in case. See that patch's comments for slightly more detail.
+
+* Patch 20 (xen): applied Juergen's recommended fix, and speculatively
+  (pending his approval) added his Signed-off-by (also noted in the patch
+  comments).
+
+* Improved patch 31 (NFS) as recommended by Calum Mackay.
+
+* Includes the latest version of patch 1. (Patch 1 has been separately
+  reposted [3], with those updates. And it's included here in order to
+  make this series apply directly to linux.git, as noted in the original
+  cover letter below.)
+
+Cover letter from v1:
+
+These are best characterized as miscellaneous conversions: many (not all)
+call sites that don't involve biovec or iov_iter, nor mm/. It also leaves
+out a few call sites that require some more work. These are mostly pretty
+simple ones.
+
+It's probably best to send all of these via Andrew's -mm tree, assuming
+that there are no significant merge conflicts with ongoing work in other
+trees (which I doubt, given that these are small changes).
+
+These patches apply to the latest linux.git. Patch #1 is also already in
+Andrew's tree, but given the broad non-linux-mm Cc list, I thought it
+would be more convenient to just include that patch here, so that people
+can use linux.git as the base--even though these are probably destined
+for linux-mm.
+
+This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
+("mm: introduce put_user_page*(), placeholder versions"). That commit
+has an extensive description of the problem and the planned steps to
+solve it, but the highlites are:
+
+1) Provide put_user_page*() routines, intended to be used
+for releasing pages that were pinned via get_user_pages*().
+
+2) Convert all of the call sites for get_user_pages*(), to
+invoke put_user_page*(), instead of put_page(). This involves dozens of
+call sites, and will take some time.
+
+3) After (2) is complete, use get_user_pages*() and put_user_page*() to
+implement tracking of these pages. This tracking will be separate from
+the existing struct page refcounting.
+
+4) Use the tracking and identification of these pages, to implement
+special handling (especially in writeback paths) when the pages are
+backed by a filesystem.
+
+And a few references, also from that commit:
+
+[1] https://lwn.net/Articles/774411/ : "DMA and get_user_pages()"
+[2] https://lwn.net/Articles/753027/ : "The Trouble with get_user_pages()"
+
+[3] "mm/gup: add make_dirty arg to put_user_pages_dirty_lock()"
+    https://lore.kernel.org/r/20190804214042.4564-1-jhubbard@nvidia.com
+
+Ira Weiny (1):
+  fs/binfmt_elf: convert put_page() to put_user_page*()
+
+John Hubbard (38):
+  mm/gup: add make_dirty arg to put_user_pages_dirty_lock()
+  net/rds: convert put_page() to put_user_page*()
+  net/ceph: convert put_page() to put_user_page*()
+  x86/kvm: convert put_page() to put_user_page*()
+  drm/etnaviv: convert release_pages() to put_user_pages()
+  drm/i915: convert put_page() to put_user_page*()
+  drm/radeon: convert put_page() to put_user_page*()
+  media/ivtv: convert put_page() to put_user_page*()
+  media/v4l2-core/mm: convert put_page() to put_user_page*()
+  genwqe: convert put_page() to put_user_page*()
+  scif: convert put_page() to put_user_page*()
+  vmci: convert put_page() to put_user_page*()
+  rapidio: convert put_page() to put_user_page*()
+  oradax: convert put_page() to put_user_page*()
+  staging/vc04_services: convert put_page() to put_user_page*()
+  drivers/tee: convert put_page() to put_user_page*()
+  vfio: convert put_page() to put_user_page*()
+  fbdev/pvr2fb: convert put_page() to put_user_page*()
+  fsl_hypervisor: convert put_page() to put_user_page*()
+  xen: convert put_page() to put_user_page*()
+  fs/exec.c: convert put_page() to put_user_page*()
+  orangefs: convert put_page() to put_user_page*()
+  uprobes: convert put_page() to put_user_page*()
+  futex: convert put_page() to put_user_page*()
+  mm/frame_vector.c: convert put_page() to put_user_page*()
+  mm/gup_benchmark.c: convert put_page() to put_user_page*()
+  mm/memory.c: convert put_page() to put_user_page*()
+  mm/madvise.c: convert put_page() to put_user_page*()
+  mm/process_vm_access.c: convert put_page() to put_user_page*()
+  crypt: convert put_page() to put_user_page*()
+  fs/nfs: convert put_page() to put_user_page*()
+  goldfish_pipe: convert put_page() to put_user_page*()
+  kernel/events/core.c: convert put_page() to put_user_page*()
+  security/tomoyo: convert put_page() to put_user_page*()
+  powerpc: convert put_page() to put_user_page*()
+  mm/mlock.c: convert put_page() to put_user_page*()
+  mm/mempolicy.c: convert put_page() to put_user_page*()
+  mm/ksm: convert put_page() to put_user_page*()
+
+ arch/powerpc/kvm/book3s_64_mmu_hv.c           |   4 +-
+ arch/powerpc/kvm/book3s_64_mmu_radix.c        |  19 ++-
+ arch/powerpc/kvm/e500_mmu.c                   |   3 +-
+ arch/powerpc/mm/book3s64/iommu_api.c          |  11 +-
+ arch/x86/kvm/svm.c                            |   4 +-
+ crypto/af_alg.c                               |   7 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c         |   4 +-
+ drivers/gpu/drm/i915/gem/i915_gem_userptr.c   |   6 +-
+ drivers/gpu/drm/radeon/radeon_ttm.c           |   2 +-
+ drivers/infiniband/core/umem.c                |   5 +-
+ drivers/infiniband/hw/hfi1/user_pages.c       |   5 +-
+ drivers/infiniband/hw/qib/qib_user_pages.c    |  13 +--
+ drivers/infiniband/hw/usnic/usnic_uiom.c      |   5 +-
+ drivers/infiniband/sw/siw/siw_mem.c           |  19 +--
+ drivers/media/pci/ivtv/ivtv-udma.c            |  14 +--
+ drivers/media/pci/ivtv/ivtv-yuv.c             |  11 +-
+ drivers/media/v4l2-core/videobuf-dma-sg.c     |   3 +-
+ drivers/misc/genwqe/card_utils.c              |  17 +--
+ drivers/misc/mic/scif/scif_rma.c              |  17 ++-
+ drivers/misc/vmw_vmci/vmci_context.c          |   2 +-
+ drivers/misc/vmw_vmci/vmci_queue_pair.c       |  11 +-
+ drivers/platform/goldfish/goldfish_pipe.c     |   9 +-
+ drivers/rapidio/devices/rio_mport_cdev.c      |   9 +-
+ drivers/sbus/char/oradax.c                    |   2 +-
+ .../interface/vchiq_arm/vchiq_2835_arm.c      |  10 +-
+ drivers/tee/tee_shm.c                         |  10 +-
+ drivers/vfio/vfio_iommu_type1.c               |   8 +-
+ drivers/video/fbdev/pvr2fb.c                  |   3 +-
+ drivers/virt/fsl_hypervisor.c                 |   7 +-
+ drivers/xen/privcmd.c                         |  32 ++---
+ fs/binfmt_elf.c                               |   2 +-
+ fs/binfmt_elf_fdpic.c                         |   2 +-
+ fs/exec.c                                     |   2 +-
+ fs/nfs/direct.c                               |  11 +-
+ fs/orangefs/orangefs-bufmap.c                 |   7 +-
+ include/linux/mm.h                            |   5 +-
+ kernel/events/core.c                          |   2 +-
+ kernel/events/uprobes.c                       |   6 +-
+ kernel/futex.c                                |  10 +-
+ mm/frame_vector.c                             |   4 +-
+ mm/gup.c                                      | 109 +++++++-----------
+ mm/gup_benchmark.c                            |   2 +-
+ mm/ksm.c                                      |  14 +--
+ mm/madvise.c                                  |   2 +-
+ mm/memory.c                                   |   2 +-
+ mm/mempolicy.c                                |   2 +-
+ mm/mlock.c                                    |   6 +-
+ mm/process_vm_access.c                        |  18 +--
+ net/ceph/pagevec.c                            |   8 +-
+ net/rds/info.c                                |   5 +-
+ net/rds/message.c                             |   2 +-
+ net/rds/rdma.c                                |  15 ++-
+ security/tomoyo/domain.c                      |   2 +-
+ virt/kvm/kvm_main.c                           |   4 +-
+ 54 files changed, 191 insertions(+), 323 deletions(-)
+
 -- 
-John Hubbard
-NVIDIA
+2.22.0
+
 

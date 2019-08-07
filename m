@@ -2,64 +2,57 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E2DD83F83
-	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:35:33 +0200 (CEST)
-Received: from [::1] (port=56068 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BF56841EC
+	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:50:40 +0200 (CEST)
+Received: from [::1] (port=59412 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hvArU-0000F0-PN
-	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:35:32 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:40523)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <john.hubbard@gmail.com>)
- id 1hvArT-00005I-2i
- for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:35:31 -0400
-Received: by mail-pf1-f195.google.com with SMTP id p184so42493160pfp.7
- for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:35:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=iyBF/TunLLNE9m64WGZW5xnvl+XVp1Tkb/4cWK4Q28U=;
- b=eabm6eV7x6nJ3H6jB3OWHKTAjJ5hccshhWRSvyF8YaL4Xb3kcN3FPSj+mrT7hdf1FM
- 0MWhm5PqlQFyy6zw76EwLtyOlQEQTOAPUCRq2cKY8d4yFrfincU70ZRfebLbmlijIWR2
- wTENuQ2R1ycfB8EIZdvDLYgUy7fahn8NbpOFjvcP7wPItsW4fy1klzu0bIomS6ZhLV9L
- FATmBTkmPO3bz1bBRYsOrrqOVmLfRrGMChgnyEYGXYwKFOo3GWkjWYe147H72f0kIcVc
- Tr73f17ZMCrLU+eCYt8HTv90LoBSVz+pg0lUMLNh1TQmkPNzI1sbpCYBSoNZ3shE6svq
- cn7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=iyBF/TunLLNE9m64WGZW5xnvl+XVp1Tkb/4cWK4Q28U=;
- b=Yl7PL0qqx2hHGX6SA+1Rc/t7Xh/YtiF9+qHof6d8ya4r/GRq83o9aiOSzmPgs/Ktbi
- YpnfL9ygHtjjkWURiLTbK5rzqjLu3id27tz9j0zadkwdCDzewl7kpyVaPjIz41GvCLE0
- EF39rNbK8sT6BRM8SyYUhKwQ7lpa33dbfp5vF5i4KhtrkfN9FASm4ZlCX5XhfE9uHm55
- NUSZ+8rQSv6brGXcEEFA0jSbSAM9gsep7vTf6ZasHRSGciXqKR9nAa4dZcusQuu/m4JW
- +XB/xMmnZJGXG+5yq/xbx07oFCffHpfE12Eg7sftiVgwsizIKcifFq6mkYJL96TfLXl7
- 3oXg==
-X-Gm-Message-State: APjAAAVCHv7pDTWZJgIvQWnPe/mMg+IFsSY/lumPr0/5hvKEMKuU8ccw
- FL457XjQMo91rwkh3gedUfg=
-X-Google-Smtp-Source: APXvYqz3mrxPCB1S0CW+dxLuweNihe5G+Md2rLL8K5hOTJIrjMzyu1ZdPrsndXXUg8jjoSZHHVCyxA==
-X-Received: by 2002:a62:14c4:: with SMTP id 187mr6515801pfu.241.1565141690166; 
- Tue, 06 Aug 2019 18:34:50 -0700 (PDT)
-Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
- by smtp.gmail.com with ESMTPSA id
- u69sm111740800pgu.77.2019.08.06.18.34.48
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 06 Aug 2019 18:34:49 -0700 (PDT)
-From: john.hubbard@gmail.com
-X-Google-Original-From: jhubbard@nvidia.com
-To: Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH v3 41/41] mm/ksm: convert put_page() to put_user_page*()
-Date: Tue,  6 Aug 2019 18:33:40 -0700
-Message-Id: <20190807013340.9706-42-jhubbard@nvidia.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190807013340.9706-1-jhubbard@nvidia.com>
+	id 1hvB67-0001DB-HA
+	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:50:39 -0400
+Received: from hqemgate15.nvidia.com ([216.228.121.64]:13867)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <jhubbard@nvidia.com>) id 1hvB66-0000Rc-2K
+ for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:50:38 -0400
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate15.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5d4a2e4e0000>; Tue, 06 Aug 2019 18:50:06 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Tue, 06 Aug 2019 18:49:56 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Tue, 06 Aug 2019 18:49:56 -0700
+Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 7 Aug
+ 2019 01:49:55 +0000
+Subject: Re: [PATCH v3 00/39] put_user_pages(): miscellaneous call sites
+To: <john.hubbard@gmail.com>, Andrew Morton <akpm@linux-foundation.org>
 References: <20190807013340.9706-1-jhubbard@nvidia.com>
+From: John Hubbard <jhubbard@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <912eb2bd-4102-05c1-5571-c261617ad30b@nvidia.com>
+Date: Tue, 6 Aug 2019 18:49:55 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-NVConfidentiality: public
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20190807013340.9706-1-jhubbard@nvidia.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL104.nvidia.com (172.18.146.11) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1565142606; bh=Dn5BKjZ7JEBRqWgfa18GnM7OhUXy8yDZwMN3JIIxlGw=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=Ikr1Z0QmiSe2izYZJH1uqOSC6icnToC0RNMEpxuB23chpfLBCzP3w/AieqLXvDTl5
+ WiAJO8Q4P7LqaICg9w9tXQj3/iPr6N76Dc9IbqJMajQoyinrqFfwgCWwW9UnKbczaL
+ GaLoALYFsFwWv8Sy+VSzQYK1xKYCINe6tMld2WSk4jzjh2UDaUm/4PS/zoETIOvAHY
+ Cv7DiogcZErrjHQstqfLwjbbIS2N4ESoffKtD4ugOTExuz4uGt5TgMT8y01S0TheeO
+ 6qVWyeW6YYVimOARtYB9SW21zJJlrmRpt7UH+8pXV98uEPUBYTW77sxtUkB504xqpb
+ D9OLrQ7tTourQ==
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -74,21 +67,19 @@ List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs
 Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- Matthew Wilcox <willy@infradead.org>, sparclinux@vger.kernel.org,
- Ira Weiny <ira.weiny@intel.com>, ceph-devel@vger.kernel.org,
- devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
- linux-rdma@vger.kernel.org, x86@kernel.org, amd-gfx@lists.freedesktop.org,
- Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
- linux-media@vger.kernel.org, Daniel Black <daniel@linux.ibm.com>,
- John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
- linux-block@vger.kernel.org,
- =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
+ sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
+ ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
+ rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
+ amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
+ devel@lists.orangefs.org, linux-media@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
+ =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
  linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
  linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
  netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Mike Kravetz <mike.kravetz@oracle.com>
+ linux-fsdevel@vger.kernel.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -102,89 +93,24 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-From: John Hubbard <jhubbard@nvidia.com>
+On 8/6/19 6:32 PM, john.hubbard@gmail.com wrote:
+> From: John Hubbard <jhubbard@nvidia.com>
+> ...
+> 
+> John Hubbard (38):
+>   mm/gup: add make_dirty arg to put_user_pages_dirty_lock()
+...
+>  54 files changed, 191 insertions(+), 323 deletions(-)
+> 
+ahem, yes, apparently this is what happens if I add a few patches while editing
+the cover letter... :) 
 
-For pages that were retained via get_user_pages*(), release those pages
-via the new put_user_page*() routines, instead of via put_page() or
-release_pages().
+The subject line should read "00/41", and the list of files affected here is
+therefore under-reported in this cover letter. However, the patch series itself is 
+intact and ready for submission.
 
-This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
-("mm: introduce put_user_page*(), placeholder versions").
-
-Cc: Dan Williams <dan.j.williams@intel.com>
-Cc: Daniel Black <daniel@linux.ibm.com>
-Cc: Jan Kara <jack@suse.cz>
-Cc: Jérôme Glisse <jglisse@redhat.com>
-Cc: Matthew Wilcox <willy@infradead.org>
-Cc: Mike Kravetz <mike.kravetz@oracle.com>
-Signed-off-by: John Hubbard <jhubbard@nvidia.com>
----
- mm/ksm.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
-
-diff --git a/mm/ksm.c b/mm/ksm.c
-index 3dc4346411e4..e10ee4d5fdd8 100644
---- a/mm/ksm.c
-+++ b/mm/ksm.c
-@@ -456,7 +456,7 @@ static inline bool ksm_test_exit(struct mm_struct *mm)
-  * We use break_ksm to break COW on a ksm page: it's a stripped down
-  *
-  *	if (get_user_pages(addr, 1, 1, 1, &page, NULL) == 1)
-- *		put_page(page);
-+ *		put_user_page(page);
-  *
-  * but taking great care only to touch a ksm page, in a VM_MERGEABLE vma,
-  * in case the application has unmapped and remapped mm,addr meanwhile.
-@@ -483,7 +483,7 @@ static int break_ksm(struct vm_area_struct *vma, unsigned long addr)
- 					FAULT_FLAG_WRITE | FAULT_FLAG_REMOTE);
- 		else
- 			ret = VM_FAULT_WRITE;
--		put_page(page);
-+		put_user_page(page);
- 	} while (!(ret & (VM_FAULT_WRITE | VM_FAULT_SIGBUS | VM_FAULT_SIGSEGV | VM_FAULT_OOM)));
- 	/*
- 	 * We must loop because handle_mm_fault() may back out if there's
-@@ -568,7 +568,7 @@ static struct page *get_mergeable_page(struct rmap_item *rmap_item)
- 		flush_anon_page(vma, page, addr);
- 		flush_dcache_page(page);
- 	} else {
--		put_page(page);
-+		put_user_page(page);
- out:
- 		page = NULL;
- 	}
-@@ -1974,10 +1974,10 @@ struct rmap_item *unstable_tree_search_insert(struct rmap_item *rmap_item,
- 
- 		parent = *new;
- 		if (ret < 0) {
--			put_page(tree_page);
-+			put_user_page(tree_page);
- 			new = &parent->rb_left;
- 		} else if (ret > 0) {
--			put_page(tree_page);
-+			put_user_page(tree_page);
- 			new = &parent->rb_right;
- 		} else if (!ksm_merge_across_nodes &&
- 			   page_to_nid(tree_page) != nid) {
-@@ -1986,7 +1986,7 @@ struct rmap_item *unstable_tree_search_insert(struct rmap_item *rmap_item,
- 			 * it will be flushed out and put in the right unstable
- 			 * tree next time: only merge with it when across_nodes.
- 			 */
--			put_page(tree_page);
-+			put_user_page(tree_page);
- 			return NULL;
- 		} else {
- 			*tree_pagep = tree_page;
-@@ -2328,7 +2328,7 @@ static struct rmap_item *scan_get_next_rmap_item(struct page **page)
- 							&rmap_item->rmap_list;
- 					ksm_scan.address += PAGE_SIZE;
- 				} else
--					put_page(*page);
-+					put_user_page(*page);
- 				up_read(&mm->mmap_sem);
- 				return rmap_item;
- 			}
+thanks,
 -- 
-2.22.0
-
+John Hubbard
+NVIDIA
 

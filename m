@@ -2,58 +2,58 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ECD583F29
-	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:34:47 +0200 (CEST)
-Received: from [::1] (port=55684 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E4DC83F2A
+	for <lists+devel-orangefs@lfdr.de>; Wed,  7 Aug 2019 03:34:49 +0200 (CEST)
+Received: from [::1] (port=55698 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hvAqk-0008Vy-Pf
-	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:34:46 -0400
-Received: from mail-pf1-f194.google.com ([209.85.210.194]:36605)
+	id 1hvAqm-0008WO-Rn
+	for lists+devel-orangefs@lfdr.de; Tue, 06 Aug 2019 21:34:48 -0400
+Received: from mail-pl1-f196.google.com ([209.85.214.196]:43063)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
  (Exim 4.92) (envelope-from <john.hubbard@gmail.com>)
- id 1hvAqk-0008Qg-5c
- for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:34:46 -0400
-Received: by mail-pf1-f194.google.com with SMTP id r7so42500302pfl.3
- for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:34:25 -0700 (PDT)
+ id 1hvAql-0008Qh-NF
+ for devel@lists.orangefs.org; Tue, 06 Aug 2019 21:34:47 -0400
+Received: by mail-pl1-f196.google.com with SMTP id 4so31588697pld.10
+ for <devel@lists.orangefs.org>; Tue, 06 Aug 2019 18:34:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=34zW6BJN89MycamN6XZc+aPi3iIpUXsyW4mngm2d11Q=;
- b=o1iMd41+ccZkK09IMPd2AYRK2nxxj4luxr/oXYf1r5zvl1rB+5Njvw5+yOF9jzdNKW
- 0sOvnAPF3Qav8GrCrICbMqDOV9qASg1Kx51KsLT3kM/WuvVdMW7XrY8CvDI8Q5dEWx12
- oQbwqpjSWiFbIsNFbcpYcVrmKluAqCipM9FxALoNB6s3X2SZRLlz53JQRsVYPh0pH9nV
- Kc9qcjAV7p7rTzqe2/MHBF1cE8sJ8msPeJl3VFMqaq2A+nfaaBpGi8bFHG/baDlwWEny
- MHNVdhC+ELal559VaRapllf9o6PzvZgYyIKj0wGmpTTu6N66MHuYIC1lBVMp4ydMH/rt
- +u0Q==
+ bh=j5bjFl/k0oxV1FIP4HazX0NuQurNmMvZSnaBil5PKNk=;
+ b=abC7vf0m4NHfC38BFCAMKWrCml8VHI8/tyJOz6tyKPGPsXxu0DOdz37V6xN3Thg1Zd
+ UpeVYry5AG+h4scE5ih6O8+arLoECywsGCioTsrKWxm7sB389EG9oJuSV29/gE7h0LS0
+ y5iguaVXKirIQlusYbxFmgE9r3+yptBAJLiq272v0Sl/QhyMLH3XCxKVguovo2yydY/e
+ hPsoqdmsX1oREmKqBP2kENq5c26aaO0nlO2uQS585/gxX2DEptCDorR5OVzgCXwYNt2m
+ opAr5jpbK/bXJNfg691sG72tAWDskEyT8B3AWzTTbwOCvmhfW6ETVYtk14IOwNSue0Fc
+ R2QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=34zW6BJN89MycamN6XZc+aPi3iIpUXsyW4mngm2d11Q=;
- b=f2b3RKR5tmzG09FSOoFGmq1Cb19I55bXYzoRXt7nh5RehC7bh+XUp5mmUps9R80f/r
- n968C95d982Oq2ySiw5gEgPde3WFxWvPVII0xhGyXwt/VVCPXNAjhWuinIDxoJaOaZtt
- MDwVaAuCqcxm75GUnlZqhp0sNybgCxop0TVpn3nVVKUgaFG1pCxtgWLJP1A+50RMZAx+
- jG5b1mQkHne7jN3qb1w8uxcf9xj3psjg8c0ux6qC67h9YTAYU+17ylOwBucVqdz8z9E3
- Sqfm1uKcprhCwjYhmmAX6ZHv3CbqlzqtrR3SYf+l6e8AXOlIOzHV9vHS5rDZM66rwp/I
- H1Iw==
-X-Gm-Message-State: APjAAAUANMgRoh7zJtNI5IEj/URaxx2Ay8bl8oPcb+dmUQxlYaUjOFPH
- PkLAEAseLKQx40XwuybMEm8=
-X-Google-Smtp-Source: APXvYqwDlo4CFJorDrBurduwUa2oSyS2Jx2b29d9K5TbsKnQqNAY6ckzALOmtrds4Hd5oSsH/O3vaA==
-X-Received: by 2002:a17:90a:1b0c:: with SMTP id
- q12mr6044962pjq.76.1565141645264; 
- Tue, 06 Aug 2019 18:34:05 -0700 (PDT)
+ bh=j5bjFl/k0oxV1FIP4HazX0NuQurNmMvZSnaBil5PKNk=;
+ b=cri9urkoSXcCkuwh6LGIALW2U51Q55H1J0ICi68FD/BoGvvGgZMk0y0yAiRkm9aE3N
+ hg2tfZosPXJXF6AlfRSKeCwh9BGRP3ojvw0Kwxro84nwg7ms3gvaptqfASZKqQLZ0Mzr
+ pf/O/XThfYkue8fsKpM+7Ms7MjyaqFUZhZ8/QYdwSAJNLx4MSfSRFslyeJZRnqufmFtB
+ 0WHUiUXRtsjWsiAioSNgxtUX6f1AoI5x6pDhLWDRkO0ZuUOO67ysNm5B/C4q8rRlz3LV
+ Cm1AIEXrAqc7t5Zgnd+PKEuAhkXx0JyQ9P1ihEVOgIaIstCpBfYmVz4EZo8UgOkJKGt2
+ K/IA==
+X-Gm-Message-State: APjAAAXPC96VzV1UjxBQetszIVOTCHAvo+YJDkSTgdJZh1L0QKzPid9F
+ iI8m6unMW62VXpNtKVVFQNQ=
+X-Google-Smtp-Source: APXvYqw7+dnuyU0Y8q/AKeAaMraB2bbAgVOsWO8V26J8bDVfSW5vhARN1nLU2+DyCWOsFFzTtXKGNQ==
+X-Received: by 2002:a17:902:e2:: with SMTP id
+ a89mr5940458pla.210.1565141646808; 
+ Tue, 06 Aug 2019 18:34:06 -0700 (PDT)
 Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
  by smtp.gmail.com with ESMTPSA id
- u69sm111740800pgu.77.2019.08.06.18.34.03
+ u69sm111740800pgu.77.2019.08.06.18.34.05
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 06 Aug 2019 18:34:04 -0700 (PDT)
+ Tue, 06 Aug 2019 18:34:06 -0700 (PDT)
 From: john.hubbard@gmail.com
 X-Google-Original-From: jhubbard@nvidia.com
 To: Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH v3 13/41] scif: convert put_page() to put_user_page*()
-Date: Tue,  6 Aug 2019 18:33:12 -0700
-Message-Id: <20190807013340.9706-14-jhubbard@nvidia.com>
+Subject: [PATCH v3 14/41] vmci: convert put_page() to put_user_page*()
+Date: Tue,  6 Aug 2019 18:33:13 -0700
+Message-Id: <20190807013340.9706-15-jhubbard@nvidia.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190807013340.9706-1-jhubbard@nvidia.com>
 References: <20190807013340.9706-1-jhubbard@nvidia.com>
@@ -72,25 +72,24 @@ List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
 Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+ "Gustavo A . R . Silva" <gustavo@embeddedor.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
- Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, sparclinux@vger.kernel.org,
- Ira Weiny <ira.weiny@intel.com>, ceph-devel@vger.kernel.org,
- devel@driverdev.osuosl.org, Ashutosh Dixit <ashutosh.dixit@intel.com>,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
+ ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
  rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
  amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
  Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
  devel@lists.orangefs.org, linux-media@vger.kernel.org,
- Joerg Roedel <jroedel@suse.de>, Arnd Bergmann <arnd@arndb.de>,
+ Kees Cook <keescook@chromium.org>, Arnd Bergmann <arnd@arndb.de>,
  John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
  linux-block@vger.kernel.org,
  =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, Zhen Lei <thunder.leizhen@huawei.com>,
- Dan Williams <dan.j.williams@intel.com>, linux-arm-kernel@lists.infradead.org,
- linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
- LKML <linux-kernel@vger.kernel.org>, linux-xfs@vger.kernel.org,
- linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Robin Murphy <robin.murphy@arm.com>
+ linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
+ linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
+ netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -113,55 +112,61 @@ release_pages().
 This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
 ("mm: introduce put_user_page*(), placeholder versions").
 
-Cc: Sudeep Dutt <sudeep.dutt@intel.com>
-Cc: Ashutosh Dixit <ashutosh.dixit@intel.com>
+Note that this effectively changes the code's behavior in
+qp_release_pages(): it now ultimately calls set_page_dirty_lock(),
+instead of set_page_dirty(). This is probably more accurate.
+
+As Christoph Hellwig put it, "set_page_dirty() is only safe if we are
+dealing with a file backed page where we have reference on the inode it
+hangs off." [1]
+
+[1] https://lore.kernel.org/r/20190723153640.GB720@lst.de
+
 Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: Joerg Roedel <jroedel@suse.de>
-Cc: Robin Murphy <robin.murphy@arm.com>
-Cc: Zhen Lei <thunder.leizhen@huawei.com>
+Cc: Al Viro <viro@zeniv.linux.org.uk>
+Cc: Gustavo A. R. Silva <gustavo@embeddedor.com>
+Cc: Kees Cook <keescook@chromium.org>
 Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 ---
- drivers/misc/mic/scif/scif_rma.c | 17 ++++++++---------
- 1 file changed, 8 insertions(+), 9 deletions(-)
+ drivers/misc/vmw_vmci/vmci_context.c    |  2 +-
+ drivers/misc/vmw_vmci/vmci_queue_pair.c | 11 ++---------
+ 2 files changed, 3 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/misc/mic/scif/scif_rma.c b/drivers/misc/mic/scif/scif_rma.c
-index 01e27682ea30..d84ed9466920 100644
---- a/drivers/misc/mic/scif/scif_rma.c
-+++ b/drivers/misc/mic/scif/scif_rma.c
-@@ -113,13 +113,14 @@ static int scif_destroy_pinned_pages(struct scif_pinned_pages *pin)
- 	int writeable = pin->prot & SCIF_PROT_WRITE;
- 	int kernel = SCIF_MAP_KERNEL & pin->map_flags;
+diff --git a/drivers/misc/vmw_vmci/vmci_context.c b/drivers/misc/vmw_vmci/vmci_context.c
+index 16695366ec92..9daa52ee63b7 100644
+--- a/drivers/misc/vmw_vmci/vmci_context.c
++++ b/drivers/misc/vmw_vmci/vmci_context.c
+@@ -587,7 +587,7 @@ void vmci_ctx_unset_notify(struct vmci_ctx *context)
  
--	for (j = 0; j < pin->nr_pages; j++) {
--		if (pin->pages[j] && !kernel) {
-+	if (kernel) {
-+		for (j = 0; j < pin->nr_pages; j++) {
- 			if (writeable)
--				SetPageDirty(pin->pages[j]);
-+				set_page_dirty_lock(pin->pages[j]);
- 			put_page(pin->pages[j]);
- 		}
+ 	if (notify_page) {
+ 		kunmap(notify_page);
+-		put_page(notify_page);
++		put_user_page(notify_page);
+ 	}
+ }
+ 
+diff --git a/drivers/misc/vmw_vmci/vmci_queue_pair.c b/drivers/misc/vmw_vmci/vmci_queue_pair.c
+index 8531ae781195..e5434551d0ef 100644
+--- a/drivers/misc/vmw_vmci/vmci_queue_pair.c
++++ b/drivers/misc/vmw_vmci/vmci_queue_pair.c
+@@ -626,15 +626,8 @@ static void qp_release_queue_mutex(struct vmci_queue *queue)
+ static void qp_release_pages(struct page **pages,
+ 			     u64 num_pages, bool dirty)
+ {
+-	int i;
+-
+-	for (i = 0; i < num_pages; i++) {
+-		if (dirty)
+-			set_page_dirty(pages[i]);
+-
+-		put_page(pages[i]);
+-		pages[i] = NULL;
 -	}
-+	} else
-+		put_user_pages_dirty_lock(pin->pages, pin->nr_pages, writeable);
++	put_user_pages_dirty_lock(pages, num_pages, dirty);
++	memset(pages, 0, num_pages * sizeof(struct page *));
+ }
  
- 	scif_free(pin->pages,
- 		  pin->nr_pages * sizeof(*pin->pages));
-@@ -1385,11 +1386,9 @@ int __scif_pin_pages(void *addr, size_t len, int *out_prot,
- 				if (ulimit)
- 					__scif_dec_pinned_vm_lock(mm, nr_pages);
- 				/* Roll back any pinned pages */
--				for (i = 0; i < pinned_pages->nr_pages; i++) {
--					if (pinned_pages->pages[i])
--						put_page(
--						pinned_pages->pages[i]);
--				}
-+				put_user_pages(pinned_pages->pages,
-+					       pinned_pages->nr_pages);
-+
- 				prot &= ~SCIF_PROT_WRITE;
- 				try_upgrade = false;
- 				goto retry;
+ /*
 -- 
 2.22.0
 

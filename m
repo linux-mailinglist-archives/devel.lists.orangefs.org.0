@@ -2,63 +2,53 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4915E881C3
-	for <lists+devel-orangefs@lfdr.de>; Fri,  9 Aug 2019 19:57:08 +0200 (CEST)
-Received: from [::1] (port=48454 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5F278AEBC
+	for <lists+devel-orangefs@lfdr.de>; Tue, 13 Aug 2019 07:25:30 +0200 (CEST)
+Received: from [::1] (port=55878 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hw98V-0005LJ-CT
-	for lists+devel-orangefs@lfdr.de; Fri, 09 Aug 2019 13:57:07 -0400
-Received: from mga03.intel.com ([134.134.136.65]:38164)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <ira.weiny@intel.com>) id 1hw98U-0005A9-Hb
- for devel@lists.orangefs.org; Fri, 09 Aug 2019 13:57:06 -0400
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 09 Aug 2019 10:56:24 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,366,1559545200"; d="scan'208";a="350560074"
-Received: from fmsmsx106.amr.corp.intel.com ([10.18.124.204])
- by orsmga005.jf.intel.com with ESMTP; 09 Aug 2019 10:56:24 -0700
-Received: from crsmsx151.amr.corp.intel.com (172.18.7.86) by
- FMSMSX106.amr.corp.intel.com (10.18.124.204) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Fri, 9 Aug 2019 10:56:23 -0700
-Received: from crsmsx101.amr.corp.intel.com ([169.254.1.115]) by
- CRSMSX151.amr.corp.intel.com ([169.254.3.186]) with mapi id 14.03.0439.000;
- Fri, 9 Aug 2019 11:56:21 -0600
-From: "Weiny, Ira" <ira.weiny@intel.com>
-To: Jan Kara <jack@suse.cz>
-Subject: RE: [PATCH 00/34] put_user_pages(): miscellaneous call sites
-Thread-Topic: [PATCH 00/34] put_user_pages(): miscellaneous call sites
-Thread-Index: AQHVSNjU1EYxEMQcyke2Y16AlWiV+abn98YAgAA6ZwCAABzEgIAAB8CAgABJHoCABynCAIAAAqCAgAC1jYCAAmuxgIAANKMg
-Date: Fri, 9 Aug 2019 17:56:20 +0000
-Message-ID: <2807E5FD2F6FDA4886F6618EAC48510E79E7F367@CRSMSX101.amr.corp.intel.com>
-References: <20190802022005.5117-1-jhubbard@nvidia.com>
- <20190802091244.GD6461@dhcp22.suse.cz>
- <20190802124146.GL25064@quack2.suse.cz>
- <20190802142443.GB5597@bombadil.infradead.org>
- <20190802145227.GQ25064@quack2.suse.cz>
- <076e7826-67a5-4829-aae2-2b90f302cebd@nvidia.com>
- <20190807083726.GA14658@quack2.suse.cz>
- <20190807084649.GQ11812@dhcp22.suse.cz>
- <20190808023637.GA1508@iweiny-DESK2.sc.intel.com>
- <20190809083435.GA17568@quack2.suse.cz>
-In-Reply-To: <20190809083435.GA17568@quack2.suse.cz>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiMjgzZWFlNTQtZDMwNC00YTZiLThiNDktMzI0ZWY3MGNjMDdiIiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjEwLjE4MDQuNDkiLCJUcnVzdGVkTGFiZWxIYXNoIjoiY2tWUXpQWXg4RTZvTlVIZFwvOFVSVWNwbCs3V2JDTG5GcHNpZTB3bzRRaEhFUExOQzZXZGtLeFkzNUhuNjVBOEYifQ==
-x-ctpclassification: CTP_NT
-dlp-product: dlpe-windows
-dlp-version: 11.2.0.6
-dlp-reaction: no-action
-x-originating-ip: [172.18.205.10]
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	id 1hxPJJ-00014G-Qz
+	for lists+devel-orangefs@lfdr.de; Tue, 13 Aug 2019 01:25:29 -0400
+Received: from mout.kundenserver.de ([217.72.192.73]:42749)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ (Exim 4.92) (envelope-from <stefan.wahren@i2se.com>)
+ id 1hxPJH-00013d-Ky
+ for devel@lists.orangefs.org; Tue, 13 Aug 2019 01:25:27 -0400
+Received: from [192.168.178.60] ([109.104.47.130]) by mrelayeu.kundenserver.de
+ (mreue107 [212.227.15.183]) with ESMTPSA (Nemesis) id
+ 1MPGiR-1hevT50O45-00PbYR; Tue, 13 Aug 2019 07:23:46 +0200
+Subject: Re: [PATCH v2 15/34] staging/vc04_services: convert put_page() to
+ put_user_page*()
+To: john.hubbard@gmail.com, Andrew Morton <akpm@linux-foundation.org>
+References: <20190804224915.28669-1-jhubbard@nvidia.com>
+ <20190804224915.28669-16-jhubbard@nvidia.com>
+From: Stefan Wahren <stefan.wahren@i2se.com>
+Message-ID: <f92a9b35-072c-a452-3248-ded047a9ee7e@i2se.com>
+Date: Tue, 13 Aug 2019 07:23:36 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
+In-Reply-To: <20190804224915.28669-16-jhubbard@nvidia.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-Provags-ID: V03:K1:WLtnGHSdIdsSOgSCw9gLWN/He07a3vhG8P/jw9q/ZsKCLbsJUeS
+ 5llVNlt7KE/tvHn+5EOmDYYv4pX1cHVWKOXHtrw4HQWAHuCkTohFsgxlEY0fExapDm8vR8t
+ zVIsUr/Bms6Kvxj5sCY8IbKiNL01LBum+j6x95pPZHXG9iG9KDUI7QIiVK2/58tc3NB1jnX
+ y7VHJG/KIA+fGCfAbINIQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:e2tiG/LoUCE=:MfCllk8c06iYHLUWJWcKAL
+ cdQ1fi1ypP4tC6pu8XAt4M+fU5mGlkjM5ziFPw9nAP5+ICbjFLhxsiDLATVpll3xwUgna69cS
+ Ev9bpFgmBYRqbHsiOVM335kNgAU19xY/LXN/GzEuigzotpDhc5IdC4FGsNTdqmIYi0Bx4dgCw
+ bLM/SrMXG40Mg1UArtxdqWQvHnINj7yK6JacwPswBAo33CV5S5U4U1PS67DpEMKA7dX0oduGb
+ 5fQtkN1kvCZEg2/ekJnnb+PAR6KRS8Eu0zqK7cwQwWxs+nxHFNvcdfFolT7waPuKj24rhpnjW
+ ZntPcErm15w8EJ72vFuARtCUk4Lh4jU+zYNtoDE6B8RJqr/+yxycmwEDucEbNXrujkaPH72RU
+ fWCHjlXjsJS29DRMlBs91cqiKMaK/ktbzSpegz+iLEJq/HkDuPh/jiz/b8w2crkMXTYEXfcIb
+ WqkuI5hHrAdEh99xa/X99FupD8F6iZ52Pv/g2glNHL9WlKL41btCn/KodqBqy/glIqHZeYzq2
+ SXjRol/t4oy36qgSCQmUGiCt1lssYLkBWOzcxjui5lZUL2V9O7wn91tHl7G+DbqjQzgMyVtBP
+ 60iHHkwkWe3su3M3o+o4m8sWd9OG5XIToU/4cSDhBQohrRIKKqoUbXAyCJH96bxaYdq/zseIf
+ oMsHaN/31pBaLs6MtsAa2tu5PRj9qlBX5kso+Y5up4mj5gl7CfIWyGwpM4gPWtVKv1En5k3ZR
+ HR/0MJ6spaP8P86u5+VALfxj2aM5bbcj+ZVczoVE2BIVl4lPQEesVoHHwFc=
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -70,37 +60,27 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: "linux-fbdev@vger.kernel.org" <linux-fbdev@vger.kernel.org>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- Michal Hocko <mhocko@kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- "sparclinux@vger.kernel.org" <sparclinux@vger.kernel.org>, "Williams,
- Dan J" <dan.j.williams@intel.com>,
- "devel@driverdev.osuosl.org" <devel@driverdev.osuosl.org>,
- "rds-devel@oss.oracle.com" <rds-devel@oss.oracle.com>,
- "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
- "x86@kernel.org" <x86@kernel.org>, Matthew Wilcox <willy@infradead.org>,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ sparclinux@vger.kernel.org, Suniel Mahesh <sunil.m@techveda.org>,
+ Dan Williams <dan.j.williams@intel.com>, devel@driverdev.osuosl.org,
+ rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org,
+ Ira Weiny <ira.weiny@intel.com>, x86@kernel.org, amd-gfx@lists.freedesktop.org,
  Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "devel@lists.orangefs.org" <devel@lists.orangefs.org>,
- "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
- John Hubbard <jhubbard@nvidia.com>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- "john.hubbard@gmail.com" <john.hubbard@gmail.com>,
- "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
- =?iso-8859-1?Q?J=E9r=F4me_Glisse?= <jglisse@redhat.com>,
- "linux-rpi-kernel@lists.infradead.org" <linux-rpi-kernel@lists.infradead.org>,
- "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
- "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
- "linux-nfs@vger.kernel.org" <linux-nfs@vger.kernel.org>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- LKML <linux-kernel@vger.kernel.org>,
- "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
- "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>
+ John Hubbard <jhubbard@nvidia.com>, xen-devel@lists.xenproject.org,
+ devel@lists.orangefs.org, linux-media@vger.kernel.org,
+ Mihaela Muraru <mihaela.muraru21@gmail.com>, intel-gfx@lists.freedesktop.org,
+ linux-block@vger.kernel.org,
+ =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
+ linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
+ Sidong Yang <realwakka@gmail.com>, linux-arm-kernel@lists.infradead.org,
+ linux-nfs@vger.kernel.org, Eric Anholt <eric@anholt.net>,
+ netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
+ Kishore KP <kishore.p@techveda.org>, linux-fsdevel@vger.kernel.org,
+ Al Viro <viro@zeniv.linux.org.uk>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -114,97 +94,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
->=20
-> On Wed 07-08-19 19:36:37, Ira Weiny wrote:
-> > On Wed, Aug 07, 2019 at 10:46:49AM +0200, Michal Hocko wrote:
-> > > > So I think your debug option and my suggested renaming serve a bit
-> > > > different purposes (and thus both make sense). If you do the
-> > > > renaming, you can just grep to see unconverted sites. Also when
-> > > > someone merges new GUP user (unaware of the new rules) while you
-> > > > switch GUP to use pins instead of ordinary references, you'll get
-> > > > compilation error in case of renaming instead of hard to debug
-> > > > refcount leak without the renaming. And such conflict is almost
-> > > > bound to happen given the size of GUP patch set... Also the
-> > > > renaming serves against the "coding inertia" - i.e., GUP is around =
-for
-> ages so people just use it without checking any documentation or comments=
-.
-> > > > After switching how GUP works, what used to be correct isn't
-> > > > anymore so renaming the function serves as a warning that
-> > > > something has really changed.
-> > >
-> > > Fully agreed!
-> >
-> > Ok Prior to this I've been basing all my work for the RDMA/FS DAX
-> > stuff in Johns put_user_pages()...  (Including when I proposed failing
-> > truncate with a lease in June [1])
-> >
-> > However, based on the suggestions in that thread it became clear that
-> > a new interface was going to need to be added to pass in the "RDMA
-> > file" information to GUP to associate file pins with the correct proces=
-ses...
-> >
-> > I have many drawings on my white board with "a whole lot of lines" on
-> > them to make sure that if a process opens a file, mmaps it, pins it
-> > with RDMA, _closes_ it, and ummaps it; that the resulting file pin can
-> > still be traced back to the RDMA context and all the processes which
-> > may have access to it....  No matter where the original context may
-> > have come from.  I believe I have accomplished that.
-> >
-> > Before I go on, I would like to say that the "imbalance" of
-> > get_user_pages() and put_page() bothers me from a purist standpoint...
-> > However, since this discussion cropped up I went ahead and ported my
-> > work to Linus' current master
-> > (5.3-rc3+) and in doing so I only had to steal a bit of Johns code...
-> > Sorry John...  :-(
-> >
-> > I don't have the commit messages all cleaned up and I know there may
-> > be some discussion on these new interfaces but I wanted to throw this
-> > series out there because I think it may be what Jan and Michal are
-> > driving at (or at least in that direction.
-> >
-> > Right now only RDMA and DAX FS's are supported.  Other users of GUP
-> > will still fail on a DAX file and regular files will still be at
-> > risk.[2]
-> >
-> > I've pushed this work (based 5.3-rc3+ (33920f1ec5bf)) here[3]:
-> >
-> > https://github.com/weiny2/linux-kernel/tree/linus-rdmafsdax-b0-v3
-> >
-> > I think the most relevant patch to this conversation is:
-> >
-> > https://github.com/weiny2/linux-
-> kernel/commit/5d377653ba5cf11c3b716f90
-> > 4b057bee6641aaf6
-> >
-> > I stole Jans suggestion for a name as the name I used while
-> > prototyping was pretty bad...  So Thanks Jan...  ;-)
->=20
-> For your function, I'd choose a name like vaddr_pin_leased_pages() so tha=
-t
-> association with a lease is clear from the name :)
-
-My gut was to just change this as you suggested.  But the fact is that thes=
-e calls can get used on anonymous pages as well.  So the "leased" semantic =
-may not apply...  OTOH if a file is encountered it will fail the pin...  :-=
-/  I'm going to leave it for now and get the patches submitted to the list.=
-..
-
-> Also I'd choose the
-> counterpart to be vaddr_unpin_leased_page[s](). Especially having put_pag=
-e
-> in the name looks confusing to me...
-
-Ah yes, totally agree with the "pin/unpin" symmetry.  I've changed from "pu=
-t" to "unpin"...
-
-Thanks,
-Ira
-
->=20
-> 								Honza
->=20
-> --
-> Jan Kara <jack@suse.com>
-> SUSE Labs, CR
+On 05.08.19 00:48, john.hubbard@gmail.com wrote:
+> From: John Hubbard <jhubbard@nvidia.com>
+>
+> For pages that were retained via get_user_pages*(), release those pages
+> via the new put_user_page*() routines, instead of via put_page() or
+> release_pages().
+>
+> This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
+> ("mm: introduce put_user_page*(), placeholder versions").
+>
+> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+>
+> Cc: Eric Anholt <eric@anholt.net>
+> Cc: Stefan Wahren <stefan.wahren@i2se.com>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: Mihaela Muraru <mihaela.muraru21@gmail.com>
+> Cc: Suniel Mahesh <sunil.m@techveda.org>
+> Cc: Al Viro <viro@zeniv.linux.org.uk>
+> Cc: Sidong Yang <realwakka@gmail.com>
+> Cc: Kishore KP <kishore.p@techveda.org>
+> Cc: linux-rpi-kernel@lists.infradead.org
+> Cc: linux-arm-kernel@lists.infradead.org
+> Cc: devel@driverdev.osuosl.org
+> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
+Acked-by: Stefan Wahren <stefan.wahren@i2se.com>
 

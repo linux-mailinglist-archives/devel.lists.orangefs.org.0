@@ -2,37 +2,32 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6041F8EF57
-	for <lists+devel-orangefs@lfdr.de>; Thu, 15 Aug 2019 17:31:14 +0200 (CEST)
-Received: from [::1] (port=34354 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1303D8F5AD
+	for <lists+devel-orangefs@lfdr.de>; Thu, 15 Aug 2019 22:22:57 +0200 (CEST)
+Received: from [::1] (port=37702 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hyHib-0005cL-2j
-	for lists+devel-orangefs@lfdr.de; Thu, 15 Aug 2019 11:31:13 -0400
-Received: from mx2.suse.de ([195.135.220.15]:34928 helo=mx1.suse.de)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <jack@suse.cz>) id 1hyHiZ-0005XZ-5S
- for devel@lists.orangefs.org; Thu, 15 Aug 2019 11:31:11 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 84639B02E;
- Thu, 15 Aug 2019 15:30:28 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id F3E6E1E4200; Thu, 15 Aug 2019 17:30:24 +0200 (CEST)
-Date: Thu, 15 Aug 2019 17:30:24 +0200
-From: Jan Kara <jack@suse.cz>
-To: Mark Salyzyn <salyzyn@android.com>
-Subject: Re: [PATCH v2] Add flags option to get xattr method paired to
+	id 1hyMGu-0004x6-2v
+	for lists+devel-orangefs@lfdr.de; Thu, 15 Aug 2019 16:22:56 -0400
+Received: from namei.org ([65.99.196.166]:42020)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <jmorris@namei.org>) id 1hyMGs-0004wF-Hp
+ for devel@lists.orangefs.org; Thu, 15 Aug 2019 16:22:54 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by namei.org (8.14.4/8.14.4) with ESMTP id x7FJKa6b013630;
+ Thu, 15 Aug 2019 19:20:36 GMT
+Date: Fri, 16 Aug 2019 05:20:36 +1000 (AEST)
+From: James Morris <jmorris@namei.org>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: Re: [PATCH] Add flags option to get xattr method paired to
  __vfs_getxattr
-Message-ID: <20190815153024.GP14313@quack2.suse.cz>
-References: <20190813145527.26289-1-salyzyn@android.com>
- <20190814110022.GB26273@quack2.suse.cz>
- <71d66fd1-cc94-fd0c-dfa7-115ba8a6b95a@android.com>
+In-Reply-To: <20190813084801.GA972@kroah.com>
+Message-ID: <alpine.LRH.2.21.1908160515130.12729@namei.org>
+References: <20190812193320.200472-1-salyzyn@android.com>
+ <20190813084801.GA972@kroah.com>
+User-Agent: Alpine 2.21 (LRH 202 2017-01-01)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <71d66fd1-cc94-fd0c-dfa7-115ba8a6b95a@android.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -45,48 +40,44 @@ List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
 Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
- jfs-discussion@lists.sourceforge.net,
- Phillip Lougher <phillip@squashfs.org.uk>, Jan Kara <jack@suse.cz>,
- linux-integrity@vger.kernel.org, samba-technical@lists.samba.org,
- Dominique Martinet <asmadeus@codewreck.org>, Chao Yu <yuchao0@huawei.com>,
- Mimi Zohar <zohar@linux.ibm.com>, Adrian Hunter <adrian.hunter@intel.com>,
- linux-mm@kvack.org, Chris Mason <clm@fb.com>, netdev@vger.kernel.org,
- Andreas Dilger <adilger.kernel@dilger.ca>, linux-xfs@vger.kernel.org,
- Eric Paris <eparis@parisplace.org>, linux-f2fs-devel@lists.sourceforge.net,
- linux-afs@lists.infradead.org, Stephen Smalley <sds@tycho.nsa.gov>,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- Paul Moore <paul@paul-moore.com>, Sage Weil <sage@redhat.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-unionfs@vger.kernel.org, Hugh Dickins <hughd@google.com>,
- James Morris <jmorris@namei.org>, cluster-devel@redhat.com,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
+ jfs-discussion@lists.sourceforge.net, linux-integrity@vger.kernel.org,
+ samba-technical@lists.samba.org, Dominique Martinet <asmadeus@codewreck.org>,
+ Chao Yu <yuchao0@huawei.com>, Mimi Zohar <zohar@linux.ibm.com>,
+ linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
+ Chris Mason <clm@fb.com>, "David S. Miller" <davem@davemloft.net>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, Eric Paris <eparis@parisplace.org>,
+ netdev@vger.kernel.org, Tyler Hicks <tyhicks@canonical.com>,
+ linux-afs@lists.infradead.org, linux-xfs@vger.kernel.org,
+ Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, Hugh Dickins <hughd@google.com>,
+ =?ISO-8859-15?Q?Ernesto_A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
+ cluster-devel@redhat.com, selinux@vger.kernel.org,
  Vyacheslav Dubeyko <slava@dubeyko.com>,
  Casey Schaufler <casey@schaufler-ca.com>, v9fs-developer@lists.sourceforge.net,
  Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- kernel-team@android.com, devel@lists.orangefs.org,
- Serge Hallyn <serge@hallyn.com>, Gao Xiang <gaoxiang25@huawei.com>,
+ kernel-team@android.com, linux-mm@kvack.org, devel@lists.orangefs.org,
+ Serge Hallyn <serge@hallyn.com>, linux-cifs@vger.kernel.org,
  Eric Van Hensbergen <ericvh@gmail.com>, ecryptfs@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, Josef Bacik <josef@toxicpanda.com>,
- reiserfs-devel@vger.kernel.org, Bob Peterson <rpeterso@redhat.com>,
- Joel Becker <jlbec@evilplan.org>, Anna Schumaker <anna.schumaker@netapp.com>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, selinux@vger.kernel.org,
+ Josef Bacik <josef@toxicpanda.com>, reiserfs-devel@vger.kernel.org,
+ Tejun Heo <tj@kernel.org>, Joel Becker <jlbec@evilplan.org>,
+ linux-mtd@lists.infradead.org, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
- Andreas Gruenbacher <agruenba@redhat.com>, David Howells <dhowells@redhat.com>,
- linux-nfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- linux-fsdevel@vger.kernel.org, Artem Bityutskiy <dedekind1@gmail.com>,
- Mathieu Malaterre <malat@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Miklos Szeredi <miklos@szeredi.hu>, Jeff Layton <jlayton@kernel.org>,
+ Paul Moore <paul@paul-moore.com>, linux-nfs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Theodore Ts'o <tytso@mit.edu>,
+ linux-fsdevel@vger.kernel.org, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Mathieu Malaterre <malat@debian.org>, Stephen Smalley <sds@tycho.nsa.gov>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
  linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- Tyler Hicks <tyhicks@canonical.com>, Steve French <sfrench@samba.org>,
- Ernesto =?iso-8859-1?Q?A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
- linux-btrfs@vger.kernel.org, linux-security-module@vger.kernel.org,
- Jan Kara <jack@suse.com>, Tejun Heo <tj@kernel.org>,
- linux-mtd@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
- David Woodhouse <dwmw2@infradead.org>, "David S. Miller" <davem@davemloft.net>,
- ocfs2-devel@oss.oracle.com, Alexander Viro <viro@zeniv.linux.org.uk>
+ Mark Salyzyn <salyzyn@android.com>, Steve French <sfrench@samba.org>,
+ linux-security-module@vger.kernel.org, ocfs2-devel@oss.oracle.com,
+ Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
+ Phillip Lougher <phillip@squashfs.org.uk>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Woodhouse <dwmw2@infradead.org>,
+ Anna Schumaker <anna.schumaker@netapp.com>, linux-btrfs@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -100,101 +91,52 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Wed 14-08-19 07:54:16, Mark Salyzyn wrote:
-> On 8/14/19 4:00 AM, Jan Kara wrote:
-> > On Tue 13-08-19 07:55:06, Mark Salyzyn wrote:
-> > ...
-> > > diff --git a/fs/xattr.c b/fs/xattr.c
-> > > index 90dd78f0eb27..71f887518d6f 100644
-> > > --- a/fs/xattr.c
-> > > +++ b/fs/xattr.c
-> > ...
-> > >   ssize_t
-> > >   __vfs_getxattr(struct dentry *dentry, struct inode *inode, const char *name,
-> > > -	       void *value, size_t size)
-> > > +	       void *value, size_t size, int flags)
-> > >   {
-> > >   	const struct xattr_handler *handler;
-> > > -
-> > > -	handler = xattr_resolve_name(inode, &name);
-> > > -	if (IS_ERR(handler))
-> > > -		return PTR_ERR(handler);
-> > > -	if (!handler->get)
-> > > -		return -EOPNOTSUPP;
-> > > -	return handler->get(handler, dentry, inode, name, value, size);
-> > > -}
-> > > -EXPORT_SYMBOL(__vfs_getxattr);
-> > > -
-> > > -ssize_t
-> > > -vfs_getxattr(struct dentry *dentry, const char *name, void *value, size_t size)
-> > > -{
-> > > -	struct inode *inode = dentry->d_inode;
-> > >   	int error;
-> > > +	if (flags & XATTR_NOSECURITY)
-> > > +		goto nolsm;
-> > Hum, is it OK for XATTR_NOSECURITY to skip even the xattr_permission()
-> > check? I understand that for reads of security xattrs it actually does not
-> > matter in practice but conceptually that seems wrong to me as
-> > XATTR_NOSECURITY is supposed to skip just security-module checks to avoid
-> > recursion AFAIU.
-> 
-> Good catch I think.
-> 
-> I was attempting to make this change purely inert, no change in
-> functionality, only a change in API. Adding a call to xattr_permission would
-> incur a change in overall functionality, as it would introduce into the
-> current and original __vfs_getxattr a call to xattr_permission that was not
-> there before.
-> 
-> (I will have to defer the real answer and requirements to the security
-> folks)
-> 
-> AFAIK you are correct, and to make the call would reduce the attack surface,
-> trading a very small amount of CPU utilization, for a much larger amount of
-> trust.
-> 
-> Given the long history of this patch set (for overlayfs) and the large
-> amount of stakeholders, I would _prefer_ to submit a followup independent
-> functionality/security change to _vfs_get_xattr _after_ this makes it in.
+On Tue, 13 Aug 2019, Greg Kroah-Hartman wrote:
 
-You're right. The problem was there before. So ack to changing this later.
-
-> > > diff --git a/include/uapi/linux/xattr.h b/include/uapi/linux/xattr.h
-> > > index c1395b5bd432..1216d777d210 100644
-> > > --- a/include/uapi/linux/xattr.h
-> > > +++ b/include/uapi/linux/xattr.h
-> > > @@ -17,8 +17,9 @@
-> > >   #if __UAPI_DEF_XATTR
-> > >   #define __USE_KERNEL_XATTR_DEFS
-> > > -#define XATTR_CREATE	0x1	/* set value, fail if attr already exists */
-> > > -#define XATTR_REPLACE	0x2	/* set value, fail if attr does not exist */
-> > > +#define XATTR_CREATE	 0x1	/* set value, fail if attr already exists */
-> > > +#define XATTR_REPLACE	 0x2	/* set value, fail if attr does not exist */
-> > > +#define XATTR_NOSECURITY 0x4	/* get value, do not involve security check */
-> > >   #endif
-> > It seems confusing to export XATTR_NOSECURITY definition to userspace when
-> > that is kernel-internal flag. I'd just define it in include/linux/xattr.h
-> > somewhere from the top of flags space (like 0x40000000).
-> > 
-> > Otherwise the patch looks OK to me (cannot really comment on the security
-> > module aspect of this whole thing though).
+> On Mon, Aug 12, 2019 at 12:32:49PM -0700, Mark Salyzyn wrote:
+> > --- a/include/linux/xattr.h
+> > +++ b/include/linux/xattr.h
+> > @@ -30,10 +30,10 @@ struct xattr_handler {
+> >  	const char *prefix;
+> >  	int flags;      /* fs private flags */
+> >  	bool (*list)(struct dentry *dentry);
+> > -	int (*get)(const struct xattr_handler *, struct dentry *dentry,
+> > +	int (*get)(const struct xattr_handler *handler, struct dentry *dentry,
+> >  		   struct inode *inode, const char *name, void *buffer,
+> > -		   size_t size);
+> > -	int (*set)(const struct xattr_handler *, struct dentry *dentry,
+> > +		   size_t size, int flags);
+> > +	int (*set)(const struct xattr_handler *handler, struct dentry *dentry,
+> >  		   struct inode *inode, const char *name, const void *buffer,
+> >  		   size_t size, int flags);
 > 
-> Good point. However, we do need to keep these flags together to reduce
-> maintenance risk, I personally abhor two locations for flags bits even if
-> one comes from the opposite bit-side; collisions are undetectable at build
-> time. Although I have not gone through the entire thought experiment, I am
-> expecting that fuse could possibly benefit from this flag (if exposed) since
-> it also has a security recursion. That said, fuse is probably the example of
-> a gaping wide attack surface if user space had access to it ... your
-> xattr_permissions call addition requested above would be realistically, not
-> just pedantically, required!
+> Wow, 7 arguments.  Isn't there some nice rule of thumb that says once
+> you get more then 5, a function becomes impossible to understand?
+> 
+> Surely this could be a structure passed in here somehow, that way when
+> you add the 8th argument in the future, you don't have to change
+> everything yet again?  :)
+> 
+> I don't have anything concrete to offer as a replacement fix for this,
+> but to me this just feels really wrong...
 
-Yeah, flags bits in two places are bad as well. So maybe at least
-#ifdef __KERNEL__ bit around the definitiona and a comment that it is
-kernel internal flag?
+How about something like:
 
-								Honza
+struct xattr_gs_args {
+	struct dentry *dentry;
+	struct inode *inode;
+	const char *name;
+	const void *buffer;
+	size_t size;
+	int flags;
+};
+
+int (*get)(const struct xattr_handler *handler, struct xattr_gs_args *args);
+int (*set)(const struct xattr_handler *handler, struct xattr_gs_args *args);
+
+
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+James Morris
+<jmorris@namei.org>
+
 

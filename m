@@ -2,32 +2,45 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1303D8F5AD
-	for <lists+devel-orangefs@lfdr.de>; Thu, 15 Aug 2019 22:22:57 +0200 (CEST)
-Received: from [::1] (port=37702 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 978398F5E4
+	for <lists+devel-orangefs@lfdr.de>; Thu, 15 Aug 2019 22:44:08 +0200 (CEST)
+Received: from [::1] (port=44730 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hyMGu-0004x6-2v
-	for lists+devel-orangefs@lfdr.de; Thu, 15 Aug 2019 16:22:56 -0400
-Received: from namei.org ([65.99.196.166]:42020)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <jmorris@namei.org>) id 1hyMGs-0004wF-Hp
- for devel@lists.orangefs.org; Thu, 15 Aug 2019 16:22:54 -0400
-Received: from localhost (localhost [127.0.0.1])
- by namei.org (8.14.4/8.14.4) with ESMTP id x7FJKa6b013630;
- Thu, 15 Aug 2019 19:20:36 GMT
-Date: Fri, 16 Aug 2019 05:20:36 +1000 (AEST)
-From: James Morris <jmorris@namei.org>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+	id 1hyMbP-0006jS-P8
+	for lists+devel-orangefs@lfdr.de; Thu, 15 Aug 2019 16:44:07 -0400
+Received: from mail.kernel.org ([198.145.29.99]:49728)
+ by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
+ (Exim 4.92) (envelope-from <gregkh@linuxfoundation.org>)
+ id 1hyMbO-0006h8-Hb
+ for devel@lists.orangefs.org; Thu, 15 Aug 2019 16:44:06 -0400
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+ [83.86.89.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5BB2B2083B;
+ Thu, 15 Aug 2019 20:43:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1565901805;
+ bh=4MUbuhxyjB/Z/I0+KEuHYyPv1fvr/qroc0kojX6LQUI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=rmevilO9FFuTpF1TkeHr9rMjq0tx8UWAlZu1cW/zsMuDRMCXNIqbtamv/Bh9PWjxr
+ uMcyMcUqmrlEz/U6ipnvwnFJksubQpe8uhV+mxBP/PuZfI7m0SnpKLNF/GD9rIRrXm
+ 9i2PofIAyA1t7LZj0WwS4y+NrRc1E+LScCfI1k7c=
+Date: Thu, 15 Aug 2019 22:43:22 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: James Morris <jmorris@namei.org>
 Subject: Re: [PATCH] Add flags option to get xattr method paired to
  __vfs_getxattr
-In-Reply-To: <20190813084801.GA972@kroah.com>
-Message-ID: <alpine.LRH.2.21.1908160515130.12729@namei.org>
+Message-ID: <20190815204322.GB6782@kroah.com>
 References: <20190812193320.200472-1-salyzyn@android.com>
  <20190813084801.GA972@kroah.com>
-User-Agent: Alpine 2.21 (LRH 202 2017-01-01)
+ <alpine.LRH.2.21.1908160515130.12729@namei.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <alpine.LRH.2.21.1908160515130.12729@namei.org>
+User-Agent: Mutt/1.12.1 (2019-06-15)
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -51,7 +64,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
  Miklos Szeredi <miklos@szeredi.hu>, Richard Weinberger <richard@nod.at>,
  Mark Fasheh <mark@fasheh.com>, Hugh Dickins <hughd@google.com>,
- =?ISO-8859-15?Q?Ernesto_A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
+ Ernesto =?iso-8859-1?Q?A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
  cluster-devel@redhat.com, selinux@vger.kernel.org,
  Vyacheslav Dubeyko <slava@dubeyko.com>,
  Casey Schaufler <casey@schaufler-ca.com>, v9fs-developer@lists.sourceforge.net,
@@ -91,52 +104,57 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Tue, 13 Aug 2019, Greg Kroah-Hartman wrote:
-
-> On Mon, Aug 12, 2019 at 12:32:49PM -0700, Mark Salyzyn wrote:
-> > --- a/include/linux/xattr.h
-> > +++ b/include/linux/xattr.h
-> > @@ -30,10 +30,10 @@ struct xattr_handler {
-> >  	const char *prefix;
-> >  	int flags;      /* fs private flags */
-> >  	bool (*list)(struct dentry *dentry);
-> > -	int (*get)(const struct xattr_handler *, struct dentry *dentry,
-> > +	int (*get)(const struct xattr_handler *handler, struct dentry *dentry,
-> >  		   struct inode *inode, const char *name, void *buffer,
-> > -		   size_t size);
-> > -	int (*set)(const struct xattr_handler *, struct dentry *dentry,
-> > +		   size_t size, int flags);
-> > +	int (*set)(const struct xattr_handler *handler, struct dentry *dentry,
-> >  		   struct inode *inode, const char *name, const void *buffer,
-> >  		   size_t size, int flags);
+On Fri, Aug 16, 2019 at 05:20:36AM +1000, James Morris wrote:
+> On Tue, 13 Aug 2019, Greg Kroah-Hartman wrote:
 > 
-> Wow, 7 arguments.  Isn't there some nice rule of thumb that says once
-> you get more then 5, a function becomes impossible to understand?
+> > On Mon, Aug 12, 2019 at 12:32:49PM -0700, Mark Salyzyn wrote:
+> > > --- a/include/linux/xattr.h
+> > > +++ b/include/linux/xattr.h
+> > > @@ -30,10 +30,10 @@ struct xattr_handler {
+> > >  	const char *prefix;
+> > >  	int flags;      /* fs private flags */
+> > >  	bool (*list)(struct dentry *dentry);
+> > > -	int (*get)(const struct xattr_handler *, struct dentry *dentry,
+> > > +	int (*get)(const struct xattr_handler *handler, struct dentry *dentry,
+> > >  		   struct inode *inode, const char *name, void *buffer,
+> > > -		   size_t size);
+> > > -	int (*set)(const struct xattr_handler *, struct dentry *dentry,
+> > > +		   size_t size, int flags);
+> > > +	int (*set)(const struct xattr_handler *handler, struct dentry *dentry,
+> > >  		   struct inode *inode, const char *name, const void *buffer,
+> > >  		   size_t size, int flags);
+> > 
+> > Wow, 7 arguments.  Isn't there some nice rule of thumb that says once
+> > you get more then 5, a function becomes impossible to understand?
+> > 
+> > Surely this could be a structure passed in here somehow, that way when
+> > you add the 8th argument in the future, you don't have to change
+> > everything yet again?  :)
+> > 
+> > I don't have anything concrete to offer as a replacement fix for this,
+> > but to me this just feels really wrong...
 > 
-> Surely this could be a structure passed in here somehow, that way when
-> you add the 8th argument in the future, you don't have to change
-> everything yet again?  :)
+> How about something like:
 > 
-> I don't have anything concrete to offer as a replacement fix for this,
-> but to me this just feels really wrong...
+> struct xattr_gs_args {
+> 	struct dentry *dentry;
+> 	struct inode *inode;
 
-How about something like:
+As he said in a later message, dentry and inode is redundant, only 1 is
+needed (dentry I think?)
 
-struct xattr_gs_args {
-	struct dentry *dentry;
-	struct inode *inode;
-	const char *name;
-	const void *buffer;
-	size_t size;
-	int flags;
-};
+> 	const char *name;
+> 	const void *buffer;
+> 	size_t size;
+> 	int flags;
+> };
+> 
+> int (*get)(const struct xattr_handler *handler, struct xattr_gs_args *args);
+> int (*set)(const struct xattr_handler *handler, struct xattr_gs_args *args);
 
-int (*get)(const struct xattr_handler *handler, struct xattr_gs_args *args);
-int (*set)(const struct xattr_handler *handler, struct xattr_gs_args *args);
+But yes, that would be much much better.
 
+thanks,
 
--- 
-James Morris
-<jmorris@namei.org>
-
+greg k-h
 

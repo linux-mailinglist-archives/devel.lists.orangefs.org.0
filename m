@@ -2,46 +2,57 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FBDA916D9
-	for <lists+devel-orangefs@lfdr.de>; Sun, 18 Aug 2019 15:46:55 +0200 (CEST)
-Received: from [::1] (port=39254 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15C489180A
+	for <lists+devel-orangefs@lfdr.de>; Sun, 18 Aug 2019 19:00:04 +0200 (CEST)
+Received: from [::1] (port=48312 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1hzLWI-0005M2-2D
-	for lists+devel-orangefs@lfdr.de; Sun, 18 Aug 2019 09:46:54 -0400
-Received: from mga14.intel.com ([192.55.52.115]:8045)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <lkp@intel.com>) id 1hxryP-0003zX-D5
- for devel@lists.orangefs.org; Wed, 14 Aug 2019 08:01:49 -0400
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 14 Aug 2019 05:01:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,385,1559545200"; 
- d="gz'50?scan'50,208,50";a="179025067"
-Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
- by orsmga003.jf.intel.com with ESMTP; 14 Aug 2019 05:00:46 -0700
-Received: from kbuild by lkp-server01 with local (Exim 4.89)
- (envelope-from <lkp@intel.com>)
- id 1hxrxN-000ER5-O8; Wed, 14 Aug 2019 20:00:45 +0800
-Date: Wed, 14 Aug 2019 19:59:57 +0800
-From: kbuild test robot <lkp@intel.com>
-To: Mark Salyzyn <salyzyn@android.com>
-Subject: Re: [PATCH v2] Add flags option to get xattr method paired to
- __vfs_getxattr
-Message-ID: <201908141935.iswsiyzF%lkp@intel.com>
-References: <20190813145527.26289-1-salyzyn@android.com>
-MIME-Version: 1.0
-In-Reply-To: <20190813145527.26289-1-salyzyn@android.com>
-X-Patchwork-Hint: ignore
-User-Agent: NeoMutt/20170113 (1.7.2)
-X-Mailman-Approved-At: Sun, 18 Aug 2019 09:46:53 -0400
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Content-Filtered-By: Mailman/MimeDel 2.1.27
+	id 1hzOXD-0000nU-25
+	for lists+devel-orangefs@lfdr.de; Sun, 18 Aug 2019 13:00:03 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:33277)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ (Exim 4.92) (envelope-from <deepa.kernel@gmail.com>)
+ id 1hzOXA-0000mt-Tn
+ for devel@lists.orangefs.org; Sun, 18 Aug 2019 13:00:01 -0400
+Received: by mail-pl1-f195.google.com with SMTP id go14so4320594plb.0
+ for <devel@lists.orangefs.org>; Sun, 18 Aug 2019 09:59:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id;
+ bh=RwcmEOVaCgQn5YcIaNY6CXwWg6zDdmkpmJl5vmh1uGs=;
+ b=HiJA0cs9nJZycVEklhF1ydMiEZlqYlRZ+rT3ZYhNjaom6QdwblnzQmdsqBjEZlDKMp
+ jvcGaD8ig89nNQdTGe9GeJ5iFMo7AEN6bsYz2SyhceKvOz7NLf8T+g8wmTJdIYNBHCnk
+ mqxSQ23qxF8fXRSxUZ0GNEzU976EBiFSVLHIFTB7kHKYVwaxjHouhX9bcoWk26Hy1rg6
+ wa6ahr1JhJ39nrboMSrYmJPMJSj2dD+/CMcTQBkhDHlKdSN8HDIVcxto7SezHoUSooyb
+ QXns2+TyCciABnoGJd/w5iL3xBZcmKb98RjlIRImw/72ezzY/hsvU9/c+eh37GhZ+4vQ
+ xS4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=RwcmEOVaCgQn5YcIaNY6CXwWg6zDdmkpmJl5vmh1uGs=;
+ b=lKwOjFma3sFvEDbK2FkSCeE/QtvdWhm0+v4NVeVK8Nq3d1rkWC8yIc4gwGdl00U6XR
+ fav2Hr7EPKqaUOKjJLVWSeHPz70xhE0IUyWrfctAObaANQb4PjnqaHSDk68aM14JGJuD
+ rMYtLl+7nwUUkxZEZrhScnTuo+T7RczK/cKN+cMNj4BnsORV1QjAnRMcfuw0o0jTuSGq
+ B4Y0wpP4aaqvqynt0Wn4AqdZluGJ4VQlhlxJEDJksQZ8V/e+VbMM02TeY8E5SSSNzuSf
+ HZeRbRcL7aTvCkm9rc376pE0jK21WOisd5XAi9e2zwA0XgadgpOusTYXIuQs+2RcjqUM
+ dfmg==
+X-Gm-Message-State: APjAAAWYf/LpsOlr8iWB9oHnHfDY2DM8dQT77WD7UKgx5VyJG2oj6KRd
+ G8JIhoIWcmtR48xd64YwylQ=
+X-Google-Smtp-Source: APXvYqxiQNguzmCRctY+lvOzTTOdGzSMQGETwprj26Ooqm/lMPEtm/pNLPzDafLGwlxjn+XuprqyZA==
+X-Received: by 2002:a17:902:f095:: with SMTP id
+ go21mr18588927plb.216.1566147559767; 
+ Sun, 18 Aug 2019 09:59:19 -0700 (PDT)
+Received: from deepa-ubuntu.lan (c-98-234-52-230.hsd1.ca.comcast.net.
+ [98.234.52.230])
+ by smtp.gmail.com with ESMTPSA id b136sm15732831pfb.73.2019.08.18.09.59.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 18 Aug 2019 09:59:19 -0700 (PDT)
+From: Deepa Dinamani <deepa.kernel@gmail.com>
+To: viro@zeniv.linux.org.uk,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v8 00/20] vfs: Add support for timestamp limits
+Date: Sun, 18 Aug 2019 09:57:57 -0700
+Message-Id: <20190818165817.32634-1-deepa.kernel@gmail.com>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -53,51 +64,27 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
- jfs-discussion@lists.sourceforge.net, linux-integrity@vger.kernel.org,
- samba-technical@lists.samba.org, Dominique Martinet <asmadeus@codewreck.org>,
- Chao Yu <yuchao0@huawei.com>, Mimi Zohar <zohar@linux.ibm.com>,
- Adrian Hunter <adrian.hunter@intel.com>, David Howells <dhowells@redhat.com>,
- Chris Mason <clm@fb.com>, "David S. Miller" <davem@davemloft.net>,
- Andreas Dilger <adilger.kernel@dilger.ca>, ocfs2-devel@oss.oracle.com,
- Eric Paris <eparis@parisplace.org>, netdev@vger.kernel.org,
- Tyler Hicks <tyhicks@canonical.com>, linux-afs@lists.infradead.org,
- devel@driverdev.osuosl.org, linux-xfs@vger.kernel.org,
- Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
- Miklos Szeredi <miklos@szeredi.hu>, Richard Weinberger <richard@nod.at>,
- Mark Fasheh <mark@fasheh.com>, linux-unionfs@vger.kernel.org,
- Hugh Dickins <hughd@google.com>, James Morris <jmorris@namei.org>,
- cluster-devel@redhat.com, Joseph Qi <joseph.qi@linux.alibaba.com>,
- Vyacheslav Dubeyko <slava@dubeyko.com>,
- Casey Schaufler <casey@schaufler-ca.com>, v9fs-developer@lists.sourceforge.net,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- kernel-team@android.com, linux-mm@kvack.org, devel@lists.orangefs.org,
- Serge Hallyn <serge@hallyn.com>,
- Ernesto =?unknown-8bit?Q?A=2E_Fern=C3=A1ndez?=
- <ernesto.mnd.fernandez@gmail.com>, Gao Xiang <gaoxiang25@huawei.com>,
- linux-cifs@vger.kernel.org, Eric Van Hensbergen <ericvh@gmail.com>,
- ecryptfs@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- Josef Bacik <josef@toxicpanda.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, reiserfs-devel@vger.kernel.org,
- Tejun Heo <tj@kernel.org>, Joel Becker <jlbec@evilplan.org>,
- linux-mtd@lists.infradead.org, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
- selinux@vger.kernel.org, Trond Myklebust <trond.myklebust@hammerspace.com>,
- Paul Moore <paul@paul-moore.com>, linux-nfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Theodore Ts'o <tytso@mit.edu>,
- linux-fsdevel@vger.kernel.org, Stephen Smalley <sds@tycho.nsa.gov>,
- Mathieu Malaterre <malat@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Artem Bityutskiy <dedekind1@gmail.com>, Jeff Layton <jlayton@kernel.org>,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- Mark Salyzyn <salyzyn@android.com>, Steve French <sfrench@samba.org>,
- linux-security-module@vger.kernel.org, kbuild-all@01.org,
- Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
- Phillip Lougher <phillip@squashfs.org.uk>,
- Andrew Morton <akpm@linux-foundation.org>,
- David Woodhouse <dwmw2@infradead.org>,
- Anna Schumaker <anna.schumaker@netapp.com>, linux-btrfs@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>
+Cc: lucho@ionkov.net, jfs-discussion@lists.sourceforge.net, shaggy@kernel.org,
+ al@alarsen.net, yuchao0@huawei.com, me@bobcopeland.com,
+ adilger.kernel@dilger.ca, mikulas@artax.karlin.mff.cuni.cz, hch@lst.de,
+ nico@fluxnic.net, linux-cifs@vger.kernel.org, zyan@redhat.com, sage@redhat.com,
+ darrick.wong@oracle.com, y2038@lists.linaro.org, richard@nod.at,
+ sfrench@samba.org, anton@enomsg.org, codalist@coda.cs.cmu.edu,
+ hch@infradead.org, coda@cs.cmu.edu, v9fs-developer@lists.sourceforge.net,
+ idryomov@gmail.com, linux-ext4@vger.kernel.org, salah.triki@gmail.com,
+ asmadeus@codewreck.org, devel@lists.orangefs.org, dushistov@mail.ru,
+ keescook@chromium.org, arnd@arndb.de, ericvh@gmail.com, jack@suse.com,
+ reiserfs-devel@vger.kernel.org, tj@kernel.org, jlbec@evilplan.org,
+ aivazian.tigran@gmail.com, phillip@squashfs.org.uk, dsterba@suse.com,
+ jaegeuk@kernel.org, ceph-devel@vger.kernel.org,
+ trond.myklebust@hammerspace.com, hirofumi@mail.parknet.co.jp,
+ jaharkes@cs.cmu.edu, linux-nfs@vger.kernel.org, tony.luck@intel.com,
+ tytso@mit.edu, luisbg@kernel.org, dedekind1@gmail.com,
+ linux-ntfs-dev@lists.sourceforge.net, gregkh@linuxfoundation.org,
+ linux-karma-devel@lists.sourceforge.net, adrian.hunter@intel.com,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ ccross@android.com, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, dwmw2@infradead.org, anna.schumaker@netapp.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -111,104 +98,231 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi Mark,
+The series is an update and a more complete version of the
+previously posted series at
+https://lore.kernel.org/linux-fsdevel/20180122020426.2988-1-deepa.kernel@gmail.com/
 
-Thank you for the patch! Yet something to improve:
+Thanks to Arnd Bergmann for doing a few preliminary reviews.
+They helped me fix a few issues I had overlooked.
 
-[auto build test ERROR on linus/master]
-[cannot apply to v5.3-rc4 next-20190813]
-[if your patch is applied to the wrong git tree, please drop us a note to help improve the system]
+The limits (sometimes granularity also) for the filesystems updated here are according to the
+following table:
 
-url:    https://github.com/0day-ci/linux/commits/Mark-Salyzyn/Add-flags-option-to-get-xattr-method-paired-to-__vfs_getxattr/20190814-124805
-config: nds32-allmodconfig (attached as .config)
-compiler: nds32le-linux-gcc (GCC) 8.1.0
-reproduce:
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # save the attached .config to linux build tree
-        GCC_VERSION=8.1.0 make.cross ARCH=nds32 
+File system   Time type                      Start year Expiration year Granularity
+cramfs        fixed                          0          0
+romfs         fixed                          0          0
+pstore        ascii seconds (27 digit ascii) S64_MIN    S64_MAX         1
+coda          INT64                          S64_MIN    S64_MAX         1
+omfs          64-bit milliseconds            0          U64_MAX/ 1000   NSEC_PER_MSEC
+befs          unsigned 48-bit seconds        0          0xffffffffffff  alloc_super
+bfs           unsigned 32-bit seconds        0          U32_MAX         alloc_super
+efs           unsigned 32-bit seconds        0          U32_MAX         alloc_super
+ext2          signed 32-bit seconds          S32_MIN    S32_MAX         alloc_super
+ext3          signed 32-bit seconds          S32_MIN    S32_MAX         alloc_super
+ext4 (old)    signed 32-bit seconds          S32_MIN    S32_MAX         alloc_super
+ext4 (extra)  34-bit seconds, 30-bit ns      S32_MIN    0x37fffffff	1
+freevxfs      u32 secs/usecs                 0          U32_MAX         alloc_super
+jffs2         unsigned 32-bit seconds        0          U32_MAX         alloc_super
+jfs           unsigned 32-bit seconds/ns     0          U32_MAX         1
+minix         unsigned 32-bit seconds        0          U32_MAX         alloc_super
+orangefs      u64 seconds                    0          U64_MAX         alloc_super
+qnx4          unsigned 32-bit seconds        0          U32_MAX         alloc_super
+qnx6          unsigned 32-bit seconds        0          U32_MAX         alloc_super
+reiserfs      unsigned 32-bit seconds        0          U32_MAX         alloc_super
+squashfs      unsigned 32-bit seconds        0          U32_MAX         alloc_super
+ufs1          signed 32-bit seconds          S32_MIN    S32_MAX         NSEC_PER_SEC
+ufs2          signed 64-bit seconds/u32 ns   S64_MIN    S64_MAX         1
+xfs           signed 32-bit seconds/ns       S32_MIN    S32_MAX         1
+ceph          unsigned 32-bit second/ns      0          U32_MAX         1000
+sysv          unsigned 32-bit seconds        0          U32_MAX         alloc_super
+affs          u32 day, min, ticks            1978       u32_max days    NSEC_PER_SEC
+nfsv2         unsigned 32-bit seconds/ns     0          U32_MAX         1
+nfsv3         unsigned 32-bit seconds/ns     0          U32_MAX         1000
+nfsv4         u64 seconds/u32 ns             S64_MIN    S64_MAX         1000
+isofs         u8 year since 1900 (fixable)   1900       2155            alloc_super
+hpfs          unsigned 32-bit seconds        1970       2106            alloc_super
+fat           7-bit years, 2s resolution     1980       2107
+cifs (smb)    7-bit years                    1980       2107
+cifs (modern) 64-bit 100ns since 1601        1601       30828
+adfs          40-bit cs since 1900           1900       2248
+9p (9P2000)   unsigned 32-bit seconds        1970       2106
+9p (9P2000.L) signed 64-bit seconds, ns      1970       S64_MAX
 
-If you fix the issue, kindly add following tag
-Reported-by: kbuild test robot <lkp@intel.com>
+Granularity column filled in by the alloc_super() in the above table indicates that
+the granularity is NSEC_PER_SEC.
+Note that anything not mentioned above still has the default limits
+S64_MIN..S64_MAX.
 
-All errors (new ones prefixed by >>):
+The patches in the series are as structured below:
+1. Add vfs support to maintain the limits per filesystem.
+2. Add a new timestamp_truncate() api for clamping timestamps
+   according to the filesystem limits.
+3. Add a warning for mount syscall to indicate the impending
+   expiry of timestamps.
+4. Modify utimes to clamp the timestamps.
+5. Fill in limits for filesystems.
 
-   fs/ubifs/xattr.c:326:9: error: conflicting types for 'ubifs_xattr_get'
-    ssize_t ubifs_xattr_get(struct inode *host, const char *name, void *buf,
-            ^~~~~~~~~~~~~~~
-   In file included from fs/ubifs/xattr.c:46:
-   fs/ubifs/ubifs.h:2006:9: note: previous declaration of 'ubifs_xattr_get' was here
-    ssize_t ubifs_xattr_get(struct inode *host, const char *name, void *buf,
-            ^~~~~~~~~~~~~~~
-   fs/ubifs/xattr.c: In function 'xattr_get':
-   fs/ubifs/xattr.c:678:9: error: too few arguments to function 'ubifs_xattr_get'
-     return ubifs_xattr_get(inode, name, buffer, size);
-            ^~~~~~~~~~~~~~~
-   fs/ubifs/xattr.c:326:9: note: declared here
-    ssize_t ubifs_xattr_get(struct inode *host, const char *name, void *buf,
-            ^~~~~~~~~~~~~~~
-   fs/ubifs/xattr.c: At top level:
->> fs/ubifs/xattr.c:699:9: error: initialization of 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, size_t,  int)' {aka 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, unsigned int,  int)'} from incompatible pointer type 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, size_t)' {aka 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, unsigned int)'} [-Werror=incompatible-pointer-types]
-     .get = xattr_get,
-            ^~~~~~~~~
-   fs/ubifs/xattr.c:699:9: note: (near initialization for 'ubifs_user_xattr_handler.get')
-   fs/ubifs/xattr.c:705:9: error: initialization of 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, size_t,  int)' {aka 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, unsigned int,  int)'} from incompatible pointer type 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, size_t)' {aka 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, unsigned int)'} [-Werror=incompatible-pointer-types]
-     .get = xattr_get,
-            ^~~~~~~~~
-   fs/ubifs/xattr.c:705:9: note: (near initialization for 'ubifs_trusted_xattr_handler.get')
-   fs/ubifs/xattr.c:712:9: error: initialization of 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, size_t,  int)' {aka 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, unsigned int,  int)'} from incompatible pointer type 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, size_t)' {aka 'int (*)(const struct xattr_handler *, struct dentry *, struct inode *, const char *, void *, unsigned int)'} [-Werror=incompatible-pointer-types]
-     .get = xattr_get,
-            ^~~~~~~~~
-   fs/ubifs/xattr.c:712:9: note: (near initialization for 'ubifs_security_xattr_handler.get')
-   fs/ubifs/xattr.c: In function 'xattr_get':
-   fs/ubifs/xattr.c:679:1: warning: control reaches end of non-void function [-Wreturn-type]
-    }
-    ^
-   cc1: some warnings being treated as errors
+A test for checking file system timestamp limits has been posted
+at https://www.spinics.net/lists/fstests/msg12262.html
 
-vim +699 fs/ubifs/xattr.c
+Changes since v7:
+* Dropped fat modifications from timespec_truncate patch
+* Leverage timestamp_truncate function in utimes
+* Added a fix for pstore ramoops timestamps
+* Added ext4 warning for inodes without room for extended timestamps.
+* Made mount warning more human readable
+Changes since v6:
+* No change in mount behavior because of expiry of timestamps.
+* Included limits for more filesystems.
+Changes since v5:
+* Dropped y2038-specific changes
+Changes since v4:
+* Added documentation for boot param
+Changes since v3:
+* Remove redundant initializations in libfs.c
+* Change early_param to __setup similar to other root mount options.
+* Fix documentation warning
+Changes since v2:
+* Introduce early boot param override for checks.
+* Drop afs patch for timestamp limits.
+Changes since v1:
+* return EROFS on mount errors
+* fix mtime copy/paste error in utimes
 
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  669  
-ade46c3a6029de Richard Weinberger  2016-09-19  670  static int xattr_get(const struct xattr_handler *handler,
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  671  			   struct dentry *dentry, struct inode *inode,
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  672  			   const char *name, void *buffer, size_t size)
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  673  {
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  674  	dbg_gen("xattr '%s', ino %lu ('%pd'), buf size %zd", name,
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  675  		inode->i_ino, dentry, size);
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  676  
-17ce1eb0b64eb2 Richard Weinberger  2016-07-31  677  	name = xattr_full_name(handler, name);
-ade46c3a6029de Richard Weinberger  2016-09-19 @678  	return ubifs_xattr_get(inode, name, buffer, size);
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  679  }
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  680  
-ade46c3a6029de Richard Weinberger  2016-09-19  681  static int xattr_set(const struct xattr_handler *handler,
-5930122683dff5 Al Viro             2016-05-27  682  			   struct dentry *dentry, struct inode *inode,
-5930122683dff5 Al Viro             2016-05-27  683  			   const char *name, const void *value,
-5930122683dff5 Al Viro             2016-05-27  684  			   size_t size, int flags)
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  685  {
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  686  	dbg_gen("xattr '%s', host ino %lu ('%pd'), size %zd",
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  687  		name, inode->i_ino, dentry, size);
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  688  
-17ce1eb0b64eb2 Richard Weinberger  2016-07-31  689  	name = xattr_full_name(handler, name);
-17ce1eb0b64eb2 Richard Weinberger  2016-07-31  690  
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  691  	if (value)
-d8db5b1ca9d4c5 Xiaolei Li          2017-06-23  692  		return ubifs_xattr_set(inode, name, value, size, flags, true);
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  693  	else
-ade46c3a6029de Richard Weinberger  2016-09-19  694  		return ubifs_xattr_remove(inode, name);
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  695  }
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  696  
-dfaf8d2aeca482 Ben Dooks           2016-06-21  697  static const struct xattr_handler ubifs_user_xattr_handler = {
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  698  	.prefix = XATTR_USER_PREFIX,
-ade46c3a6029de Richard Weinberger  2016-09-19 @699  	.get = xattr_get,
-ade46c3a6029de Richard Weinberger  2016-09-19  700  	.set = xattr_set,
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  701  };
-2b88fc21cae91e Andreas Gruenbacher 2016-04-22  702  
+Deepa Dinamani (20):
+  vfs: Add file timestamp range support
+  vfs: Add timestamp_truncate() api
+  timestamp_truncate: Replace users of timespec64_trunc
+  mount: Add mount warning for impending timestamp expiry
+  utimes: Clamp the timestamps before update
+  fs: Fill in max and min timestamps in superblock
+  9p: Fill min and max timestamps in sb
+  adfs: Fill in max and min timestamps in sb
+  ext4: Initialize timestamps limits
+  fs: nfs: Initialize filesystem timestamp ranges
+  fs: cifs: Initialize filesystem timestamp ranges
+  fs: fat: Initialize filesystem timestamp ranges
+  fs: affs: Initialize filesystem timestamp ranges
+  fs: sysv: Initialize filesystem timestamp ranges
+  fs: ceph: Initialize filesystem timestamp ranges
+  fs: orangefs: Initialize filesystem timestamp ranges
+  fs: hpfs: Initialize filesystem timestamp ranges
+  fs: omfs: Initialize filesystem timestamp ranges
+  pstore: fs superblock limits
+  isofs: Initialize filesystem timestamp ranges
 
-:::::: The code at line 699 was first introduced by commit
-:::::: ade46c3a6029dea49dbc6c7734b0f6a78d3f104c ubifs: Export xattr get and set functions
+ fs/9p/vfs_super.c        |  6 +++++-
+ fs/adfs/adfs.h           | 13 +++++++++++++
+ fs/adfs/inode.c          |  8 ++------
+ fs/adfs/super.c          |  2 ++
+ fs/affs/amigaffs.c       |  2 +-
+ fs/affs/amigaffs.h       |  3 +++
+ fs/affs/inode.c          |  4 ++--
+ fs/affs/super.c          |  4 ++++
+ fs/attr.c                | 21 ++++++++++++---------
+ fs/befs/linuxvfs.c       |  2 ++
+ fs/bfs/inode.c           |  2 ++
+ fs/ceph/super.c          |  2 ++
+ fs/cifs/cifsfs.c         | 22 ++++++++++++++++++++++
+ fs/cifs/netmisc.c        | 14 +++++++-------
+ fs/coda/inode.c          |  3 +++
+ fs/configfs/inode.c      | 12 ++++++------
+ fs/cramfs/inode.c        |  2 ++
+ fs/efs/super.c           |  2 ++
+ fs/ext2/super.c          |  2 ++
+ fs/ext4/ext4.h           | 10 +++++++++-
+ fs/ext4/super.c          | 17 +++++++++++++++--
+ fs/f2fs/file.c           | 21 ++++++++++++---------
+ fs/fat/inode.c           | 12 ++++++++++++
+ fs/freevxfs/vxfs_super.c |  2 ++
+ fs/hpfs/hpfs_fn.h        |  6 ++----
+ fs/hpfs/super.c          |  2 ++
+ fs/inode.c               | 33 ++++++++++++++++++++++++++++++++-
+ fs/isofs/inode.c         |  7 +++++++
+ fs/jffs2/fs.c            |  3 +++
+ fs/jfs/super.c           |  2 ++
+ fs/kernfs/inode.c        |  7 +++----
+ fs/minix/inode.c         |  2 ++
+ fs/namespace.c           | 33 ++++++++++++++++++++++++++++++++-
+ fs/nfs/super.c           | 20 +++++++++++++++++++-
+ fs/ntfs/inode.c          | 21 ++++++++++++---------
+ fs/omfs/inode.c          |  4 ++++
+ fs/orangefs/super.c      |  2 ++
+ fs/pstore/ram.c          |  2 ++
+ fs/qnx4/inode.c          |  2 ++
+ fs/qnx6/inode.c          |  2 ++
+ fs/reiserfs/super.c      |  3 +++
+ fs/romfs/super.c         |  2 ++
+ fs/squashfs/super.c      |  2 ++
+ fs/super.c               |  2 ++
+ fs/sysv/super.c          |  5 ++++-
+ fs/ubifs/file.c          | 21 ++++++++++++---------
+ fs/ufs/super.c           |  7 +++++++
+ fs/utimes.c              |  6 ++----
+ fs/xfs/xfs_super.c       |  2 ++
+ include/linux/fs.h       |  5 +++++
+ include/linux/time64.h   |  2 ++
+ 51 files changed, 315 insertions(+), 78 deletions(-)
 
-:::::: TO: Richard Weinberger <richard@nod.at>
-:::::: CC: Richard Weinberger <richard@nod.at>
+-- 
+2.17.1
 
----
-0-DAY kernel test infrastructure                Open Source Technology Center
-https://lists.01.org/pipermail/kbuild-all                   Intel Corporation
+Cc: adilger.kernel@dilger.ca
+Cc: adrian.hunter@intel.com
+Cc: aivazian.tigran@gmail.com
+Cc: al@alarsen.net
+Cc: anna.schumaker@netapp.com
+Cc: anton@enomsg.org
+Cc: asmadeus@codewreck.org
+Cc: ccross@android.com
+Cc: ceph-devel@vger.kernel.org
+Cc: coda@cs.cmu.edu
+Cc: codalist@coda.cs.cmu.edu
+Cc: darrick.wong@oracle.com
+Cc: dedekind1@gmail.com
+Cc: devel@lists.orangefs.org
+Cc: dsterba@suse.com
+Cc: dushistov@mail.ru
+Cc: dwmw2@infradead.org
+Cc: ericvh@gmail.com
+Cc: gregkh@linuxfoundation.org
+Cc: hch@infradead.org
+Cc: hch@lst.de
+Cc: hirofumi@mail.parknet.co.jp
+Cc: hubcap@omnibond.com
+Cc: idryomov@gmail.com
+Cc: jack@suse.com
+Cc: jaegeuk@kernel.org
+Cc: jaharkes@cs.cmu.edu
+Cc: jfs-discussion@lists.sourceforge.net
+Cc: jlbec@evilplan.org
+Cc: keescook@chromium.org
+Cc: linux-cifs@vger.kernel.org
+Cc: linux-ext4@vger.kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-karma-devel@lists.sourceforge.net
+Cc: linux-mtd@lists.infradead.org
+Cc: linux-nfs@vger.kernel.org
+Cc: linux-ntfs-dev@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org
+Cc: lucho@ionkov.net
+Cc: luisbg@kernel.org
+Cc: martin@omnibond.com
+Cc: me@bobcopeland.com
+Cc: mikulas@artax.karlin.mff.cuni.cz
+Cc: nico@fluxnic.net
+Cc: phillip@squashfs.org.uk
+Cc: reiserfs-devel@vger.kernel.org
+Cc: richard@nod.at
+Cc: sage@redhat.com
+Cc: salah.triki@gmail.com
+Cc: sfrench@samba.org
+Cc: shaggy@kernel.org
+Cc: tj@kernel.org
+Cc: tony.luck@intel.com
+Cc: trond.myklebust@hammerspace.com
+Cc: tytso@mit.edu
+Cc: v9fs-developer@lists.sourceforge.net
+Cc: yuchao0@huawei.com
+Cc: zyan@redhat.com
+

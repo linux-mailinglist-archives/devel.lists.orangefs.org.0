@@ -2,42 +2,45 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C49D95CDF
-	for <lists+devel-orangefs@lfdr.de>; Tue, 20 Aug 2019 13:06:00 +0200 (CEST)
-Received: from [::1] (port=42900 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBE96963E3
+	for <lists+devel-orangefs@lfdr.de>; Tue, 20 Aug 2019 17:13:52 +0200 (CEST)
+Received: from [::1] (port=47506 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1i01xf-0006jb-Hw
-	for lists+devel-orangefs@lfdr.de; Tue, 20 Aug 2019 07:05:59 -0400
-Received: from mail.kernel.org ([198.145.29.99]:40978)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <jlayton@kernel.org>) id 1i01xd-0006j2-Vg
- for devel@lists.orangefs.org; Tue, 20 Aug 2019 07:05:58 -0400
-Received: from tleilax.poochiereds.net
- (68-20-15-154.lightspeed.rlghnc.sbcglobal.net [68.20.15.154])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EFF55205C9;
- Tue, 20 Aug 2019 11:05:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1566299116;
- bh=T0rmHh8w3H3bwdXLru7KFY2A/8hjJcNt2eMc9MdFvoU=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=OWYdJNUzSee+UuIh6LQ3YFru0x6seE2TTCifysIDGNOjR8O4ScYkdj2Vrw5S/JeTB
- qmDzLYeDaoNBfNwX5IDihFikAWZqI1dzLhII85Qm3JJy6zIH2yIFue45EEMtXZPwcN
- fgzdH+WlULgP+SUhyw7NDBScX/I9XuZMIU+ITkEg=
-Message-ID: <27d1943a0027cb4f658334fad8dc880df133c22d.camel@kernel.org>
-Subject: Re: [PATCH v8 00/20] vfs: Add support for timestamp limits
-From: Jeff Layton <jlayton@kernel.org>
-To: Deepa Dinamani <deepa.kernel@gmail.com>, viro@zeniv.linux.org.uk, 
- linux-kernel@vger.kernel.org
-Date: Tue, 20 Aug 2019 07:05:10 -0400
-In-Reply-To: <20190818165817.32634-1-deepa.kernel@gmail.com>
-References: <20190818165817.32634-1-deepa.kernel@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+	id 1i05pX-00051L-NO
+	for lists+devel-orangefs@lfdr.de; Tue, 20 Aug 2019 11:13:51 -0400
+Received: from mga04.intel.com ([192.55.52.120]:51484)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <lkp@intel.com>) id 1i05pV-00050U-TL
+ for devel@lists.orangefs.org; Tue, 20 Aug 2019 11:13:50 -0400
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 20 Aug 2019 08:13:08 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,408,1559545200"; 
+ d="gz'50?scan'50,208,50";a="353603591"
+Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
+ by orsmga005.jf.intel.com with ESMTP; 20 Aug 2019 08:12:52 -0700
+Received: from kbuild by lkp-server01 with local (Exim 4.89)
+ (envelope-from <lkp@intel.com>)
+ id 1i05oZ-0004T4-Ls; Tue, 20 Aug 2019 23:12:51 +0800
+Date: Tue, 20 Aug 2019 23:12:03 +0800
+From: kbuild test robot <lkp@intel.com>
+To: Mark Salyzyn <salyzyn@android.com>
+Subject: Re: [PATCH v5] Add flags option to get xattr method paired to
+ __vfs_getxattr
+Message-ID: <201908202356.Jnt6ivbB%lkp@intel.com>
+References: <20190819183305.153583-1-salyzyn@android.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20190819183305.153583-1-salyzyn@android.com>
+X-Patchwork-Hint: ignore
+User-Agent: NeoMutt/20170113 (1.7.2)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Content-Filtered-By: Mailman/MimeDel 2.1.27
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -49,27 +52,58 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: lucho@ionkov.net, jfs-discussion@lists.sourceforge.net, shaggy@kernel.org,
- al@alarsen.net, yuchao0@huawei.com, me@bobcopeland.com,
- adilger.kernel@dilger.ca, mikulas@artax.karlin.mff.cuni.cz, hch@lst.de,
- nico@fluxnic.net, linux-cifs@vger.kernel.org, zyan@redhat.com, sage@redhat.com,
- darrick.wong@oracle.com, y2038@lists.linaro.org, richard@nod.at,
- sfrench@samba.org, anton@enomsg.org, codalist@coda.cs.cmu.edu,
- hch@infradead.org, coda@cs.cmu.edu, v9fs-developer@lists.sourceforge.net,
- idryomov@gmail.com, linux-ext4@vger.kernel.org, salah.triki@gmail.com,
- asmadeus@codewreck.org, devel@lists.orangefs.org, dushistov@mail.ru,
- keescook@chromium.org, arnd@arndb.de, ericvh@gmail.com, jack@suse.com,
- reiserfs-devel@vger.kernel.org, tj@kernel.org, jlbec@evilplan.org,
- aivazian.tigran@gmail.com, phillip@squashfs.org.uk, dsterba@suse.com,
- jaegeuk@kernel.org, ceph-devel@vger.kernel.org,
- trond.myklebust@hammerspace.com, hirofumi@mail.parknet.co.jp,
- jaharkes@cs.cmu.edu, linux-nfs@vger.kernel.org, tony.luck@intel.com,
- tytso@mit.edu, luisbg@kernel.org, dedekind1@gmail.com,
- linux-ntfs-dev@lists.sourceforge.net, gregkh@linuxfoundation.org,
- linux-karma-devel@lists.sourceforge.net, adrian.hunter@intel.com,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- ccross@android.com, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, dwmw2@infradead.org, anna.schumaker@netapp.com
+Cc: Latchesar Ionkov <lucho@ionkov.net>, Hugh Dickins <hughd@google.com>,
+ James Morris <jmorris@namei.org>, devel@lists.orangefs.org,
+ Eric Van Hensbergen <ericvh@gmail.com>, Joel Becker <jlbec@evilplan.org>,
+ Anna Schumaker <anna.schumaker@netapp.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Mathieu Malaterre <malat@debian.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
+ kbuild-all@01.org, Jan Kara <jack@suse.com>,
+ Casey Schaufler <casey@schaufler-ca.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Dave Kleikamp <shaggy@kernel.org>,
+ linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
+ Chao Yu <yuchao0@huawei.com>, Mimi Zohar <zohar@linux.ibm.com>,
+ linux-cifs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>,
+ Eric Sandeen <sandeen@sandeen.net>, kernel-team@android.com,
+ selinux@vger.kernel.org, Brian Foster <bfoster@redhat.com>,
+ reiserfs-devel@vger.kernel.org, Tejun Heo <tj@kernel.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
+ Miklos Szeredi <miklos@szeredi.hu>, linux-f2fs-devel@lists.sourceforge.net,
+ Benjamin Coddington <bcodding@redhat.com>, linux-integrity@vger.kernel.org,
+ Chris Mason <clm@fb.com>, linux-mtd@lists.infradead.org,
+ linux-afs@lists.infradead.org, Jonathan Corbet <corbet@lwn.net>,
+ Vyacheslav Dubeyko <slava@dubeyko.com>,
+ Allison Henderson <allison.henderson@oracle.com>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ Stephen Smalley <sds@tycho.nsa.gov>, Serge Hallyn <serge@hallyn.com>,
+ Gao Xiang <gaoxiang25@huawei.com>, Eric Paris <eparis@parisplace.org>,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org, linux-mm@kvack.org,
+ samba-technical@lists.samba.org, linux-xfs@vger.kernel.org,
+ Bob Peterson <rpeterso@redhat.com>, linux-fsdevel@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, "David S. Miller" <davem@davemloft.net>,
+ ocfs2-devel@oss.oracle.com, jfs-discussion@lists.sourceforge.net,
+ Eric Biggers <ebiggers@google.com>,
+ Dominique Martinet <asmadeus@codewreck.org>, Jeff Mahoney <jeffm@suse.com>,
+ linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, Mark Salyzyn <salyzyn@android.com>,
+ devel@driverdev.osuosl.org, "J. Bruce Fields" <bfields@redhat.com>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ linux-security-module@vger.kernel.org, cluster-devel@redhat.com,
+ Steve French <sfrench@samba.org>, v9fs-developer@lists.sourceforge.net,
+ Bharath Vedartham <linux.bhar@gmail.com>, Jann Horn <jannh@google.com>,
+ ecryptfs@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>,
+ Dave Chinner <dchinner@redhat.com>, David Sterba <dsterba@suse.com>,
+ Artem Bityutskiy <dedekind1@gmail.com>, netdev@vger.kernel.org,
+ Adrian Hunter <adrian.hunter@intel.com>, stable@vger.kernel.org,
+ Tyler Hicks <tyhicks@canonical.com>,
+ Ernesto =?unknown-8bit?Q?A=2E_Fern=C3=A1ndez?=
+ <ernesto.mnd.fernandez@gmail.com>, Phillip Lougher <phillip@squashfs.org.uk>,
+ David Woodhouse <dwmw2@infradead.org>, linux-btrfs@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -83,52 +117,51 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Sun, 2019-08-18 at 09:57 -0700, Deepa Dinamani wrote:
-> The series is an update and a more complete version of the
-> previously posted series at
-> https://lore.kernel.org/linux-fsdevel/20180122020426.2988-1-deepa.kernel@gmail.com/
-> 
-> Thanks to Arnd Bergmann for doing a few preliminary reviews.
-> They helped me fix a few issues I had overlooked.
-> 
-> The limits (sometimes granularity also) for the filesystems updated here are according to the
-> following table:
-> 
-> File system   Time type                      Start year Expiration year Granularity
-> cramfs        fixed                          0          0
-> romfs         fixed                          0          0
-> pstore        ascii seconds (27 digit ascii) S64_MIN    S64_MAX         1
-> coda          INT64                          S64_MIN    S64_MAX         1
-> omfs          64-bit milliseconds            0          U64_MAX/ 1000   NSEC_PER_MSEC
-> befs          unsigned 48-bit seconds        0          0xffffffffffff  alloc_super
-> bfs           unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> efs           unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> ext2          signed 32-bit seconds          S32_MIN    S32_MAX         alloc_super
-> ext3          signed 32-bit seconds          S32_MIN    S32_MAX         alloc_super
-> ext4 (old)    signed 32-bit seconds          S32_MIN    S32_MAX         alloc_super
-> ext4 (extra)  34-bit seconds, 30-bit ns      S32_MIN    0x37fffffff	1
-> freevxfs      u32 secs/usecs                 0          U32_MAX         alloc_super
-> jffs2         unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> jfs           unsigned 32-bit seconds/ns     0          U32_MAX         1
-> minix         unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> orangefs      u64 seconds                    0          U64_MAX         alloc_super
-> qnx4          unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> qnx6          unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> reiserfs      unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> squashfs      unsigned 32-bit seconds        0          U32_MAX         alloc_super
-> ufs1          signed 32-bit seconds          S32_MIN    S32_MAX         NSEC_PER_SEC
-> ufs2          signed 64-bit seconds/u32 ns   S64_MIN    S64_MAX         1
-> xfs           signed 32-bit seconds/ns       S32_MIN    S32_MAX         1
-> ceph          unsigned 32-bit second/ns      0          U32_MAX         1000
+Hi Mark,
 
-Looks reasonable, overall.
+Thank you for the patch! Yet something to improve:
 
-Note that the granularity changed recently for cephfs. See commit
-0f7cf80ae96c2a (ceph: initialize superblock s_time_gran to 1).
+[auto build test ERROR on linus/master]
+[cannot apply to v5.3-rc5 next-20190820]
+[if your patch is applied to the wrong git tree, please drop us a note to help improve the system]
 
-In any case, you can add my Acked-by
+url:    https://github.com/0day-ci/linux/commits/Mark-Salyzyn/Add-flags-option-to-get-xattr-method-paired-to-__vfs_getxattr/20190820-220307
+config: um-x86_64_defconfig (attached as .config)
+compiler: gcc-7 (Debian 7.4.0-10) 7.4.0
+reproduce:
+        # save the attached .config to linux build tree
+        make ARCH=um SUBARCH=x86_64
 
--- 
-Jeff Layton <jlayton@kernel.org>
+If you fix the issue, kindly add following tag
+Reported-by: kbuild test robot <lkp@intel.com>
 
+All errors (new ones prefixed by >>):
 
+   fs//kernfs/inode.c: In function 'kernfs_vfs_xattr_set':
+>> fs//kernfs/inode.c:322:27: error: 'inode' undeclared (first use in this function)
+     struct kernfs_node *kn = inode->i_private;
+                              ^~~~~
+   fs//kernfs/inode.c:322:27: note: each undeclared identifier is reported only once for each function it appears in
+
+vim +/inode +322 fs//kernfs/inode.c
+
+b230d5aba2d1a7 Ondrej Mosnacek 2019-02-22  318  
+1537ad15c9c59c Ondrej Mosnacek 2019-04-03  319  static int kernfs_vfs_xattr_set(const struct xattr_handler *handler,
+7d823b0879d4e2 Mark Salyzyn    2019-08-19  320  				struct xattr_gs_args *args)
+b230d5aba2d1a7 Ondrej Mosnacek 2019-02-22  321  {
+b230d5aba2d1a7 Ondrej Mosnacek 2019-02-22 @322  	struct kernfs_node *kn = inode->i_private;
+b230d5aba2d1a7 Ondrej Mosnacek 2019-02-22  323  
+7d823b0879d4e2 Mark Salyzyn    2019-08-19  324  	return kernfs_xattr_set(kn, xattr_full_name(handler, args->name),
+7d823b0879d4e2 Mark Salyzyn    2019-08-19  325  				args->value, args->size, args->flags);
+b230d5aba2d1a7 Ondrej Mosnacek 2019-02-22  326  }
+b230d5aba2d1a7 Ondrej Mosnacek 2019-02-22  327  
+
+:::::: The code at line 322 was first introduced by commit
+:::::: b230d5aba2d1a7b0636408889a75bf9eae6b8bc7 LSM: add new hook for kernfs node initialization
+
+:::::: TO: Ondrej Mosnacek <omosnace@redhat.com>
+:::::: CC: Paul Moore <paul@paul-moore.com>
+
+---
+0-DAY kernel test infrastructure                Open Source Technology Center
+https://lists.01.org/pipermail/kbuild-all                   Intel Corporation

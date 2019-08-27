@@ -2,45 +2,42 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17ACA9684E
-	for <lists+devel-orangefs@lfdr.de>; Tue, 20 Aug 2019 20:09:11 +0200 (CEST)
-Received: from [::1] (port=39820 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB8739EF6A
+	for <lists+devel-orangefs@lfdr.de>; Tue, 27 Aug 2019 17:50:33 +0200 (CEST)
+Received: from [::1] (port=35282 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1i08ZC-0000MK-3K
-	for lists+devel-orangefs@lfdr.de; Tue, 20 Aug 2019 14:09:10 -0400
-Received: from mga09.intel.com ([134.134.136.24]:48837)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <lkp@intel.com>) id 1i08CV-0007xm-Nq
- for devel@lists.orangefs.org; Tue, 20 Aug 2019 13:45:44 -0400
-X-Amp-Result: UNSCANNABLE
-X-Amp-File-Uploaded: False
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 20 Aug 2019 10:45:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,408,1559545200"; 
- d="gz'50?scan'50,208,50";a="378650505"
-Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
- by fmsmga006.fm.intel.com with ESMTP; 20 Aug 2019 10:44:46 -0700
-Received: from kbuild by lkp-server01 with local (Exim 4.89)
- (envelope-from <lkp@intel.com>)
- id 1i08Ba-000DC3-8V; Wed, 21 Aug 2019 01:44:46 +0800
-Date: Wed, 21 Aug 2019 01:43:50 +0800
-From: kbuild test robot <lkp@intel.com>
-To: Mark Salyzyn <salyzyn@android.com>
-Subject: Re: [PATCH v5] Add flags option to get xattr method paired to
+	id 1i2djs-0007Em-HQ
+	for lists+devel-orangefs@lfdr.de; Tue, 27 Aug 2019 11:50:32 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60224)
+ by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
+ (Exim 4.92) (envelope-from <jlayton@kernel.org>) id 1i2djq-0007Dg-IE
+ for devel@lists.orangefs.org; Tue, 27 Aug 2019 11:50:30 -0400
+Received: from tleilax.poochiereds.net
+ (68-20-15-154.lightspeed.rlghnc.sbcglobal.net [68.20.15.154])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 833FF2184D;
+ Tue, 27 Aug 2019 15:49:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1566920989;
+ bh=bbgW62YNwOw6nr0OoLy9qjvU2nnCXSu3OBPYD+Bupp4=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=L2rOWfFTV9ZENo9sY6rTomCTkAVi6eVgtVnTG5LG9plQ1qzOy8kmqkEIkcKlJccsb
+ 6oQCfNdLugesaJKgynlWsJQg7kb5LVkyYTK4cR8c58Kwfjmh9eQhwGZ7v/8NIZG3RI
+ XOEmwVN1iC+LyMlqc3dSWBw7KJ+TXshlVw7j4UqM=
+Message-ID: <dfc0fea49dfc77cb7631abb76e1e64ed745d25dd.camel@kernel.org>
+Subject: Re: [PATCH v8] Add flags option to get xattr method paired to
  __vfs_getxattr
-Message-ID: <201908210110.Lxwg6dmP%lkp@intel.com>
-References: <20190819183305.153583-1-salyzyn@android.com>
+From: Jeff Layton <jlayton@kernel.org>
+To: Mark Salyzyn <salyzyn@android.com>, linux-kernel@vger.kernel.org
+Date: Tue, 27 Aug 2019 11:49:41 -0400
+In-Reply-To: <20190827150544.151031-1-salyzyn@android.com>
+References: <20190827150544.151031-1-salyzyn@android.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
 MIME-Version: 1.0
-In-Reply-To: <20190819183305.153583-1-salyzyn@android.com>
-X-Patchwork-Hint: ignore
-User-Agent: NeoMutt/20170113 (1.7.2)
-X-Mailman-Approved-At: Tue, 20 Aug 2019 14:09:08 -0400
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Content-Filtered-By: Mailman/MimeDel 2.1.27
+Content-Transfer-Encoding: 7bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -58,14 +55,12 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Hugh Dickins <hughd@google.com>,
  Anna Schumaker <anna.schumaker@netapp.com>,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
  Mathieu Malaterre <malat@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- kbuild-all@01.org, Jan Kara <jack@suse.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jan Kara <jack@suse.com>,
  Casey Schaufler <casey@schaufler-ca.com>,
  Andrew Morton <akpm@linux-foundation.org>, Dave Kleikamp <shaggy@kernel.org>,
- linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
- Chao Yu <yuchao0@huawei.com>, Mimi Zohar <zohar@linux.ibm.com>,
- linux-cifs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
+ linux-doc@vger.kernel.org, Chao Yu <yuchao0@huawei.com>,
+ Mimi Zohar <zohar@linux.ibm.com>, linux-cifs@vger.kernel.org,
+ Paul Moore <paul@paul-moore.com>, "Darrick J. Wong" <darrick.wong@oracle.com>,
  Eric Sandeen <sandeen@sandeen.net>, kernel-team@android.com,
  selinux@vger.kernel.org, Brian Foster <bfoster@redhat.com>,
  reiserfs-devel@vger.kernel.org, Tejun Heo <tj@kernel.org>,
@@ -79,29 +74,28 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Hugh Dickins <hughd@google.com>,
  Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
  Stephen Smalley <sds@tycho.nsa.gov>, Serge Hallyn <serge@hallyn.com>,
  Gao Xiang <gaoxiang25@huawei.com>, Eric Paris <eparis@parisplace.org>,
- ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org, linux-mm@kvack.org,
- samba-technical@lists.samba.org, linux-xfs@vger.kernel.org,
- Bob Peterson <rpeterso@redhat.com>, linux-fsdevel@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, "David S. Miller" <davem@davemloft.net>,
- ocfs2-devel@oss.oracle.com, jfs-discussion@lists.sourceforge.net,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, samba-technical@lists.samba.org,
+ linux-xfs@vger.kernel.org, Bob Peterson <rpeterso@redhat.com>,
+ linux-fsdevel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ "David S. Miller" <davem@davemloft.net>, ocfs2-devel@oss.oracle.com,
+ jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
  Eric Biggers <ebiggers@google.com>,
- Dominique Martinet <asmadeus@codewreck.org>, Jeff Mahoney <jeffm@suse.com>,
- linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, Mark Salyzyn <salyzyn@android.com>,
- devel@driverdev.osuosl.org, "J. Bruce Fields" <bfields@redhat.com>,
- Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-security-module@vger.kernel.org, cluster-devel@redhat.com,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Adrian Hunter <adrian.hunter@intel.com>, David Howells <dhowells@redhat.com>,
+ linux-mm@kvack.org, Andreas Dilger <adilger.kernel@dilger.ca>,
+ devel@driverdev.osuosl.org, "J.
+ Bruce Fields" <bfields@redhat.com>, Andreas Gruenbacher <agruenba@redhat.com>,
+ Sage Weil <sage@redhat.com>, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, cluster-devel@redhat.com,
  Steve French <sfrench@samba.org>, v9fs-developer@lists.sourceforge.net,
  Bharath Vedartham <linux.bhar@gmail.com>, Jann Horn <jannh@google.com>,
  ecryptfs@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>,
  Dave Chinner <dchinner@redhat.com>, David Sterba <dsterba@suse.com>,
  Artem Bityutskiy <dedekind1@gmail.com>, netdev@vger.kernel.org,
- Adrian Hunter <adrian.hunter@intel.com>, stable@vger.kernel.org,
- Tyler Hicks <tyhicks@canonical.com>,
- Ernesto =?unknown-8bit?Q?A=2E_Fern=C3=A1ndez?=
- <ernesto.mnd.fernandez@gmail.com>, Phillip Lougher <phillip@squashfs.org.uk>,
+ linux-unionfs@vger.kernel.org, stable@vger.kernel.org,
+ Tyler Hicks <tyhicks@canonical.com>, linux-security-module@vger.kernel.org,
+ Phillip Lougher <phillip@squashfs.org.uk>,
  David Woodhouse <dwmw2@infradead.org>, linux-btrfs@vger.kernel.org,
  Alexander Viro <viro@zeniv.linux.org.uk>
 Errors-To: devel-bounces@lists.orangefs.org
@@ -117,150 +111,241 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi Mark,
+On Tue, 2019-08-27 at 08:05 -0700, Mark Salyzyn wrote:
+> Replace arguments for get and set xattr methods, and __vfs_getxattr
+> and __vfs_setaxtr functions with a reference to the following now
+> common argument structure:
+> 
+> struct xattr_gs_args {
+> 	struct dentry *dentry;
+> 	struct inode *inode;
+> 	const char *name;
+> 	union {
+> 		void *buffer;
+> 		const void *value;
+> 	};
+> 	size_t size;
+> 	int flags;
+> };
+> 
+> Which in effect adds a flags option to the get method and
+> __vfs_getxattr function.
+> 
+> Add a flag option to get xattr method that has bit flag of
+> XATTR_NOSECURITY passed to it.  XATTR_NOSECURITY is generally then
+> set in the __vfs_getxattr path when called by security
+> infrastructure.
+> 
+> This handles the case of a union filesystem driver that is being
+> requested by the security layer to report back the xattr data.
+> 
+> For the use case where access is to be blocked by the security layer.
+> 
+> The path then could be security(dentry) ->
+> __vfs_getxattr({dentry...XATTR_NOSECURITY}) ->
+> handler->get({dentry...XATTR_NOSECURITY}) ->
+> __vfs_getxattr({lower_dentry...XATTR_NOSECURITY}) ->
+> lower_handler->get({lower_dentry...XATTR_NOSECURITY})
+> which would report back through the chain data and success as
+> expected, the logging security layer at the top would have the
+> data to determine the access permissions and report back the target
+> context that was blocked.
+> 
+> Without the get handler flag, the path on a union filesystem would be
+> the errant security(dentry) -> __vfs_getxattr(dentry) ->
+> handler->get(dentry) -> vfs_getxattr(lower_dentry) -> nested ->
+> security(lower_dentry, log off) -> lower_handler->get(lower_dentry)
+> which would report back through the chain no data, and -EACCES.
+> 
+> For selinux for both cases, this would translate to a correctly
+> determined blocked access. In the first case with this change a correct avc
+> log would be reported, in the second legacy case an incorrect avc log
+> would be reported against an uninitialized u:object_r:unlabeled:s0
+> context making the logs cosmetically useless for audit2allow.
+> 
+> This patch series is inert and is the wide-spread addition of the
+> flags option for xattr functions, and a replacement of __vfs_getxattr
+> with __vfs_getxattr({...XATTR_NOSECURITY}).
+> 
+> Signed-off-by: Mark Salyzyn <salyzyn@android.com>
+> Reviewed-by: Jan Kara <jack@suse.cz>
+> Cc: Stephen Smalley <sds@tycho.nsa.gov>
+> Cc: linux-kernel@vger.kernel.org
+> Cc: kernel-team@android.com
+> Cc: linux-security-module@vger.kernel.org
+> Cc: stable@vger.kernel.org # 4.4, 4.9, 4.14 & 4.19
+> ---
+> v8:
+> - Documentation reported 'struct xattr_gs_flags' rather than
+>   'struct xattr_gs_flags *args' as argument to get and set methods.
+> 
+> v7:
+> - missed spots in fs/9p/acl.c, fs/afs/xattr.c, fs/ecryptfs/crypto.c,
+>   fs/ubifs/xattr.c, fs/xfs/libxfs/xfs_attr.c,
+>   security/integrity/evm/evm_main.c and security/smack/smack_lsm.c.
+> 
+> v6:
+> - kernfs missed a spot
+> 
+> v5:
+> - introduce struct xattr_gs_args for get and set methods,
+>   __vfs_getxattr and __vfs_setxattr functions.
+> - cover a missing spot in ext2.
+> - switch from snprintf to scnprintf for correctness.
+> 
+> v4:
+> - ifdef __KERNEL__ around XATTR_NOSECURITY to
+>   keep it colocated in uapi headers.
+> 
+> v3:
+> - poor aim on ubifs not ubifs_xattr_get, but static xattr_get
+> 
+> v2:
+> - Missed a spot: ubifs, erofs and afs.
+> 
+> v1:
+> - Removed from an overlayfs patch set, and made independent.
+>   Expect this to be the basis of some security improvements.
+> ---
+>  Documentation/filesystems/Locking |  10 ++-
+>  drivers/staging/erofs/xattr.c     |   8 +--
+>  fs/9p/acl.c                       |  51 +++++++-------
+>  fs/9p/xattr.c                     |  19 +++--
+>  fs/afs/xattr.c                    | 112 +++++++++++++-----------------
+>  fs/btrfs/xattr.c                  |  36 +++++-----
+>  fs/ceph/xattr.c                   |  40 +++++------
+>  fs/cifs/xattr.c                   |  72 +++++++++----------
+>  fs/ecryptfs/crypto.c              |  20 +++---
+>  fs/ecryptfs/inode.c               |  36 ++++++----
+>  fs/ecryptfs/mmap.c                |  39 ++++++-----
+>  fs/ext2/xattr_security.c          |  16 ++---
+>  fs/ext2/xattr_trusted.c           |  15 ++--
+>  fs/ext2/xattr_user.c              |  19 +++--
+>  fs/ext4/xattr_security.c          |  15 ++--
+>  fs/ext4/xattr_trusted.c           |  15 ++--
+>  fs/ext4/xattr_user.c              |  19 +++--
+>  fs/f2fs/xattr.c                   |  42 +++++------
+>  fs/fuse/xattr.c                   |  23 +++---
+>  fs/gfs2/xattr.c                   |  18 ++---
+>  fs/hfs/attr.c                     |  15 ++--
+>  fs/hfsplus/xattr.c                |  17 +++--
+>  fs/hfsplus/xattr_security.c       |  13 ++--
+>  fs/hfsplus/xattr_trusted.c        |  13 ++--
+>  fs/hfsplus/xattr_user.c           |  13 ++--
+>  fs/jffs2/security.c               |  16 ++---
+>  fs/jffs2/xattr_trusted.c          |  16 ++---
+>  fs/jffs2/xattr_user.c             |  16 ++---
+>  fs/jfs/xattr.c                    |  33 ++++-----
+>  fs/kernfs/inode.c                 |  23 +++---
+>  fs/nfs/nfs4proc.c                 |  28 ++++----
+>  fs/ocfs2/xattr.c                  |  52 ++++++--------
+>  fs/orangefs/xattr.c               |  19 ++---
+>  fs/overlayfs/inode.c              |  43 ++++++------
+>  fs/overlayfs/overlayfs.h          |   6 +-
+>  fs/overlayfs/super.c              |  53 ++++++--------
+>  fs/posix_acl.c                    |  23 +++---
+>  fs/reiserfs/xattr.c               |   2 +-
+>  fs/reiserfs/xattr_security.c      |  22 +++---
+>  fs/reiserfs/xattr_trusted.c       |  22 +++---
+>  fs/reiserfs/xattr_user.c          |  22 +++---
+>  fs/squashfs/xattr.c               |  10 +--
+>  fs/ubifs/xattr.c                  |  33 +++++----
+>  fs/xattr.c                        | 112 ++++++++++++++++++------------
+>  fs/xfs/libxfs/xfs_attr.c          |   4 +-
+>  fs/xfs/libxfs/xfs_attr.h          |   2 +-
+>  fs/xfs/xfs_xattr.c                |  35 +++++-----
+>  include/linux/xattr.h             |  26 ++++---
+>  include/uapi/linux/xattr.h        |   7 +-
+>  mm/shmem.c                        |  21 +++---
+>  net/socket.c                      |  16 ++---
+>  security/commoncap.c              |  29 +++++---
+>  security/integrity/evm/evm_main.c |  13 +++-
+>  security/selinux/hooks.c          |  28 ++++++--
+>  security/smack/smack_lsm.c        |  38 ++++++----
+>  55 files changed, 732 insertions(+), 734 deletions(-)
+> 
+> 
 
-Thank you for the patch! Yet something to improve:
+[...]
 
-[auto build test ERROR on linus/master]
-[cannot apply to v5.3-rc5 next-20190820]
-[if your patch is applied to the wrong git tree, please drop us a note to help improve the system]
+>  
+> diff --git a/fs/ceph/xattr.c b/fs/ceph/xattr.c
+> index 939eab7aa219..c4fee624291b 100644
+> --- a/fs/ceph/xattr.c
+> +++ b/fs/ceph/xattr.c
+> @@ -1179,22 +1179,21 @@ int __ceph_setxattr(struct inode *inode, const char *name,
+>  }
+>  
+>  static int ceph_get_xattr_handler(const struct xattr_handler *handler,
+> -				  struct dentry *dentry, struct inode *inode,
+> -				  const char *name, void *value, size_t size)
+> +				  struct xattr_gs_args *args)
+>  {
+> -	if (!ceph_is_valid_xattr(name))
+> +	if (!ceph_is_valid_xattr(args->name))
+>  		return -EOPNOTSUPP;
+> -	return __ceph_getxattr(inode, name, value, size);
+> +	return __ceph_getxattr(args->inode, args->name,
+> +			       args->buffer, args->size);
+>  }
+>  
+>  static int ceph_set_xattr_handler(const struct xattr_handler *handler,
+> -				  struct dentry *unused, struct inode *inode,
+> -				  const char *name, const void *value,
+> -				  size_t size, int flags)
+> +				  struct xattr_gs_args *args)
+>  {
+> -	if (!ceph_is_valid_xattr(name))
+> +	if (!ceph_is_valid_xattr(args->name))
+>  		return -EOPNOTSUPP;
+> -	return __ceph_setxattr(inode, name, value, size, flags);
+> +	return __ceph_setxattr(args->inode, args->name,
+> +			       args->value, args->size, args->flags);
+>  }
+>  
+>  static const struct xattr_handler ceph_other_xattr_handler = {
+> @@ -1300,25 +1299,22 @@ void ceph_security_invalidate_secctx(struct inode *inode)
+>  }
+>  
+>  static int ceph_xattr_set_security_label(const struct xattr_handler *handler,
+> -				    struct dentry *unused, struct inode *inode,
+> -				    const char *key, const void *buf,
+> -				    size_t buflen, int flags)
+> +					 struct xattr_gs_args *args)
+>  {
+> -	if (security_ismaclabel(key)) {
+> -		const char *name = xattr_full_name(handler, key);
+> -		return __ceph_setxattr(inode, name, buf, buflen, flags);
+> -	}
+> +	if (security_ismaclabel(args->name))
+> +		return __ceph_setxattr(args->inode,
+> +				       xattr_full_name(handler, args->name),
+> +				       args->value, args->size, args->flags);
+>  	return  -EOPNOTSUPP;
+>  }
+>  
+>  static int ceph_xattr_get_security_label(const struct xattr_handler *handler,
+> -				    struct dentry *unused, struct inode *inode,
+> -				    const char *key, void *buf, size_t buflen)
+> +					 struct xattr_gs_args *args)
+>  {
+> -	if (security_ismaclabel(key)) {
+> -		const char *name = xattr_full_name(handler, key);
+> -		return __ceph_getxattr(inode, name, buf, buflen);
+> -	}
+> +	if (security_ismaclabel(args->name))
+> +		return __ceph_getxattr(args->inode,
+> +				       xattr_full_name(handler, args->name),
+> +				       args->buffer, args->size);
+>  	return  -EOPNOTSUPP;
+>  }
+>  
 
-url:    https://github.com/0day-ci/linux/commits/Mark-Salyzyn/Add-flags-option-to-get-xattr-method-paired-to-__vfs_getxattr/20190820-220307
-config: i386-allmodconfig (attached as .config)
-compiler: gcc-7 (Debian 7.4.0-10) 7.4.0
-reproduce:
-        # save the attached .config to linux build tree
-        make ARCH=i386 
+The ceph bits look fine to me. Note that we do have some patches queued
+up for v5.4 that might have some merge conflicts here. Shouldn't be too
+hard to fix it up though.
 
-If you fix the issue, kindly add following tag
-Reported-by: kbuild test robot <lkp@intel.com>
+Acked-by: Jeff Layton <jlayton@kernel.org>
 
-All error/warnings (new ones prefixed by >>):
 
-   security/smack/smack_lsm.c: In function 'smk_fetch':
->> security/smack/smack_lsm.c:308:26: error: 'buffer' undeclared (first use in this function); did you mean 'user'?
-      skp = smk_import_entry(buffer, rc);
-                             ^~~~~~
-                             user
-   security/smack/smack_lsm.c:308:26: note: each undeclared identifier is reported only once for each function it appears in
---
-   security/integrity/evm/evm_main.c: In function 'evm_find_protected_xattrs':
->> security/integrity/evm/evm_main.c:103:8: error: 'inode' undeclared (first use in this function)
-     if (!(inode->i_opflags & IOP_XATTR))
-           ^~~~~
-   security/integrity/evm/evm_main.c:103:8: note: each undeclared identifier is reported only once for each function it appears in
->> security/integrity/evm/evm_main.c:109:14: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
-      args.flags = xattr->name;
-                 ^
---
-   In file included from include/linux/stat.h:7:0,
-                    from include/linux/module.h:10,
-                    from fs/9p/acl.c:15:
-   fs/9p/acl.c: In function 'v9fs_xattr_set_acl':
->> fs/9p/acl.c:258:14: error: 'inode' undeclared (first use in this function)
-     if (S_ISLNK(inode->i_mode))
-                 ^
-   include/uapi/linux/stat.h:21:23: note: in definition of macro 'S_ISLNK'
-    #define S_ISLNK(m) (((m) & S_IFMT) == S_IFLNK)
-                          ^
-   fs/9p/acl.c:258:14: note: each undeclared identifier is reported only once for each function it appears in
-     if (S_ISLNK(inode->i_mode))
-                 ^
-   include/uapi/linux/stat.h:21:23: note: in definition of macro 'S_ISLNK'
-    #define S_ISLNK(m) (((m) & S_IFMT) == S_IFLNK)
-                          ^
---
-   fs/afs/xattr.c: In function 'afs_xattr_get_cell':
->> fs/afs/xattr.c:334:6: error: 'size' undeclared (first use in this function); did you mean 'ksize'?
-     if (size == 0)
-         ^~~~
-         ksize
-   fs/afs/xattr.c:334:6: note: each undeclared identifier is reported only once for each function it appears in
---
-   fs/ecryptfs/crypto.c: In function 'ecryptfs_write_metadata_to_xattr':
->> fs/ecryptfs/crypto.c:1131:23: error: 'args' undeclared (first use in this function); did you mean 'abs'?
-     rc = __vfs_setxattr(&args);
-                          ^~~~
-                          abs
-   fs/ecryptfs/crypto.c:1131:23: note: each undeclared identifier is reported only once for each function it appears in
---
-   fs/ubifs/xattr.c: In function 'xattr_get':
->> fs/ubifs/xattr.c:676:63: error: 'name' undeclared (first use in this function); did you mean 'page'?
-     return ubifs_xattr_get(args->inode, xattr_full_name(handler, name),
-                                                                  ^~~~
-                                                                  page
-   fs/ubifs/xattr.c:676:63: note: each undeclared identifier is reported only once for each function it appears in
-   fs/ubifs/xattr.c: In function 'xattr_set':
->> fs/ubifs/xattr.c:686:6: error: 'value' undeclared (first use in this function); did you mean 'false'?
-     if (value)
-         ^~~~~
-         false
-   fs/ubifs/xattr.c:694:1: warning: control reaches end of non-void function [-Wreturn-type]
-    }
-    ^
-   fs/ubifs/xattr.c: In function 'xattr_get':
-   fs/ubifs/xattr.c:678:1: warning: control reaches end of non-void function [-Wreturn-type]
-    }
-    ^
---
-   fs/xfs/libxfs/xfs_attr.c: In function 'xfs_attr_set':
->> fs/xfs/libxfs/xfs_attr.c:327:13: warning: assignment discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
-     args.value = value;
-                ^
 
-vim +308 security/smack/smack_lsm.c
-
-d166c8024d620d Casey Schaufler     2014-08-27  271  
-e114e473771c84 Casey Schaufler     2008-02-04  272  /**
-e114e473771c84 Casey Schaufler     2008-02-04  273   * smk_fetch - Fetch the smack label from a file.
-1a28979b322bb2 Lukasz Pawelczyk    2014-11-26  274   * @name: type of the label (attribute)
-e114e473771c84 Casey Schaufler     2008-02-04  275   * @ip: a pointer to the inode
-e114e473771c84 Casey Schaufler     2008-02-04  276   * @dp: a pointer to the dentry
-e114e473771c84 Casey Schaufler     2008-02-04  277   *
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  278   * Returns a pointer to the master list entry for the Smack label,
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  279   * NULL if there was no label to fetch, or an error code.
-e114e473771c84 Casey Schaufler     2008-02-04  280   */
-2f823ff8bec03a Casey Schaufler     2013-05-22  281  static struct smack_known *smk_fetch(const char *name, struct inode *ip,
-2f823ff8bec03a Casey Schaufler     2013-05-22  282  					struct dentry *dp)
-e114e473771c84 Casey Schaufler     2008-02-04  283  {
-e114e473771c84 Casey Schaufler     2008-02-04  284  	int rc;
-2f823ff8bec03a Casey Schaufler     2013-05-22  285  	struct smack_known *skp = NULL;
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  286  	struct xattr_gs_args args;
-e114e473771c84 Casey Schaufler     2008-02-04  287  
-5d6c31910bc071 Andreas Gruenbacher 2016-09-29  288  	if (!(ip->i_opflags & IOP_XATTR))
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  289  		return ERR_PTR(-EOPNOTSUPP);
-e114e473771c84 Casey Schaufler     2008-02-04  290  
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  291  	memset(&args, 0, sizeof(args));
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  292  	args.dentry = dp;
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  293  	args.inode = ip;
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  294  	args.name = name;
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  295  	args.buffer = kzalloc(SMK_LONGLABEL, GFP_KERNEL);
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  296  	args.size = SMK_LONGLABEL;
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  297  	args.flags = XATTR_NOSECURITY;
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  298  
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  299  	if (args.buffer == NULL)
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  300  		return ERR_PTR(-ENOMEM);
-e114e473771c84 Casey Schaufler     2008-02-04  301  
-7d823b0879d4e2 Mark Salyzyn        2019-08-19  302  	rc = __vfs_getxattr(&args);
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  303  	if (rc < 0)
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  304  		skp = ERR_PTR(rc);
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  305  	else if (rc == 0)
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  306  		skp = NULL;
-e774ad683f425a Lukasz Pawelczyk    2015-04-20  307  	else
-2f823ff8bec03a Casey Schaufler     2013-05-22 @308  		skp = smk_import_entry(buffer, rc);
-f7112e6c9abf1c Casey Schaufler     2012-05-06  309  
-f7112e6c9abf1c Casey Schaufler     2012-05-06  310  	kfree(buffer);
-f7112e6c9abf1c Casey Schaufler     2012-05-06  311  
-2f823ff8bec03a Casey Schaufler     2013-05-22  312  	return skp;
-e114e473771c84 Casey Schaufler     2008-02-04  313  }
-e114e473771c84 Casey Schaufler     2008-02-04  314  
-
-:::::: The code at line 308 was first introduced by commit
-:::::: 2f823ff8bec03a1e6f9e11fd0c4d54e4c7d09532 Smack: Improve access check performance
-
-:::::: TO: Casey Schaufler <casey@schaufler-ca.com>
-:::::: CC: Casey Schaufler <casey@schaufler-ca.com>
-
----
-0-DAY kernel test infrastructure                Open Source Technology Center
-https://lists.01.org/pipermail/kbuild-all                   Intel Corporation

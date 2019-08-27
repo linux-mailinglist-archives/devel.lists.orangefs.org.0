@@ -2,35 +2,75 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FF4C9F6EE
+	by mail.lfdr.de (Postfix) with ESMTPS id 929B19F6EF
 	for <lists+devel-orangefs@lfdr.de>; Wed, 28 Aug 2019 01:31:40 +0200 (CEST)
-Received: from [::1] (port=45680 helo=mm1.emwd.com)
+Received: from [::1] (port=45682 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1i2kw7-0003LX-GW
+	id 1i2kw7-0003Lg-KM
 	for lists+devel-orangefs@lfdr.de; Tue, 27 Aug 2019 19:31:39 -0400
-Received: from mx2.suse.de ([195.135.220.15]:40752 helo=mx1.suse.de)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <jack@suse.cz>) id 1i2cKv-00010P-RD
- for devel@lists.orangefs.org; Tue, 27 Aug 2019 10:20:42 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 0A664ACC6;
- Tue, 27 Aug 2019 14:19:59 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id DBFE91E4362; Tue, 27 Aug 2019 16:19:52 +0200 (CEST)
-Date: Tue, 27 Aug 2019 16:19:52 +0200
-From: Jan Kara <jack@suse.cz>
+Received: from aserp2120.oracle.com ([141.146.126.78]:49610)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <darrick.wong@oracle.com>)
+ id 1i2j9g-0008HD-BK
+ for devel@lists.orangefs.org; Tue, 27 Aug 2019 17:37:32 -0400
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x7RLZVp6082292;
+ Tue, 27 Aug 2019 21:36:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2019-08-05;
+ bh=PXOnTPv+8T1bB5n8JVmUuWdJUBnp+wT9+bzVdGFeNBk=;
+ b=m8TdMe06W8ah6nIqT8Z78bE7qAkK7s/oM5lpVAcxvxDMsz7y46Rlws1U5D2S4rTY+WqV
+ w9OHDuxIbYZ9Hbce6VX1RZnQSBNX12bBZ6fiPplJKUGb/FVsqDYFB9N3wYipC0eIIhQZ
+ dxZ9ekSyKFQTFWKFcSPZG7dcT2zrhpFJ8T2JGmSd/K2AU8DQ0mRcWsVW6Cu0AAcD39EI
+ t6rdTfunqrtN76jOAVl6AIPeFe8YPPYpkRMaIehoLWp5+RxpBPwqz7cv9LQoBnF5pvoK
+ cw1O1FXcSZGHvCNYjw4wxH1nINH7DqrlPoqGgf0XeMa6QeDPq1q9tqUd9/jWh+yto9pU QA== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by aserp2120.oracle.com with ESMTP id 2uncjf803r-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 27 Aug 2019 21:36:21 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x7RLXYnA013486;
+ Tue, 27 Aug 2019 21:36:20 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by userp3030.oracle.com with ESMTP id 2un6q1kf6u-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 27 Aug 2019 21:36:20 +0000
+Received: from userp3030.oracle.com (userp3030.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x7RLYv0l018295;
+ Tue, 27 Aug 2019 21:36:19 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by userp3030.oracle.com with ESMTP id 2un6q1kf6b-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 27 Aug 2019 21:36:19 +0000
+Received: from abhmp0001.oracle.com (abhmp0001.oracle.com [141.146.116.7])
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x7RLZoYW004307;
+ Tue, 27 Aug 2019 21:35:54 GMT
+Received: from localhost (/10.145.178.11)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Tue, 27 Aug 2019 14:35:49 -0700
+Date: Tue, 27 Aug 2019 14:35:43 -0700
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
 To: Mark Salyzyn <salyzyn@android.com>
-Subject: Re: [PATCH v7] Add flags option to get xattr method paired to
+Subject: Re: [PATCH v8] Add flags option to get xattr method paired to
  __vfs_getxattr
-Message-ID: <20190827141952.GB10098@quack2.suse.cz>
-References: <20190820180716.129882-1-salyzyn@android.com>
+Message-ID: <20190827213543.GR1037422@magnolia>
+References: <20190827150544.151031-1-salyzyn@android.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20190820180716.129882-1-salyzyn@android.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20190827150544.151031-1-salyzyn@android.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9362
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=2 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1906280000
+ definitions=main-1908270201
 X-Mailman-Approved-At: Tue, 27 Aug 2019 19:31:38 -0400
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
@@ -43,10 +83,10 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, Eric Sandeen <sandeen@sandeen.net>,
- linux-xfs@vger.kernel.org, James Morris <jmorris@namei.org>,
- devel@lists.orangefs.org, Eric Van Hensbergen <ericvh@gmail.com>,
- Joel Becker <jlbec@evilplan.org>,
+Cc: Latchesar Ionkov <lucho@ionkov.net>, Hugh Dickins <hughd@google.com>,
+ James Morris <jmorris@namei.org>, devel@lists.orangefs.org,
+ Eric Van Hensbergen <ericvh@gmail.com>, Joel Becker <jlbec@evilplan.org>,
+ Anna Schumaker <anna.schumaker@netapp.com>,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
  Mathieu Malaterre <malat@debian.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
@@ -54,11 +94,10 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Eric Sandeen <sandeen@sandeen.net>,
  Andrew Morton <akpm@linux-foundation.org>, Dave Kleikamp <shaggy@kernel.org>,
  linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
  Chao Yu <yuchao0@huawei.com>, Mimi Zohar <zohar@linux.ibm.com>,
- "David S. Miller" <davem@davemloft.net>, linux-cifs@vger.kernel.org,
- Paul Moore <paul@paul-moore.com>, "Darrick J. Wong" <darrick.wong@oracle.com>,
- Hugh Dickins <hughd@google.com>, kernel-team@android.com,
+ linux-cifs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
+ Eric Sandeen <sandeen@sandeen.net>, kernel-team@android.com,
  selinux@vger.kernel.org, Brian Foster <bfoster@redhat.com>,
- reiserfs-devel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ reiserfs-devel@vger.kernel.org, Tejun Heo <tj@kernel.org>,
  Jaegeuk Kim <jaegeuk@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
  Miklos Szeredi <miklos@szeredi.hu>, linux-f2fs-devel@lists.sourceforge.net,
  Benjamin Coddington <bcodding@redhat.com>, linux-integrity@vger.kernel.org,
@@ -69,26 +108,26 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Eric Sandeen <sandeen@sandeen.net>,
  Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
  Stephen Smalley <sds@tycho.nsa.gov>, Serge Hallyn <serge@hallyn.com>,
  Gao Xiang <gaoxiang25@huawei.com>, Eric Paris <eparis@parisplace.org>,
- ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org,
- Joseph Qi <joseph.qi@linux.alibaba.com>, samba-technical@lists.samba.org,
- Steve French <sfrench@samba.org>, Bob Peterson <rpeterso@redhat.com>,
- Tejun Heo <tj@kernel.org>, linux-erofs@lists.ozlabs.org,
- Anna Schumaker <anna.schumaker@netapp.com>, ocfs2-devel@oss.oracle.com,
- jfs-discussion@lists.sourceforge.net, Eric Biggers <ebiggers@google.com>,
- Dominique Martinet <asmadeus@codewreck.org>, Jeff Mahoney <jeffm@suse.com>,
- linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
- linux-mm@kvack.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- devel@driverdev.osuosl.org, "J. Bruce Fields" <bfields@redhat.com>,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org, linux-mm@kvack.org,
+ samba-technical@lists.samba.org, linux-xfs@vger.kernel.org,
+ Bob Peterson <rpeterso@redhat.com>, linux-fsdevel@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, "David S. Miller" <davem@davemloft.net>,
+ ocfs2-devel@oss.oracle.com, jfs-discussion@lists.sourceforge.net,
+ Jan Kara <jack@suse.cz>, Eric Biggers <ebiggers@google.com>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Adrian Hunter <adrian.hunter@intel.com>, David Howells <dhowells@redhat.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, devel@driverdev.osuosl.org,
+ "J. Bruce Fields" <bfields@redhat.com>,
  Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
  Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-security-module@vger.kernel.org, cluster-devel@redhat.com,
+ cluster-devel@redhat.com, Steve French <sfrench@samba.org>,
  v9fs-developer@lists.sourceforge.net, Bharath Vedartham <linux.bhar@gmail.com>,
  Jann Horn <jannh@google.com>, ecryptfs@vger.kernel.org,
  Josef Bacik <josef@toxicpanda.com>, Dave Chinner <dchinner@redhat.com>,
  David Sterba <dsterba@suse.com>, Artem Bityutskiy <dedekind1@gmail.com>,
- netdev@vger.kernel.org, Adrian Hunter <adrian.hunter@intel.com>,
- stable@vger.kernel.org, Tyler Hicks <tyhicks@canonical.com>,
- Ernesto =?iso-8859-1?Q?A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
+ netdev@vger.kernel.org, linux-unionfs@vger.kernel.org, stable@vger.kernel.org,
+ Tyler Hicks <tyhicks@canonical.com>, linux-security-module@vger.kernel.org,
  Phillip Lougher <phillip@squashfs.org.uk>,
  David Woodhouse <dwmw2@infradead.org>, linux-btrfs@vger.kernel.org,
  Alexander Viro <viro@zeniv.linux.org.uk>
@@ -105,9 +144,165 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Tue 20-08-19 11:06:48, Mark Salyzyn wrote:
+On Tue, Aug 27, 2019 at 08:05:15AM -0700, Mark Salyzyn wrote:
+> Replace arguments for get and set xattr methods, and __vfs_getxattr
+> and __vfs_setaxtr functions with a reference to the following now
+> common argument structure:
+> 
+> struct xattr_gs_args {
+> 	struct dentry *dentry;
+> 	struct inode *inode;
+> 	const char *name;
+> 	union {
+> 		void *buffer;
+> 		const void *value;
+> 	};
+> 	size_t size;
+> 	int flags;
+> };
+> 
+> Which in effect adds a flags option to the get method and
+> __vfs_getxattr function.
+> 
+> Add a flag option to get xattr method that has bit flag of
+> XATTR_NOSECURITY passed to it.  XATTR_NOSECURITY is generally then
+> set in the __vfs_getxattr path when called by security
+> infrastructure.
+> 
+> This handles the case of a union filesystem driver that is being
+> requested by the security layer to report back the xattr data.
+> 
+> For the use case where access is to be blocked by the security layer.
+> 
+> The path then could be security(dentry) ->
+> __vfs_getxattr({dentry...XATTR_NOSECURITY}) ->
+> handler->get({dentry...XATTR_NOSECURITY}) ->
+> __vfs_getxattr({lower_dentry...XATTR_NOSECURITY}) ->
+> lower_handler->get({lower_dentry...XATTR_NOSECURITY})
+> which would report back through the chain data and success as
+> expected, the logging security layer at the top would have the
+> data to determine the access permissions and report back the target
+> context that was blocked.
+> 
+> Without the get handler flag, the path on a union filesystem would be
+> the errant security(dentry) -> __vfs_getxattr(dentry) ->
+> handler->get(dentry) -> vfs_getxattr(lower_dentry) -> nested ->
+> security(lower_dentry, log off) -> lower_handler->get(lower_dentry)
+> which would report back through the chain no data, and -EACCES.
+> 
+> For selinux for both cases, this would translate to a correctly
+> determined blocked access. In the first case with this change a correct avc
+> log would be reported, in the second legacy case an incorrect avc log
+> would be reported against an uninitialized u:object_r:unlabeled:s0
+> context making the logs cosmetically useless for audit2allow.
+> 
+> This patch series is inert and is the wide-spread addition of the
+> flags option for xattr functions, and a replacement of __vfs_getxattr
+> with __vfs_getxattr({...XATTR_NOSECURITY}).
+> 
+> Signed-off-by: Mark Salyzyn <salyzyn@android.com>
+> Reviewed-by: Jan Kara <jack@suse.cz>
+> Cc: Stephen Smalley <sds@tycho.nsa.gov>
+> Cc: linux-kernel@vger.kernel.org
+> Cc: kernel-team@android.com
+> Cc: linux-security-module@vger.kernel.org
+> Cc: stable@vger.kernel.org # 4.4, 4.9, 4.14 & 4.19
+
+For the XFS part,
+Acked-by: Darrick J. Wong <darrick.wong@oracle.com>
+
+> ---
+> v8:
+> - Documentation reported 'struct xattr_gs_flags' rather than
+>   'struct xattr_gs_flags *args' as argument to get and set methods.
+> 
+> v7:
+> - missed spots in fs/9p/acl.c, fs/afs/xattr.c, fs/ecryptfs/crypto.c,
+>   fs/ubifs/xattr.c, fs/xfs/libxfs/xfs_attr.c,
+>   security/integrity/evm/evm_main.c and security/smack/smack_lsm.c.
+> 
+> v6:
+> - kernfs missed a spot
+> 
+> v5:
+> - introduce struct xattr_gs_args for get and set methods,
+>   __vfs_getxattr and __vfs_setxattr functions.
+> - cover a missing spot in ext2.
+> - switch from snprintf to scnprintf for correctness.
+> 
+> v4:
+> - ifdef __KERNEL__ around XATTR_NOSECURITY to
+>   keep it colocated in uapi headers.
+> 
+> v3:
+> - poor aim on ubifs not ubifs_xattr_get, but static xattr_get
+> 
+> v2:
+> - Missed a spot: ubifs, erofs and afs.
+> 
+> v1:
+> - Removed from an overlayfs patch set, and made independent.
+>   Expect this to be the basis of some security improvements.
+> ---
+>  Documentation/filesystems/Locking |  10 ++-
+>  drivers/staging/erofs/xattr.c     |   8 +--
+>  fs/9p/acl.c                       |  51 +++++++-------
+>  fs/9p/xattr.c                     |  19 +++--
+>  fs/afs/xattr.c                    | 112 +++++++++++++-----------------
+>  fs/btrfs/xattr.c                  |  36 +++++-----
+>  fs/ceph/xattr.c                   |  40 +++++------
+>  fs/cifs/xattr.c                   |  72 +++++++++----------
+>  fs/ecryptfs/crypto.c              |  20 +++---
+>  fs/ecryptfs/inode.c               |  36 ++++++----
+>  fs/ecryptfs/mmap.c                |  39 ++++++-----
+>  fs/ext2/xattr_security.c          |  16 ++---
+>  fs/ext2/xattr_trusted.c           |  15 ++--
+>  fs/ext2/xattr_user.c              |  19 +++--
+>  fs/ext4/xattr_security.c          |  15 ++--
+>  fs/ext4/xattr_trusted.c           |  15 ++--
+>  fs/ext4/xattr_user.c              |  19 +++--
+>  fs/f2fs/xattr.c                   |  42 +++++------
+>  fs/fuse/xattr.c                   |  23 +++---
+>  fs/gfs2/xattr.c                   |  18 ++---
+>  fs/hfs/attr.c                     |  15 ++--
+>  fs/hfsplus/xattr.c                |  17 +++--
+>  fs/hfsplus/xattr_security.c       |  13 ++--
+>  fs/hfsplus/xattr_trusted.c        |  13 ++--
+>  fs/hfsplus/xattr_user.c           |  13 ++--
+>  fs/jffs2/security.c               |  16 ++---
+>  fs/jffs2/xattr_trusted.c          |  16 ++---
+>  fs/jffs2/xattr_user.c             |  16 ++---
+>  fs/jfs/xattr.c                    |  33 ++++-----
+>  fs/kernfs/inode.c                 |  23 +++---
+>  fs/nfs/nfs4proc.c                 |  28 ++++----
+>  fs/ocfs2/xattr.c                  |  52 ++++++--------
+>  fs/orangefs/xattr.c               |  19 ++---
+>  fs/overlayfs/inode.c              |  43 ++++++------
+>  fs/overlayfs/overlayfs.h          |   6 +-
+>  fs/overlayfs/super.c              |  53 ++++++--------
+>  fs/posix_acl.c                    |  23 +++---
+>  fs/reiserfs/xattr.c               |   2 +-
+>  fs/reiserfs/xattr_security.c      |  22 +++---
+>  fs/reiserfs/xattr_trusted.c       |  22 +++---
+>  fs/reiserfs/xattr_user.c          |  22 +++---
+>  fs/squashfs/xattr.c               |  10 +--
+>  fs/ubifs/xattr.c                  |  33 +++++----
+>  fs/xattr.c                        | 112 ++++++++++++++++++------------
+>  fs/xfs/libxfs/xfs_attr.c          |   4 +-
+>  fs/xfs/libxfs/xfs_attr.h          |   2 +-
+>  fs/xfs/xfs_xattr.c                |  35 +++++-----
+>  include/linux/xattr.h             |  26 ++++---
+>  include/uapi/linux/xattr.h        |   7 +-
+>  mm/shmem.c                        |  21 +++---
+>  net/socket.c                      |  16 ++---
+>  security/commoncap.c              |  29 +++++---
+>  security/integrity/evm/evm_main.c |  13 +++-
+>  security/selinux/hooks.c          |  28 ++++++--
+>  security/smack/smack_lsm.c        |  38 ++++++----
+>  55 files changed, 732 insertions(+), 734 deletions(-)
+> 
 > diff --git a/Documentation/filesystems/Locking b/Documentation/filesystems/Locking
-> index 204dd3ea36bb..e2687f21c7d6 100644
+> index 204dd3ea36bb..c16752a41959 100644
 > --- a/Documentation/filesystems/Locking
 > +++ b/Documentation/filesystems/Locking
 > @@ -101,12 +101,10 @@ of the locking scheme for directory operations.
@@ -121,19 +316,9 @@ On Tue 20-08-19 11:06:48, Mark Salyzyn wrote:
 > -		   struct inode *inode, const char *name, const void *buffer,
 > -		   size_t size, int flags);
 > +	int (*get)(const struct xattr_handler *handler,
-> +		   struct xattr_gs_flags);
+> +		   struct xattr_gs_flags *args);
 > +	int (*set)(const struct xattr_handler *handler,
-> +		   struct xattr_gs_flags);
-
-The prototype here is really "struct xattr_gs_flags *args", isn't it?
-Otherwise feel free to add:
-
-Reviewed-by: Jan Kara <jack@suse.cz>
-
-for the ext2, ext4, ocfs2, reiserfs, and the generic fs/* bits. 
-
-								Honza
-
+> +		   struct xattr_gs_flags *args);
 >  
 >  locking rules:
 >  	all may block
@@ -666,10 +851,10 @@ for the ext2, ext4, ocfs2, reiserfs, and the generic fs/* bits.
 >  	}
 >  
 > diff --git a/fs/ceph/xattr.c b/fs/ceph/xattr.c
-> index 37b458a9af3a..71395a8e5ec7 100644
+> index 939eab7aa219..c4fee624291b 100644
 > --- a/fs/ceph/xattr.c
 > +++ b/fs/ceph/xattr.c
-> @@ -1170,22 +1170,21 @@ int __ceph_setxattr(struct inode *inode, const char *name,
+> @@ -1179,22 +1179,21 @@ int __ceph_setxattr(struct inode *inode, const char *name,
 >  }
 >  
 >  static int ceph_get_xattr_handler(const struct xattr_handler *handler,
@@ -700,7 +885,7 @@ for the ext2, ext4, ocfs2, reiserfs, and the generic fs/* bits.
 >  }
 >  
 >  static const struct xattr_handler ceph_other_xattr_handler = {
-> @@ -1291,25 +1290,22 @@ void ceph_security_invalidate_secctx(struct inode *inode)
+> @@ -1300,25 +1299,22 @@ void ceph_security_invalidate_secctx(struct inode *inode)
 >  }
 >  
 >  static int ceph_xattr_set_security_label(const struct xattr_handler *handler,
@@ -3273,10 +3458,6 @@ for the ext2, ext4, ocfs2, reiserfs, and the generic fs/* bits.
 >  						       TRANS_TRUE_SIZE) != 0)
 >  					rc = -EINVAL;
 > -- 
-> 2.23.0.rc1.153.gdeed80330f-goog
+> 2.23.0.187.g17f5b7556c-goog
 > 
-> 
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
 

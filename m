@@ -2,56 +2,59 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6312EA2C8E
-	for <lists+devel-orangefs@lfdr.de>; Fri, 30 Aug 2019 04:03:09 +0200 (CEST)
-Received: from [::1] (port=33716 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A024A2CC3
+	for <lists+devel-orangefs@lfdr.de>; Fri, 30 Aug 2019 04:21:47 +0200 (CEST)
+Received: from [::1] (port=33952 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1i3WFo-00071V-Gk
-	for lists+devel-orangefs@lfdr.de; Thu, 29 Aug 2019 22:03:08 -0400
-Received: from mail-io1-f68.google.com ([209.85.166.68]:38164)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <deepa.kernel@gmail.com>)
- id 1i3WFm-00071B-S6
- for devel@lists.orangefs.org; Thu, 29 Aug 2019 22:03:06 -0400
-Received: by mail-io1-f68.google.com with SMTP id p12so10982129iog.5
- for <devel@lists.orangefs.org>; Thu, 29 Aug 2019 19:02:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oLvzfsj88KL7STQQplyqqS42g24w/uMRduFS4XzvSOo=;
- b=SUiSI+Km3m50gBNp/Vf1kQ5Znt7t2xjJr9IjLemKNMiLxz2yhpZsbK/DLZC4L9urNb
- gDxuG7f7XtiecI937GfbQdq+jdln7Z3Fb+8kZnJxwlPpeYQImuMwhjHoDEP857mW1lVb
- NZHRIybWwFHnsioflZzUdQfkXgsEf/TexqY+05N8IO8NvnMnQftjfJ9hFazxqlx7VQO+
- BZ2rZ7/dbzo90ZAvtO0lvvso+7mGgwA9kdlEC7uFLAulP9R+MYUVIvG8IxPGPXul5/em
- IvII12CYogidxhoNLSBGFsf9ZguQCTMWCWKe+z44xwiHPHukomi7gttk607Xpy0ogB0G
- kuPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oLvzfsj88KL7STQQplyqqS42g24w/uMRduFS4XzvSOo=;
- b=XCC6P3OxZHndXB/XB991FnD5IF8dx6jz59hx/Q/y646Xoi+4lPMbP6NcEghf/0eeuy
- XlY77YxaxTf2k7OmuHy1Ro/n+SFRtRWfPBzQ7xyXaFfR4a1LYvqpzzR26iiLw0iuIZS3
- ucM8R35obMoYyRYoFEclmO647jnLmMIPZTWvXuHEO3KrNoQGZPh+XsgazXaAL3nOCP39
- 8Q3ZSuL24xSAP6eFit4GUs7Wa7YdNEm+YMW9vHbDkPAM1pvM79nH3SnHBmcoYlDXDTWU
- oCxlzCL5ql1ZRLDL9qI4+loc6PdTdIFTxMW44yKDxYC8LI1YvxrVBhZ2E13zxjXD6nwH
- /ucQ==
-X-Gm-Message-State: APjAAAURDg7rFUp6NxJhVb/nBy/2QU7UvV4lR9feNp+Qrm2vCZDo2XxT
- Y7H8xyh2awMSeclQe4WjKIm/+ZHGY+t6/8tQXow=
-X-Google-Smtp-Source: APXvYqzBsNh7crucvVXKqn/eA6ggQob01fCf1ZKTT3BSHFJDqk3FlwYnF1wm6BwegRm/uQfEg9JQEGStTj+fA+RuGsU=
-X-Received: by 2002:a5d:8599:: with SMTP id f25mr9602181ioj.265.1567130545941; 
- Thu, 29 Aug 2019 19:02:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190829041132.26677-1-deepa.kernel@gmail.com>
- <CABeXuvoKD83B7iUqE33Y9E2OVtf61DKv-swZr-N=ozz-cMmGOA@mail.gmail.com>
- <CAOg9mSR25eAH7e1KhDZt_uscJSzyuSmELbCxgyh=-KWRxjZtcw@mail.gmail.com>
-In-Reply-To: <CAOg9mSR25eAH7e1KhDZt_uscJSzyuSmELbCxgyh=-KWRxjZtcw@mail.gmail.com>
-From: Deepa Dinamani <deepa.kernel@gmail.com>
-Date: Thu, 29 Aug 2019 19:02:13 -0700
-Message-ID: <CABeXuvpe9vADLZUr4zHrH0izt=1BaLQvBMxAu=T1A2CV3AN4vA@mail.gmail.com>
-Subject: Re: [GIT PULL] vfs: Add support for timestamp limits
+	id 1i3WXq-0007Kr-E8
+	for lists+devel-orangefs@lfdr.de; Thu, 29 Aug 2019 22:21:46 -0400
+Received: from hqemgate16.nvidia.com ([216.228.121.65]:15434)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <jhubbard@nvidia.com>) id 1i3WXp-0007KV-8e
+ for devel@lists.orangefs.org; Thu, 29 Aug 2019 22:21:45 -0400
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate16.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5d6888110001>; Thu, 29 Aug 2019 19:21:05 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Thu, 29 Aug 2019 19:21:04 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Thu, 29 Aug 2019 19:21:04 -0700
+Received: from [10.110.48.201] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 30 Aug
+ 2019 02:21:03 +0000
+Subject: Re: [PATCH v3 00/39] put_user_pages(): miscellaneous call sites
 To: Mike Marshall <hubcap@omnibond.com>
-Content-Type: text/plain; charset="UTF-8"
+References: <20190807013340.9706-1-jhubbard@nvidia.com>
+ <912eb2bd-4102-05c1-5571-c261617ad30b@nvidia.com>
+ <CAOg9mSQKGDywcMde2DE42diUS7J8m74Hdv+xp_PJhC39EXZQuw@mail.gmail.com>
+X-Nvconfidentiality: public
+From: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <d453f865-2224-ed53-a2f4-f43d574c130a@nvidia.com>
+Date: Thu, 29 Aug 2019 19:21:03 -0700
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAOg9mSQKGDywcMde2DE42diUS7J8m74Hdv+xp_PJhC39EXZQuw@mail.gmail.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1567131665; bh=ws5caXaEY0X3GX3egw6JsJDC0L7OwnIAHkDMK9ZQcE4=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=dIUKOH913DAYlocN1x3OWKU66rYzbsvcqMg6XurXOtfsQm0mTaQq0ufL9HiRQjmKf
+ MYeR8XR6MbUy9f2nOHFjitJW5jxjU59hEwD2KYzGMRBc0+P+o4b2mkzUliEchFZQzm
+ D0OR0ZfFBCp6cKpnoBGakw3Ch1supTeIz+DcDxFqgzxBAMqXWQoRbk0Sq3VWx6u9tp
+ 6uURi8FKe6XveWY1U9zok9s2um/SF43+51Cnxqw5q2h2Dtp4kEwxNonMDqxzAcZjDx
+ HfyaHZc2XUvwuRV5WZb7Ki3OlH/mp5QHGx5CtmwXtp2TNme1r3iXAZgXDKrycQZylt
+ qlPWiGD9ap9bQ==
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -63,42 +66,24 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, jfs-discussion@lists.sourceforge.net,
- Dave Kleikamp <shaggy@kernel.org>, al@alarsen.net, yuchao0@huawei.com,
- Bob Copeland <me@bobcopeland.com>, Adrian Hunter <adrian.hunter@intel.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, mikulas@artax.karlin.mff.cuni.cz,
- stoph Hellwig <hch@lst.de>, nico@fluxnic.net, linux-cifs@vger.kernel.org, "Yan,
- Zheng" <zyan@redhat.com>, Sage Weil <sage@redhat.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- y2038 Mailman List <y2038@lists.linaro.org>,
- Richard Weinberger <richard@nod.at>, Steve French <sfrench@samba.org>,
- Anton Vorontsov <anton@enomsg.org>, linux@armlinux.org.uk,
- codalist@coda.cs.cmu.edu, Christoph Hellwig <hch@infradead.org>,
- coda@cs.cmu.edu, V9FS Developers <v9fs-developer@lists.sourceforge.net>,
- Ilya Dryomov <idryomov@gmail.com>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>, salah.triki@gmail.com,
- asmadeus@codewreck.org, devel@lists.orangefs.org,
- Evgeniy Dushistov <dushistov@mail.ru>, Kees Cook <keescook@chromium.org>,
- Arnd Bergmann <arnd@arndb.de>, Eric Van Hensbergen <ericvh@gmail.com>,
- Jan Kara <jack@suse.com>, reiserfs-devel@vger.kernel.org,
- Tejun Heo <tj@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
- aivazian.tigran@gmail.com, phillip@squashfs.org.uk,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel <ceph-devel@vger.kernel.org>, trond.myklebust@hammerspace.com,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Andreas Dilger <adilger@dilger.ca>, Jan Harkes <jaharkes@cs.cmu.edu>,
- Linux NFS Mailing List <linux-nfs@vger.kernel.org>,
- Tony Luck <tony.luck@intel.com>, Theodore Ts'o <tytso@mit.edu>,
- luisbg@kernel.org, Artem Bityutskiy <dedekind1@gmail.com>,
- linux-ntfs-dev@lists.sourceforge.net, Greg KH <gregkh@linuxfoundation.org>,
- linux-karma-devel@lists.sourceforge.net, jlayton@kernel.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, "Linux F2FS DEV,
- Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
- linux-xfs@vger.kernel.org, Colin Cross <ccross@android.com>,
- Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
- linux-mtd <linux-mtd@lists.infradead.org>,
- David Woodhouse <dwmw2@infradead.org>,
- Anna Schumaker <anna.schumaker@netapp.com>, Joel Becker <jlbec@evilplan.org>
+Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+ Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
+ dri-devel@lists.freedesktop.org, linux-mm <linux-mm@kvack.org>,
+ sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
+ Dan Williams <dan.j.williams@intel.com>, devel@driverdev.osuosl.org,
+ rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
+ amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
+ devel@lists.orangefs.org, linux-media@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, john.hubbard@gmail.com,
+ linux-block@vger.kernel.org,
+ =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
+ linux-rpi-kernel@lists.infradead.org, ceph-devel <ceph-devel@vger.kernel.org>,
+ linux-arm-kernel@lists.infradead.org,
+ Linux NFS Mailing List <linux-nfs@vger.kernel.org>, netdev@vger.kernel.org,
+ LKML <linux-kernel@vger.kernel.org>, linux-xfs@vger.kernel.org,
+ linux-crypto@vger.kernel.org, linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -112,50 +97,75 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Thu, Aug 29, 2019 at 6:20 PM Mike Marshall <hubcap@omnibond.com> wrote:
->
-> Hi Deepa...
->
-> I installed this patch series on top of Linux 5.3-rc6 and ran xfstests
-> on orangefs and got a regression... generic/258 failed
-> with: "Timestamp wrapped"...
->
-> # cat results/generic/258.out.bad
-> QA output created by 258
-> Creating file with timestamp of Jan 1, 1960
-> Testing for negative seconds since epoch
-> Timestamp wrapped: 0
-> Timestamp wrapped
-> (see /home/hubcap/xfstests-dev/results//generic/258.full for details)
+On 8/29/2019 6:29 PM, Mike Marshall wrote:
+> Hi John...
+> 
+> I added this patch series on top of Linux 5.3rc6 and ran
+> xfstests with no regressions...
+> 
+> Acked-by: Mike Marshall <hubcap@omnibond.com>
+> 
 
-Note that patch [16/20] https://lkml.org/lkml/2019/8/18/193 assumes
-that orangefs does not support negative timestamps.
-And, the reason was pointed out in the commit text:
+Hi Mike (and I hope Ira and others are reading as well, because
+I'm making a bunch of claims further down),
 
-----------------------
-Assume the limits as unsigned according to the below
-commit 98e8eef557a9 ("changed PVFS_time from int64_t to uint64_t")
-in https://github.com/waltligon/orangefs
+That's great news, thanks for running that test suite and for
+the report and the ACK.
 
-Author: Neill Miller <neillm@mcs.anl.gov>
-Date:   Thu Sep 2 15:00:38 2004 +0000
---------------------
+There is an interesting pause right now, due to the fact that
+we've made some tentative decisions about gup pinning, that affect
+the call sites. A key decision is that only pages that were
+requested via FOLL_PIN, will require put_user_page*() to release
+them. There are 4 main cases, which were first explained by Jan
+Kara and Vlastimil Babka, and are now written up in my FOLL_PIN
+patch [1].
 
-So the timestamp being wrapped to 0 in this case is correct behavior
-according to my patchset.
-The generic/258 assumes that the timestamps can be negative. If this
-is not true then it should not be run for this fs.
+So, what that means for this series is that:
 
-But, if you think the timestamp should support negative timestamps for
-orangefs, I'd be happy to change it.
+1. Some call sites (mlock.c for example, and a lot of the mm/ files
+in fact, and more) will not be converted: some of these patches will
+get dropped, especially in mm/.
 
-> Just to double check, I compiled Linux 5.3-rc6 without the timestamp series,
-> and 258 passed... then added the patch series back and the failure returned...
->
-> Also.... when I was using "git am" to apply the patch series, the ceph patch
-> failed, so I "git skipped" it...
+2. Call sites that do DirectIO or RDMA will need to set FOLL_PIN, and
+will also need to call put_user_page().
 
-My series applies cleanly against linux-next as of yesterday.
+3. Call sites that do RDMA will need to set FOLL_LONGTERM *and* FOLL_PIN,
 
--Deepa
+    3.a. ...and will at least in some cases need to provide a link to a
+    vaddr_pin object, and thus back to a struct file*...maybe. Still
+    under discussion.
+
+4. It's desirable to keep FOLL_* flags (or at least FOLL_PIN) internal
+to the gup() calls. That implies using a wrapper call such as Ira's
+vaddr_pin_[user]_pages(), instead of gup(), and vaddr_unpin_[user]_pages()
+instead of put_user_page*().
+
+5. We don't want to churn the call sites unnecessarily.
+
+With that in mind, I've taken another pass through all these patches
+and narrowed it down to:
+
+     a) 12 call sites that I'd like to convert soon, but even those
+        really look cleaner with a full conversion to a wrapper call
+        similar to (identical to?) vaddr_pin_[user]_pages(), probably
+        just the FOLL_PIN only variant (not FOLL_LONGTERM). That
+        wrapper call is not ready yet, though.
+
+     b) Some more call sites that require both FOLL_PIN and FOLL_LONGTERM.
+        Definitely will wait to use the wrapper calls for these, because
+        they may also require hooking up to a struct file*.
+
+     c) A few more that were already applied, which is fine, because they
+        show where to convert, and simplify a few sites anyway. But they'll
+        need follow-on changes to, one way or another, set FOLL_PIN.
+
+     d) And of course a few sites whose patches get dropped, as mentioned
+        above.
+
+[1] https://lore.kernel.org/r/20190821040727.19650-3-jhubbard@nvidia.com
+
+thanks,
+-- 
+John Hubbard
+NVIDIA
 

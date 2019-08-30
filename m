@@ -2,48 +2,60 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE6BAA3883
-	for <lists+devel-orangefs@lfdr.de>; Fri, 30 Aug 2019 15:59:35 +0200 (CEST)
-Received: from [::1] (port=54128 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65AE7A3AEF
+	for <lists+devel-orangefs@lfdr.de>; Fri, 30 Aug 2019 17:49:18 +0200 (CEST)
+Received: from [::1] (port=45516 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1i3hR8-0004Xj-K4
-	for lists+devel-orangefs@lfdr.de; Fri, 30 Aug 2019 09:59:34 -0400
-Received: from mail-qk1-f196.google.com ([209.85.222.196]:45695)
+	id 1i3j9J-0001sT-LN
+	for lists+devel-orangefs@lfdr.de; Fri, 30 Aug 2019 11:49:17 -0400
+Received: from mail-pg1-f196.google.com ([209.85.215.196]:34126)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <arndbergmann@gmail.com>)
- id 1i3hR7-0004XC-Cc
- for devel@lists.orangefs.org; Fri, 30 Aug 2019 09:59:33 -0400
-Received: by mail-qk1-f196.google.com with SMTP id m2so6145057qki.12
- for <devel@lists.orangefs.org>; Fri, 30 Aug 2019 06:59:13 -0700 (PDT)
+ (Exim 4.92) (envelope-from <deepa.kernel@gmail.com>)
+ id 1i3j9I-0001s2-S1
+ for devel@lists.orangefs.org; Fri, 30 Aug 2019 11:49:16 -0400
+Received: by mail-pg1-f196.google.com with SMTP id n9so3760174pgc.1
+ for <devel@lists.orangefs.org>; Fri, 30 Aug 2019 08:48:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=4oHQ/J6gD7m5a2hZJIzg30k30/iTJHkHY5qB+o+D4cE=;
+ b=h7oWCY6wHIupyilklhVw3zKKmS4N6rNYStKFd6M4mXY2zoBod9UZ8VCkDGXpvOwPEx
+ y0aASnlb2KjG+wF+/aUT2biKn+NEObcgE8m7DGPrZYueZa0oebuiKl0kXOBZW/YvAFgG
+ wiNfxFX1BU+QMvruLmfNr9RwuUgTVgZhni7EzWpQBGg9w69s5GjxRS3CR8rDUkEmFDvX
+ StbzvePxJ6JAeogsEcWDy1lOLEazKGBM7XSWMidYvC4oTqL+OIaD7n27qxye/p6T0bld
+ MAh4tx6oguKUb4RPv6qhdVfxJi3jyYGLfFoX32P7ntEtN8+5CPxBMCDh7sUKz71y0419
+ 8ZHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=wZh0lrnnbveFd2ktjNoW+9Y7+KeLBrFI15hkdhrfg8w=;
- b=BCXz8llUgIGTBmYUYVr9O7jm9YZKt5UoDJmYQg4mxDpmiLtQkTaeMbgqvIzBMXWHJv
- sWV3IRjM+Pt0IhGt0Yj3GIO7HnI6h33iqoCn8D+CureVsP0KhHcrFLn682Y7N67wdtAj
- KN3phWLWIJWqte3ZMCY0L50TpgXjDII8oXRZV3jaEQvRdYxqx0LPlUvd1mWLtWW56ShV
- rmHlodegMH/xv/cu2i1MeN8L1uAWYua566jYgBcSXEM0kU6PZhF47Nz/XxVPcn8Q3KIT
- oyULsJt90SNceMBzGR17YFpSx4qMhiYheM7qBVLmJfvFZ3ImkCbvzscwNh3Wi2MT4IxI
- osOA==
-X-Gm-Message-State: APjAAAUWPI1iOthM19aKw8NamKrs4LUmu99CQ0RXn3tCRb5JTamX14Ai
- TSiq3CLmzNseJiatF99/CbloONMkT0ziEK0n51U=
-X-Google-Smtp-Source: APXvYqwLJSfUvFHYpnCbLtQwiLesqk6Up0F09OxCEWeJS/zvGXm8TGjLQauibK2uyX+MPGtGJJXtticB+OlivKMyzRQ=
-X-Received: by 2002:a37:4b0d:: with SMTP id y13mr15306907qka.3.1567173532434; 
- Fri, 30 Aug 2019 06:58:52 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190829041132.26677-1-deepa.kernel@gmail.com>
- <CABeXuvoKD83B7iUqE33Y9E2OVtf61DKv-swZr-N=ozz-cMmGOA@mail.gmail.com>
- <CAOg9mSR25eAH7e1KhDZt_uscJSzyuSmELbCxgyh=-KWRxjZtcw@mail.gmail.com>
- <CABeXuvpe9vADLZUr4zHrH0izt=1BaLQvBMxAu=T1A2CV3AN4vA@mail.gmail.com>
-In-Reply-To: <CABeXuvpe9vADLZUr4zHrH0izt=1BaLQvBMxAu=T1A2CV3AN4vA@mail.gmail.com>
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Fri, 30 Aug 2019 15:58:35 +0200
-Message-ID: <CAK8P3a0NMUv2xOw=fCxJXo_2wbmBMG24Fst3U1LT-m7C8uxz0w@mail.gmail.com>
-Subject: Re: [GIT PULL] vfs: Add support for timestamp limits
-To: Deepa Dinamani <deepa.kernel@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=4oHQ/J6gD7m5a2hZJIzg30k30/iTJHkHY5qB+o+D4cE=;
+ b=GRvb9nQiu4He9FWlDiWSbkJty6drQgD7qmjTjnCHut1Jw7w0hvYvTkOIjlThOjf8WY
+ xXSkWnFPIJFwt5ITtgNvMwZjxt7kPiS8001vpM0Q63seofKAOBEVrZDsgsQYNEunLvtf
+ BbcriDXlrqVMp5/l0RlwCZyFGhUVSzpbhYxj/mGXK3LZE3eT0hRuXGwpMmSWFVFS9flH
+ jHZWeBuH1VV6AdIzxymNfciXu9CO2XD4TjXE9bVYdsD8nxx85Alv9tGrjTx2Th8/Mx64
+ m7emelBkQU6QxRfpinIKlax6wLH917ewoInghteifgJoQ+UvikTQQJ7g7mNbwz01SDkQ
+ FN6w==
+X-Gm-Message-State: APjAAAWwEWzSw6QfCsIo5GcpEboR2oQegpSJwDqD9yyzEjoCxp/mimMQ
+ EPMB344cfc7/SYTJDZjMZ/g=
+X-Google-Smtp-Source: APXvYqw+TTjvl6C13mK+Kx+U+c7BoLzOucbYEU3GqDfQjm5bxaW7IFfh1q/TNPR40tNdaKG3mocNEw==
+X-Received: by 2002:a17:90a:c386:: with SMTP id
+ h6mr16090687pjt.122.1567180114546; 
+ Fri, 30 Aug 2019 08:48:34 -0700 (PDT)
+Received: from deepa-ubuntu.lan (c-98-234-52-230.hsd1.ca.comcast.net.
+ [98.234.52.230])
+ by smtp.gmail.com with ESMTPSA id z28sm8093085pfj.74.2019.08.30.08.48.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Aug 2019 08:48:33 -0700 (PDT)
+From: Deepa Dinamani <deepa.kernel@gmail.com>
+To: arnd@arndb.de,
+	viro@zeniv.linux.org.uk
+Subject: [GIT PULL RESEND] vfs: Add support for timestamp limits
+Date: Fri, 30 Aug 2019 08:47:44 -0700
+Message-Id: <20190830154744.4868-1-deepa.kernel@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <CAK8P3a1XjOMpuS12Xao1xqOLFOuz1Jb8dTAfrhLcE643sSkC5g@mail.gmail.com>
+References: <CAK8P3a1XjOMpuS12Xao1xqOLFOuz1Jb8dTAfrhLcE643sSkC5g@mail.gmail.com>
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -55,44 +67,28 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, jfs-discussion@lists.sourceforge.net,
- Dave Kleikamp <shaggy@kernel.org>, Anders Larsen <al@alarsen.net>,
- Chao Yu <yuchao0@huawei.com>, Bob Copeland <me@bobcopeland.com>,
- Adrian Hunter <adrian.hunter@intel.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, mikulas@artax.karlin.mff.cuni.cz,
- stoph Hellwig <hch@lst.de>, Nicolas Pitre <nico@fluxnic.net>,
- linux-cifs@vger.kernel.org, "Yan, Zheng" <zyan@redhat.com>,
- Sage Weil <sage@redhat.com>, "Darrick J. Wong" <darrick.wong@oracle.com>,
- y2038 Mailman List <y2038@lists.linaro.org>,
- Richard Weinberger <richard@nod.at>, Steve French <sfrench@samba.org>,
- Anton Vorontsov <anton@enomsg.org>,
- Russell King - ARM Linux <linux@armlinux.org.uk>, codalist@coda.cs.cmu.edu,
- Christoph Hellwig <hch@infradead.org>, coda@cs.cmu.edu,
- V9FS Developers <v9fs-developer@lists.sourceforge.net>,
- Ilya Dryomov <idryomov@gmail.com>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>, salah.triki@gmail.com,
- asmadeus@codewreck.org, devel@lists.orangefs.org,
- Evgeniy Dushistov <dushistov@mail.ru>, Kees Cook <keescook@chromium.org>,
- Eric Van Hensbergen <ericvh@gmail.com>, Jan Kara <jack@suse.com>,
- reiserfs-devel@vger.kernel.org, Tejun Heo <tj@kernel.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>, aivazian.tigran@gmail.com,
- phillip@squashfs.org.uk, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel <ceph-devel@vger.kernel.org>,
- trond.myklebust@hammerspace.com, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Andreas Dilger <adilger@dilger.ca>, Jan Harkes <jaharkes@cs.cmu.edu>,
- Linux NFS Mailing List <linux-nfs@vger.kernel.org>,
- Tony Luck <tony.luck@intel.com>, Theodore Ts'o <tytso@mit.edu>,
- Luis de Bethencourt <luisbg@kernel.org>,
- Artem Bityutskiy <dedekind1@gmail.com>, linux-ntfs-dev@lists.sourceforge.net,
- Greg KH <gregkh@linuxfoundation.org>, linux-karma-devel@lists.sourceforge.net,
- Jeff Layton <jlayton@kernel.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, "Linux F2FS DEV,
- Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
- linux-xfs <linux-xfs@vger.kernel.org>, Colin Cross <ccross@android.com>,
- Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
- linux-mtd <linux-mtd@lists.infradead.org>,
- David Woodhouse <dwmw2@infradead.org>,
- Anna Schumaker <anna.schumaker@netapp.com>, Joel Becker <jlbec@evilplan.org>
+Cc: lucho@ionkov.net, jfs-discussion@lists.sourceforge.net, shaggy@kernel.org,
+ al@alarsen.net, yuchao0@huawei.com, me@bobcopeland.com,
+ adrian.hunter@intel.com, linux-mtd@lists.infradead.org, deepa.kernel@gmail.com,
+ mikulas@artax.karlin.mff.cuni.cz, hch@lst.de, nico@fluxnic.net,
+ linux-cifs@vger.kernel.org, zyan@redhat.com, sage@redhat.com,
+ darrick.wong@oracle.com, y2038@lists.linaro.org, richard@nod.at,
+ sfrench@samba.org, anton@enomsg.org, linux@armlinux.org.uk,
+ codalist@coda.cs.cmu.edu, hch@infradead.org, coda@cs.cmu.edu,
+ v9fs-developer@lists.sourceforge.net, idryomov@gmail.com,
+ linux-ext4@vger.kernel.org, salah.triki@gmail.com, asmadeus@codewreck.org,
+ devel@lists.orangefs.org, dushistov@mail.ru, keescook@chromium.org,
+ ericvh@gmail.com, jack@suse.com, reiserfs-devel@vger.kernel.org, tj@kernel.org,
+ jlbec@evilplan.org, aivazian.tigran@gmail.com, dsterba@suse.com,
+ jaegeuk@kernel.org, ceph-devel@vger.kernel.org,
+ trond.myklebust@hammerspace.com, hirofumi@mail.parknet.co.jp,
+ adilger@dilger.ca, jaharkes@cs.cmu.edu, linux-nfs@vger.kernel.org,
+ tony.luck@intel.com, tytso@mit.edu, luisbg@kernel.org, dedekind1@gmail.com,
+ linux-ntfs-dev@lists.sourceforge.net, gregkh@linuxfoundation.org,
+ linux-karma-devel@lists.sourceforge.net, jlayton@kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, ccross@android.com, linux-fsdevel@vger.kernel.org,
+ phillip@squashfs.org.uk, dwmw2@infradead.org, anna.schumaker@netapp.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -106,104 +102,98 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Fri, Aug 30, 2019 at 4:02 AM Deepa Dinamani <deepa.kernel@gmail.com> wrote:
-> On Thu, Aug 29, 2019 at 6:20 PM Mike Marshall <hubcap@omnibond.com> wrote:
-> >
-> > Hi Deepa...
-> >
-> > I installed this patch series on top of Linux 5.3-rc6 and ran xfstests
-> > on orangefs and got a regression... generic/258 failed
-> > with: "Timestamp wrapped"...
-> >
-> > # cat results/generic/258.out.bad
-> > QA output created by 258
-> > Creating file with timestamp of Jan 1, 1960
-> > Testing for negative seconds since epoch
-> > Timestamp wrapped: 0
-> > Timestamp wrapped
-> > (see /home/hubcap/xfstests-dev/results//generic/258.full for details)
->
-> Note that patch [16/20] https://lkml.org/lkml/2019/8/18/193 assumes
-> that orangefs does not support negative timestamps.
-> And, the reason was pointed out in the commit text:
->
-> ----------------------
-> Assume the limits as unsigned according to the below
-> commit 98e8eef557a9 ("changed PVFS_time from int64_t to uint64_t")
-> in https://github.com/waltligon/orangefs
->
-> Author: Neill Miller <neillm@mcs.anl.gov>
-> Date:   Thu Sep 2 15:00:38 2004 +0000
-> --------------------
->
-> So the timestamp being wrapped to 0 in this case is correct behavior
-> according to my patchset.
-> The generic/258 assumes that the timestamps can be negative. If this
-> is not true then it should not be run for this fs.
->
-> But, if you think the timestamp should support negative timestamps for
-> orangefs, I'd be happy to change it.
+[resending, rebased onto linux v5.3-rc6, and dropped orangefs patch from the series]
 
-I think it's unclear from the orangefs source code what the intention is,
-as there is a mixed of signed and unsigned types used for the inode
-stamps:
+Hi Al, Arnd,
 
-#define encode_PVFS_time encode_int64_t
-#define encode_int64_t(pptr,x) do { \
-    *(int64_t*) *(pptr) = cpu_to_le64(*(x)); \
-    *(pptr) += 8; \
-} while (0)
-#define decode_PVFS_time decode_int64_t
-#define decode_int64_t(pptr,x) do { \
-    *(x) = le64_to_cpu(*(int64_t*) *(pptr)); \
-    *(pptr) += 8; \
-} while (0)
+This is a pull request for filling in min and max timestamps for filesystems.
+I've added all the acks, and dropped the adfs patch. That will be merged through
+Russell's tree.
 
-This suggests that making it unsigned may have been an accident.
+Dropped orangefs until the maintainers decide what its limits should be.
 
-Then again,  it's clearly and consistently printed as unsigned in
-user space:
+The following changes since commit a55aa89aab90fae7c815b0551b07be37db359d76:
 
-        gossip_debug(
-            GOSSIP_GETATTR_DEBUG, " VERSION is %llu, mtime is %llu\n",
-            llu(s_op->attr.mtime), llu(resp_attr->mtime));
+  Linux 5.3-rc6 (2019-08-25 12:01:23 -0700)
 
-A related issue I noticed is this:
+are available in the Git repository at:
 
-PVFS_time PINT_util_mktime_version(PVFS_time time)
-{
-    struct timeval t = {0,0};
-    PVFS_time version = (time << 32);
+  https://github.com/deepa-hub/vfs limits
 
-    gettimeofday(&t, NULL);
-    version |= (PVFS_time)t.tv_usec;
-    return version;
-}
-PVFS_time PINT_util_mkversion_time(PVFS_time version)
-{
-    return (PVFS_time)(version >> 32);
-}
-static PINT_sm_action getattr_verify_attribs(
-        struct PINT_smcb *smcb, job_status_s *js_p)
-{
-...
-    resp_attr->mtime = PINT_util_mkversion_time(s_op->attr.mtime);
-...
-}
+for you to fetch changes up to 5ad32b3acded06183f40806f76b030c3143017bb:
 
-which suggests that at least for some purposes, the mtime field
-is only an unsigned 32-bit number (1970..2106). From my readiing,
-this affects the on-disk format, but not the protocol implemented
-by the kernel.
+  isofs: Initialize filesystem timestamp ranges (2019-08-30 08:11:25 -0700)
 
-atime and ctime are apparently 64-bit, but mtime is only 32-bit
-seconds, plus a 32-bit 'version'. I suppose the server could be
-fixed to allow a larger range, but probably would take it out of
-the 'version' bits, not the upper half.
+----------------------------------------------------------------
 
-To be on the safe side, I suppose the kernel can only assume
-an unsigned 32-bit range to be available. If the server gets
-extended beyond that, it would have to pass a feature flag.
+- Deepa
 
-     Arnd
+Deepa Dinamani (18):
+      vfs: Add file timestamp range support
+      vfs: Add timestamp_truncate() api
+      timestamp_truncate: Replace users of timespec64_trunc
+      mount: Add mount warning for impending timestamp expiry
+      utimes: Clamp the timestamps before update
+      fs: Fill in max and min timestamps in superblock
+      9p: Fill min and max timestamps in sb
+      ext4: Initialize timestamps limits
+      fs: nfs: Initialize filesystem timestamp ranges
+      fs: cifs: Initialize filesystem timestamp ranges
+      fs: fat: Initialize filesystem timestamp ranges
+      fs: affs: Initialize filesystem timestamp ranges
+      fs: sysv: Initialize filesystem timestamp ranges
+      fs: ceph: Initialize filesystem timestamp ranges
+      fs: hpfs: Initialize filesystem timestamp ranges
+      fs: omfs: Initialize filesystem timestamp ranges
+      pstore: fs superblock limits
+      isofs: Initialize filesystem timestamp ranges
+
+ fs/9p/vfs_super.c        |  6 +++++-
+ fs/affs/amigaffs.c       |  2 +-
+ fs/affs/amigaffs.h       |  3 +++
+ fs/affs/inode.c          |  4 ++--
+ fs/affs/super.c          |  4 ++++
+ fs/attr.c                | 21 ++++++++++++---------
+ fs/befs/linuxvfs.c       |  2 ++
+ fs/bfs/inode.c           |  2 ++
+ fs/ceph/super.c          |  2 ++
+ fs/cifs/cifsfs.c         | 22 ++++++++++++++++++++++
+ fs/cifs/netmisc.c        | 14 +++++++-------
+ fs/coda/inode.c          |  3 +++
+ fs/configfs/inode.c      | 12 ++++++------
+ fs/cramfs/inode.c        |  2 ++
+ fs/efs/super.c           |  2 ++
+ fs/ext2/super.c          |  2 ++
+ fs/ext4/ext4.h           | 10 +++++++++-
+ fs/ext4/super.c          | 17 +++++++++++++++--
+ fs/f2fs/file.c           | 21 ++++++++++++---------
+ fs/fat/inode.c           | 12 ++++++++++++
+ fs/freevxfs/vxfs_super.c |  2 ++
+ fs/hpfs/hpfs_fn.h        |  6 ++----
+ fs/hpfs/super.c          |  2 ++
+ fs/inode.c               | 33 ++++++++++++++++++++++++++++++++-
+ fs/isofs/inode.c         |  7 +++++++
+ fs/jffs2/fs.c            |  3 +++
+ fs/jfs/super.c           |  2 ++
+ fs/kernfs/inode.c        |  7 +++----
+ fs/minix/inode.c         |  2 ++
+ fs/namespace.c           | 33 ++++++++++++++++++++++++++++++++-
+ fs/nfs/super.c           | 20 +++++++++++++++++++-
+ fs/ntfs/inode.c          | 21 ++++++++++++---------
+ fs/omfs/inode.c          |  4 ++++
+ fs/pstore/ram.c          |  2 ++
+ fs/qnx4/inode.c          |  2 ++
+ fs/qnx6/inode.c          |  2 ++
+ fs/reiserfs/super.c      |  3 +++
+ fs/romfs/super.c         |  2 ++
+ fs/squashfs/super.c      |  2 ++
+ fs/super.c               |  2 ++
+ fs/sysv/super.c          |  5 ++++-
+ fs/ubifs/file.c          | 21 ++++++++++++---------
+ fs/ufs/super.c           |  7 +++++++
+ fs/utimes.c              |  6 ++----
+ fs/xfs/xfs_super.c       |  2 ++
+ include/linux/fs.h       |  5 +++++
+ include/linux/time64.h   |  2 ++
+ 47 files changed, 296 insertions(+), 72 deletions(-)
 

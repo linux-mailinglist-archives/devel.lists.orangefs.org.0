@@ -2,38 +2,26 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFF2FBB619
-	for <lists+devel-orangefs@lfdr.de>; Mon, 23 Sep 2019 16:02:57 +0200 (CEST)
-Received: from [::1] (port=33510 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EC98BDE0D
+	for <lists+devel-orangefs@lfdr.de>; Wed, 25 Sep 2019 14:28:43 +0200 (CEST)
+Received: from [::1] (port=59522 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iCOvY-0004kJ-KQ
-	for lists+devel-orangefs@lfdr.de; Mon, 23 Sep 2019 10:02:56 -0400
-Received: from p3plsmtpa12-03.prod.phx3.secureserver.net
- ([68.178.252.232]:40579)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <klavender@techinfo-connects.com>)
- id 1iCOvT-0004TZ-K7
- for devel@lists.orangefs.org; Mon, 23 Sep 2019 10:02:51 -0400
-Received: from LenovoPC ([112.79.93.75]) by :SMTPAUTH: with ESMTPSA
- id COuMidUb8x1ipCOujiOF4w; Mon, 23 Sep 2019 07:02:06 -0700
-From: "Kim Lavender" <klavender@techinfo-connects.com>
-To: <devel@lists.orangefs.org>
-References: 
-In-Reply-To: 
-Subject: RE: Supercomputing - SC 2019 
-Date: Mon, 23 Sep 2019 10:02:02 -0400
-Message-ID: <!&!AAAAAAAAAAAYAAAAAAAAABZ15c6OX61DponiePG2bCvCgAAAEAAAAPJ7OcTEISlKnA/ZO/GeLqoBAAAAAA==@techinfo-connects.com>
+	id 1iD6PS-0003yp-5M
+	for lists+devel-orangefs@lfdr.de; Wed, 25 Sep 2019 08:28:42 -0400
+Received: from 59-125-224-207.hinet-ip.hinet.net ([59.125.224.207]:61755
+ helo=loans.com) by mm1.emwd.com with esmtp (Exim 4.92)
+ (envelope-from <info@loans.com>) id 1iD6PQ-0003tw-NV
+ for devel@lists.orangefs.org; Wed, 25 Sep 2019 08:28:41 -0400
+From: "BBK LOANS & INVESTMENT CO" <info@loans.com>
+To: devel@lists.orangefs.org
+Subject: RE: LOAN & INVESTMENT NOW READY. PLEASE READ OUR MAIL.
+Date: 25 Sep 2019 20:27:58 +0800
+Message-ID: <20190925202758.40481FE2C1573363@loans.com>
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AdVv5qgmYz3WaTp8QHKyK9Aq5BE/TQABUQ+gAAAACgAAAAADcAAAAASgAAAAA6AAAAAD0AAAAAQAAIritGA=
-Content-Language: en-in
-X-CMAE-Envelope: MS4wfDCtbZOeS86spzczEF+vkrrJulLvi9SdE65OnkiJo8UUCjZqMcvo/KMyWIJs3LjBx9NnxEknMEC9mR+H3+QYSVcDr105nyDR6hYCAoYjiOF2jx9e9uUK
- sK7bNMQ5WVCqvpuW7ckDFWyAf4AxZR7sC3y1AmWhe2ImwQvbYYzm84/rcrWR4LW0NzO3a572nWPLFg==
 Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.27
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -45,6 +33,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: bbkloanscompany@aol.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -58,73 +47,42 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi,
+Dear Sir/Ma'am
 
- 
+We have set aside $100 Billion US Dollars for our loans 
 
-Just following up on my email below. I'd love to get a reply if you have
-time.
+program. BBK LOANS & INVESTMENT CO is now open to all people 
 
- 
+looking for a loan. We offer loans grant at an affordable 
 
-If you're still interested, please suggest a next step.
+interest rate of 3% for per annum (1 year). This program is 
 
- 
+available to all credible and honest loan seekers who are in 
 
-I await your response
+need of a business loan, home mortgages, real estates etc. We 
 
- 
+give up to US$100,000,000 (One Hundred Million US Dollars) in 
 
-Best Regards,
+loan grants.
 
-Kim
 
- 
+Fill in the blank spaces for full application:
 
-From: Kim Lavender 
-Sent: 20 September 2019 15:46
-To: 'devel@lists.orangefs.org'
-Subject: Supercomputing - SC 2019 
+ 1. Full Name:
+ 2. Address:
+ 3. Occupation:
+ 4. Date of Birth:
+ 5. Man/Woman:
+ 6. Nationality:
+ 7. Country Where You Now Live:
+ 8. Mobile No:
+ 9. Loan Amount:
 
- 
+You can contact us immediately by sending the above mentioned 
 
-Hi,
+information to our email here below;
 
- 
-
-Hope You Are Having A Good Day!
-
- 
-
-I am writing this to check if you are interested in the attendees list for
-Supercomputing - SC - 2019?"
-
- 
-
-List Includes: 
-
-Company Name, Contact Name, First Name, Middle Name, Last Name, Job Title,
-Website, Address, Phone Number, Fax Number, SIC Codes and most importantly
-verified Email Address.
-
-Please let me know your interest to send you the number of Attendees and
-cost.
-
- 
-
-Awaiting your reply.
-
- 
-
-Best Wishes,
-
-Kim Lavender
-
-Lead Generation Executive
-
- 
-If you don't wish to receive our newsletters, reply back with " Leave Out "
-in subject line
-
- 
+Ms. Elham Ibrahim Hassan
+Operations Director
+Email: bbkloanscompany@aol.com
 

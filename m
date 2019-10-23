@@ -2,64 +2,59 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 757ECE0E15
-	for <lists+devel-orangefs@lfdr.de>; Wed, 23 Oct 2019 00:14:56 +0200 (CEST)
-Received: from [::1] (port=58562 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C149E24B0
+	for <lists+devel-orangefs@lfdr.de>; Wed, 23 Oct 2019 22:39:51 +0200 (CEST)
+Received: from [::1] (port=48194 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iN2QZ-00059G-5a
-	for lists+devel-orangefs@lfdr.de; Tue, 22 Oct 2019 18:14:55 -0400
-Received: from mail-pf1-f193.google.com ([209.85.210.193]:32961)
+	id 1iNNQ6-0002Xb-CV
+	for lists+devel-orangefs@lfdr.de; Wed, 23 Oct 2019 16:39:50 -0400
+Received: from sonic301-27.consmr.mail.sg3.yahoo.com ([106.10.242.90]:46583)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <adilger@dilger.ca>) id 1iN2QX-00058j-4m
- for devel@lists.orangefs.org; Tue, 22 Oct 2019 18:14:53 -0400
-Received: by mail-pf1-f193.google.com with SMTP id c184so1998664pfb.0
- for <devel@lists.orangefs.org>; Tue, 22 Oct 2019 15:14:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dilger-ca.20150623.gappssmtp.com; s=20150623;
- h=from:message-id:mime-version:subject:date:in-reply-to:cc:to
- :references; bh=jdSjvTdb7YhhV+yeBoGT2uoOFpXOTdsEt8mUL1v5JjU=;
- b=XIkqrxaAVGv4cKdfDL9k/xAlmXBfmv2xaqBwDFkiO+RuiaJ/qx8Qv68C18O/MO1irW
- Cy3Vn+tIJxOtFj8DY52CQH0sqz1B3iiTZccOjh0yUYyHLsKbUqIOJZkP1hpBi5FJn608
- BEKbvyyNE55qhvNvrbZH2IZmNn1WRfEs8EFa630Z7qZk27nOSVksTd9wxV/XGh89QoMm
- Za0X342Laxsi4tJ3eJWdVY07aJeei3nhk9yeONMbDuwXBHxa9DmHFXabN91oSXoIjD1+
- 8erSnFeO/EhdCZAlrBE7LptFLs02TiPVVGY+Laj64nj95GyisCNv2t0bm1swjOyHxZ8j
- 6L/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:message-id:mime-version:subject:date
- :in-reply-to:cc:to:references;
- bh=jdSjvTdb7YhhV+yeBoGT2uoOFpXOTdsEt8mUL1v5JjU=;
- b=BNN5R/pCy7RGzOndyVq/95fm6ER4PbfZ/ufRjjtzjDILLeP5pUwmB8Zup6dQli6VdO
- +YULvMQBg3jE+8Cgmn0Gqu/guQmr7CPFoma7y/MYdl9mIwYFps+jsYW7b1VvY08rA0Lq
- aSkykhj4F1VOU9dWgYvnmRlRmNU0mzBklBZcMsG9TXmNSH1XTtpYlPQkWaSKqXCUDLSY
- 4pKaCZRfFALmgr9TTpH6fyIzctZ4oxjdLnmIi2H6C0dE9wUpIJkh8Hq4M4M7lyzcGy4v
- d9lXN3TzV1Ea+2xjJgQ/EkNkMcGfklx+dUgHcouNvsa90uZz4hIXMHkZhL7m/+2Futhh
- 8+Ug==
-X-Gm-Message-State: APjAAAUSeOqREQusY2BvlUYho4HEuY+NGEtWNHHVTpUCjjMuTYirBo4U
- 52zibbsn4e5kvb8XX989GUGG8A==
-X-Google-Smtp-Source: APXvYqyCGFGpT2C3cY7XT0d1Dal+bVUH3K7BRELFdnAX59mbUm04n1z8zWdaK4LGbMaAkUt/N9526w==
-X-Received: by 2002:a17:90a:a60f:: with SMTP id
- c15mr7467310pjq.18.1571782451665; 
- Tue, 22 Oct 2019 15:14:11 -0700 (PDT)
-Received: from cabot-wlan.adilger.int (S0106a84e3fe4b223.cg.shawcable.net.
- [70.77.216.213])
- by smtp.gmail.com with ESMTPSA id r24sm21302038pfh.69.2019.10.22.15.13.57
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 22 Oct 2019 15:14:10 -0700 (PDT)
-From: Andreas Dilger <adilger@dilger.ca>
-Message-Id: <8CE5B6E8-DCB7-4F0B-91C1-48030947F585@dilger.ca>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Subject: Re: [PATCH v14 1/5] Add flags option to get xattr method paired to
- __vfs_getxattr
-Date: Tue, 22 Oct 2019 16:13:53 -0600
-In-Reply-To: <20191022204453.97058-2-salyzyn@android.com>
-To: Mark Salyzyn <salyzyn@android.com>
-References: <20191022204453.97058-1-salyzyn@android.com>
- <20191022204453.97058-2-salyzyn@android.com>
-X-Mailer: Apple Mail (2.3273)
-Content-Type: text/plain; charset="us-ascii"
+ (Exim 4.92) (envelope-from <kim@possumbusiness.com>)
+ id 1iNNQ4-0002Uq-Na
+ for devel@lists.orangefs.org; Wed, 23 Oct 2019 16:39:48 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1571863145; bh=DK+zzXtDuHSbJMAv1NKGG84OmJtfrAPZBjKcHeviSpI=;
+ h=From:To:Subject:Date:From:Subject;
+ b=UamE3B5ozAAZ/IuJflDMH8mqWLabv7X8xoX5iqMHHUYVsrEa+ZWYEblj/v+oo0eY6sgt4ipDbRDHqfm4nmk4LInyKp74uoIPdn4MzPX7xh9yB5p5kpzuT7TikQ2nrZaUDZgirHRu83bB410v2/qVrU0NujumPLW7wDwttNMgRr1Q8fhQsNF+0e4xZDkDFKO50qS+JkMK2IFGHpozfwR1vQLel/kSRphfWr+Mi9ENAlfbPEqUgTvDw1yB78Ivhf1yqXb1eW4GQDm4KqPnhHOx5RzvkcyI++On87gIuWVuiqFAn+jsIayetT9Sb2ntWo/NYYo0wmBoL9LaNL/9brRwIQ==
+X-YMail-OSG: Ba657Z4VM1kJiTwuACx37sr1.4B0g6Y92hqTmyKz6Hq8iKAH2hW_vYb4EHhU8O6
+ lBFfMSLbGJY13SuWYdCLp6WQk3lz0kpqdkbxU_k03SOnqHsZAgvFWexur1hrIa63BLH_jLUyYIoX
+ lb0GeZvqSqhOaZKaHkgR397mpKzzFanCwyLteKmCWKV2mwGXgCVvoYz_rO68PreIej39adurftzn
+ x11RFNjVH.DOvTOaVxQYv_B8fk26Nwju_aQOWt47XrA1vyFW1dHvn6XsPQnRh2Vx_Bx4zeirqK_y
+ qFLsQ6s2D3nVesJahxRFOFoOc_X1JIg_yglUgAcGop17yIgV1sHAig0d0YJA38xxEqnHrNrnZ6xh
+ i208mXfbEOwi0EhSoGc7pnWY1wHbZdOeFfw42Qnwx9.hO9g6E6WJERJPTrIhZqbZssF_EwIIzoXS
+ TWOcSiPcGwYoGNFCz7EvfyqZtRSx4uUIbhnsXAeuIzRsDHqqCykN2e8qNbIOxIGTPiaMY7wZZY9k
+ Rhmd90OSd0PmXZVEEnCGv4Vv8Xv4yWrJqCpiEsBcjr3THoGRlO2O._NABS7Rd.V8d6eJnK31MSCy
+ B9tDe_lOvgsNMIbJM0DrQb2neuJmpgWobn0NTl3S0cXj6ddrrHjWjTTEbVjr1ZKLptAepaQPlvSO
+ VRV7khxOo9C98d_9oCwPu5FPuDXkmcWmwQ2kjZciYJdCaaf6Yo_mh2dwBvKSWCtM2NXxaww4daMm
+ BwtFnbVG2WVZIs77gdsXB_0G0TDHceBoqoCUJvT9NkImT7kTzsL.FgxWpjV3WcWGCKM9Xzlv9DcJ
+ ZgcdtBlD7x_s6eBSx0MxE3wmNOoZjC12xJg2c2Voj4tFQsExHb8AfBvXnimQkC5J1i13csO1COVl
+ mb_7B4zfLCf3POXgKr4XHGYeaSaBRRG8GTepemwifwem5ieG7ofZR2yowNMRRDKnh9Q_G_xQkex7
+ vMu7javqIAuYuFMOkXpx6Z50hjpttGybDajCB4YB7FbdKVvX95oiByRjdCkkPODOgLBRGkFtVwZ0
+ Xg_FCQpzhQddElRwDQo2jPG0gvC09CH2KJ3Ww70zols32gKCRdm9KWLrEvgypISRPDIP7xxjM.xt
+ m0Alu31wHpkz._SQJbCs1v6l4ltiu4W6AlE8XCwgLtl9jhjMr8aU_jsqhuhsRtN89WaJToFwib11
+ efSVlRQxSupP2QrOYSRtVm3RN1NltjJMuYNEBOkAgyqD.9OvMsRNskQq9VYUUtaNxawgdGdqIQ.h
+ HqRKjGbDmILKVeGV4qZLfqQiAdEcuF6MgEUGlX8o3oeoYredom3NH2f3dDO3FOJo78SsaisB_798
+ aqfEUfne_9zpM_mSLe_sVx6Xx36GXbPwsK0UYirzbjVk-
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic301.consmr.mail.sg3.yahoo.com with HTTP; Wed, 23 Oct 2019 20:39:05 +0000
+Received: by smtp402.mail.sg3.yahoo.com (Oath Hermes SMTP Server) with ESMTPA
+ ID 4ca75dd3a511c944cad2a91178020fab; 
+ Wed, 23 Oct 2019 20:39:02 +0000 (UTC)
+From: "Kim" <kim@possumbusiness.com>
+To: <devel@lists.orangefs.org>
+Subject: =?us-ascii?Q?_Supercomputing_'19-_Attendees_Leads?=
+Date: Wed, 23 Oct 2019 16:39:01 -0400
+Message-ID: <!&!AAAAAAAAAAAYAAAAAAAAANVdmHe06qNMghp8QAFZn57CgAAAEAAAAFIS//TNH7hJpOvK7etfRDgBAAAAAA==@possumbusiness.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Outlook 15.0
+Thread-Index: AdWJ4ea5KihnfDDET0+Ev8/6Qypprw==
+Content-Language: en-us
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.27
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -71,57 +66,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, Hugh Dickins <hughd@google.com>,
- Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
- James Morris <jmorris@namei.org>, devel@lists.orangefs.org,
- Eric Van Hensbergen <ericvh@gmail.com>, Joel Becker <jlbec@evilplan.org>,
- Anna Schumaker <anna.schumaker@netapp.com>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Mathieu Malaterre <malat@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Jan Kara <jack@suse.com>, Casey Schaufler <casey@schaufler-ca.com>,
- Andrew Morton <akpm@linux-foundation.org>, Dave Kleikamp <shaggy@kernel.org>,
- linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
- Mimi Zohar <zohar@linux.ibm.com>, CIFS <linux-cifs@vger.kernel.org>,
- Paul Moore <paul@paul-moore.com>, "Darrick J . Wong" <darrick.wong@oracle.com>,
- Eric Sandeen <sandeen@sandeen.net>, kernel-team@android.com,
- Chao Yu <chao@kernel.org>, selinux@vger.kernel.org,
- Brian Foster <bfoster@redhat.com>, reiserfs-devel@vger.kernel.org,
- Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
- Jonathan Corbet <corbet@lwn.net>, linux-f2fs-devel@lists.sourceforge.net,
- Benjamin Coddington <bcodding@redhat.com>, linux-integrity@vger.kernel.org,
- Chris Mason <clm@fb.com>, linux-mtd@lists.infradead.org,
- linux-afs@lists.infradead.org, Miklos Szeredi <miklos@szeredi.hu>,
- Ilya Dryomov <idryomov@gmail.com>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>,
- Stephen Smalley <sds@tycho.nsa.gov>, Serge Hallyn <serge@hallyn.com>,
- Eric Paris <eparis@parisplace.org>, ceph-devel <ceph-devel@vger.kernel.org>,
- Gao Xiang <xiang@kernel.org>, linux-nfs <linux-nfs@vger.kernel.org>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- samba-technical <samba-technical@lists.samba.org>,
- linux-xfs <linux-xfs@vger.kernel.org>, Bob Peterson <rpeterso@redhat.com>,
- Tejun Heo <tj@kernel.org>, linux-erofs@lists.ozlabs.org,
- "David S. Miller" <davem@davemloft.net>, ocfs2-devel@oss.oracle.com,
- jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
- Eric Biggers <ebiggers@google.com>,
- Dominique Martinet <asmadeus@codewreck.org>,
- overlayfs <linux-unionfs@vger.kernel.org>, David Howells <dhowells@redhat.com>,
- linux-mm <linux-mm@kvack.org>, Andreas Gruenbacher <agruenba@redhat.com>,
- Sage Weil <sage@redhat.com>, Richard Weinberger <richard@nod.at>,
- Mark Fasheh <mark@fasheh.com>, cluster-devel@redhat.com,
- Steve French <sfrench@samba.org>, v9fs-developer@lists.sourceforge.net,
- Bharath Vedartham <linux.bhar@gmail.com>, Jann Horn <jannh@google.com>,
- ecryptfs@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>,
- Dave Chinner <dchinner@redhat.com>, David Sterba <dsterba@suse.com>,
- Artem Bityutskiy <dedekind1@gmail.com>, netdev@vger.kernel.org,
- Adrian Hunter <adrian.hunter@intel.com>, Tyler Hicks <tyhicks@canonical.com>,
- linux-security-module@vger.kernel.org,
- Phillip Lougher <phillip@squashfs.org.uk>,
- David Woodhouse <dwmw2@infradead.org>,
- linux-btrfs <linux-btrfs@vger.kernel.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -135,82 +79,45 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
+ 
 
-On Oct 22, 2019, at 2:44 PM, Mark Salyzyn <salyzyn@android.com> wrote:
-> 
-> Replace arguments for get and set xattr methods, and __vfs_getxattr
-> and __vfs_setaxtr functions with a reference to the following now
-> common argument structure:
-> 
-> struct xattr_gs_args {
-> 	struct dentry *dentry;
-> 	struct inode *inode;
-> 	const char *name;
-> 	union {
-> 		void *buffer;
-> 		const void *value;
-> 	};
-> 	size_t size;
-> 	int flags;
-> };
+ 
 
-As part of this change (which is touching all of the uses of these
-fields anyway) it would be useful to give these structure fields a
-prefix like "xga_" so that they can be easily found with tags.
-Otherwise, there are so many different "dentry" and "inode" fields
-in various structures that it is hard to find the right one.
+Hello,
 
-> #define __USE_KERNEL_XATTR_DEFS
-> 
-> -#define XATTR_CREATE	0x1	/* set value, fail if attr already exists */
-> -#define XATTR_REPLACE	0x2	/* set value, fail if attr does not exist */
-> +#define XATTR_CREATE	 0x1	/* set value, fail if attr already exists */
-> +#define XATTR_REPLACE	 0x2	/* set value, fail if attr does not exist */
-> +#ifdef __KERNEL__ /* following is kernel internal, colocated for maintenance */
-> +#define XATTR_NOSECURITY 0x4	/* get value, do not involve security check */
-> +#endif
+ 
 
-Now that these arguments are separated out into their own structure,
-rather than using "int flags" (there are a million different flags in
-the kernel and easily confused) it would be immediately clear *which*
-flags are used here with a named enum, like:
+Would you be interested in attendee list of Supercomputing '19? 
 
-enum xattr_flags {
-	XATTR_CREATE	= 0x1,	/* set value, fail if attr already exists */
-	XATTR_REPLACE	= 0x2,	/* set value, fail if attr does not exist */
-#ifdef __KERNEL__ /* following is kernel internal, colocated for maintenance */
-	XATTR_NOSECURITY= 0x4,  /* get value, do not involve security check */
-#endif
-};
+ 
 
-and use this in the struct like:
+Titles: Computing, Networking and storage professional Marketing/Sales
+Managers
 
-struct xattr_gs_args {
-	struct dentry	*xga_dentry;
-	struct inode	*xga_inode;
-	const char	*xga_name;
-	union {
-		void		*xga_buffer;
-		const void	*xga_value;
-	};
-	size_t		 xga_size;
-	enum xattr_flags xga_flags;
-};
+ 
 
-Beyond the benefit for the reader to understand the code better, this
-can also allow the compiler to warn if incorrect values are being
-assigned to this field.
+Please let me know your interest, I will send you additional information
+along with pricing details.
 
-Cheers, Andreas
+Awaiting your reply.
 
+ 
 
+Thank you and I look forward to working with your company in making all your
+upcoming events successful.
 
+ 
 
+Best Regards,
 
--------------- next part --------------
-A non-text attachment was scrubbed...
-Name: signature.asc
-Type: application/pgp-signature
-Size: 873 bytes
-Desc: Message signed with OpenPGP
-URL: <http://lists.orangefs.org/pipermail/devel_lists.orangefs.org/attachments/20191022/0bca25a2/attachment.asc>
+Kim Kardashian 
+
+Marketing Consultant                                         
+
+ 
+
+                                                      To opt out, please
+response Remove.
+
+ 
+

@@ -2,52 +2,44 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC44AF775F
-	for <lists+devel-orangefs@lfdr.de>; Mon, 11 Nov 2019 16:07:22 +0100 (CET)
-Received: from [::1] (port=46400 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFFEDFA143
+	for <lists+devel-orangefs@lfdr.de>; Wed, 13 Nov 2019 02:56:41 +0100 (CET)
+Received: from [::1] (port=53958 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iUBHl-0007bS-GP
-	for lists+devel-orangefs@lfdr.de; Mon, 11 Nov 2019 10:07:21 -0500
-Received: from mail-il1-f173.google.com ([209.85.166.173]:39724)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <abidsheikhabidsheikh4@gmail.com>)
- id 1iUBHj-0007aP-UU
- for devel@lists.orangefs.org; Mon, 11 Nov 2019 10:07:19 -0500
-Received: by mail-il1-f173.google.com with SMTP id a7so11937527ild.6
- for <devel@lists.orangefs.org>; Mon, 11 Nov 2019 07:06:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=93ovztUGIfle0nRCLMKKRMkW1aOHoXcmbDdjiogUhF8=;
- b=DNrSe3ebgI3PQPl90u4jBFaSNNILQbUcWcfGcOPSiStF3FHKa82MNCoPc/cXH7I3SP
- juRLp4vdPoc7/nhw2f6A9UTF9whC5IQi3Nva2zd3GOgx1baprkPQvVgsjq8Nr2AgrtxP
- v0oGBdxmyNNewFl/XAnR3cFEh7Z8rBZVr5654mlD64XVQyYDfJRfzSawo/d5Ma2imEic
- f3DnkokbthLfGZl7E17zg1AvULkO0TC47NCQLmy4Wi1eJZztF+KJUUN4BB1EPL7hLbkK
- JrO1INuBynJg8E7aDHY58QD4tiz0/mUrRaOm36PIRW5E3KCkClas0isu4YzawFvQbkmL
- b4iQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=93ovztUGIfle0nRCLMKKRMkW1aOHoXcmbDdjiogUhF8=;
- b=YGlmSzmeGJHc4otkSiJ4QxBbSuJttdNuurAU5FvMHInLW3YGPUYNmy97odTMMW2SxB
- IFKd4Uu5BernytKCQv6zi6VWK1sbHCtm35G+p9z1bhVn7m8cYy+8XkQUF/8apjCC0TQB
- dPbQ2PfndxkRDkbkaRx1SGM94U8rROsMgfJvHLcGTIMxihFsda1+Se8eTkP0pnccATlY
- R4t2jcpir69+CXZab9yr5PF0v7O42XB/WQ7BMhXa8qRj4kNuz6AZItTg5DAIjpoSzt6x
- NLGzJDVpwHww8XxMufFnvQxZKFQgdroSpxKq6lyJyPFWqxNSpgUOsEPVlEi+Q24oXiTk
- 8kuA==
-X-Gm-Message-State: APjAAAUCIbXZXTBE8v6oxwpGMF64PAbXCU/tJ54DTb1q83HVsRcU8rgu
- 7VXEd5meSGqZW+IM9HzrAHOWkmdpvB3Yus86cc5Trg==
-X-Google-Smtp-Source: APXvYqwp0X7vq55zejd5k9J5L4gv5zAIDXsGf+8fHjc69e8EVtN+HGIT8g2s2/sPD15cZTKdXQgNLLXARI0//G1snPU=
-X-Received: by 2002:a92:c525:: with SMTP id m5mr16655001ili.91.1573484799046; 
- Mon, 11 Nov 2019 07:06:39 -0800 (PST)
+	id 1iUhtg-0004i5-8W
+	for lists+devel-orangefs@lfdr.de; Tue, 12 Nov 2019 20:56:40 -0500
+Received: from mail.kernel.org ([198.145.29.99]:54802)
+ by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
+ (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1iUhtK-0003L1-1W
+ for devel@lists.orangefs.org; Tue, 12 Nov 2019 20:56:18 -0500
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 65B542245A;
+ Wed, 13 Nov 2019 01:55:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1573610137;
+ bh=+E19Huy+AE+P6Kn7PRtmtBXtIXdaMq31874qfiMh7I0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=1cIgwI5kP/3tEpdy5Tf6jXRF4Kl7Jd6L35lAmBXgEC2ibw/tOMm6HyJ90nc/Mq9IH
+ ijeCUB1EoiXsZ9ZG8DzIYHAFuX3MwSNvAC3qoHA7vFgjINUQB0goiSPRgoq+KBgXzA
+ onS4EHrjzY7uRZSnXMJH5aKiqQ8iml0eD5oHu6WQ=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH AUTOSEL 4.19 185/209] orangefs: rate limit the client not
+ running info message
+Date: Tue, 12 Nov 2019 20:50:01 -0500
+Message-Id: <20191113015025.9685-185-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191113015025.9685-1-sashal@kernel.org>
+References: <20191113015025.9685-1-sashal@kernel.org>
 MIME-Version: 1.0
-From: Abidsheikh Abidsheikh <abidsheikhabidsheikh4@gmail.com>
-Date: Mon, 11 Nov 2019 20:04:44 +0500
-Message-ID: <CABSED-oF6pMiA1eij2Bzd7B91Ftsbp-wwJam3MiCY=47rNqh7Q@mail.gmail.com>
-Subject: 
-To: devel@lists.orangefs.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.27
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.27
 Precedence: list
@@ -59,6 +51,8 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Cc: Sasha Levin <sashal@kernel.org>, Colin Ian King <colin.king@canonical.com>,
+ devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -71,5 +65,40 @@ X-Authenticated-Sender: mm1.emwd.com: mailman@lists.orangefs.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
+
+From: Colin Ian King <colin.king@canonical.com>
+
+[ Upstream commit 2978d873471005577e7b68a528b4f256a529b030 ]
+
+Currently accessing various /sys/fs/orangefs files will spam the
+kernel log with the following info message when the client is not
+running:
+
+[  491.489284] sysfs_service_op_show: Client not running :-5:
+
+Rate limit this info message to make it less spammy.
+
+Signed-off-by: Colin Ian King <colin.king@canonical.com>
+Signed-off-by: Mike Marshall <hubcap@omnibond.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ fs/orangefs/orangefs-sysfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/orangefs/orangefs-sysfs.c b/fs/orangefs/orangefs-sysfs.c
+index dd28079f518c0..19739aaee6755 100644
+--- a/fs/orangefs/orangefs-sysfs.c
++++ b/fs/orangefs/orangefs-sysfs.c
+@@ -323,7 +323,7 @@ static ssize_t sysfs_service_op_show(struct kobject *kobj,
+ 	/* Can't do a service_operation if the client is not running... */
+ 	rc = is_daemon_in_service();
+ 	if (rc) {
+-		pr_info("%s: Client not running :%d:\n",
++		pr_info_ratelimited("%s: Client not running :%d:\n",
+ 			__func__,
+ 			is_daemon_in_service());
+ 		goto out;
+-- 
+2.20.1
 
 

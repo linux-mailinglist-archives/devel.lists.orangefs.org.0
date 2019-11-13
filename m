@@ -2,40 +2,40 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFFEDFA143
-	for <lists+devel-orangefs@lfdr.de>; Wed, 13 Nov 2019 02:56:41 +0100 (CET)
-Received: from [::1] (port=53958 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id A05FFFA1A8
+	for <lists+devel-orangefs@lfdr.de>; Wed, 13 Nov 2019 02:59:52 +0100 (CET)
+Received: from [::1] (port=54482 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iUhtg-0004i5-8W
-	for lists+devel-orangefs@lfdr.de; Tue, 12 Nov 2019 20:56:40 -0500
-Received: from mail.kernel.org ([198.145.29.99]:54802)
+	id 1iUhwl-0004r1-TO
+	for lists+devel-orangefs@lfdr.de; Tue, 12 Nov 2019 20:59:51 -0500
+Received: from mail.kernel.org ([198.145.29.99]:32768)
  by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1iUhtK-0003L1-1W
- for devel@lists.orangefs.org; Tue, 12 Nov 2019 20:56:18 -0500
+ (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1iUhwk-0004qn-S9
+ for devel@lists.orangefs.org; Tue, 12 Nov 2019 20:59:50 -0500
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 65B542245A;
- Wed, 13 Nov 2019 01:55:36 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5A9C022467;
+ Wed, 13 Nov 2019 01:59:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1573610137;
- bh=+E19Huy+AE+P6Kn7PRtmtBXtIXdaMq31874qfiMh7I0=;
+ s=default; t=1573610350;
+ bh=U80dEjPfm6c8g/zCXeJHwAcr8VYZTGqXuhGXKJNLaYw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=1cIgwI5kP/3tEpdy5Tf6jXRF4Kl7Jd6L35lAmBXgEC2ibw/tOMm6HyJ90nc/Mq9IH
- ijeCUB1EoiXsZ9ZG8DzIYHAFuX3MwSNvAC3qoHA7vFgjINUQB0goiSPRgoq+KBgXzA
- onS4EHrjzY7uRZSnXMJH5aKiqQ8iml0eD5oHu6WQ=
+ b=JpauDPGhAk3/w7SHtxGVvFFXvP+3ChoVsVNC9pc2eaZgXZc+Wb5rsZr9Y2RoJH0ZN
+ G0tWxw4lCqvf1XKmn0lsMqpTzSTBO7jP13AQGmUmdVN9Zjk8dsYeoz42eOKy5c0myw
+ /oxmUbuS3ypg1viwFZEb0lfy4BDxxs/AKSLQxcOA=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 185/209] orangefs: rate limit the client not
+Subject: [PATCH AUTOSEL 4.14 101/115] orangefs: rate limit the client not
  running info message
-Date: Tue, 12 Nov 2019 20:50:01 -0500
-Message-Id: <20191113015025.9685-185-sashal@kernel.org>
+Date: Tue, 12 Nov 2019 20:56:08 -0500
+Message-Id: <20191113015622.11592-101-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191113015025.9685-1-sashal@kernel.org>
-References: <20191113015025.9685-1-sashal@kernel.org>
+In-Reply-To: <20191113015622.11592-1-sashal@kernel.org>
+References: <20191113015622.11592-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -86,7 +86,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/fs/orangefs/orangefs-sysfs.c b/fs/orangefs/orangefs-sysfs.c
-index dd28079f518c0..19739aaee6755 100644
+index 079a465796f3e..bc56df2ae705d 100644
 --- a/fs/orangefs/orangefs-sysfs.c
 +++ b/fs/orangefs/orangefs-sysfs.c
 @@ -323,7 +323,7 @@ static ssize_t sysfs_service_op_show(struct kobject *kobj,

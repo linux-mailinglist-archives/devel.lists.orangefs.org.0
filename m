@@ -2,46 +2,40 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id A23D6FA207
-	for <lists+devel-orangefs@lfdr.de>; Wed, 13 Nov 2019 03:02:04 +0100 (CET)
-Received: from [::1] (port=59518 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id A879FFE4B7
+	for <lists+devel-orangefs@lfdr.de>; Fri, 15 Nov 2019 19:15:17 +0100 (CET)
+Received: from [::1] (port=55430 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iUhyt-0006Ap-Tf
-	for lists+devel-orangefs@lfdr.de; Tue, 12 Nov 2019 21:02:03 -0500
-Received: from mail.kernel.org ([198.145.29.99]:36472)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1iUhys-0006AF-LF
- for devel@lists.orangefs.org; Tue, 12 Nov 2019 21:02:02 -0500
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 21D6A2247C;
- Wed, 13 Nov 2019 02:01:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1573610481;
- bh=5sAEPQ6C3izdvVEkVcjaWep+k5AXbl+VHCVHCcYnFlU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=MUa9+AJQe7OHeND9/dXINbz+JBzktj4geKdBDbJ/34RLUh3XE8Cqt3cr13rmDqzhb
- kSJFTRJ5ZfDyyCbDUYDAqhW6xG6XTKYlg/4kbkcdgImlW+tDREwpsswy641eLBiv3H
- 9zMRw1vgHeh7SJFxr8VKHmtByn3UngLk+R+iPEU4=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 62/68] orangefs: rate limit the client not running
- info message
-Date: Tue, 12 Nov 2019 20:59:26 -0500
-Message-Id: <20191113015932.12655-62-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191113015932.12655-1-sashal@kernel.org>
-References: <20191113015932.12655-1-sashal@kernel.org>
+	id 1iVg7o-0000gf-GF
+	for lists+devel-orangefs@lfdr.de; Fri, 15 Nov 2019 13:15:16 -0500
+Received: from p3plsmtpa07-01.prod.phx3.secureserver.net
+ ([173.201.192.230]:37773)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <c.parker@pre-conference.com>)
+ id 1iVg7n-0000f5-6p
+ for devel@lists.orangefs.org; Fri, 15 Nov 2019 13:15:15 -0500
+Received: from HPpcPC ([157.45.99.4]) by :SMTPAUTH: with ESMTPA
+ id Vg6gi0kD6KgoPVg76iewP4; Fri, 15 Nov 2019 11:14:34 -0700
+From: "Chloe Parker" <c.parker@pre-conference.com>
+To: <devel@lists.orangefs.org>
+References: 
+In-Reply-To: 
+Subject: 2020 - TRB attendee contacts list
+Date: Fri, 15 Nov 2019 23:44:30 +0530
+Message-ID: <1c9e01d59be0$8750b290$95f217b0$@pre-conference.com>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Content-Transfer-Encoding: 8bit
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AdWb4GdegCVxWITRSNW9B6Ll8gUrGAAAAQRAAAAADDAAAAAIYAAAAAjwAAAACfAAAAAIgAAAAAcgAAAACLAAAAAHUAAAAAgQAAAACHAAAAAIEAAAAAoQAAAACAAAAAAJ0AAAAAoAAAAACWAAAAAKYAAAAAqQAAAACvAAAAAKUAAAAAqwAAAAChAAAAALsAAAAAtAAAAACgAAAAAKMAAAAApgAAAACsAAAAAKYAAAAAqQAAAAC/AAAAAKgAAAAAzgAAAAC+AAAAAL4AAAAAlAAAAAC3A=
+Content-Language: en-in
+X-CMAE-Envelope: MS4wfKkGmdCLA1+qC7tJsvhetPjJfxWuQAzZyVXO+1Ynt1dDfstLB8AqxEx4mrVEyimsaSer7Acj+nsGlikQJcnqWgVoYPX5VgAPyCwlewkLOsV8Zv1o2+yJ
+ qVQAgXIcA0CY4ZJZHml/4EkJzD3E0AY4exCd5gh4DG72unQQN+BLwBKc
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
-X-Mailman-Version: 2.1.27
+X-Mailman-Version: 2.1.29
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
 List-Unsubscribe: <http://lists.orangefs.org/mailman/options/devel_lists.orangefs.org>, 
@@ -51,8 +45,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Colin Ian King <colin.king@canonical.com>,
- devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -66,39 +58,30 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-From: Colin Ian King <colin.king@canonical.com>
+Hello,
 
-[ Upstream commit 2978d873471005577e7b68a528b4f256a529b030 ]
+ 
 
-Currently accessing various /sys/fs/orangefs files will spam the
-kernel log with the following info message when the client is not
-running:
+I hope you are the right person to discuss about "Transportation Research
+Board - TRB 2020 " Attendee Contacts List?
 
-[  491.489284] sysfs_service_op_show: Client not running :-5:
+ 
 
-Rate limit this info message to make it less spammy.
+Interested? Please let me know. I would love to provide pricing options and
+other details in my next email.
 
-Signed-off-by: Colin Ian King <colin.king@canonical.com>
-Signed-off-by: Mike Marshall <hubcap@omnibond.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- fs/orangefs/orangefs-sysfs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 
 
-diff --git a/fs/orangefs/orangefs-sysfs.c b/fs/orangefs/orangefs-sysfs.c
-index a799546a67f77..f6172c3f83ba0 100644
---- a/fs/orangefs/orangefs-sysfs.c
-+++ b/fs/orangefs/orangefs-sysfs.c
-@@ -315,7 +315,7 @@ static ssize_t sysfs_service_op_show(struct kobject *kobj,
- 	/* Can't do a service_operation if the client is not running... */
- 	rc = is_daemon_in_service();
- 	if (rc) {
--		pr_info("%s: Client not running :%d:\n",
-+		pr_info_ratelimited("%s: Client not running :%d:\n",
- 			__func__,
- 			is_daemon_in_service());
- 		goto out;
--- 
-2.20.1
+Best Wishes,
 
+Chloe Parker
+
+Demand Generation Executive
+
+ 
+
+  If you don't wish to receive our newsletters, reply back with "Leave Out"
+in subject line
+
+ 
 

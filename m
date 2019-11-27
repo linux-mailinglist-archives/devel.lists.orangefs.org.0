@@ -2,42 +2,36 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EC0B105EB6
-	for <lists+devel-orangefs@lfdr.de>; Fri, 22 Nov 2019 03:47:10 +0100 (CET)
-Received: from [::1] (port=43474 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58A7F10B424
+	for <lists+devel-orangefs@lfdr.de>; Wed, 27 Nov 2019 18:10:15 +0100 (CET)
+Received: from [::1] (port=39068 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iXyyT-0008GQ-0m
-	for lists+devel-orangefs@lfdr.de; Thu, 21 Nov 2019 21:47:09 -0500
-Received: from b5.em.tnds.info ([208.234.11.253]:44225)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <info@em.tnds.info>) id 1iXyyR-0008FZ-LV
- for devel@lists.orangefs.org; Thu, 21 Nov 2019 21:47:07 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=em.tnds.info;
- q=dns/txt; s=1573493771.tnds;
- bh=1iJvCVqDuq3qekQEgIkhQJY77nPTjl9DcS5/iQiY+I0=;
- h=from:subject:date:message-id:to:mime-version:content-type;
- b=bGSj+KhDlzmW6qBZJQHcPWqy8kQt+qCaXsidUppcLQ83rYnHPI5dq8uernfiaA3IKXX3M+xi8
- SBQSxCHvAz+j23wL77UlV0ssfYL9ZucQid44M4JmdvSMEfOLN0/kZezdGcNvbizCP135DA9y8wp
- W9KiMgbWq0zgQ1hb0A5ktSo=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=b5.em.tnds.info;
- q=dns/txt; s=1573493771.tnds;
- bh=1iJvCVqDuq3qekQEgIkhQJY77nPTjl9DcS5/iQiY+I0=;
- h=from:subject:date:message-id:to:mime-version:content-type;
- b=LUOAoFtk4CW1gjK9dsYAq5Z9y0g0svzTD9mw+8TH6/74H/pslT730HycFRhazm+w7vnbuVlzh
- lkaxtbcx5pFUIPRtUC/9qc6NRRsZfP7TjOdLG6zPY212z3tmyoaueIQIaZICTDIFWqD35tx8Oho
- 9bj7Z1Cs3nnaB/+n35qLbwo=
-Received: from [127.0.0.1] ([127.0.0.1] localhost) (Authenticated sender: tnds)
- by b5.em.tnds.info (em.tnds.info) with ESMTPA id 16e9100df8a000fb61.001
- for <devel@lists.orangefs.org>; Fri, 22 Nov 2019 02:46:23 +0000
-X-Zone-Loop: 92a828288df784c91af60a778d1be454e854f3c89f7e
-From: My Awesome Company <info@em.tnds.info>
-To: devel@lists.orangefs.org
-Subject: 11/21/2019: Unsubscription Confirmed
-Message-ID: <fec9ea61-022e-71ac-f2c8-516146af4d26@em.tnds.info>
-Date: Fri, 22 Nov 2019 02:46:23 +0000
+	id 1ia0pS-0000K6-1A
+	for lists+devel-orangefs@lfdr.de; Wed, 27 Nov 2019 12:10:14 -0500
+Received: from p3plsmtpa09-01.prod.phx3.secureserver.net
+ ([173.201.193.230]:37617)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <elenart@techinfo-connects.com>)
+ id 1ia0pQ-0000Ii-Ep
+ for devel@lists.orangefs.org; Wed, 27 Nov 2019 12:10:12 -0500
+Received: from ADMINPC ([112.79.80.88]) by :SMTPAUTH: with ESMTPA
+ id a0nQiWvGLMSlfa0ojicwEr; Wed, 27 Nov 2019 10:09:31 -0700
+From: "Elizabeth Lenart" <elenart@techinfo-connects.com>
+To: <devel@lists.orangefs.org>
+References: 
+In-Reply-To: 
+Subject: AGU - 2019
+Date: Wed, 27 Nov 2019 22:39:14 +0530
+Message-ID: <!&!AAAAAAAAAAAYAAAAAAAAABfEG69xP1hEmOeFIjL1JWnCgAAAEAAAAI1RWtMJ60NAvTCGyVdn+kABAAAAAA==@techinfo-connects.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+X-Mailer: Microsoft Outlook 14.0
+Content-Language: en-in
+Thread-Index: AdWlNYzxE54UYJA3Q1+kcrzE+PPv2wAD8LiAAAAAFJAAAAAFgAAAAATgAAAABFAAAAAFsAAAAARQAAAABeAAAAAEQAAAAAXgAAAABHAAAAAF4AAAAAVwAAAABBAAAAAFoAAAAAVAAAAABdAAAAAFoAAAAAZgAAAABWAAAAAGMA==
+X-CMAE-Envelope: MS4wfAD4/ANfnTe0dKsJaNJItNeWAoZIQK3hRkcjT9xHYd580c02q0GsPGrP1i4O53Gs7yn0VEBBjgej7Q7RE76pD1CYjgkWboM0lm2RoXH/WxrudOzpAp0r
+ 1iM53vqakmDTZ9Z+nJabHIQlnqz8HNXPoYLVbOW6PazS85j0NoDO3xMhu1YA1rowVAlJzLIgQVavaA==
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
@@ -64,15 +58,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-11/21/2019
-You Are Now Unsubscribed
-========================
+Hi, 
 
-We have removed your email address from our list.
+ 
 
-If you unsubscribed by mistake, you can re-subscribe at:
+I am writing this to check, if you would like to acquire the attendee
+contacts of "American Geophysical Union- AGU 2019 "Attendee list?
 
-Subscribe: https://em.tnds.info/subscription/cL0X5LLQX?cid&#x3D;tpnvJobREN
+ 
 
-For questions about this list, please contact:
-info@em.tnds.info
+Please keep me posted if you are interested and I shall get back to you with
+cost and more details.
+
+ 
+
+I look forward to hearing from you.
+
+ 
+
+Best Regards,
+
+Elizabeth Lenart
+
+Event Data Specialist| B2B Prolist
+
+ 
+
+ 
+
+If you don't wish to receive our newsletters, reply back with " Unsubscribe
+" in subject line
+
+ 
+
+ 
+

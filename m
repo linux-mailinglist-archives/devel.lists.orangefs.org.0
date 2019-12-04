@@ -2,49 +2,49 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12EDD10DD41
-	for <lists+devel-orangefs@lfdr.de>; Sat, 30 Nov 2019 10:14:26 +0100 (CET)
-Received: from [::1] (port=41676 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 755851120F2
+	for <lists+devel-orangefs@lfdr.de>; Wed,  4 Dec 2019 02:14:29 +0100 (CET)
+Received: from [::1] (port=42192 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iaypd-0003Vl-3g
-	for lists+devel-orangefs@lfdr.de; Sat, 30 Nov 2019 04:14:25 -0500
-Received: from senderb73.zcsend.net ([135.84.83.73]:59338)
+	id 1icJFM-0001z9-Cw
+	for lists+devel-orangefs@lfdr.de; Tue, 03 Dec 2019 20:14:28 -0500
+Received: from senderb74.zcsend.net ([135.84.83.74]:35385)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
  (Exim 4.92) (envelope-from
- <bounce_642507526+a.13bcfbdbfe86e303_11699e4be4f81f0_v53@mail3.bnws.zcsend.net>)
- id 1iaypb-0003VA-Py
- for devel@lists.orangefs.org; Sat, 30 Nov 2019 04:14:23 -0500
-Received: from [172.30.235.59] (172.30.235.59) by senderb73.zcsend.net id
- hs8peu28epg1 for <devel@lists.orangefs.org>;
- Sat, 30 Nov 2019 01:13:42 -0800 (envelope-from
- <bounce_642507526+a.13bcfbdbfe86e303_11699e4be4f81f0_v53@mail3.bnws.zcsend.net>)
+ <bounce_642507526+a.13bcfbdbfe8cd8f0_11699e4c1408033_v53@mail3.bnws.zcsend.net>)
+ id 1icJFK-0001yQ-Ql
+ for devel@lists.orangefs.org; Tue, 03 Dec 2019 20:14:26 -0500
+Received: from [172.30.235.68] (172.30.235.68) by senderb74.zcsend.net id
+ hss47428epgr for <devel@lists.orangefs.org>;
+ Tue, 3 Dec 2019 17:13:45 -0800 (envelope-from
+ <bounce_642507526+a.13bcfbdbfe8cd8f0_11699e4c1408033_v53@mail3.bnws.zcsend.net>)
 DKIM-Signature: a=rsa-sha1;
- b=huYHv0mq5nvBzSp8L4aDYetw9OnwRBLV81EcEwj0zZ944CsP5Hbsi6/i2knogRHWoD5wK9dVxYJEp2gWnSFIE1cm71lboVRifEDIubL+40dmJfkGCU5cmB1cqLG9CImQyd+fx/4806S5XXXQUEDy9CKScCfWa3KfI+qsDvbTT8I=;
+ b=IQCOUJAg2AKHVzbjeMFlAcFSEHSB9ylLOGKG+P5RAlvneO+ckbfY8k/Q48VcIf7aUYpI3xap+wZXJnmV3phhVHbvZfw81BUyE4HjjHIXRCB+//7WyIl/CvL6IPS97TpUzvWb+FcLcx7w2b+7dopzsbdOBokZVgzKLdDD+ig5R08=;
  c=simple/simple; s=k1; d=mail3.bnws.zcsend.net; v=1;
- bh=jSYubpDZ969/G0W/GDbXQxfYvgs=;
+ bh=C3sOwQFGYeQfQL499ox/d0jmcbk=;
  h=date:from:reply-to:to:message-id:subject:mime-version:content-type; 
 DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; 
  s=k1; d=mail3.bnws.zcsend.net; 
- b=Oy2x+ejj0fHDAE3PAptVY619HX16sEfB29kxm7yYklJDKbXZ2Ru226fleD57vAQIj11ddazAjR35
- h0N6OcADrMHoCnA3WB7bArTSCoHcFHxbc68HKQjN6hjd5NB6V9nqkuUCUR/V/Yk1OXUMKBNf51Xf
- 7dnF6hmVy+r9RC1ZDjM=  
-Date: Sat, 30 Nov 2019 01:13:42 -0800 (PST)
-From: "Webrid" <sales@getdoctorsonline.com>
+ b=kBPFhq/wxm6Q2bTO0oOXLTGS8oR9g961isYPzjET5ugNJ/wqQB/NAAn6hoCXjVR4qq5NBx9KIJr1
+ tKRMDd3GeONTA9bYvKF+pmjFwtdjrpfynIsotE6NhMfIbsl62GhOP52wVFWMrChLux9g/2GxUw3X
+ f3mhpTQXaXrLW77iMpQ=  
+Date: Tue, 3 Dec 2019 17:13:45 -0800 (PST)
+From: "Website Design" <sales@getdoctorsonline.com>
 To: devel@lists.orangefs.org
-Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe86e303.1575105222801@mail3.bnws.zcsend.net>
+Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe8cd8f0.1575422025751@mail3.bnws.zcsend.net>
 Subject: Is Squarespace Actually SEO Friendly?
 MIME-Version: 1.0
-Feedback-ID: 1264be306:1264be306.13bcfbdbfe8611e2:US:ZohoCampaigns
-X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe8611e2
-X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe86e303.11699e4be4f81f0
-X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe86e303.11699e4be4f81f0
+Feedback-ID: 1264be306:1264be306.13bcfbdbfe8a4055:US:ZohoCampaigns
+X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe8a4055
+X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe8cd8f0.11699e4c1408033
+X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe8cd8f0.11699e4c1408033
 X-Mailer: Zoho Campaigns
 List-Unsubscribe-Post: List-Unsubscribe=One-Click
 X-Report-Abuse: <Please send a copy of this message along with header to abuse
  +
- 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfe86e303@zohocampaigns.com>,
- <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfe86e303&sd=13bcfbdbfe861e5b&n=11699e4be4f81f0>
+ 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfe8cd8f0@zohocampaigns.com>,
+ <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfe8cd8f0&sd=13bcfbdbfe8a4cab&n=11699e4c1408033>
 Content-Type: text/plain;charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -140,10 +140,10 @@ sales@webrid.com=20
   =20
 
 You can  https://acpo.maillist-manage.com/ua/optout?od=3D2d5a885a69b60a972a=
-ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe86e303&sd=3D13bcfbdbfe861e5b=
-&n=3D11699e4be4f81f0  unsubscribe [ https://acpo.maillist-manage.com/ua/opt=
+ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe8cd8f0&sd=3D13bcfbdbfe8a4cab=
+&n=3D11699e4c1408033  unsubscribe [ https://acpo.maillist-manage.com/ua/opt=
 out?od=3D2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe8=
-6e303&sd=3D13bcfbdbfe861e5b&n=3D11699e4be4f81f0 ]from this email or change =
+cd8f0&sd=3D13bcfbdbfe8a4cab&n=3D11699e4c1408033 ]from this email or change =
 your email notifications.=20
 Online version is here =C2=A0     =20
 =20

@@ -2,44 +2,52 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA19211447D
-	for <lists+devel-orangefs@lfdr.de>; Thu,  5 Dec 2019 17:09:04 +0100 (CET)
-Received: from [::1] (port=39946 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B982115D3D
+	for <lists+devel-orangefs@lfdr.de>; Sat,  7 Dec 2019 15:53:37 +0100 (CET)
+Received: from [::1] (port=52922 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1ictgd-0002CD-Q0
-	for lists+devel-orangefs@lfdr.de; Thu, 05 Dec 2019 11:09:03 -0500
-Received: from mail.kernel.org ([198.145.29.99]:54926)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <jlayton@kernel.org>) id 1ictgc-0002AX-Kd
- for devel@lists.orangefs.org; Thu, 05 Dec 2019 11:09:02 -0500
-Received: from tleilax.poochiereds.net
- (68-20-15-154.lightspeed.rlghnc.sbcglobal.net [68.20.15.154])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EEFA624249;
- Thu,  5 Dec 2019 16:08:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1575562101;
- bh=4BBbM4w57ZUGYAZen6Z4sS7m2spu0jjZRJ7n/AxkzNQ=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=dO9ySgKuhd+dTs2uIHnmBXmTkx0+ZaIVZNTu8iWwCnF73ueH7IvQFP4butiJMIPWF
- DrHILJMHUlFjMuOZuIePpNG09ojuE33AD3P3sEdbn/qU8mR8Kn5MD046didGRRAJv4
- rfh3B8BnmLPWjGlyroSsRsXW6d5MmvBprLYDPcEY=
-Message-ID: <388342be7cd03e34bcccb1287d790cac04376e85.camel@kernel.org>
-Subject: Re: [PATCH 1/1] fs: Use inode_lock/unlock class of provided APIs in
- filesystems
-From: Jeff Layton <jlayton@kernel.org>
-To: Ritesh Harjani <riteshh@linux.ibm.com>, willy@infradead.org, 
- linux-fsdevel@vger.kernel.org, viro@zeniv.linux.org.uk
-Date: Thu, 05 Dec 2019 11:08:19 -0500
-In-Reply-To: <20191205103902.23618-2-riteshh@linux.ibm.com>
-References: <20191205103902.23618-1-riteshh@linux.ibm.com>
- <20191205103902.23618-2-riteshh@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.34.2 (3.34.2-1.fc31) 
+	id 1idbSi-0006ri-8h
+	for lists+devel-orangefs@lfdr.de; Sat, 07 Dec 2019 09:53:36 -0500
+Received: from senderb74.zcsend.net ([135.84.83.74]:52220)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from
+ <bounce_642507526+a.13bcfbdbfe9181df_11699e4bfb276e2_v53@mail3.bnws.zcsend.net>)
+ id 1idbSh-0006rP-5g
+ for devel@lists.orangefs.org; Sat, 07 Dec 2019 09:53:35 -0500
+Received: from [172.30.236.109] (172.30.236.109) by senderb74.zcsend.net id
+ hteueu28epg1 for <devel@lists.orangefs.org>;
+ Sat, 7 Dec 2019 06:52:54 -0800 (envelope-from
+ <bounce_642507526+a.13bcfbdbfe9181df_11699e4bfb276e2_v53@mail3.bnws.zcsend.net>)
+DKIM-Signature: a=rsa-sha1;
+ b=hBzaEjRQklYKRmKJgDE0f24BJDDhA4EkNCWC4Giqhy3ll6aZhVu4WpGSodPXUNU5xBNlwDw4/amuVz9r9u6DiMzvDvhQfZUD7eEEoXVZlySGPv4satXIguSmUs2GzDSdOz9K8TlhX6W81WNOPPIDj8S8VqTu3mfsXMEyOSve+tY=;
+ c=simple/simple; s=k1; d=mail3.bnws.zcsend.net; v=1;
+ bh=GRPwBKYTTwf/+yZfI1ItHq7v2cA=;
+ h=date:from:reply-to:to:message-id:subject:mime-version:content-type; 
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; 
+ s=k1; d=mail3.bnws.zcsend.net; 
+ b=O+r1/1ve2nTdRLvt5WbAS8S8E0wQsnJulMcQui5XKn59G9ywjJX8A3VcWs8oAhVOAZvNc4/0rQb6
+ TdhcLxLwANM7oV9XAPzxViXk4Ep0eImtf9/tugzaS6BNMI59U5NB0jR3PWx/yiByR3jWaTPNzLu+
+ 8mb71cl9u3gv/Vvl55w=  
+Date: Sat, 7 Dec 2019 06:52:54 -0800 (PST)
+From: "Website Design" <sales@getdoctorsonline.com>
+To: devel@lists.orangefs.org
+Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe9181df.1575730374074@mail3.bnws.zcsend.net>
+Subject: Better than Squarespace
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Feedback-ID: 1264be306:1264be306.13bcfbdbfe906a52:US:ZohoCampaigns
+X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe906a52
+X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe9181df.11699e4bfb276e2
+X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe9181df.11699e4bfb276e2
+X-Mailer: Zoho Campaigns
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-Report-Abuse: <Please send a copy of this message along with header to abuse
+ +
+ 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfe9181df@zohocampaigns.com>,
+ <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfe9181df&sd=13bcfbdbfe9072e3&n=11699e4bfb276e2>
+Content-Type: text/plain;charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,9 +59,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: ceph-devel@vger.kernel.org, devel@lists.orangefs.org,
- linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-unionfs@vger.kernel.org
+Reply-To: sales@getdoctorsonline.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -67,295 +73,85 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Thu, 2019-12-05 at 16:09 +0530, Ritesh Harjani wrote:
-> This defines 4 more APIs which some of the filesystem needs
-> and reduces the direct use of i_rwsem in filesystem drivers.
-> Instead those are replaced with inode_lock/unlock_** APIs.
-> 
-> Signed-off-by: Ritesh Harjani <riteshh@linux.ibm.com>
-> ---
->  fs/btrfs/delayed-inode.c |  2 +-
->  fs/btrfs/ioctl.c         |  4 ++--
->  fs/ceph/io.c             | 24 ++++++++++++------------
->  fs/nfs/io.c              | 24 ++++++++++++------------
->  fs/orangefs/file.c       |  4 ++--
->  fs/overlayfs/readdir.c   |  2 +-
->  fs/readdir.c             |  4 ++--
->  include/linux/fs.h       | 21 +++++++++++++++++++++
->  8 files changed, 53 insertions(+), 32 deletions(-)
-> 
-> diff --git a/fs/btrfs/delayed-inode.c b/fs/btrfs/delayed-inode.c
-> index d3e15e1d4a91..c3e92f2fd915 100644
-> --- a/fs/btrfs/delayed-inode.c
-> +++ b/fs/btrfs/delayed-inode.c
-> @@ -1644,7 +1644,7 @@ void btrfs_readdir_put_delayed_items(struct inode *inode,
->  	 * The VFS is going to do up_read(), so we need to downgrade back to a
->  	 * read lock.
->  	 */
-> -	downgrade_write(&inode->i_rwsem);
-> +	inode_lock_downgrade(inode);
->  }
->  
->  int btrfs_should_delete_dir_index(struct list_head *del_list,
-> diff --git a/fs/btrfs/ioctl.c b/fs/btrfs/ioctl.c
-> index a1ee0b775e65..1cbd763a46d8 100644
-> --- a/fs/btrfs/ioctl.c
-> +++ b/fs/btrfs/ioctl.c
-> @@ -955,7 +955,7 @@ static noinline int btrfs_mksubvol(const struct path *parent,
->  	struct dentry *dentry;
->  	int error;
->  
-> -	error = down_write_killable_nested(&dir->i_rwsem, I_MUTEX_PARENT);
-> +	error = inode_lock_killable_nested(dir, I_MUTEX_PARENT);
->  	if (error == -EINTR)
->  		return error;
->  
-> @@ -2863,7 +2863,7 @@ static noinline int btrfs_ioctl_snap_destroy(struct file *file,
->  		goto out;
->  
->  
-> -	err = down_write_killable_nested(&dir->i_rwsem, I_MUTEX_PARENT);
-> +	err = inode_lock_killable_nested(dir, I_MUTEX_PARENT);
->  	if (err == -EINTR)
->  		goto out_drop_write;
->  	dentry = lookup_one_len(vol_args->name, parent, namelen);
-> diff --git a/fs/ceph/io.c b/fs/ceph/io.c
-> index 97602ea92ff4..e94186259c2e 100644
-> --- a/fs/ceph/io.c
-> +++ b/fs/ceph/io.c
-> @@ -53,14 +53,14 @@ ceph_start_io_read(struct inode *inode)
->  	struct ceph_inode_info *ci = ceph_inode(inode);
->  
->  	/* Be an optimist! */
-> -	down_read(&inode->i_rwsem);
-> +	inode_lock_shared(inode);
->  	if (!(READ_ONCE(ci->i_ceph_flags) & CEPH_I_ODIRECT))
->  		return;
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  	/* Slow path.... */
-> -	down_write(&inode->i_rwsem);
-> +	inode_lock(inode);
->  	ceph_block_o_direct(ci, inode);
-> -	downgrade_write(&inode->i_rwsem);
-> +	inode_lock_downgrade(inode);
->  }
->  
->  /**
-> @@ -73,7 +73,7 @@ ceph_start_io_read(struct inode *inode)
->  void
->  ceph_end_io_read(struct inode *inode)
->  {
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  }
->  
->  /**
-> @@ -86,7 +86,7 @@ ceph_end_io_read(struct inode *inode)
->  void
->  ceph_start_io_write(struct inode *inode)
->  {
-> -	down_write(&inode->i_rwsem);
-> +	inode_lock(inode);
->  	ceph_block_o_direct(ceph_inode(inode), inode);
->  }
->  
-> @@ -100,7 +100,7 @@ ceph_start_io_write(struct inode *inode)
->  void
->  ceph_end_io_write(struct inode *inode)
->  {
-> -	up_write(&inode->i_rwsem);
-> +	inode_unlock(inode);
->  }
->  
->  /* Call with exclusively locked inode->i_rwsem */
-> @@ -139,14 +139,14 @@ ceph_start_io_direct(struct inode *inode)
->  	struct ceph_inode_info *ci = ceph_inode(inode);
->  
->  	/* Be an optimist! */
-> -	down_read(&inode->i_rwsem);
-> +	inode_lock_shared(inode);
->  	if (READ_ONCE(ci->i_ceph_flags) & CEPH_I_ODIRECT)
->  		return;
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  	/* Slow path.... */
-> -	down_write(&inode->i_rwsem);
-> +	inode_lock(inode);
->  	ceph_block_buffered(ci, inode);
-> -	downgrade_write(&inode->i_rwsem);
-> +	inode_lock_downgrade(inode);
->  }
->  
->  /**
-> @@ -159,5 +159,5 @@ ceph_start_io_direct(struct inode *inode)
->  void
->  ceph_end_io_direct(struct inode *inode)
->  {
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  }
-> diff --git a/fs/nfs/io.c b/fs/nfs/io.c
-> index 5088fda9b453..bf5ed7bea59d 100644
-> --- a/fs/nfs/io.c
-> +++ b/fs/nfs/io.c
-> @@ -44,14 +44,14 @@ nfs_start_io_read(struct inode *inode)
->  {
->  	struct nfs_inode *nfsi = NFS_I(inode);
->  	/* Be an optimist! */
-> -	down_read(&inode->i_rwsem);
-> +	inode_lock_shared(inode);
->  	if (test_bit(NFS_INO_ODIRECT, &nfsi->flags) == 0)
->  		return;
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  	/* Slow path.... */
-> -	down_write(&inode->i_rwsem);
-> +	inode_lock(inode);
->  	nfs_block_o_direct(nfsi, inode);
-> -	downgrade_write(&inode->i_rwsem);
-> +	inode_lock_downgrade(inode);
->  }
->  
->  /**
-> @@ -64,7 +64,7 @@ nfs_start_io_read(struct inode *inode)
->  void
->  nfs_end_io_read(struct inode *inode)
->  {
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  }
->  
->  /**
-> @@ -77,7 +77,7 @@ nfs_end_io_read(struct inode *inode)
->  void
->  nfs_start_io_write(struct inode *inode)
->  {
-> -	down_write(&inode->i_rwsem);
-> +	inode_lock(inode);
->  	nfs_block_o_direct(NFS_I(inode), inode);
->  }
->  
-> @@ -91,7 +91,7 @@ nfs_start_io_write(struct inode *inode)
->  void
->  nfs_end_io_write(struct inode *inode)
->  {
-> -	up_write(&inode->i_rwsem);
-> +	inode_unlock(inode);
->  }
->  
->  /* Call with exclusively locked inode->i_rwsem */
-> @@ -124,14 +124,14 @@ nfs_start_io_direct(struct inode *inode)
->  {
->  	struct nfs_inode *nfsi = NFS_I(inode);
->  	/* Be an optimist! */
-> -	down_read(&inode->i_rwsem);
-> +	inode_lock_shared(inode);
->  	if (test_bit(NFS_INO_ODIRECT, &nfsi->flags) != 0)
->  		return;
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  	/* Slow path.... */
-> -	down_write(&inode->i_rwsem);
-> +	inode_lock(inode);
->  	nfs_block_buffered(nfsi, inode);
-> -	downgrade_write(&inode->i_rwsem);
-> +	inode_lock_downgrade(inode);
->  }
->  
->  /**
-> @@ -144,5 +144,5 @@ nfs_start_io_direct(struct inode *inode)
->  void
->  nfs_end_io_direct(struct inode *inode)
->  {
-> -	up_read(&inode->i_rwsem);
-> +	inode_unlock_shared(inode);
->  }
-> diff --git a/fs/orangefs/file.c b/fs/orangefs/file.c
-> index a5612abc0936..6420503e1275 100644
-> --- a/fs/orangefs/file.c
-> +++ b/fs/orangefs/file.c
-> @@ -328,14 +328,14 @@ static ssize_t orangefs_file_read_iter(struct kiocb *iocb,
->  		ro->blksiz = iter->count;
->  	}
->  
-> -	down_read(&file_inode(iocb->ki_filp)->i_rwsem);
-> +	inode_lock_shared(file_inode(iocb->ki_filp));
->  	ret = orangefs_revalidate_mapping(file_inode(iocb->ki_filp));
->  	if (ret)
->  		goto out;
->  
->  	ret = generic_file_read_iter(iocb, iter);
->  out:
-> -	up_read(&file_inode(iocb->ki_filp)->i_rwsem);
-> +	inode_unlock_shared(file_inode(iocb->ki_filp));
->  	return ret;
->  }
->  
-> diff --git a/fs/overlayfs/readdir.c b/fs/overlayfs/readdir.c
-> index 47a91c9733a5..c203e73160b0 100644
-> --- a/fs/overlayfs/readdir.c
-> +++ b/fs/overlayfs/readdir.c
-> @@ -273,7 +273,7 @@ static int ovl_check_whiteouts(struct dentry *dir, struct ovl_readdir_data *rdd)
->  
->  	old_cred = ovl_override_creds(rdd->dentry->d_sb);
->  
-> -	err = down_write_killable(&dir->d_inode->i_rwsem);
-> +	err = inode_lock_killable(dir->d_inode);
->  	if (!err) {
->  		while (rdd->first_maybe_whiteout) {
->  			p = rdd->first_maybe_whiteout;
-> diff --git a/fs/readdir.c b/fs/readdir.c
-> index d26d5ea4de7b..10a34efa0af0 100644
-> --- a/fs/readdir.c
-> +++ b/fs/readdir.c
-> @@ -52,9 +52,9 @@ int iterate_dir(struct file *file, struct dir_context *ctx)
->  		goto out;
->  
->  	if (shared)
-> -		res = down_read_killable(&inode->i_rwsem);
-> +		res = inode_lock_shared_killable(inode);
->  	else
-> -		res = down_write_killable(&inode->i_rwsem);
-> +		res = inode_lock_killable(inode);
->  	if (res)
->  		goto out;
->  
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index 98e0349adb52..2b407464fac1 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -831,6 +831,27 @@ static inline void inode_lock_shared_nested(struct inode *inode, unsigned subcla
->  	down_read_nested(&inode->i_rwsem, subclass);
->  }
->  
-> +static inline void inode_lock_downgrade(struct inode *inode)
-> +{
-> +	downgrade_write(&inode->i_rwsem);
-> +}
-> +
-> +static inline int inode_lock_killable(struct inode *inode)
-> +{
-> +	return down_write_killable(&inode->i_rwsem);
-> +}
-> +
-> +static inline int inode_lock_shared_killable(struct inode *inode)
-> +{
-> +	return down_read_killable(&inode->i_rwsem);
-> +}
-> +
-> +static inline int inode_lock_killable_nested(struct inode *inode,
-> +					     unsigned subclass)
-> +{
-> +	return down_write_killable_nested(&inode->i_rwsem, subclass);
-> +}
-> +
->  void lock_two_nondirectories(struct inode *, struct inode*);
->  void unlock_two_nondirectories(struct inode *, struct inode*);
->  
+=C2=A0 =20
+      =20
+     =20
+=20
+    =20
+=20
+     =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =20
 
-Nice little cleanup.
+Is Squarespace Actually SEO Friendly?=20
+    =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =20
 
-Reviewed-by: Jeff Layton <jlayton@kernel.org>
+Do you know your website isn't visible on Google first page of search resul=
+ts? I know you are using Squarespace for your website but do you know Squar=
+espace websites are template based and have very low SEO rankings rate as c=
+ompared to custom designed websites. Search engines like Google.com and Bin=
+g.com never support template based websites for search ranking.=C2=A0Not ha=
+ving that visibility is losing=C2=A0you money every month.=20
 
+
+In other words, if your pages and SEO are setup properly, the very people y=
+ou want to attract to your business will find you ... on their own through=
+=C2=A0organic searches.=20
+
+
+With our design and UX strategies, we can help you increase your sales, eng=
+agement, and conversions by 150%. Our rates are similar to Squarespace with=
+ custom made site and SEO setup in all pages.=20
+
+
+We charge only $39 per month for brand new website, custom logo, hosting an=
+d unlimited revisions.=C2=A0=20
+
+
+For more information, please visit our website:=C2=A0  http://webrid.com ht=
+tp://webrid.com=20
+
+
+If you=E2=80=99re interested, please email me back. I would love to chat.=
+=20
+
+
+Thank you,=20
+Suraj=20
+281-532-5873=20
+sales@webrid.com=20
+ http://webrid.com www.webrid.com     =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+  =20
+=20
+      http://webrid.com Learn More        =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =20
+
+You can  https://acpo.maillist-manage.com/ua/optout?od=3D2d5a885a69b60a972a=
+ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe9181df&sd=3D13bcfbdbfe9072e3=
+&n=3D11699e4bfb276e2  unsubscribe [ https://acpo.maillist-manage.com/ua/opt=
+out?od=3D2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe9=
+181df&sd=3D13bcfbdbfe9072e3&n=3D11699e4bfb276e2 ]from this email or change =
+your email notifications.=20
+Online version is here =C2=A0     =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+   =20
+=20
+    =20
+=20
+           =20
+=C2=A0
 

@@ -2,78 +2,52 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E4AC12265D
-	for <lists+devel-orangefs@lfdr.de>; Tue, 17 Dec 2019 09:13:25 +0100 (CET)
-Received: from [::1] (port=59776 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A19F124C7A
+	for <lists+devel-orangefs@lfdr.de>; Wed, 18 Dec 2019 17:06:30 +0100 (CET)
+Received: from [::1] (port=60074 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1ih7yu-0002AR-Kb
-	for lists+devel-orangefs@lfdr.de; Tue, 17 Dec 2019 03:13:24 -0500
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:26480)
+	id 1ihbqG-0007dp-Ub
+	for lists+devel-orangefs@lfdr.de; Wed, 18 Dec 2019 11:06:28 -0500
+Received: from alt-144.psu4.zcsend.net ([135.84.83.144]:37235)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <riteshh@linux.ibm.com>)
- id 1ih7yt-00028y-6q
- for devel@lists.orangefs.org; Tue, 17 Dec 2019 03:13:23 -0500
-Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xBH87TdK101112
- for <devel@lists.orangefs.org>; Tue, 17 Dec 2019 03:12:42 -0500
-Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2wxpvwfgph-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <devel@lists.orangefs.org>; Tue, 17 Dec 2019 03:12:41 -0500
-Received: from localhost
- by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <devel@lists.orangefs.org> from <riteshh@linux.ibm.com>;
- Tue, 17 Dec 2019 08:12:39 -0000
-Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
- by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Tue, 17 Dec 2019 08:12:36 -0000
-Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
- [9.149.105.58])
- by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- xBH8CZG155705752
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 17 Dec 2019 08:12:35 GMT
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2B3DD4C059;
- Tue, 17 Dec 2019 08:12:35 +0000 (GMT)
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A81214C040;
- Tue, 17 Dec 2019 08:12:33 +0000 (GMT)
-Received: from [9.199.158.112] (unknown [9.199.158.112])
- by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue, 17 Dec 2019 08:12:33 +0000 (GMT)
-Subject: Re: [PATCH 0/1] Use inode_lock/unlock class of provided APIs in
- filesystems
-To: willy@infradead.org, linux-fsdevel@vger.kernel.org, jlayton@kernel.org,
- viro@zeniv.linux.org.uk
-References: <20191205103902.23618-1-riteshh@linux.ibm.com>
-From: Ritesh Harjani <riteshh@linux.ibm.com>
-Date: Tue, 17 Dec 2019 13:42:29 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ (Exim 4.92) (envelope-from
+ <bounce_642507526+a.13bcfbdbfe97d8ea_11699e4be41b6bd_v53@mail3.bnws.zcsend.net>)
+ id 1ihbqE-0007bz-9v
+ for devel@lists.orangefs.org; Wed, 18 Dec 2019 11:06:28 -0500
+Received: from [172.30.236.109] (172.30.236.109) by alt-144.psu4.zcsend.net id
+ hv978628epg3 for <devel@lists.orangefs.org>;
+ Wed, 18 Dec 2019 08:05:29 -0800 (envelope-from
+ <bounce_642507526+a.13bcfbdbfe97d8ea_11699e4be41b6bd_v53@mail3.bnws.zcsend.net>)
+DKIM-Signature: a=rsa-sha1;
+ b=Sau9Ak+qgfYaW//Xb//btD9qKtcmm6cLBNIKp27lpFDN7Jgfa1SoYp3vKn9NLKv8YoiOjTlC94T/yB8ybThefXJN55Tqx6C2dqxSFEVPkdQi6IiUDRQa74ZeSzWRBrpEKdxATNLeUxZCxCc8du8BRD75zM4kf35qOAVjdnunE0k=;
+ c=simple/simple; s=k1; d=mail3.bnws.zcsend.net; v=1;
+ bh=EdSRnCeRFS0fIKCNMUZ9ZdCXrKQ=;
+ h=date:from:reply-to:to:message-id:subject:mime-version:content-type; 
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; 
+ s=k1; d=mail3.bnws.zcsend.net; 
+ b=BVvPUt9CJj+FkvMx/D2kJDJTqe/1YUIBs5mVFhmiyBhIGVUB0fFiiPOM8TPK2WpgMzguzwE81t1c
+ OX0Xwa9+BlM6FtMB7VxkH+VfN2lJBcWiXXxB4Q/ag8AQd57HXfHpM3Vn30TINxiX08w3+2UEpfAF
+ uMzfGV3iDL598zPtvIw=  
+Date: Wed, 18 Dec 2019 08:05:29 -0800 (PST)
+From: "=?UTF-8?Q?Send_your_first_invoice_today_=E2=80=94_It=27s_free!?="
+ <sales@getdoctorsonline.com>
+To: devel@lists.orangefs.org
+Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe97d8ea.1576685129597@mail3.bnws.zcsend.net>
+Subject: =?UTF-8?B?U2VuZCB5b3VyIGZpcnN0IGludm9pY2UgdG9kYXkg4oCUIEl0J3MgZnJlZSE=?=
 MIME-Version: 1.0
-In-Reply-To: <20191205103902.23618-1-riteshh@linux.ibm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-x-cbid: 19121708-0020-0000-0000-000003990467
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19121708-0021-0000-0000-000021F01F27
-Message-Id: <20191217081233.A81214C040@d06av22.portsmouth.uk.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
- definitions=2019-12-17_01:2019-12-16,2019-12-16 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 adultscore=0
- phishscore=0 mlxlogscore=771 impostorscore=0 priorityscore=1501
- spamscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0 clxscore=1015
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-1910280000 definitions=main-1912170071
+X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe96562f
+X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe97d8ea.11699e4be41b6bd
+X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe97d8ea.11699e4be41b6bd
+X-Mailer: Zoho Campaigns
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-Report-Abuse: <Please send a copy of this message along with header to abuse
+ +
+ 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfe97d8ea@zohocampaigns.com>,
+ <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfe97d8ea&sd=13bcfbdbfe965a9b&n=11699e4be41b6bd>
+Content-Type: text/plain;charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,9 +59,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: ceph-devel@vger.kernel.org, devel@lists.orangefs.org,
- linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-unionfs@vger.kernel.org
+Reply-To: sales@getdoctorsonline.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -101,37 +73,92 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Al, do you think this can be picked up via your tree?
-Please let me know if anything needed from my end on this.
+=C2=A0 =20
+      =20
+     =20
+=20
+    =20
+=20
+     =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =20
 
--ritesh
+Your Business. Your Clients. One Free, Powerful Invoicing Platform.=20
+    =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =20
+Effortless Invoicing:=20
+Create professional and elegant looking estimates and invoices in any langu=
+age or currency in a matter of seconds, and easily deliver them to your cli=
+ents.=20
 
-On 12/5/19 4:09 PM, Ritesh Harjani wrote:
-> Matthew Wilcox in [1] suggested that it will be a good idea
-> to define some missing API instead of directly using i_rwsem in
-> filesystems drivers for lock/unlock/downgrade purposes.
-> 
-> This patch does that work. No functionality change in this patch.
-> 
-> After this there are only lockdep class of APIs at certain places
-> in filesystems which are directly using i_rwsem and second is XFS,
-> but it seems to be anyway defining it's own xfs_ilock/iunlock set
-> of APIs and 'iolock' naming convention for this lock.
-> 
-> [1]: https://www.spinics.net/lists/linux-ext4/msg68689.html
-> 
-> Ritesh Harjani (1):
->    fs: Use inode_lock/unlock class of provided APIs in filesystems
-> 
->   fs/btrfs/delayed-inode.c |  2 +-
->   fs/btrfs/ioctl.c         |  4 ++--
->   fs/ceph/io.c             | 24 ++++++++++++------------
->   fs/nfs/io.c              | 24 ++++++++++++------------
->   fs/orangefs/file.c       |  4 ++--
->   fs/overlayfs/readdir.c   |  2 +-
->   fs/readdir.c             |  4 ++--
->   include/linux/fs.h       | 21 +++++++++++++++++++++
->   8 files changed, 53 insertions(+), 32 deletions(-)
-> 
 
+
+
+
+Send Unlimited Invoices, For Free:=20
+Stay organized and take control of your invoicing and accounting needs with=
+ ease =E2=80=94 CloudBooks lets you send unlimited invoices for free, at an=
+y account level.=20
+
+
+
+Recurring Invoicing:=20
+Save time & effort and get paid faster with recurring invoice profiles, and=
+ send automatic payment reminders to secure a steady cashflow for your busi=
+ness.=20
+
+
+
+From Estimate To Invoice:=20
+Create and send professional looking estimates and =E2=80=94 once accepted =
+by your client =E2=80=94 convert them into invoices at the click of a butto=
+n.=20
+
+
+
+View And Send Account Statements:=20
+Dynamically generated account statements are a great reference of all past =
+transactions between your business and a specific vendor or client =E2=80=
+=94 view and send them at any time.=20
+
+
+
+Customize Your Invoices:=20
+Make your brand stick out from the rest by adding your individual logo to i=
+nvoices and estimates, to go along with the branding colors specific to you=
+r business.=20
+    =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+  =20
+=20
+      https://www.cloudbooksapp.com Send your first invoice today =E2=80=94=
+ It's free!        =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =20
+
+You can  https://acpo.maillist-manage.com/ua/optout?od=3D2d5a885a69b60a972a=
+ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe97d8ea&sd=3D13bcfbdbfe965a9b=
+&n=3D11699e4be41b6bd  unsubscribe [ https://acpo.maillist-manage.com/ua/opt=
+out?od=3D2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe9=
+7d8ea&sd=3D13bcfbdbfe965a9b&n=3D11699e4be41b6bd ]from this email or change =
+your email notifications.=20
+Online version is here =C2=A0     =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+   =20
+=20
+    =20
+=20
+           =20
+=C2=A0
 

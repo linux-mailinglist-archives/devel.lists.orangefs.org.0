@@ -2,49 +2,50 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6417A128273
-	for <lists+devel-orangefs@lfdr.de>; Fri, 20 Dec 2019 19:52:40 +0100 (CET)
-Received: from [::1] (port=34560 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 647A0128C1C
+	for <lists+devel-orangefs@lfdr.de>; Sun, 22 Dec 2019 01:39:44 +0100 (CET)
+Received: from [::1] (port=53266 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iiNOB-0007BI-Bq
-	for lists+devel-orangefs@lfdr.de; Fri, 20 Dec 2019 13:52:39 -0500
-Received: from senderb73.zcsend.net ([135.84.83.73]:41777)
+	id 1iipHb-0004Uf-A6
+	for lists+devel-orangefs@lfdr.de; Sat, 21 Dec 2019 19:39:43 -0500
+Received: from senderb78.zcsend.net ([135.84.83.78]:36812)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
  (Exim 4.92) (envelope-from
- <bounce_642507526+a.13bcfbdbfe99fc67_11699e4bff182a2_v53@mail3.bnws.zcsend.net>)
- id 1iiNO4-0006Xn-Fc
- for devel@lists.orangefs.org; Fri, 20 Dec 2019 13:52:38 -0500
-Received: from [172.30.235.68] (172.30.235.68) by senderb73.zcsend.net id
- hvkc7228epgu for <devel@lists.orangefs.org>;
- Fri, 20 Dec 2019 10:51:17 -0800 (envelope-from
- <bounce_642507526+a.13bcfbdbfe99fc67_11699e4bff182a2_v53@mail3.bnws.zcsend.net>)
+ <bounce_642507526+a.13bcfbdbfe9be531_11699e4c209e4aa_v53@mail3.bnws.zcsend.net>)
+ id 1iipHZ-0004UH-FN
+ for devel@lists.orangefs.org; Sat, 21 Dec 2019 19:39:41 -0500
+Received: from [172.30.236.109] (172.30.236.109) by senderb78.zcsend.net id
+ hvqtkq28epga for <devel@lists.orangefs.org>;
+ Sat, 21 Dec 2019 16:39:00 -0800 (envelope-from
+ <bounce_642507526+a.13bcfbdbfe9be531_11699e4c209e4aa_v53@mail3.bnws.zcsend.net>)
 DKIM-Signature: a=rsa-sha1;
- b=M+kMpyP+Egu7axzXct7nhWMrNRAjkFjS1FX7PSQ7YQj8ge58PNUpRG8TD+2cvLZz1Q4WNNOPGzcNYV3ODmk2cNj/B9g6YV6DNVHUoJCQdL3TlafMv21WCvkn7b6xJheYQFe6xpgIL4Rji1azZrbOv6AC2OcU1XI930MjjxsjMvI=;
+ b=TAf/E4EMSMBzBqRctriVacafOffgb7kU3HjKwAqJ9Z0OAFt5/dlhMgu99bpcbBdR9ArIDcQjXFDH5aaEOcVZUlUZlq4TBvjKhwbuF3WjuJumOZOuXddOo5KHf2xVRyaaenA8XLhltqHHfKUDTLvqM08XGeqloAaH7CkINdRf3is=;
  c=simple/simple; s=k1; d=mail3.bnws.zcsend.net; v=1;
- bh=eyDulJt98bXaEb+zSprKhLqcc7Q=;
+ bh=P6XxrPrI6Be6YKHRra6KNOyGrzA=;
  h=date:from:reply-to:to:message-id:subject:mime-version:content-type; 
 DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; 
  s=k1; d=mail3.bnws.zcsend.net; 
- b=SAp5i5+J8wXtSBVAtdaWrbEn21YhEUqWyqVzo36XJ4pWmTDz5lzaENeulw36K+XFGiH8CyA77z41
- F2qD82B78wMvyjAGQ/t3DZ0Gbmm/g6S+qdqvnleeVUoMwnJQfWY1yidnd45PojGmgBgddbW0IrcO
- 26M53pDhf3FHUFsNYqo=  
-Date: Fri, 20 Dec 2019 10:51:17 -0800 (PST)
+ b=K024qct0ftMGwBCZsCU+lw1QDh6IYXL+kCDOMmUf2qqEXILFzVUT+HifS4X0e9MUwTE6ZvdYFNns
+ mojLAzqhr1sQHJkCqgMPhrsuhnpYH0ULXDXPfIYLPFQHpcQOWJVcR8sB2qCQVMxcJ+6igK18I4Hn
+ /mhVM4Ag7bMFAEEoh5k=  
+Date: Sat, 21 Dec 2019 16:39:00 -0800 (PST)
 From: "=?UTF-8?Q?Send_your_first_invoice_today_=E2=80=94_It=27s_free!?="
  <sales@getdoctorsonline.com>
 To: devel@lists.orangefs.org
-Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe99fc67.1576867877742@mail3.bnws.zcsend.net>
+Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe9be531.1576975140474@mail3.bnws.zcsend.net>
 Subject: =?UTF-8?B?U2VuZCB5b3VyIGZpcnN0IGludm9pY2UgdG9kYXkg4oCUIEl0J3MgZnJlZSE=?=
 MIME-Version: 1.0
-X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe98a3ca
-X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe99fc67.11699e4bff182a2
-X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe99fc67.11699e4bff182a2
+Feedback-ID: 1264be306:1264be306.13bcfbdbfe9a5d32:US:ZohoCampaigns
+X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe9a5d32
+X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe9be531.11699e4c209e4aa
+X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe9be531.11699e4c209e4aa
 X-Mailer: Zoho Campaigns
 List-Unsubscribe-Post: List-Unsubscribe=One-Click
 X-Report-Abuse: <Please send a copy of this message along with header to abuse
  +
- 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfe99fc67@zohocampaigns.com>,
- <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfe99fc67&sd=13bcfbdbfe98abaf&n=11699e4bff182a2>
+ 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfe9be531@zohocampaigns.com>,
+ <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfe9be531&sd=13bcfbdbfe9a2cb2&n=11699e4c209e4aa>
 Content-Type: text/plain;charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -147,10 +148,10 @@ r business.=20
   =20
 
 You can  https://acpo.maillist-manage.com/ua/optout?od=3D2d5a885a69b60a972a=
-ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe99fc67&sd=3D13bcfbdbfe98abaf=
-&n=3D11699e4bff182a2  unsubscribe [ https://acpo.maillist-manage.com/ua/opt=
+ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe9be531&sd=3D13bcfbdbfe9a2cb2=
+&n=3D11699e4c209e4aa  unsubscribe [ https://acpo.maillist-manage.com/ua/opt=
 out?od=3D2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe9=
-9fc67&sd=3D13bcfbdbfe98abaf&n=3D11699e4bff182a2 ]from this email or change =
+be531&sd=3D13bcfbdbfe9a2cb2&n=3D11699e4c209e4aa ]from this email or change =
 your email notifications.=20
 Online version is here =C2=A0     =20
 =20

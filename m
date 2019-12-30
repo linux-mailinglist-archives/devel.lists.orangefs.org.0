@@ -2,52 +2,68 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 647A0128C1C
-	for <lists+devel-orangefs@lfdr.de>; Sun, 22 Dec 2019 01:39:44 +0100 (CET)
-Received: from [::1] (port=53266 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09B8112D4E3
+	for <lists+devel-orangefs@lfdr.de>; Mon, 30 Dec 2019 23:56:08 +0100 (CET)
+Received: from [::1] (port=36322 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iipHb-0004Uf-A6
-	for lists+devel-orangefs@lfdr.de; Sat, 21 Dec 2019 19:39:43 -0500
-Received: from senderb78.zcsend.net ([135.84.83.78]:36812)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from
- <bounce_642507526+a.13bcfbdbfe9be531_11699e4c209e4aa_v53@mail3.bnws.zcsend.net>)
- id 1iipHZ-0004UH-FN
- for devel@lists.orangefs.org; Sat, 21 Dec 2019 19:39:41 -0500
-Received: from [172.30.236.109] (172.30.236.109) by senderb78.zcsend.net id
- hvqtkq28epga for <devel@lists.orangefs.org>;
- Sat, 21 Dec 2019 16:39:00 -0800 (envelope-from
- <bounce_642507526+a.13bcfbdbfe9be531_11699e4c209e4aa_v53@mail3.bnws.zcsend.net>)
-DKIM-Signature: a=rsa-sha1;
- b=TAf/E4EMSMBzBqRctriVacafOffgb7kU3HjKwAqJ9Z0OAFt5/dlhMgu99bpcbBdR9ArIDcQjXFDH5aaEOcVZUlUZlq4TBvjKhwbuF3WjuJumOZOuXddOo5KHf2xVRyaaenA8XLhltqHHfKUDTLvqM08XGeqloAaH7CkINdRf3is=;
- c=simple/simple; s=k1; d=mail3.bnws.zcsend.net; v=1;
- bh=P6XxrPrI6Be6YKHRra6KNOyGrzA=;
- h=date:from:reply-to:to:message-id:subject:mime-version:content-type; 
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; 
- s=k1; d=mail3.bnws.zcsend.net; 
- b=K024qct0ftMGwBCZsCU+lw1QDh6IYXL+kCDOMmUf2qqEXILFzVUT+HifS4X0e9MUwTE6ZvdYFNns
- mojLAzqhr1sQHJkCqgMPhrsuhnpYH0ULXDXPfIYLPFQHpcQOWJVcR8sB2qCQVMxcJ+6igK18I4Hn
- /mhVM4Ag7bMFAEEoh5k=  
-Date: Sat, 21 Dec 2019 16:39:00 -0800 (PST)
-From: "=?UTF-8?Q?Send_your_first_invoice_today_=E2=80=94_It=27s_free!?="
- <sales@getdoctorsonline.com>
-To: devel@lists.orangefs.org
-Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe9be531.1576975140474@mail3.bnws.zcsend.net>
-Subject: =?UTF-8?B?U2VuZCB5b3VyIGZpcnN0IGludm9pY2UgdG9kYXkg4oCUIEl0J3MgZnJlZSE=?=
+	id 1im3xH-0000Bw-1f
+	for lists+devel-orangefs@lfdr.de; Mon, 30 Dec 2019 17:56:07 -0500
+Received: from mail-qk1-f193.google.com ([209.85.222.193]:45287)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ (Exim 4.92) (envelope-from <jessika5tyr@gmail.com>)
+ id 1im3xF-0000Bc-7A
+ for devel@lists.orangefs.org; Mon, 30 Dec 2019 17:56:05 -0500
+Received: by mail-qk1-f193.google.com with SMTP id x1so27259218qkl.12
+ for <devel@lists.orangefs.org>; Mon, 30 Dec 2019 14:55:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=thread-index:thread-topic:from:to:subject:date:message-id
+ :mime-version:content-class:importance:priority;
+ bh=N5ZKOf7Z8aouQofnzD+Stcfxk/lNQ60+KFKBinQqfqw=;
+ b=T3nDLqOF7YMrjLpfVmzML5BvfFi2N9TpaYj0yZ3g3ajrK1rw22jpm5KUpT6Os1N01H
+ +jruOt9lpZRDvDRPECWcmxYPhX+VmFOsBgrz2fVvVmo93V6AQG8pdYT16cqlZxt05xpK
+ EN7PQTPu9pd6G/x6COceLfWzL7QcTdULPrARhM5EhC088nBMxOROh9QTB6eKH2s/PPtk
+ LOQKazHHnD3wg91meI6TN1+H/fvvZGqudACD6+KenHLCPENDoIVsLAK5BQ/2oweHqZSa
+ wCqHC4yvs4gRPFvR5JzEVa6//7l7SAXTcNjATKdcKZO5iG4XefSZVTfB3m/8fmt2Biy8
+ Qr9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:thread-index:thread-topic:from:to:subject:date
+ :message-id:mime-version:content-class:importance:priority;
+ bh=N5ZKOf7Z8aouQofnzD+Stcfxk/lNQ60+KFKBinQqfqw=;
+ b=EEPaR9mcqHLOzzkhTbrUg7xb4KB1fOqdk3cpmiPmbuwc8FNUGlpq1yeJ4Wf948X8yv
+ Qc0rpbfexcR//nvj/xPX2aTLWh+Hp2rxhYu4z9fXYerXvpyJuJ4xt76IDJxhEVI/HEG9
+ 6brfiUyWgRGaeZutareUghvdEowJgztJtZPKfr49hjkDgDl5bRO1FLLo7XJuloJv+OFb
+ 9EIJMi8ZnPrE6hcRXGcspO07OWdGOCJa5BUqzv5x37jB1LXjWH3xepvMDC6djApg3NU+
+ basi6XL3sJ3071ev2hm5ZePguYFxSNVPAmwHcUOb7nLsizgQ3SCBW80ZoY3SejHjZL9m
+ ylxA==
+X-Gm-Message-State: APjAAAWPTFDuQr5Kq85JI35mqvXxP4ScvEo0b/nmgphjQ+TyUh2XzYnZ
+ ErMyAXxDl8uT3c4Ee6cUJZIk/3Hz0q8=
+X-Google-Smtp-Source: APXvYqxOEWW+k0fyPC3DnDUSpZ5F25VgCUJIGs5Cr8qxwtEZknwQ444TJiIhqW2emfsi7G+8K/wO+Q==
+X-Received: by 2002:a05:620a:16d1:: with SMTP id
+ a17mr55578946qkn.49.1577746524321; 
+ Mon, 30 Dec 2019 14:55:24 -0800 (PST)
+Received: from ThingTwo ([2604:2000:6b83:2e00:3d39:f97c:5e71:3016])
+ by smtp.gmail.com with ESMTPSA id d26sm12768732qka.28.2019.12.30.14.55.23
+ for <devel@lists.orangefs.org>
+ (version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Mon, 30 Dec 2019 14:55:23 -0800 (PST)
+thread-index: AdW/ZDWDJY5Js1I5RhS20GG9PkRPCw==
+Thread-Topic: Thank You for your time.
+From: "John Stone" <jessika5tyr@gmail.com>
+To: <devel@lists.orangefs.org>
+Subject: Thank You for your time.
+Date: Mon, 30 Dec 2019 17:55:19 -0500
+Message-ID: <26673EA591564BD79D120646DBCECB0C@ThingTwo>
 MIME-Version: 1.0
-Feedback-ID: 1264be306:1264be306.13bcfbdbfe9a5d32:US:ZohoCampaigns
-X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfe9a5d32
-X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe9be531.11699e4c209e4aa
-X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfe9be531.11699e4c209e4aa
-X-Mailer: Zoho Campaigns
-List-Unsubscribe-Post: List-Unsubscribe=One-Click
-X-Report-Abuse: <Please send a copy of this message along with header to abuse
- +
- 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfe9be531@zohocampaigns.com>,
- <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfe9be531&sd=13bcfbdbfe9a2cb2&n=11699e4c209e4aa>
-Content-Type: text/plain;charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft CDO for Windows 2000
+Content-Class: urn:content-classes:message
+Importance: Normal
+Priority: normal
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.24158
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
@@ -60,7 +76,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: sales@getdoctorsonline.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -74,92 +89,55 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-=C2=A0 =20
-      =20
-     =20
-=20
-    =20
-=20
-     =20
-=20
-  =C2=A0=C2=A0=C2=A0    =20
-=20
-  =20
+Thank You for taking time out of your schedule.
+Here is 20% off our entire line until September 3rd, 2019
 
-Your Business. Your Clients. One Free, Powerful Invoicing Platform.=20
-    =20
-=20
-  =C2=A0=C2=A0=C2=A0    =20
-=20
-  =C2=A0=C2=A0=C2=A0    =20
-=20
-  =20
-Effortless Invoicing:=20
-Create professional and elegant looking estimates and invoices in any langu=
-age or currency in a matter of seconds, and easily deliver them to your cli=
-ents.=20
+Use the discount code "MADMANGO" at checkout
+Use casn even use this link
+
+20% Dicsount Link <https://broadway29.com/discount/MADMANGO> 
 
 
 
+Elegant Yet Rugged Armored Case for iPhone and Samsung
+ <https://broadway29.com/collections/smartphone-cases> 
 
 
-Send Unlimited Invoices, For Free:=20
-Stay organized and take control of your invoicing and accounting needs with=
- ease =E2=80=94 CloudBooks lets you send unlimited invoices for free, at an=
-y account level.=20
+THIS SUPER STRONG HYBRID COMPOSITE  MAKES THIS CASE A SHOCKPROOF ARMOR
+CASE FOR HEAVY DUTY PROTECTION
+<https://broadway29.com/collections/smartphone-cases> 
+
+LED Luminous Flowing USB Charging Cable
+ 
+<https://broadway29.com/collections/frontpage/products/led-luminous-flow
+ing-usb-charging-cable-for-samsung-galaxy-a3-a5-a7-2017-2016-huawei-p20-
+mate-10-pro-honor-9-lite-charger-cabel-1>  
+
+Super Strong! Super Cool! What good is super cool if it only lasts 5
+days. This super tough cord can last beyond what you can dish out.
+Never lose your charging cable in the dark. Flowing LED lights pulsates
+from the power source to the device. Stand out in crowd and unique
+enough not to confuse your cord with another person's plain cord. This
+is a really nice gift for a friend.
+<https://broadway29.com/collections/smartphone-accessories/products/led-
+luminous-flowing-usb-charging-cable-for-samsung-galaxy-a3-a5-a7-2017-201
+6-huawei-p20-mate-10-pro-honor-9-lite-charger-cabel-1> 
+
+
+	
+Click for 17% Discount on All Our Inventory
+<http://Broadway29.com/discount/BOBCAT> 
+Broadway29.com <http://Broadway29.com/discount/BOBCAT> 
+	
 
 
 
-Recurring Invoicing:=20
-Save time & effort and get paid faster with recurring invoice profiles, and=
- send automatic payment reminders to secure a steady cashflow for your busi=
-ness.=20
 
 
 
-From Estimate To Invoice:=20
-Create and send professional looking estimates and =E2=80=94 once accepted =
-by your client =E2=80=94 convert them into invoices at the click of a butto=
-n.=20
+If you want to be removed from this list, please Click Here
+<MailTo:UnsubscribeMe123123@gmail.com?Subject=Remove%20Me%20%20devel@lis
+ts.orangefs.org&Body=Remove%20devel@lists.orangefs.org> .
 
 
-
-View And Send Account Statements:=20
-Dynamically generated account statements are a great reference of all past =
-transactions between your business and a specific vendor or client =E2=80=
-=94 view and send them at any time.=20
-
-
-
-Customize Your Invoices:=20
-Make your brand stick out from the rest by adding your individual logo to i=
-nvoices and estimates, to go along with the branding colors specific to you=
-r business.=20
-    =20
-=20
-  =C2=A0=C2=A0=C2=A0    =20
-  =20
-=20
-      https://www.cloudbooksapp.com Send your first invoice today =E2=80=94=
- It's free!        =20
-=20
-  =C2=A0=C2=A0=C2=A0    =20
-=20
-  =20
-
-You can  https://acpo.maillist-manage.com/ua/optout?od=3D2d5a885a69b60a972a=
-ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe9be531&sd=3D13bcfbdbfe9a2cb2=
-&n=3D11699e4c209e4aa  unsubscribe [ https://acpo.maillist-manage.com/ua/opt=
-out?od=3D2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfe9=
-be531&sd=3D13bcfbdbfe9a2cb2&n=3D11699e4c209e4aa ]from this email or change =
-your email notifications.=20
-Online version is here =C2=A0     =20
-=20
-  =C2=A0=C2=A0=C2=A0    =20
-   =20
-=20
-    =20
-=20
-           =20
-=C2=A0
 

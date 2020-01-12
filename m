@@ -2,55 +2,73 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B59112F7A1
-	for <lists+devel-orangefs@lfdr.de>; Fri,  3 Jan 2020 12:48:49 +0100 (CET)
-Received: from [::1] (port=52632 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id B81CF138551
+	for <lists+devel-orangefs@lfdr.de>; Sun, 12 Jan 2020 07:35:16 +0100 (CET)
+Received: from [::1] (port=37448 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1inLRg-0000yc-9I
-	for lists+devel-orangefs@lfdr.de; Fri, 03 Jan 2020 06:48:48 -0500
-Received: from mail-vk1-f194.google.com ([209.85.221.194]:35220)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <steadystraps@gmail.com>)
- id 1inLRf-0000w6-5v
- for devel@lists.orangefs.org; Fri, 03 Jan 2020 06:48:47 -0500
-Received: by mail-vk1-f194.google.com with SMTP id o187so10685868vka.2
- for <devel@lists.orangefs.org>; Fri, 03 Jan 2020 03:48:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:sender:from:date:message-id:subject:to;
- bh=mExCGQ8dKXh/wvywd1xsYYvFIxzK0K/Fog8WteNFaFQ=;
- b=FZV2/Lc1WdPSTrzskRBarV95XiJrU8idB0iFyWYAUbwmar/U+m8cYdXaN6gxOJbnIb
- Sp24E8YdCKr8TJA+x8sR1f3E3P0C5Ht7PpH7E+43QJalg03htmKP0G1f9jLaNRgRN4pC
- 7PxyRENhcHX2f0MJKaS1nHYd++0C2Bo7HkRfYnImOkB54u/gnXa46UxRmiZpR1u9+ZW3
- dKaVCb83DB/hYlBtiR/kzPt/g7JSLebiH4IIEk/POfPMhuLhHiJMc0jif2t/BQjrmuct
- eyZoQvmb9kTMBfmMJkNRD66SrFfWI5VinM9DeqQlSxw90zJInusrWImoQV2NURJSGyn6
- XadA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
- :to; bh=mExCGQ8dKXh/wvywd1xsYYvFIxzK0K/Fog8WteNFaFQ=;
- b=aeNEHUbTWapbPAY5TROWtvAJyYzZmvV80YbX97RiH3/Dw/Mz2FHrAI+kmS3UUKLR0M
- 3X31hGFoVO63bii429wV6BQ6sNExZXAbQMOLLEVTeKH9IBNUKTpHs4If9606QD2zagZm
- EskZzjplZiPgBNzE4XyuN56uWRFqC/lnrxNG0uBaOPgeyGivsRMt53rXJt2DT8cvXs9b
- OsrDkhjg8cU6eS4/qZqVnsVH02NbFpS1voNHT5jGgTCuye8ixCINuHDVIRW+18Ge/Apr
- 3xO4IVZsCFBP+XdefiKjupKaK9/IoCGrs64goKajRKisW9vuHdyTHZFXr3DtXtYHFLzS
- uHWg==
-X-Gm-Message-State: APjAAAXhQBaut7RzOydCssOSY8//miFOmnecSRIgEpEkwOgALnM2AWtb
- Ih36lynwwUwrJTPg2Q6jNyNgDtIfdjlPBl6rzegknQ==
-X-Google-Smtp-Source: APXvYqz+u50m8h4P1E1ed0aGLbafk7s5QU4LHMUUEgw4gOez1UCHTNCQkGAqk+I+gZ25GB1ndH3avGd72E3Q1PmBV48=
-X-Received: by 2002:ac5:c950:: with SMTP id s16mr41082922vkm.27.1578052084998; 
- Fri, 03 Jan 2020 03:48:04 -0800 (PST)
-Received: from 52669349336 named unknown by gmailapi.google.com with HTTPREST; 
- Fri, 3 Jan 2020 03:48:04 -0800
+	id 1iqWqB-0008V9-Hf
+	for lists+devel-orangefs@lfdr.de; Sun, 12 Jan 2020 01:35:15 -0500
+Received: from mail3-bck.iservicesmail.com ([217.130.24.85]:25859)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <peterwong@hsbc.com.hk>)
+ id 1iqWqA-0008U7-BB
+ for devel@lists.orangefs.org; Sun, 12 Jan 2020 01:35:14 -0500
+IronPort-SDR: eZHkkB0VzYhZ4pPTi5fLzHT4OliJqt4hk+v1HfgoNURVnfAixc1O+p8EqiUzKNWMSvj2t7BI0+
+ Avahjge6hX3w==
+IronPort-PHdr: =?us-ascii?q?9a23=3A1yYvZhVB2umFST7n6AcYHAxt2ZfV8LGtZVwlr6?=
+ =?us-ascii?q?E/grcLSJyIuqrYbByDt8tkgFKBZ4jH8fUM07OQ7/m7HzZev93Q6zgrS99lb1?=
+ =?us-ascii?q?c9k8IYnggtUoauKHbQC7rUVRE8B9lIT1R//nu2YgB/Ecf6YEDO8DXptWZBUh?=
+ =?us-ascii?q?rwOhBoKevrB4Xck9q41/yo+53Ufg5EmCexbal9IRmrowjdrNcajIpjJ6o+zh?=
+ =?us-ascii?q?bErGZDdvhLy29vOV+dhQv36N2q/J5k/SRQuvYh+NBFXK7nYak2TqFWASo/PW?=
+ =?us-ascii?q?wt68LlqRfMTQ2U5nsBSWoWiQZHAxLE7B7hQJj8tDbxu/dn1ymbOc32Sq00WS?=
+ =?us-ascii?q?in4qx2RhLklDsLOjgk+23RjcB+kb5Urwikpx1/2oLZfoaVNOBmfqPaZ9MVX3?=
+ =?us-ascii?q?ZBUdhIWyNfBIOwdpcCD/YdPelCs4b9p0UBrR6gCgmqGOPj0yFHhnnv0aM91O?=
+ =?us-ascii?q?QhFx/J3Qw5E90QtnTfsdH5OakOXeypyaXFyyjIYfFL1jfn8IXGfBAvoeuSU7?=
+ =?us-ascii?q?xzbMTexlUgGQzeg1WMq4HqIy+Z2vgRv2SF6edrSOKhi3QgqwF0ujWh3Nkjip?=
+ =?us-ascii?q?XXiYIP11vL9SJ5wIA6JdalT0N7ecCrEIdOuCGAOYp2RcUiQ25ztSY60b0Joo?=
+ =?us-ascii?q?K0cDIWx5Qgwh7TcfyHc4uR7x/lSe2fIi94iWp7dL6ihRu+61Wsx+PgWsWuzl?=
+ =?us-ascii?q?pHoTBJn9fMu30Lyhfd8NKISuFn8UekwTuP0gfT5fxaLk0sjqrbLoIhwqY3lp?=
+ =?us-ascii?q?oOrUTPBi/2l1vyjK+Rbkgk//Kn6+XjYrX8uJCcM5N4hw7kPqQwncywHP43Mg?=
+ =?us-ascii?q?YJX2id5+uwzqPs/VbhTLVLiP05jLXZvYjEKcgGpKO1GRJZ34g/5xqlETur38?=
+ =?us-ascii?q?4UkHcHIV5dfRKIlYnpO1XAIPDiCve/hkyhkC91yPDaILLhGJvMLn/FkLfuZr?=
+ =?us-ascii?q?t961VcxxEvwtxF+51UDbQBLOjzWk/yrNDYFAM2MxSow+b7D9Vwzp4RVnyRAq?=
+ =?us-ascii?q?CHNKPfqluI5uM0I+mQf48ZojH9K+I/6P7ogn82h1EdfbKz0ZsQcnC4EacuH0?=
+ =?us-ascii?q?LMbXfyj9MpFWYRohF4S/bjjlKPXyUVYGy9DJgx/jUqNIXzNYrfS5rlv7uH02?=
+ =?us-ascii?q?/vBpBKa3pZDVaDEXTobI+Pc/gJYSOWZMRml2pXe6KmTtoZ2A2jrkfFzLxoZr?=
+ =?us-ascii?q?7M9zEVr43k0tdd5/bZnlc58jkyD8fLgDLFdH19gm5dHmx+56t4u0EokQ/b3A?=
+ =?us-ascii?q?=3D=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2GeAgA1vRpelyMYgtlNGBoBAQEBAQE?=
+ =?us-ascii?q?BAQEDAQEBAREBAQECAgEBAQGBaAQBAQEBCwEBGwgBgSWBTVIgEpNQgU0fg0O?=
+ =?us-ascii?q?LY4EAgx4VhgcUDIFbDQEBAQEBNQIBAYRATgEXgQ8kNQgOAgMNAQEFAQEBAQE?=
+ =?us-ascii?q?FBAEBAhABAQEBAQYYBoVzgh0MHgEEAQEBAQMDAwEBDAGDXQcZDzlKTAEOAVO?=
+ =?us-ascii?q?DBIJLAQEznXEBjQQNDQKFHYJKBAqBCYEaI4E2AYwYGoFBP4EjIYIrCAGCAYJ?=
+ =?us-ascii?q?/ARIBbIJIglkEjUISIYEHiCmYF4JBBHaJTIwCgjcBD4gBhDEDEIJFD4EJiAO?=
+ =?us-ascii?q?EToF9ozdXdAGBHnEzGoImGoEgTxgNiBuOLUCBFhACT4xbgjIBAQ?=
+X-IPAS-Result: =?us-ascii?q?A2GeAgA1vRpelyMYgtlNGBoBAQEBAQEBAQEDAQEBAREBA?=
+ =?us-ascii?q?QECAgEBAQGBaAQBAQEBCwEBGwgBgSWBTVIgEpNQgU0fg0OLY4EAgx4VhgcUD?=
+ =?us-ascii?q?IFbDQEBAQEBNQIBAYRATgEXgQ8kNQgOAgMNAQEFAQEBAQEFBAEBAhABAQEBA?=
+ =?us-ascii?q?QYYBoVzgh0MHgEEAQEBAQMDAwEBDAGDXQcZDzlKTAEOAVODBIJLAQEznXEBj?=
+ =?us-ascii?q?QQNDQKFHYJKBAqBCYEaI4E2AYwYGoFBP4EjIYIrCAGCAYJ/ARIBbIJIglkEj?=
+ =?us-ascii?q?UISIYEHiCmYF4JBBHaJTIwCgjcBD4gBhDEDEIJFD4EJiAOEToF9ozdXdAGBH?=
+ =?us-ascii?q?nEzGoImGoEgTxgNiBuOLUCBFhACT4xbgjIBAQ?=
+X-IronPort-AV: E=Sophos;i="5.69,424,1571695200"; d="scan'208";a="323227503"
+Received: from mailrel04.vodafone.es ([217.130.24.35])
+ by mail02.vodafone.es with ESMTP; 12 Jan 2020 07:34:32 +0100
+Received: (qmail 13805 invoked from network); 12 Jan 2020 05:12:19 -0000
+Received: from unknown (HELO 192.168.1.3) (quesosbelda@[217.217.179.17])
+ (envelope-sender <peterwong@hsbc.com.hk>)
+ by mailrel04.vodafone.es (qmail-ldap-1.03) with SMTP
+ for <devel@lists.orangefs.org>; 12 Jan 2020 05:12:19 -0000
+Date: Sun, 12 Jan 2020 06:12:18 +0100 (CET)
+From: Peter Wong <peterwong@hsbc.com.hk>
+To: devel@lists.orangefs.org
+Message-ID: <20820991.498367.1578805939485.JavaMail.cash@217.130.24.55>
+Subject: Investment opportunity
 MIME-Version: 1.0
-From: Grinder Ella <steadystraps@gmail.com>
-Date: Fri, 3 Jan 2020 03:48:04 -0800
-X-Google-Sender-Auth: Ll7JhijBt-H6ERgOKfFUe3nuN9Q
-Message-ID: <CAHh9Ckhf9o6ZdSbmd=exSkFQENAypGBs+jYygJqTTS9J352VBw@mail.gmail.com>
-Subject: Where is your Web visibility for orangefs.org
-To: Devel <devel@lists.orangefs.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,6 +80,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: Peter Wong <peterwonghkhsbc@gmail.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -75,36 +94,15 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hello orangefs.org Team,
-
-Hope you are doing well with your business.
-
-Online marketing and promotion plays a vital role in determining the
-success of your business.  However, my team observed a huge need of
-improvement on your website to get better performance
-
-*Here are some of the results to the analysis done by my team of experts on
-your website.*
-
-- Key phrases selected for your site are not competitive enough.
-- On page and website issues are the major setback leading to
-non-performance.
-- Aggressive Social media promotion will help you to achieve brand
-visibility.
-
-If you are interested, you can revert and my team would provide you with a
-free analysis report for your website. You can also fix an appointment with
-our tech expert to get a free consultation on how to improve your
-visibility and ranking in the search results.
+Greetings,
+Please read the attached investment proposal and reply for more details.
+Are you interested in loan?
+Sincerely: Peter Wong
 
 
 
 
+----------------------------------------------------
+This email was sent by the shareware version of Postman Professional.
 
 
-
-
-
-*Warm Regards,Grinder Ella Marketing Manager*
-------------------------------------------------------------
-[image: beacon]

@@ -2,27 +2,26 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FB62147876
-	for <lists+devel-orangefs@lfdr.de>; Fri, 24 Jan 2020 07:11:24 +0100 (CET)
-Received: from [::1] (port=60410 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AC00147877
+	for <lists+devel-orangefs@lfdr.de>; Fri, 24 Jan 2020 07:11:33 +0100 (CET)
+Received: from [::1] (port=60426 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1iusBf-00069c-4t
-	for lists+devel-orangefs@lfdr.de; Fri, 24 Jan 2020 01:11:23 -0500
-Received: from relay.sw.ru ([185.231.240.75]:45452)
+	id 1iusBo-00069z-6e
+	for lists+devel-orangefs@lfdr.de; Fri, 24 Jan 2020 01:11:32 -0500
+Received: from relay.sw.ru ([185.231.240.75]:45458)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <vvs@virtuozzo.com>) id 1iusBd-00067r-GL
- for devel@lists.orangefs.org; Fri, 24 Jan 2020 01:11:21 -0500
+ (Exim 4.92) (envelope-from <vvs@virtuozzo.com>) id 1iusBm-00067v-Qf
+ for devel@lists.orangefs.org; Fri, 24 Jan 2020 01:11:30 -0500
 Received: from vvs-ws.sw.ru ([172.16.24.21])
  by relay.sw.ru with esmtp (Exim 4.92.3)
  (envelope-from <vvs@virtuozzo.com>)
- id 1iusAs-0007oz-2z; Fri, 24 Jan 2020 09:10:34 +0300
+ id 1iusB6-0007p9-HM; Fri, 24 Jan 2020 09:10:48 +0300
 From: Vasily Averin <vvs@virtuozzo.com>
-Subject: [PATCH 0/1] orangefs: seq_file .next functions should increase
- position index
+Subject: [PATCH 1/1] help_next should increase position index
 To: devel@lists.orangefs.org
-Message-ID: <c7249601-0c60-d5b1-fb76-ee426925e745@virtuozzo.com>
-Date: Fri, 24 Jan 2020 09:10:33 +0300
+Message-ID: <33c86368-72e9-955c-2601-467f17a12ec2@virtuozzo.com>
+Date: Fri, 24 Jan 2020 09:10:47 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.2.2
 MIME-Version: 1.0
@@ -53,48 +52,27 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-In Aug 2018 NeilBrown noticed 
-commit 1f4aace60b0e ("fs/seq_file.c: simplify seq_file iteration code and interface")
-"Some ->next functions do not increment *pos when they return NULL...
-Note that such ->next functions are buggy and should be fixed. 
-A simple demonstration is
-   
-dd if=/proc/swaps bs=1000 skip=1
-    
-Choose any block size larger than the size of /proc/swaps.  This will
-always show the whole last line of /proc/swaps"
-
-Described problem is still actual. If you make lseek into middle of last output line 
-following read will output end of last line and whole last line once again.
-
-$ dd if=/proc/swaps bs=1  # usual output
-Filename				Type		Size	Used	Priority
-/dev/dm-0                               partition	4194812	97536	-2
-104+0 records in
-104+0 records out
-104 bytes copied
-
-$ dd if=/proc/swaps bs=40 skip=1    # last line was generated twice
-dd: /proc/swaps: cannot skip to specified offset
-v/dm-0                               partition	4194812	97536	-2
-/dev/dm-0                               partition	4194812	97536	-2 
-3+1 records in
-3+1 records out
-131 bytes copied
-
-There are lot of other affected files, I've found 30+ including
-/proc/net/ip_tables_matches and /proc/sysvipc/*
-
-Following patch fixes the problem in orangefs-related file
+if seq_file .next fuction does not change position index,
+read after some lseek can generate unexpected output.
 
 https://bugzilla.kernel.org/show_bug.cgi?id=206283
-
-Vasily Averin (1):
-  help_next should increase position index
-
+Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
+---
  fs/orangefs/orangefs-debugfs.c | 1 +
  1 file changed, 1 insertion(+)
 
+diff --git a/fs/orangefs/orangefs-debugfs.c b/fs/orangefs/orangefs-debugfs.c
+index 25543a9..29eaa45 100644
+--- a/fs/orangefs/orangefs-debugfs.c
++++ b/fs/orangefs/orangefs-debugfs.c
+@@ -273,6 +273,7 @@ static void *help_start(struct seq_file *m, loff_t *pos)
+ 
+ static void *help_next(struct seq_file *m, void *v, loff_t *pos)
+ {
++	(*pos)++;
+ 	gossip_debug(GOSSIP_DEBUGFS_DEBUG, "help_next: start\n");
+ 
+ 	return NULL;
 -- 
 1.8.3.1
 

@@ -2,69 +2,33 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E3D713FAEA
-	for <lists+devel-orangefs@lfdr.de>; Thu, 16 Jan 2020 22:01:20 +0100 (CET)
-Received: from [::1] (port=38746 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FB62147876
+	for <lists+devel-orangefs@lfdr.de>; Fri, 24 Jan 2020 07:11:24 +0100 (CET)
+Received: from [::1] (port=60410 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1isCGV-0004zA-EH
-	for lists+devel-orangefs@lfdr.de; Thu, 16 Jan 2020 16:01:19 -0500
-Received: from n1nlsmtp02.prod.ams1.secureserver.net ([188.121.43.194]:46654
- helo=n1nlsmtp02.shr.prod.ams1.secureserver.net)
+	id 1iusBf-00069c-4t
+	for lists+devel-orangefs@lfdr.de; Fri, 24 Jan 2020 01:11:23 -0500
+Received: from relay.sw.ru ([185.231.240.75]:45452)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92)
- (envelope-from <sandra.perry@eventmicrobizsolutionpro.com>)
- id 1isCGU-0004yR-4m
- for devel@lists.orangefs.org; Thu, 16 Jan 2020 16:01:18 -0500
-Received: from n3plcpnl0153.prod.ams3.secureserver.net ([160.153.155.6])
- by : HOSTING RELAY : with ESMTP
- id sCEqitLi63rtksCEqiODVg; Thu, 16 Jan 2020 13:59:36 -0700
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=eventmicrobizsolutionpro.com; s=default; h=Content-Type:MIME-Version:
- Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=b6XpHbChsakHeJEcckz+mbtqR7ku0L6vjfeeho4UoUc=; b=rJZVqvKSR+kT1twdxX1HHVF/4
- Gk1HYWmI2nRnmZcZ+IkkNiP5Ar4YR4OpBd4GyiYmnIvliLX7BmKCmwwTFjl0f/nddTM3kwWf8MiA1
- 2VUbHnVfDsIiPla9An2Acm+bV4RSBZPPwxoCjZ+r5edhYX58xCaTJ3sgaIxGgOygGUS2Bhs8DP4y8
- 1InQh0aeAJO+wc4xUMPp5HSC2C7xQeFduUHWiYzwfQGQ7SAEz+pYPdM2H3h49sz++zVAvxBfFH+zH
- MxOkC/ur741xOOTDj7+BnitvSE7RF96bR2iGGQ8Y89UnR9jNGTLr57ssv/xcGj7un7XKZ15mzeoAn
- Yk4JWbPxQ==;
-Received: from [87.101.94.197] (port=49970 helo=WS47)
- by n3plcpnl0153.prod.ams3.secureserver.net with esmtpsa
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92)
- (envelope-from <sandra.perry@eventmicrobizsolutionpro.com>)
- id 1isCEp-0071oe-Sy
- for devel@lists.orangefs.org; Thu, 16 Jan 2020 13:59:36 -0700
-From: "Sandra Perry" <sandra.perry@eventmicrobizsolutionpro.com>
-To: <devel@lists.orangefs.org>
-Subject: TRBM 2020
-Date: Thu, 16 Jan 2020 13:58:22 -0800
-Message-ID: <!&!AAAAAAAAAAAYAAAAAAAAAALArqiATLxFigP0akzeSeXCgAAAEAAAAACW3MGfBgRHn2XxJBQa5w4BAAAAAA==@eventmicrobizsolutionpro.com>
+ (Exim 4.92) (envelope-from <vvs@virtuozzo.com>) id 1iusBd-00067r-GL
+ for devel@lists.orangefs.org; Fri, 24 Jan 2020 01:11:21 -0500
+Received: from vvs-ws.sw.ru ([172.16.24.21])
+ by relay.sw.ru with esmtp (Exim 4.92.3)
+ (envelope-from <vvs@virtuozzo.com>)
+ id 1iusAs-0007oz-2z; Fri, 24 Jan 2020 09:10:34 +0300
+From: Vasily Averin <vvs@virtuozzo.com>
+Subject: [PATCH 0/1] orangefs: seq_file .next functions should increase
+ position index
+To: devel@lists.orangefs.org
+Message-ID: <c7249601-0c60-d5b1-fb76-ee426925e745@virtuozzo.com>
+Date: Fri, 24 Jan 2020 09:10:33 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AdXMuA9qjrGXdqBUR1evrS7jdrM5mA==
-Content-Language: en-us
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - n3plcpnl0153.prod.ams3.secureserver.net
-X-AntiAbuse: Original Domain - lists.orangefs.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - eventmicrobizsolutionpro.com
-X-Get-Message-Sender-Via: n3plcpnl0153.prod.ams3.secureserver.net: authenticated_id:
- sandra.perry@eventmicrobizsolutionpro.com
-X-Authenticated-Sender: n3plcpnl0153.prod.ams3.secureserver.net: sandra.perry@eventmicrobizsolutionpro.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-CMAE-Envelope: MS4wfMhuizPQNF7SdkdPg0TPbbYFtvG46dOxtPSHc1c9s5BQMPlV/RLuRJdPGMfdFld6LhwaA5sPX0suxc2TExDAPmEwI03Wd0hYwqOJES2IwO5H3g4k5nwJ
- iP8Gf6KCNMTWTo1qqVPplxkfucaNmbq3ZTfrDOb+9gRN43nyVDsZV0t8N7PVH2NuVRv4GK3SyZKha/CS5xc4e67j/t8eVYJGCCLuTfNq+EBVI3vPxpPOFsoH
- vtW9suFKq9P+Gp5OvFZCpw==
-Content-Type: text/plain;
-	charset="us-ascii"
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,7 +40,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: sandra.perry@eventmicrobizsolutionpro.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -90,44 +53,49 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi,
+In Aug 2018 NeilBrown noticed 
+commit 1f4aace60b0e ("fs/seq_file.c: simplify seq_file iteration code and interface")
+"Some ->next functions do not increment *pos when they return NULL...
+Note that such ->next functions are buggy and should be fixed. 
+A simple demonstration is
+   
+dd if=/proc/swaps bs=1000 skip=1
+    
+Choose any block size larger than the size of /proc/swaps.  This will
+always show the whole last line of /proc/swaps"
 
- 
+Described problem is still actual. If you make lseek into middle of last output line 
+following read will output end of last line and whole last line once again.
 
-I am following up to check if your company is interested in acquiring
-Attendees List of Transportation Research Board Meeting 2020?
+$ dd if=/proc/swaps bs=1  # usual output
+Filename				Type		Size	Used	Priority
+/dev/dm-0                               partition	4194812	97536	-2
+104+0 records in
+104+0 records out
+104 bytes copied
 
- 
+$ dd if=/proc/swaps bs=40 skip=1    # last line was generated twice
+dd: /proc/swaps: cannot skip to specified offset
+v/dm-0                               partition	4194812	97536	-2
+/dev/dm-0                               partition	4194812	97536	-2 
+3+1 records in
+3+1 records out
+131 bytes copied
 
-Expo Details:
+There are lot of other affected files, I've found 30+ including
+/proc/net/ip_tables_matches and /proc/sysvipc/*
 
- 
+Following patch fixes the problem in orangefs-related file
 
- Date: 12- 16 Jan 2020 
+https://bugzilla.kernel.org/show_bug.cgi?id=206283
 
-Location: USA
+Vasily Averin (1):
+  help_next should increase position index
 
-Expo Name: Transportation Research Board Meeting 2020.
+ fs/orangefs/orangefs-debugfs.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Total Attendees Count:  13,000 Visitors 
+-- 
+1.8.3.1
 
- 
-
-Data Fields include: Company name, Contact name, Title, Email address,
-Website, Telephone number.
-
- 
-
-Please let me know your thoughts and I shall get back to you with the
-Pricing.
-
- 
-
-Awaiting your reply.
-
- 
-
-Thanks & Regards,
-
-Sandra Perry
 

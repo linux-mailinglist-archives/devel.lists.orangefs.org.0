@@ -2,35 +2,28 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 900D314F031
-	for <lists+devel-orangefs@lfdr.de>; Fri, 31 Jan 2020 16:54:21 +0100 (CET)
-Received: from [::1] (port=35628 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0667214F585
+	for <lists+devel-orangefs@lfdr.de>; Sat,  1 Feb 2020 01:57:26 +0100 (CET)
+Received: from [::1] (port=35896 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1ixYce-0006Xg-Nk
-	for lists+devel-orangefs@lfdr.de; Fri, 31 Jan 2020 10:54:20 -0500
-Received: from relay.sw.ru ([185.231.240.75]:48222)
+	id 1ixh6C-00032s-UG
+	for lists+devel-orangefs@lfdr.de; Fri, 31 Jan 2020 19:57:24 -0500
+Received: from zeniv.linux.org.uk ([195.92.253.2]:45266)
  by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <vvs@virtuozzo.com>) id 1ixYcd-0006XO-9Z
- for devel@lists.orangefs.org; Fri, 31 Jan 2020 10:54:19 -0500
-Received: from vvs-ws.sw.ru ([172.16.24.21])
- by relay.sw.ru with esmtp (Exim 4.92.3)
- (envelope-from <vvs@virtuozzo.com>)
- id 1ixYbt-0002v0-3l; Fri, 31 Jan 2020 18:53:33 +0300
-Subject: Re: [PATCH 1/1] help_next should increase position index
+ (Exim 4.92) (envelope-from <viro@ftp.linux.org.uk>)
+ id 1ixh6B-00032R-Ex
+ for devel@lists.orangefs.org; Fri, 31 Jan 2020 19:57:23 -0500
+Received: from viro by ZenIV.linux.org.uk with local (Exim 4.92.3 #3 (Red Hat
+ Linux)) id 1ixh5T-005Ta0-1z; Sat, 01 Feb 2020 00:56:39 +0000
+Date: Sat, 1 Feb 2020 00:56:39 +0000
+From: Al Viro <viro@zeniv.linux.org.uk>
 To: Mike Marshall <hubcap@omnibond.com>
-References: <33c86368-72e9-955c-2601-467f17a12ec2@virtuozzo.com>
- <CAOg9mSTjKBOGbb0k-SRnFZBUcj10UpOX1Z1tvUxsYGfxbDOZGw@mail.gmail.com>
-From: Vasily Averin <vvs@virtuozzo.com>
-Message-ID: <ff491a1a-3fe7-9aa0-661e-5549edfb2fba@virtuozzo.com>
-Date: Fri, 31 Jan 2020 18:53:32 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+Subject: [confused] can orangefs ACLs be removed at all?
+Message-ID: <20200201005639.GG23230@ZenIV.linux.org.uk>
 MIME-Version: 1.0
-In-Reply-To: <CAOg9mSTjKBOGbb0k-SRnFZBUcj10UpOX1Z1tvUxsYGfxbDOZGw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -42,7 +35,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: devel@lists.orangefs.org
+Cc: linux-fsdevel@vger.kernel.org, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -56,42 +49,21 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 1/31/20 5:59 PM, Mike Marshall wrote:
-> Hello Vasily...
-> 
-> I have applied your patch to Linux 5.5 and tested that it
-> fixes the problem that your script demonstrates. Thanks
-> for the fix!
-> 
-> The Linux merge window is open, are you going to submit
-> this patch, or should I?
+	Prior to 4bef69000d93 (orangefs: react properly to
+posix_acl_update_mode's aftermath.) it used to be possible
+to do orangefs_set_acl(inode, NULL, ACL_TYPE_ACCESS) -
+it would've removed the corresponding xattr and that would
+be it.  Now it fails with -EINVAL without having done
+anything.  How is one supposed to remove ACLs there?
 
-Thank you, please do it
+	Moreover, if you change an existing ACL to something
+that is expressible by pure mode, you end up calling
+__orangefs_setattr(), which will call posix_acl_chmod().
+And AFAICS that will happen with *old* ACL still cached,
+so you'll get ACL_MASK/ACL_OTHER updated in the old ACL.
 
-> On Fri, Jan 24, 2020 at 1:10 AM Vasily Averin <vvs@virtuozzo.com> wrote:
->>
->> if seq_file .next fuction does not change position index,
->> read after some lseek can generate unexpected output.
->>
->> https://bugzilla.kernel.org/show_bug.cgi?id=206283
->> Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
->> ---
->>  fs/orangefs/orangefs-debugfs.c | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/fs/orangefs/orangefs-debugfs.c b/fs/orangefs/orangefs-debugfs.c
->> index 25543a9..29eaa45 100644
->> --- a/fs/orangefs/orangefs-debugfs.c
->> +++ b/fs/orangefs/orangefs-debugfs.c
->> @@ -273,6 +273,7 @@ static void *help_start(struct seq_file *m, loff_t *pos)
->>
->>  static void *help_next(struct seq_file *m, void *v, loff_t *pos)
->>  {
->> +       (*pos)++;
->>         gossip_debug(GOSSIP_DEBUGFS_DEBUG, "help_next: start\n");
->>
->>         return NULL;
->> --
->> 1.8.3.1
->>
+	How can that possibly work?  Sure, you want to
+propagate the updated mode to server - after you've
+done the actual update (possibly removal) of ACL-encoding
+xattr there...
 

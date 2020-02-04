@@ -2,28 +2,29 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0667214F585
-	for <lists+devel-orangefs@lfdr.de>; Sat,  1 Feb 2020 01:57:26 +0100 (CET)
-Received: from [::1] (port=35896 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7622152073
+	for <lists+devel-orangefs@lfdr.de>; Tue,  4 Feb 2020 19:31:13 +0100 (CET)
+Received: from [::1] (port=34266 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1ixh6C-00032s-UG
-	for lists+devel-orangefs@lfdr.de; Fri, 31 Jan 2020 19:57:24 -0500
-Received: from zeniv.linux.org.uk ([195.92.253.2]:45266)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <viro@ftp.linux.org.uk>)
- id 1ixh6B-00032R-Ex
- for devel@lists.orangefs.org; Fri, 31 Jan 2020 19:57:23 -0500
-Received: from viro by ZenIV.linux.org.uk with local (Exim 4.92.3 #3 (Red Hat
- Linux)) id 1ixh5T-005Ta0-1z; Sat, 01 Feb 2020 00:56:39 +0000
-Date: Sat, 1 Feb 2020 00:56:39 +0000
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Mike Marshall <hubcap@omnibond.com>
-Subject: [confused] can orangefs ACLs be removed at all?
-Message-ID: <20200201005639.GG23230@ZenIV.linux.org.uk>
+	id 1iz2ye-0000oc-Kf
+	for lists+devel-orangefs@lfdr.de; Tue, 04 Feb 2020 13:31:12 -0500
+Received: from [153.122.130.250] (port=39748 helo=nichido-garo.co.jp)
+ by mm1.emwd.com with esmtps (TLSv1:DHE-RSA-AES256-SHA:256)
+ (Exim 4.92) (envelope-from <skundi@sutton.com>) id 1iz2yc-0000oH-Re
+ for devel@lists.orangefs.org; Tue, 04 Feb 2020 13:31:11 -0500
+Received: from WIN-47EE9DL56FT (localhost.localdomain [127.0.0.1])
+ by nichido-garo.co.jp (8.14.5/8.14.5) with ESMTP id 014HaIFM008307
+ for <devel@lists.orangefs.org>; Wed, 5 Feb 2020 03:30:28 +0900
+From: "Mr Albert Yang" <skundi@sutton.com>
+Subject: Viable Project
+To: devel@lists.orangefs.org
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Date: Tue, 4 Feb 2020 10:30:29 -0800
+Message-ID: <226056201260968549@127.0.0.1>
+Content-Type: text/plain ; charset="ISO-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -35,7 +36,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, devel@lists.orangefs.org
+Reply-To: albert.yang2222@gmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -49,21 +50,17 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-	Prior to 4bef69000d93 (orangefs: react properly to
-posix_acl_update_mode's aftermath.) it used to be possible
-to do orangefs_set_acl(inode, NULL, ACL_TYPE_ACCESS) -
-it would've removed the corresponding xattr and that would
-be it.  Now it fails with -EINVAL without having done
-anything.  How is one supposed to remove ACLs there?
+Compliment of the day,
 
-	Moreover, if you change an existing ACL to something
-that is expressible by pure mode, you end up calling
-__orangefs_setattr(), which will call posix_acl_chmod().
-And AFAICS that will happen with *old* ACL still cached,
-so you'll get ACL_MASK/ACL_OTHER updated in the old ACL.
 
-	How can that possibly work?  Sure, you want to
-propagate the updated mode to server - after you've
-done the actual update (possibly removal) of ACL-encoding
-xattr there...
+I have access to very vital information that can be used to move a hug=
+e amount of money .I have done my homework very well and i have the ne=
+cessary informations needed for the success of this transaction .=20
 
+If it was possible for me to do it alone I would not have bothered con=
+tacting you, ultimately I need a honest foreigner to play an important=
+ role in the completion of this business deal.
+
+
+Regards,
+Albert

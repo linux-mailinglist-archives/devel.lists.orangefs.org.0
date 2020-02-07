@@ -2,31 +2,51 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9303A154A0A
-	for <lists+devel-orangefs@lfdr.de>; Thu,  6 Feb 2020 18:10:19 +0100 (CET)
-Received: from [::1] (port=37788 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CA34155345
+	for <lists+devel-orangefs@lfdr.de>; Fri,  7 Feb 2020 08:51:37 +0100 (CET)
+Received: from [::1] (port=36984 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1izkfS-0002Bq-N1
-	for lists+devel-orangefs@lfdr.de; Thu, 06 Feb 2020 12:10:18 -0500
-Received: from zeniv.linux.org.uk ([195.92.253.2]:53820)
- by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- (Exim 4.92) (envelope-from <viro@ftp.linux.org.uk>)
- id 1izkfQ-0002BM-Cu
- for devel@lists.orangefs.org; Thu, 06 Feb 2020 12:10:16 -0500
-Received: from viro by ZenIV.linux.org.uk with local (Exim 4.92.3 #3 (Red Hat
- Linux)) id 1izkej-008Nko-FW; Thu, 06 Feb 2020 17:09:33 +0000
-Date: Thu, 6 Feb 2020 17:09:33 +0000
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Mike Marshall <hubcap@omnibond.com>
-Subject: Re: [confused] can orangefs ACLs be removed at all?
-Message-ID: <20200206170933.GA23230@ZenIV.linux.org.uk>
-References: <20200201005639.GG23230@ZenIV.linux.org.uk>
- <CAOg9mSSBG7tWQ2+yZDwixCHe5GayyCgZO26D2CCrPCRHxjp4mg@mail.gmail.com>
+	id 1izyQJ-00066z-UA
+	for lists+devel-orangefs@lfdr.de; Fri, 07 Feb 2020 02:51:35 -0500
+Received: from mail-il1-f170.google.com ([209.85.166.170]:38949)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ (Exim 4.92) (envelope-from <pwai64229@gmail.com>) id 1izyQJ-00064W-3S
+ for devel@lists.orangefs.org; Fri, 07 Feb 2020 02:51:35 -0500
+Received: by mail-il1-f170.google.com with SMTP id f70so918867ill.6
+ for <devel@lists.orangefs.org>; Thu, 06 Feb 2020 23:51:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=dp6uKKJ9SnDlPSyI2Tb+m+GBP8mfd9TCq+tlzqYK31A=;
+ b=ATnAG+Jj4vFFpmYMMJzg3ciXiJAll9Fh56DyGSNgvWC2WE77eBURPTsqKu2zM2k1WA
+ xizmxmyyEJDbDq+ZiSFtMVxiD5RaFjIY5ywaDLMUeXIRwmNYpujQyCuE1aZxJ1+gdqrC
+ MPH8LbTAgqEPKP6+lKU79h182BdHBjY4Wl65vs0G1Y6KD72XbfXQ9bt211urZ62k8Ta2
+ WlDrGbQZMiMKq80Wg9/nFpvvFrQiZqjCI/eXHRBuyJ1CG3QtqqvDlDw1RttJqRLAK8Sc
+ RJtfFVJn+9zmHYVn9E+DyersyJmveaVS4r6eDNCxZto1z4K9zpxgcDf5SKm9VfA25dxk
+ GcbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=dp6uKKJ9SnDlPSyI2Tb+m+GBP8mfd9TCq+tlzqYK31A=;
+ b=PbE6PsrqXwZrXT5iFya7GxjeC1H5mCf+y+tcgswWrsQdzVVMA9djy35pkohE07L5wL
+ B+JhiXzcB6T33I7/L/PNQJvnT/PZUGHpY3xTF5jTmc4YKCUZk792ZRvSSV8t4G26SsJA
+ TyGu9dxGmmTrA2gpzzWkmwe6kQH1Hd3VSDk/FT1oLGlTs11ewOi0Rfye6KtB+XeSCnoZ
+ rSIEM0EB7GGxg4FO90Q6j42/t/+tKZhTKCWlZopusypPhyLDk5J1ejHLPjOuu41cRFEl
+ GXXXo2KT6UlXXwD312iGDtmb07PWcSROILZMr2sPEbv4PSZQAjxv10eRDCI2rVg5QEsY
+ hXxw==
+X-Gm-Message-State: APjAAAWMxJxAHBj4XJDEwFdhGDen6RLuTtY8+hQ/W1NLh0cVMgE4ElYr
+ wij7tbXfAb9QkAje8oHnSLOITAkyoHEC3fHR6JcBeg==
+X-Google-Smtp-Source: APXvYqxyHv3ycq4mNzWR1u5GNATgrzpveYsVFlhMSbwCuo6WvkDprrn3JAYhXAgg6fAcm8TlYRVXVmFEu/o/cqmUW3I=
+X-Received: by 2002:a92:1547:: with SMTP id v68mr7753192ilk.58.1581061853844; 
+ Thu, 06 Feb 2020 23:50:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAOg9mSSBG7tWQ2+yZDwixCHe5GayyCgZO26D2CCrPCRHxjp4mg@mail.gmail.com>
+From: wai phyo <pwai64229@gmail.com>
+Date: Fri, 7 Feb 2020 14:20:42 +0630
+Message-ID: <CAA9pnGOXxM8MGM4Kx5qFLfak0wDLMWVjugvwVKpggrPOae+Bhg@mail.gmail.com>
+Subject: 
+To: devel@lists.orangefs.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -38,7 +58,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -52,62 +71,4 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Thu, Feb 06, 2020 at 10:35:12AM -0500, Mike Marshall wrote:
-
-> I looked at my code while thinking about your questions, and
-> they seem like good ones. I have a couple of questions that will
-> help me when I return to this in a few days:
-> 
-> >> it used to be possible to do
-> >> orangefs_set_acl(inode, NULL, ACL_TYPE_ACCESS)
-> 
-> The way I tested (which maybe misses important stuff?) usually
-> caused posix_acl_xattr_set -> set_posix_acl -> orangefs_set_acl ...
-> Is there a simple userspace command that would send a NULL? When
-> would there be a NULL?
-
-setfattr -x system.posix_acl_access <filename>
-
-works on ext4 and I don't see any way for it to work with current
-orangefs_set_acl().
-
-> I don't remember having trouble before, but now when I try to set
-> an acl (on orangefs or ext4) that I think is expressible in pure mode,
-> the mode doesn't change, rather the acl is still set... can you
-> suggest a simple setfacl (or other) example I can use to test?
-
-setfacl -b <filename>
-
-works on ext4, goes by setxattr() with non-NULL acl that gets folded
-into NULL by  posix_acl_update_mode().  Sure, you call __orangefs_setattr()
-there, so mode does get updated.  What you don't do is telling the
-server to get rid of xattr on that file.  And I don't see where the
-cached acl is dropped, but I might be missing something.
-
-Note that e.g. ext4 does this:
-        if ((type == ACL_TYPE_ACCESS) && acl) {
-                error = posix_acl_update_mode(inode, &mode, &acl);
-                if (error)
-                        goto out_stop;
-                if (mode != inode->i_mode)
-                        update_mode = 1;
-        }
-
-        error = __ext4_set_acl(handle, inode, type, acl, 0 /* xattr_flags */);
-        if (!error && update_mode) {
-                inode->i_mode = mode;
-                inode->i_ctime = current_time(inode);
-                ext4_mark_inode_dirty(handle, inode);
-        }
-the first part is more or less what your commit tries to do, but
-note that __ext4_set_acl() is called in all cases; changing i_mode
-is done after it, not instead of it.  And __ext4_set_acl() does
-set_cached_acl() in the end (on success, that is).  So does
-__orangefs_set_acl(), but you don't can it in that case; _maybe_
-something else deals with that, but I don't see any plausible
-candidates in there.
-
-Sorry for the lack of direct orangefs testcases - I don't have
-orangefs testbed set up right now, and IIRC setting it up had been
-an interesting exercise...
-
+Billfree9000000

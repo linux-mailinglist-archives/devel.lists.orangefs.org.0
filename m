@@ -2,39 +2,39 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE27015DDAD
-	for <lists+devel-orangefs@lfdr.de>; Fri, 14 Feb 2020 17:01:02 +0100 (CET)
-Received: from [::1] (port=47846 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87F5315DFFF
+	for <lists+devel-orangefs@lfdr.de>; Fri, 14 Feb 2020 17:12:10 +0100 (CET)
+Received: from [::1] (port=48548 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1j2dOn-0004a9-G7
-	for lists+devel-orangefs@lfdr.de; Fri, 14 Feb 2020 11:01:01 -0500
-Received: from mail.kernel.org ([198.145.29.99]:55746)
+	id 1j2dZZ-0004xe-Nk
+	for lists+devel-orangefs@lfdr.de; Fri, 14 Feb 2020 11:12:09 -0500
+Received: from mail.kernel.org ([198.145.29.99]:48302)
  by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1j2dOl-0004K7-EL
- for devel@lists.orangefs.org; Fri, 14 Feb 2020 11:00:59 -0500
+ (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1j2dZY-0004xA-3U
+ for devel@lists.orangefs.org; Fri, 14 Feb 2020 11:12:08 -0500
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B38712468A;
- Fri, 14 Feb 2020 16:00:17 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8F2582469F;
+ Fri, 14 Feb 2020 16:11:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581696018;
+ s=default; t=1581696687;
  bh=uiFWzuo/y1vx3D80IkrnHuinHjU+Bj+7CiDyhZhphNc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=npIjUgo2WnCRTbns505a1oFTT6cbzTmGF3b5YgwPLCmy8CGy4UiRQC5eqazXzNEcb
- mTyK9JdO/REccxYX4wlKNKEvpTicPUOwyPQhpGenm64xMzHpcQi+vZzN1fV1hFVcrz
- Y1F3MOqqEW3y8mvGfJwJGpsNj6shwwm2+aJvqKLk=
+ b=uzl65a4cBtQ64t1Fo5cZmYenEta4LtfW/n/j64Sazr2lSweSl4xMO7AgMZdHthiZB
+ sgXDny6VMbS9KBBd0K9CGMxIB6jc73s7yr38FY2RVR6/syWErFLVR3ZyYSm6nbOjTZ
+ CA+984uF+Rq7B4dXPY2eXOXjEg+YF3rAW6tShEWQ=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.5 534/542] help_next should increase position index
-Date: Fri, 14 Feb 2020 10:48:46 -0500
-Message-Id: <20200214154854.6746-534-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 454/459] help_next should increase position index
+Date: Fri, 14 Feb 2020 11:01:44 -0500
+Message-Id: <20200214160149.11681-454-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
-References: <20200214154854.6746-1-sashal@kernel.org>
+In-Reply-To: <20200214160149.11681-1-sashal@kernel.org>
+References: <20200214160149.11681-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore

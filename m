@@ -2,39 +2,39 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 253CA15E123
-	for <lists+devel-orangefs@lfdr.de>; Fri, 14 Feb 2020 17:17:44 +0100 (CET)
-Received: from [::1] (port=49240 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3405F15E1EA
+	for <lists+devel-orangefs@lfdr.de>; Fri, 14 Feb 2020 17:21:53 +0100 (CET)
+Received: from [::1] (port=50354 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1j2dex-0005Do-Cd
-	for lists+devel-orangefs@lfdr.de; Fri, 14 Feb 2020 11:17:43 -0500
-Received: from mail.kernel.org ([198.145.29.99]:58214)
+	id 1j2diy-0005UR-EV
+	for lists+devel-orangefs@lfdr.de; Fri, 14 Feb 2020 11:21:52 -0500
+Received: from mail.kernel.org ([198.145.29.99]:37416)
  by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1j2dev-0005DM-Hg
- for devel@lists.orangefs.org; Fri, 14 Feb 2020 11:17:41 -0500
+ (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1j2diy-0005Si-3r
+ for devel@lists.orangefs.org; Fri, 14 Feb 2020 11:21:52 -0500
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F27CE24681;
- Fri, 14 Feb 2020 16:16:59 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 500E624696;
+ Fri, 14 Feb 2020 16:21:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581697020;
- bh=q2TutZycWO+06LIexJy5S4hJwrIdMx3yDfrCaRz7C08=;
+ s=default; t=1581697271;
+ bh=UKNtu5XRs/pDceewTzCYEE9giWtipSmHD1MFay/pACc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GwYsnBWZj6eV+/ZHSFHPmaCbn9kv0sroAQbwKtZaIoFTLVDRy19pKmP5W8S8VkBXp
- DhNISsv61hxb4khbDikVF1yWZ0F+3274RZjHmuwUggCtAsqI6VEQb771cYBtqrvIyc
- kiOtSPvNSF6Q4oYCgz+1sjROfN/rx01RiDqUnkIA=
+ b=0g+CyMJ+sOk6kSjJuKaP54s92e1ER1t6lcQP1DxSYDBP+ZOgQPRm5+0pVQcL7JAqg
+ JmKo+TJ/xjbRmSiT8aAZpHH28C7TYdBA6TfRLyx0Aiso2nl8TyW7D8cY362d7Hmzq2
+ lH6bMnX4YA+Z9Tgie7TrMO6n2chpwtBcDqM3hhOA=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 249/252] help_next should increase position index
-Date: Fri, 14 Feb 2020 11:11:44 -0500
-Message-Id: <20200214161147.15842-249-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 184/186] help_next should increase position index
+Date: Fri, 14 Feb 2020 11:17:13 -0500
+Message-Id: <20200214161715.18113-184-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214161147.15842-1-sashal@kernel.org>
-References: <20200214161147.15842-1-sashal@kernel.org>
+In-Reply-To: <20200214161715.18113-1-sashal@kernel.org>
+References: <20200214161715.18113-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -81,7 +81,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+)
 
 diff --git a/fs/orangefs/orangefs-debugfs.c b/fs/orangefs/orangefs-debugfs.c
-index 0732cb08173e9..e24738c691f66 100644
+index 1c59dff530dee..34d1cc98260d2 100644
 --- a/fs/orangefs/orangefs-debugfs.c
 +++ b/fs/orangefs/orangefs-debugfs.c
 @@ -305,6 +305,7 @@ static void *help_start(struct seq_file *m, loff_t *pos)

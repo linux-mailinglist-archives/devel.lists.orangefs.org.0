@@ -2,42 +2,42 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1BF115E2AA
-	for <lists+devel-orangefs@lfdr.de>; Fri, 14 Feb 2020 17:25:01 +0100 (CET)
-Received: from [::1] (port=50384 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2CAF161772
+	for <lists+devel-orangefs@lfdr.de>; Mon, 17 Feb 2020 17:13:42 +0100 (CET)
+Received: from [::1] (port=54632 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.92)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1j2dm0-0005Wb-VU
-	for lists+devel-orangefs@lfdr.de; Fri, 14 Feb 2020 11:25:00 -0500
-Received: from mail.kernel.org ([198.145.29.99]:42882)
- by mm1.emwd.com with esmtps (TLSv1.2:AECDH-AES256-SHA:256)
- (Exim 4.92) (envelope-from <sashal@kernel.org>) id 1j2dlz-0005Ve-MU
- for devel@lists.orangefs.org; Fri, 14 Feb 2020 11:24:59 -0500
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 33C0824795;
- Fri, 14 Feb 2020 16:24:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581697458;
- bh=03m/YZuxHUtpmwUPg60w1w/fNkSrmXYJ/3/BRkmRcWw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=neGE/R5Sm4/rYVA2Eybu5HZoulgNO0yf099M4eWOuclm+DfahwMNYwEGhnoJ7D4O/
- zCM1J1TkTdjy5oqBh4Fd4llFl3i9nKZTie74hiDlUVtMJaXgkdfY8UvMaDsaVeM59b
- SQTlms/UtMltdK7V7MNf/aNfe0jqfyiu6jg6FH+I=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 141/141] help_next should increase position index
-Date: Fri, 14 Feb 2020 11:21:21 -0500
-Message-Id: <20200214162122.19794-141-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214162122.19794-1-sashal@kernel.org>
-References: <20200214162122.19794-1-sashal@kernel.org>
+	id 1j3j1i-0005eC-2W
+	for lists+devel-orangefs@lfdr.de; Mon, 17 Feb 2020 11:13:42 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:33978)
+ by mm1.emwd.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ (Exim 4.92) (envelope-from <mchehab@bombadil.infradead.org>)
+ id 1j3j1g-0005c5-VQ
+ for devel@lists.orangefs.org; Mon, 17 Feb 2020 11:13:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=79mrsdMpZPq81EcHssJU6sAclSp6O+HRgk1tiwv0Vl8=; b=GMuzjHpYp20+IP116h8bDp0g41
+ ttVv3QJJR7FUdGUEREIUbjI+FUFjDSURRen682to2IXcwuRloQMyivCGW0qj86X72Kvp1WppX4YSF
+ KBNTZhQI4rrwMsNuFOEBTsFYSoyIjfuhXQtkFp51xA162kdPm79JVt9XIZ0172I/NqXRxeERVPF9L
+ kLpRpq7LmR/RnnjrPy/y+l34kcRu6hNJOaGfDY1XqGzt5O0+3y1BFL1SEB5+/2nSR6nonL9n110Kx
+ N4rWXQRqkj1rqfV3jAF6Ow+Wmr+s/DXyeHln9cn6x1qRSToaShgKICUy4iF4JXV3I10hB9VhSPmLY
+ BoN4dDdw==;
+Received: from ip-109-41-129-189.web.vodafone.de ([109.41.129.189]
+ helo=bombadil.infradead.org)
+ by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1j3j0c-0006ud-6y; Mon, 17 Feb 2020 16:12:34 +0000
+Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
+ (envelope-from <mchehab@bombadil.infradead.org>)
+ id 1j3j0Z-000fYx-H7; Mon, 17 Feb 2020 17:12:31 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Subject: [PATCH 00/44] Manually convert filesystem FS documents to ReST
+Date: Mon, 17 Feb 2020 17:11:46 +0100
+Message-Id: <cover.1581955849.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
@@ -50,8 +50,36 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Vasily Averin <vvs@virtuozzo.com>,
- devel@lists.orangefs.org
+Cc: Latchesar Ionkov <lucho@ionkov.net>, Jan Kara <jack@suse.cz>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Amir Goldstein <amir73il@gmail.com>, Bob Copeland <me@bobcopeland.com>,
+ David Howells <dhowells@redhat.com>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ linux-mtd@lists.infradead.org, Tyler Hicks <code@tyhicks.com>,
+ linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
+ Christoph Hellwig <hch@infradead.org>, linux-nilfs@vger.kernel.org,
+ Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ Chris Mason <clm@fb.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ cluster-devel@redhat.com, v9fs-developer@lists.sourceforge.net,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ Salah Triki <salah.triki@gmail.com>, Alexey Dobriyan <adobriyan@gmail.com>,
+ devel@lists.orangefs.org, ecryptfs@vger.kernel.org,
+ Eric Van Hensbergen <ericvh@gmail.com>, Chao Yu <chao@kernel.org>,
+ Josef Bacik <josef@toxicpanda.com>, linux-fsdevel@vger.kernel.org,
+ Joel Becker <jlbec@evilplan.org>,
+ "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
+ Anton Altaparmakov <anton@tuxera.com>, Damien Le Moal <damien.lemoal@wdc.com>,
+ Luis de Bethencourt <luisbg@kernel.org>, Nicolas Pitre <nico@fluxnic.net>,
+ linux-ntfs-dev@lists.sourceforge.net, Jeff Layton <jlayton@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org,
+ Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
+ Phillip Lougher <phillip@squashfs.org.uk>, Johannes Thumshirn <jth@kernel.org>,
+ linux-erofs@lists.ozlabs.org, linux-karma-devel@lists.sourceforge.net,
+ ocfs2-devel@oss.oracle.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -65,34 +93,152 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-From: Vasily Averin <vvs@virtuozzo.com>
+There are lots of plain text documents under Documentation/filesystems.
 
-[ Upstream commit 9f198a2ac543eaaf47be275531ad5cbd50db3edf ]
+Manually convert several of those to ReST and add them to the index file.
 
-if seq_file .next fuction does not change position index,
-read after some lseek can generate unexpected output.
+Mauro Carvalho Chehab (44):
+  docs: filesystems: convert 9p.txt to ReST
+  docs: filesystems: convert adfs.txt to ReST
+  docs: filesystems: convert affs.txt to ReST
+  docs: filesystems: convert afs.txt to ReST
+  docs: filesystems: convert autofs-mount-control.txt to ReST
+  docs: filesystems: convert befs.txt to ReST
+  docs: filesystems: convert bfs.txt to ReST
+  docs: filesystems: convert btrfs.txt to ReST
+  docs: filesystems: convert ceph.txt to ReST
+  docs: filesystems: convert cramfs.txt to ReST
+  docs: filesystems: convert debugfs.txt to ReST
+  docs: filesystems: convert dlmfs.txt to ReST
+  docs: filesystems: convert ecryptfs.txt to ReST
+  docs: filesystems: convert efivarfs.txt to ReST
+  docs: filesystems: convert erofs.txt to ReST
+  docs: filesystems: convert ext2.txt to ReST
+  docs: filesystems: convert ext3.txt to ReST
+  docs: filesystems: convert f2fs.txt to ReST
+  docs: filesystems: convert gfs2.txt to ReST
+  docs: filesystems: convert gfs2-uevents.txt to ReST
+  docs: filesystems: convert hfsplus.txt to ReST
+  docs: filesystems: convert hfs.txt to ReST
+  docs: filesystems: convert hpfs.txt to ReST
+  docs: filesystems: convert inotify.txt to ReST
+  docs: filesystems: convert isofs.txt to ReST
+  docs: filesystems: convert nilfs2.txt to ReST
+  docs: filesystems: convert ntfs.txt to ReST
+  docs: filesystems: convert ocfs2-online-filecheck.txt to ReST
+  docs: filesystems: convert ocfs2.txt to ReST
+  docs: filesystems: convert omfs.txt to ReST
+  docs: filesystems: convert orangefs.txt to ReST
+  docs: filesystems: convert proc.txt to ReST
+  docs: filesystems: convert qnx6.txt to ReST
+  docs: filesystems: convert ramfs-rootfs-initramfs.txt to ReST
+  docs: filesystems: convert relay.txt to ReST
+  docs: filesystems: convert romfs.txt to ReST
+  docs: filesystems: convert squashfs.txt to ReST
+  docs: filesystems: convert sysfs.txt to ReST
+  docs: filesystems: convert sysv-fs.txt to ReST
+  docs: filesystems: convert tmpfs.txt to ReST
+  docs: filesystems: convert ubifs-authentication.rst.txt to ReST
+  docs: filesystems: convert ubifs.txt to ReST
+  docs: filesystems: convert udf.txt to ReST
+  docs: filesystems: convert zonefs.txt to ReST
 
-https://bugzilla.kernel.org/show_bug.cgi?id=206283
-Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
-Signed-off-by: Mike Marshall <hubcap@omnibond.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- fs/orangefs/orangefs-debugfs.c | 1 +
- 1 file changed, 1 insertion(+)
+ Documentation/filesystems/{9p.txt => 9p.rst}  |  114 +-
+ .../filesystems/{adfs.txt => adfs.rst}        |   29 +-
+ .../filesystems/{affs.txt => affs.rst}        |   62 +-
+ .../filesystems/{afs.txt => afs.rst}          |   73 +-
+ ...t-control.txt => autofs-mount-control.rst} |  102 +-
+ .../filesystems/{befs.txt => befs.rst}        |   59 +-
+ .../filesystems/{bfs.txt => bfs.rst}          |   37 +-
+ .../filesystems/{btrfs.txt => btrfs.rst}      |    3 +
+ .../filesystems/{ceph.txt => ceph.rst}        |   26 +-
+ .../filesystems/{cramfs.txt => cramfs.rst}    |   19 +-
+ .../filesystems/{debugfs.txt => debugfs.rst}  |   54 +-
+ .../filesystems/{dlmfs.txt => dlmfs.rst}      |   28 +-
+ .../{ecryptfs.txt => ecryptfs.rst}            |   44 +-
+ .../{efivarfs.txt => efivarfs.rst}            |    5 +-
+ .../filesystems/{erofs.txt => erofs.rst}      |  175 +-
+ .../filesystems/{ext2.txt => ext2.rst}        |   41 +-
+ .../filesystems/{ext3.txt => ext3.rst}        |    2 +
+ .../filesystems/{f2fs.txt => f2fs.rst}        |  252 +--
+ .../{gfs2-uevents.txt => gfs2-uevents.rst}    |   20 +-
+ .../filesystems/{gfs2.txt => gfs2.rst}        |   20 +-
+ .../filesystems/{hfs.txt => hfs.rst}          |   23 +-
+ .../filesystems/{hfsplus.txt => hfsplus.rst}  |    2 +
+ .../filesystems/{hpfs.txt => hpfs.rst}        |  239 ++-
+ Documentation/filesystems/index.rst           |   46 +-
+ .../filesystems/{inotify.txt => inotify.rst}  |   33 +-
+ Documentation/filesystems/isofs.rst           |   64 +
+ Documentation/filesystems/isofs.txt           |   48 -
+ .../filesystems/{nilfs2.txt => nilfs2.rst}    |   40 +-
+ .../filesystems/{ntfs.txt => ntfs.rst}        |  143 +-
+ ...lecheck.txt => ocfs2-online-filecheck.rst} |   45 +-
+ .../filesystems/{ocfs2.txt => ocfs2.rst}      |   31 +-
+ Documentation/filesystems/omfs.rst            |  112 ++
+ Documentation/filesystems/omfs.txt            |  106 --
+ .../{orangefs.txt => orangefs.rst}            |  187 +-
+ .../filesystems/{proc.txt => proc.rst}        | 1498 +++++++++--------
+ .../filesystems/{qnx6.txt => qnx6.rst}        |   22 +
+ ...itramfs.txt => ramfs-rootfs-initramfs.rst} |   54 +-
+ .../filesystems/{relay.txt => relay.rst}      |  129 +-
+ .../filesystems/{romfs.txt => romfs.rst}      |   42 +-
+ .../{squashfs.txt => squashfs.rst}            |   60 +-
+ .../filesystems/{sysfs.txt => sysfs.rst}      |  324 ++--
+ .../filesystems/{sysv-fs.txt => sysv-fs.rst}  |  155 +-
+ .../filesystems/{tmpfs.txt => tmpfs.rst}      |   44 +-
+ .../filesystems/ubifs-authentication.rst      |   10 +-
+ .../filesystems/{ubifs.txt => ubifs.rst}      |   25 +-
+ .../filesystems/{udf.txt => udf.rst}          |   21 +-
+ .../filesystems/{zonefs.txt => zonefs.rst}    |  106 +-
+ 47 files changed, 2739 insertions(+), 2035 deletions(-)
+ rename Documentation/filesystems/{9p.txt => 9p.rst} (63%)
+ rename Documentation/filesystems/{adfs.txt => adfs.rst} (85%)
+ rename Documentation/filesystems/{affs.txt => affs.rst} (86%)
+ rename Documentation/filesystems/{afs.txt => afs.rst} (90%)
+ rename Documentation/filesystems/{autofs-mount-control.txt => autofs-mount-control.rst} (89%)
+ rename Documentation/filesystems/{befs.txt => befs.rst} (83%)
+ rename Documentation/filesystems/{bfs.txt => bfs.rst} (71%)
+ rename Documentation/filesystems/{btrfs.txt => btrfs.rst} (96%)
+ rename Documentation/filesystems/{ceph.txt => ceph.rst} (91%)
+ rename Documentation/filesystems/{cramfs.txt => cramfs.rst} (88%)
+ rename Documentation/filesystems/{debugfs.txt => debugfs.rst} (91%)
+ rename Documentation/filesystems/{dlmfs.txt => dlmfs.rst} (86%)
+ rename Documentation/filesystems/{ecryptfs.txt => ecryptfs.rst} (70%)
+ rename Documentation/filesystems/{efivarfs.txt => efivarfs.rst} (85%)
+ rename Documentation/filesystems/{erofs.txt => erofs.rst} (54%)
+ rename Documentation/filesystems/{ext2.txt => ext2.rst} (91%)
+ rename Documentation/filesystems/{ext3.txt => ext3.rst} (88%)
+ rename Documentation/filesystems/{f2fs.txt => f2fs.rst} (84%)
+ rename Documentation/filesystems/{gfs2-uevents.txt => gfs2-uevents.rst} (94%)
+ rename Documentation/filesystems/{gfs2.txt => gfs2.rst} (76%)
+ rename Documentation/filesystems/{hfs.txt => hfs.rst} (80%)
+ rename Documentation/filesystems/{hfsplus.txt => hfsplus.rst} (95%)
+ rename Documentation/filesystems/{hpfs.txt => hpfs.rst} (66%)
+ rename Documentation/filesystems/{inotify.txt => inotify.rst} (83%)
+ create mode 100644 Documentation/filesystems/isofs.rst
+ delete mode 100644 Documentation/filesystems/isofs.txt
+ rename Documentation/filesystems/{nilfs2.txt => nilfs2.rst} (89%)
+ rename Documentation/filesystems/{ntfs.txt => ntfs.rst} (85%)
+ rename Documentation/filesystems/{ocfs2-online-filecheck.txt => ocfs2-online-filecheck.rst} (77%)
+ rename Documentation/filesystems/{ocfs2.txt => ocfs2.rst} (88%)
+ create mode 100644 Documentation/filesystems/omfs.rst
+ delete mode 100644 Documentation/filesystems/omfs.txt
+ rename Documentation/filesystems/{orangefs.txt => orangefs.rst} (83%)
+ rename Documentation/filesystems/{proc.txt => proc.rst} (65%)
+ rename Documentation/filesystems/{qnx6.txt => qnx6.rst} (98%)
+ rename Documentation/filesystems/{ramfs-rootfs-initramfs.txt => ramfs-rootfs-initramfs.rst} (91%)
+ rename Documentation/filesystems/{relay.txt => relay.rst} (91%)
+ rename Documentation/filesystems/{romfs.txt => romfs.rst} (86%)
+ rename Documentation/filesystems/{squashfs.txt => squashfs.rst} (91%)
+ rename Documentation/filesystems/{sysfs.txt => sysfs.rst} (56%)
+ rename Documentation/filesystems/{sysv-fs.txt => sysv-fs.rst} (73%)
+ rename Documentation/filesystems/{tmpfs.txt => tmpfs.rst} (86%)
+ rename Documentation/filesystems/{ubifs.txt => ubifs.rst} (91%)
+ rename Documentation/filesystems/{udf.txt => udf.rst} (83%)
+ rename Documentation/filesystems/{zonefs.txt => zonefs.rst} (90%)
 
-diff --git a/fs/orangefs/orangefs-debugfs.c b/fs/orangefs/orangefs-debugfs.c
-index 0748a26598fca..7d7df003f9d8d 100644
---- a/fs/orangefs/orangefs-debugfs.c
-+++ b/fs/orangefs/orangefs-debugfs.c
-@@ -304,6 +304,7 @@ static void *help_start(struct seq_file *m, loff_t *pos)
- 
- static void *help_next(struct seq_file *m, void *v, loff_t *pos)
- {
-+	(*pos)++;
- 	gossip_debug(GOSSIP_DEBUGFS_DEBUG, "help_next: start\n");
- 
- 	return NULL;
 -- 
-2.20.1
+2.24.1
+
 
 

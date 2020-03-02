@@ -2,53 +2,33 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57A31176081
-	for <lists+devel-orangefs@lfdr.de>; Mon,  2 Mar 2020 17:55:18 +0100 (CET)
-Received: from [::1] (port=58726 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id C49021765B0
+	for <lists+devel-orangefs@lfdr.de>; Mon,  2 Mar 2020 22:14:03 +0100 (CET)
+Received: from [::1] (port=55876 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1j8oLd-0002MS-3A
-	for lists+devel-orangefs@lfdr.de; Mon, 02 Mar 2020 11:55:17 -0500
-Received: from mail-ed1-f41.google.com ([209.85.208.41]:35950)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <tutulahasanm91@gmail.com>)
- id 1j8oLb-0002J3-8n
- for devel@lists.orangefs.org; Mon, 02 Mar 2020 11:55:15 -0500
-Received: by mail-ed1-f41.google.com with SMTP id a13so608885edh.3
- for <devel@lists.orangefs.org>; Mon, 02 Mar 2020 08:54:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=mzZrMxgLSaSgg5d6Iq47QFIaO1sQ/f60zqeB6Od3oFA=;
- b=chWlbe3Nv5K5APbgY1SBv6V5eJEcThv69ffyN1NstEHHNEnKnqeYpQhuMg6F7nYLQG
- jpY+Dct0Vr1pu0i19kQ3xucbxX3SgqQ9Tty1DBVQu7KZeLNbDZwQoh7x7X1LQkN2HWEW
- BwRV1SZWUbi7VkmdUK9hjFbAS7G9/oM41TNnQPUwkwDLzB1u/Pxkt9h9E1I0xlril6aX
- LQGyrvCi6C1Z7zaKqlFoM0/B0fgVq8+LfnDIzLyTm49Iva9kpa+OHsg7bfaTXhXdOXMW
- 6wn+/3UFDXJ2ELxLjrix5hzoGaaitlgg9vBWExdvzC8tkXiM9QL93zy6jpzkdH6XmG1b
- yFgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=mzZrMxgLSaSgg5d6Iq47QFIaO1sQ/f60zqeB6Od3oFA=;
- b=UuEEfEGVqrPnkrqF5HSIkNfw5FdRH7e3nn+pVhf9SrmNd4RcpQj3uK5943Sv8eRZ5Q
- 5ZTQeREm/7w+M2jVdRC5xiSa1mWrEjhKT0UL3Bo2n4mTqsA5zKzvd6OS2zhXZbTL2LUq
- xAP60QqubMIIP971WAixJDGTyMB+cc2bybIC57pb2ATRnsleATjhRsLcpJhNDxjUiaJA
- zBpg0drQnm5r/BXwYn2y6DZYti4H4qabspCyCilwC3HgIYy1Oww60bvElA74mlsJKIVx
- Um8fgf0Yf7DMbJrkKk9IATz1srzcy9/QDOXR77Y7I6grE6K8zRFrk2iBakdy1ivYkhhw
- Qx/w==
-X-Gm-Message-State: ANhLgQ3v+/P+eB0jIEas4ld3WOjyJTwPptWNCdlFGLVs9CJwGNAu4k4W
- EsKz+5YYTwjt3o4SLzglBbMadQ4JM+s4scb7zUFK7Q==
-X-Google-Smtp-Source: ADFU+vtZZZ0X7xSV6QBh58Gn8xDijoRsY6s1H3ZkaTYHGdn1dtxOIx5ogrO77Eyuk/8ABqeAFwTNyQ+v/qVx2vK5dZE=
-X-Received: by 2002:a17:907:4300:: with SMTP id
- oa24mr267083ejb.61.1583168073986; 
- Mon, 02 Mar 2020 08:54:33 -0800 (PST)
+	id 1j8sO2-0006MM-J1
+	for lists+devel-orangefs@lfdr.de; Mon, 02 Mar 2020 16:14:02 -0500
+Received: from ms.lwn.net ([45.79.88.28]:34138)
+ by mm1.emwd.com with esmtps  (TLS1.2) tls TLS_ECDH_anon_WITH_AES_256_CBC_SHA
+ (Exim 4.93) (envelope-from <corbet@lwn.net>) id 1j8sO1-0006Lk-4c
+ for devel@lists.orangefs.org; Mon, 02 Mar 2020 16:14:01 -0500
+Received: from lwn.net (localhost [127.0.0.1])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ms.lwn.net (Postfix) with ESMTPSA id 96EE92E4;
+ Mon,  2 Mar 2020 21:13:17 +0000 (UTC)
+Date: Mon, 2 Mar 2020 14:13:16 -0700
+From: Jonathan Corbet <corbet@lwn.net>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Subject: Re: [PATCH 00/44] Manually convert filesystem FS documents to ReST
+Message-ID: <20200302141316.4269b22d@lwn.net>
+In-Reply-To: <cover.1581955849.git.mchehab+huawei@kernel.org>
+References: <cover.1581955849.git.mchehab+huawei@kernel.org>
+Organization: LWN.net
 MIME-Version: 1.0
-From: tutula hasanm <tutulahasanm91@gmail.com>
-Date: Mon, 2 Mar 2020 22:54:22 +0600
-Message-ID: <CAPgVdK1aUvcQTgdvO1DAZDP1GeazzaOVZAAZy=PLtRO99CoFBw@mail.gmail.com>
-Subject: 
-To: devel@lists.orangefs.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,6 +40,35 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Cc: Latchesar Ionkov <lucho@ionkov.net>, Jan Kara <jack@suse.cz>,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Amir Goldstein <amir73il@gmail.com>, Bob Copeland <me@bobcopeland.com>,
+ David Howells <dhowells@redhat.com>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ linux-mtd@lists.infradead.org, Tyler Hicks <code@tyhicks.com>,
+ linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
+ Christoph Hellwig <hch@infradead.org>, linux-nilfs@vger.kernel.org,
+ Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ Chris Mason <clm@fb.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ cluster-devel@redhat.com, v9fs-developer@lists.sourceforge.net,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ Salah Triki <salah.triki@gmail.com>, Alexey Dobriyan <adobriyan@gmail.com>,
+ devel@lists.orangefs.org, ecryptfs@vger.kernel.org,
+ Eric Van Hensbergen <ericvh@gmail.com>, Chao Yu <chao@kernel.org>,
+ Josef Bacik <josef@toxicpanda.com>, linux-fsdevel@vger.kernel.org,
+ Joel Becker <jlbec@evilplan.org>,
+ "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
+ Anton Altaparmakov <anton@tuxera.com>, Damien Le Moal <damien.lemoal@wdc.com>,
+ Luis de Bethencourt <luisbg@kernel.org>, Nicolas Pitre <nico@fluxnic.net>,
+ linux-ntfs-dev@lists.sourceforge.net, Jeff Layton <jlayton@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org,
+ Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
+ Phillip Lougher <phillip@squashfs.org.uk>, Johannes Thumshirn <jth@kernel.org>,
+ linux-erofs@lists.ozlabs.org, linux-karma-devel@lists.sourceforge.net,
+ ocfs2-devel@oss.oracle.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -73,4 +82,15 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
+On Mon, 17 Feb 2020 17:11:46 +0100
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+
+> There are lots of plain text documents under Documentation/filesystems.
+> 
+> Manually convert several of those to ReST and add them to the index file.
+
+OK, I've finally managed to add all the acks and wrestle this pile into
+docs-next - thanks.
+
+jon
 

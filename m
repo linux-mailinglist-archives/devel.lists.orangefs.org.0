@@ -2,66 +2,54 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 870491830C7
-	for <lists+devel-orangefs@lfdr.de>; Thu, 12 Mar 2020 14:02:45 +0100 (CET)
-Received: from [::1] (port=40948 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C6A6184C96
+	for <lists+devel-orangefs@lfdr.de>; Fri, 13 Mar 2020 17:33:54 +0100 (CET)
+Received: from [::1] (port=37802 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jCNU4-0002gr-59
-	for lists+devel-orangefs@lfdr.de; Thu, 12 Mar 2020 09:02:44 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:44724)
+	id 1jCnFx-0007e8-2J
+	for lists+devel-orangefs@lfdr.de; Fri, 13 Mar 2020 12:33:53 -0400
+Received: from mail-ua1-f47.google.com ([209.85.222.47]:34381)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <shivam@seogurusllc.com>)
- id 1jCNU2-0002Ty-KO
- for devel@lists.orangefs.org; Thu, 12 Mar 2020 09:02:42 -0400
-Received: by mail-pl1-f195.google.com with SMTP id d9so2632309plo.11
- for <devel@lists.orangefs.org>; Thu, 12 Mar 2020 06:02:22 -0700 (PDT)
+ (Exim 4.93) (envelope-from <hubcap@omnibond.com>) id 1jCnFw-0007ao-Dj
+ for devel@lists.orangefs.org; Fri, 13 Mar 2020 12:33:52 -0400
+Received: by mail-ua1-f47.google.com with SMTP id g21so3766912uaj.1
+ for <devel@lists.orangefs.org>; Fri, 13 Mar 2020 09:33:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=seogurusllc-com.20150623.gappssmtp.com; s=20150623;
- h=from:to:subject:date:message-id:mime-version:thread-index
- :content-language;
- bh=hVKWgkOEPxXi+3SdqYMMZNyXLLMLVI++lfnDgDgeelY=;
- b=e8j3ZfxgOme/Ydo0hQLx0OBj0R0eWLH1x2vrUXQqhSJCXK8/OjJ7ctoLW2Hqh0HSkh
- emhjN/T+MaM7OW4eVokrvzKWllAZKs9UCHJ7wbMf73VIWOIRi58GAAu6orZvAWaDvJ76
- sJFKTCgL/EepVuuBnMVo6nhW1KGPB06Clw+iHJAH+Q5n9K/Gx9VtIbCxXj+BcgXm/wSP
- T7UdSCiV57yvyo5yzyRVkG1dn9l1nazgYqR4v1V1tDuh4pKAfxg0UzaIe0LcF6g622Jk
- blWWaKQGIGehCo5DTTm6MdswNlPZQl6LoPRtFpuAB2YvshC4JTFdj7LMphu69QNt8e8q
- C2Pg==
+ d=omnibond-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=02lwFBCLBcb4bzvU/oIWzhKPfBjQLcn82ZsnxwE2cWA=;
+ b=KE7MohrwsXcWc+ugG2vXw416yi53NBTu1mN+sgRnlmsoSa1m5XWNGRMi05YVqhU+7X
+ fLlKN/XYUPPONpc0UgOJ5NpxrGP7uTml9+QXjkk90pC5iAYsZsCDkAYdPRZY6AyPtRJ1
+ RvFSLK/0nWSHeg/mkshyl7lYQVB4SOVQgBiq62kkTnBsu8eE9cJKkiAXI1MJCFf9sAlu
+ yrw4TPQhbTyKO+feddsbrEcc4w3K8rT2R5CUgE+877QCYp0dqpDTPsJSdM+m2vUIi97V
+ /OHCQpEwnGrmjPNrDBXPy/riC/VO4+w4ZnimIRci6/DaagzFHJIYZ2NB4cwsq4O4lVBS
+ 7qhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :thread-index:content-language;
- bh=hVKWgkOEPxXi+3SdqYMMZNyXLLMLVI++lfnDgDgeelY=;
- b=VEgS9dS4FSbRLcZjSeHKkTNqTqnPTeXXhTgIAS67nqN4W70pt4CNAQQeECU+u4TMre
- xBEWPH3wJSuNuieAxzCfeFMJESpXf5esbMD/b6gOJxL2S26WppXUiXwA8tWa/+t2j+y2
- U18LMlNLzKFAbcd0DOuPhiFrATHDQxcK4nfcte1fxziBxNTJqm/Aw1x2vfaaUG+sHO2w
- YYUdUfjBCMYWUReZN5iwsi2gyfaVWU5RF5Y7KlI1MpiZJdDmqI4wUOjeTHb+ULcL4XNE
- 3/+xnMJDAYRF6RrWoJzxp9cHfWhyJSeyHE+8i6Zh9JkAtnFA6aiQbMib1FZlgDfDd7QI
- pAhA==
-X-Gm-Message-State: ANhLgQ3Lb3kLUzPwl+htN5B+YYhnvgWOion6m1hEsZlNNTh9407V3W2B
- DmN6zTJ2c3kkdJK5fWFqimFLzKuOW7U=
-X-Google-Smtp-Source: ADFU+vuKObzOtIQYcavWtslS038rmslAmvgGsdLAzeSCRMubYCqB3UQJvpWdWX7U+idzkL1Zco+xxw==
-X-Received: by 2002:a17:902:b206:: with SMTP id
- t6mr7223121plr.75.1584018119980; 
- Thu, 12 Mar 2020 06:01:59 -0700 (PDT)
-Received: from omPC ([106.201.5.189])
- by smtp.gmail.com with ESMTPSA id x70sm44680655pgd.37.2020.03.12.06.01.58
- for <devel@lists.orangefs.org>
- (version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
- Thu, 12 Mar 2020 06:01:59 -0700 (PDT)
-From: "Shivam" <shivam@seogurusllc.com>
-To: <devel@lists.orangefs.org>
-Subject: Web design and App development
-Date: Thu, 12 Mar 2020 18:26:00 -0700
-Message-ID: <1a28c01d5f8d7$403ffc90$c0bff5b0$@com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=02lwFBCLBcb4bzvU/oIWzhKPfBjQLcn82ZsnxwE2cWA=;
+ b=Qb34n4bZDEcODVaFmIP41H7mmPvd+XAUiZ+HxhjlkknL6fsgbrfzZBeFYHMWniSl+8
+ UK/iWF0z83qLnbJ+E0QfPaaKSBN0/Rx4y1dyNVRSECQo8BHiVXQRYbqpXVAQDev7YStA
+ BsecEZr+t+Y6LuqC3SnVikdjR2Xnycv+xvP4KcaqTxNU+R/YJGKxf9vhBswP0gtJ5ZyO
+ UorttcQYHwMKtO66mhU9aOroj+yqw/RQOH7ZC/MdT5/OMpLqKsjMsB53vrHAB2Bh7wJw
+ enQh21hD38C0EcOaXx+1PLySa079RVaxBVbWtM/BeNFW0SM1wijuyW6k6DJwnT11K2FF
+ eVMg==
+X-Gm-Message-State: ANhLgQ1urhu3xQq4cqZp8JJfagdR9v3aOy4YtSVRCiQ/052h0QEMbPaP
+ GqXemVOjBgUiGCaZd4khmUoVrW+agEOfz/0stp6v5Q==
+X-Google-Smtp-Source: ADFU+vupr5E63XsCaYXo8W5nb6d5fgOuV1xz0DHCr+5ZkFvki3Op9d+JYWFsGIBTOcaAI/TqU7tX11SdXRCzDMOlHuE=
+X-Received: by 2002:ab0:758b:: with SMTP id q11mr9002341uap.12.1584117191479; 
+ Fri, 13 Mar 2020 09:33:11 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AdX41d5RZLWrokmxRrGTNwwvn7dTbw==
-Content-Language: en-us
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <20200201005639.GG23230@ZenIV.linux.org.uk>
+In-Reply-To: <20200201005639.GG23230@ZenIV.linux.org.uk>
+From: Mike Marshall <hubcap@omnibond.com>
+Date: Fri, 13 Mar 2020 12:33:00 -0400
+Message-ID: <CAOg9mSTwD1HxU=autqFDan_dSCaPOMBed-SuzW=kYjGRjKuyXA@mail.gmail.com>
+Subject: Re: [confused] can orangefs ACLs be removed at all?
+To: Al Viro <viro@zeniv.linux.org.uk>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,6 +61,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -86,44 +75,75 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi devel@lists.orangefs.org,
+I've been away from this for a while, but have been working on it
+now for several days... by working on it, I mean I've been reading
+the code back into fs and forward into the userspace part of orangefs,
+and comparing what orangefs does with what ext4 and tmpfs do when I
+set and unset acls...
 
- 
+I can observe that these acls are foldable into mode,
+no acls are set, this asdf file is on ext4:
 
-We have bunch of expert developers who can customize and create a site from
-scratch as per your needs. Our web services use the best host in the
-internet. We also provide premium themes from various word press theme
-makers and create your site in a best price. 
+hubcap@vm1 ~]$ ls -l asdf
+-rw-rw----. 1 hubcap hubcap 0 Mar  6 15:34 asdf
+[hubcap@vm1 ~]$ setfacl -m u::rwx asdf
+[hubcap@vm1 ~]$ ls -l asdf
+-rwxrw----. 1 hubcap hubcap 0 Mar  6 15:34 asdf
+[hubcap@vm1 ~]$ setfacl -m g::rwx asdf
+[hubcap@vm1 ~]$ ls -l asdf
+-rwxrwx---. 1 hubcap hubcap 0 Mar  6 15:34 asdf
+[hubcap@vm1 ~]$ setfacl -m o::rwx asdf
+[hubcap@vm1 ~]$ ls -l asdf
+-rwxrwxrwx. 1 hubcap hubcap 0 Mar  6 15:34 asdf
 
- 
+There must be more, perhaps from the perspective of
+root setting the acl, or...? What are some other
+examples of acls that get folded into mode that I
+could test with?
 
-Our development related services that include: 
+Al>> Moreover, if you change an existing ACL to something
+Al>> that is expressible by pure mode,
 
- 
+Can you suggest an example here, too?
 
-1 .Website redesign with highly responsive features
+Finally (for today :-) ) what happened here? Orangefs
+reacts differently than ext4... in both cases the acl
+was set, but on ext4 the mode was also
+changed...
 
-2 .E-commerce and M-commerce
+hubcap@vm1 ~]$ touch /pvfsmnt/asdf /home/hubcap/asdf
+[hubcap@vm1 ~]$ ls -l /pvfsmnt/asdf /home/hubcap/asdf
+-rw-rw-r--. 1 hubcap hubcap 0 Mar 13 11:50 /home/hubcap/asdf
+-rw-rw-r--. 1 hubcap hubcap 0 Mar 13 11:50 /pvfsmnt/asdf
 
-3. Responsive web design
+root@vm1 hubcap]# chown root /home/hubcap/asdf /pvfsmnt/asdf
+[root@vm1 hubcap]# ls -l /home/hubcap/asdf /pvfsmnt/asdf
+-rw-rw-r--. 1 root hubcap 0 Mar 13 11:50 /home/hubcap/asdf
+-rw-rw-r--. 1 root hubcap 0 Mar 13 11:50 /pvfsmnt/asdf
+[root@vm1 hubcap]# setfacl -m u:hubcap:rwx /home/hubcap/asdf /pvfsmnt/asdf
+[root@vm1 hubcap]# ls -l /home/hubcap/asdf /pvfsmnt/asdf
+-rw-rwxr--+ 1 root hubcap 0 Mar 13 11:50 /home/hubcap/asdf
+-rw-rw-r--+ 1 root hubcap 0 Mar 13 11:50 /pvfsmnt/asdf
 
-4. Web Design/Development
+-Mike
 
-5. Mobile Apps Development (iOS and Android)
-
-6. Joomla, Magento, Wordpress, PHP and other Content Management System. 
-
-7. SEO (Search Engine Optimization)
-
- 
-
-Thanks & Regards, 
-
- 
-
-Shivam,
-
- 
-
-Business Development Executive - (India)
+On Fri, Jan 31, 2020 at 7:56 PM Al Viro <viro@zeniv.linux.org.uk> wrote:
+>
+>         Prior to 4bef69000d93 (orangefs: react properly to
+> posix_acl_update_mode's aftermath.) it used to be possible
+> to do orangefs_set_acl(inode, NULL, ACL_TYPE_ACCESS) -
+> it would've removed the corresponding xattr and that would
+> be it.  Now it fails with -EINVAL without having done
+> anything.  How is one supposed to remove ACLs there?
+>
+>         Moreover, if you change an existing ACL to something
+> that is expressible by pure mode, you end up calling
+> __orangefs_setattr(), which will call posix_acl_chmod().
+> And AFAICS that will happen with *old* ACL still cached,
+> so you'll get ACL_MASK/ACL_OTHER updated in the old ACL.
+>
+>         How can that possibly work?  Sure, you want to
+> propagate the updated mode to server - after you've
+> done the actual update (possibly removal) of ACL-encoding
+> xattr there...
 

@@ -2,33 +2,66 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id C49021765B0
-	for <lists+devel-orangefs@lfdr.de>; Mon,  2 Mar 2020 22:14:03 +0100 (CET)
-Received: from [::1] (port=55876 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 870491830C7
+	for <lists+devel-orangefs@lfdr.de>; Thu, 12 Mar 2020 14:02:45 +0100 (CET)
+Received: from [::1] (port=40948 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1j8sO2-0006MM-J1
-	for lists+devel-orangefs@lfdr.de; Mon, 02 Mar 2020 16:14:02 -0500
-Received: from ms.lwn.net ([45.79.88.28]:34138)
- by mm1.emwd.com with esmtps  (TLS1.2) tls TLS_ECDH_anon_WITH_AES_256_CBC_SHA
- (Exim 4.93) (envelope-from <corbet@lwn.net>) id 1j8sO1-0006Lk-4c
- for devel@lists.orangefs.org; Mon, 02 Mar 2020 16:14:01 -0500
-Received: from lwn.net (localhost [127.0.0.1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ms.lwn.net (Postfix) with ESMTPSA id 96EE92E4;
- Mon,  2 Mar 2020 21:13:17 +0000 (UTC)
-Date: Mon, 2 Mar 2020 14:13:16 -0700
-From: Jonathan Corbet <corbet@lwn.net>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Subject: Re: [PATCH 00/44] Manually convert filesystem FS documents to ReST
-Message-ID: <20200302141316.4269b22d@lwn.net>
-In-Reply-To: <cover.1581955849.git.mchehab+huawei@kernel.org>
-References: <cover.1581955849.git.mchehab+huawei@kernel.org>
-Organization: LWN.net
+	id 1jCNU4-0002gr-59
+	for lists+devel-orangefs@lfdr.de; Thu, 12 Mar 2020 09:02:44 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:44724)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+ (Exim 4.93) (envelope-from <shivam@seogurusllc.com>)
+ id 1jCNU2-0002Ty-KO
+ for devel@lists.orangefs.org; Thu, 12 Mar 2020 09:02:42 -0400
+Received: by mail-pl1-f195.google.com with SMTP id d9so2632309plo.11
+ for <devel@lists.orangefs.org>; Thu, 12 Mar 2020 06:02:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=seogurusllc-com.20150623.gappssmtp.com; s=20150623;
+ h=from:to:subject:date:message-id:mime-version:thread-index
+ :content-language;
+ bh=hVKWgkOEPxXi+3SdqYMMZNyXLLMLVI++lfnDgDgeelY=;
+ b=e8j3ZfxgOme/Ydo0hQLx0OBj0R0eWLH1x2vrUXQqhSJCXK8/OjJ7ctoLW2Hqh0HSkh
+ emhjN/T+MaM7OW4eVokrvzKWllAZKs9UCHJ7wbMf73VIWOIRi58GAAu6orZvAWaDvJ76
+ sJFKTCgL/EepVuuBnMVo6nhW1KGPB06Clw+iHJAH+Q5n9K/Gx9VtIbCxXj+BcgXm/wSP
+ T7UdSCiV57yvyo5yzyRVkG1dn9l1nazgYqR4v1V1tDuh4pKAfxg0UzaIe0LcF6g622Jk
+ blWWaKQGIGehCo5DTTm6MdswNlPZQl6LoPRtFpuAB2YvshC4JTFdj7LMphu69QNt8e8q
+ C2Pg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :thread-index:content-language;
+ bh=hVKWgkOEPxXi+3SdqYMMZNyXLLMLVI++lfnDgDgeelY=;
+ b=VEgS9dS4FSbRLcZjSeHKkTNqTqnPTeXXhTgIAS67nqN4W70pt4CNAQQeECU+u4TMre
+ xBEWPH3wJSuNuieAxzCfeFMJESpXf5esbMD/b6gOJxL2S26WppXUiXwA8tWa/+t2j+y2
+ U18LMlNLzKFAbcd0DOuPhiFrATHDQxcK4nfcte1fxziBxNTJqm/Aw1x2vfaaUG+sHO2w
+ YYUdUfjBCMYWUReZN5iwsi2gyfaVWU5RF5Y7KlI1MpiZJdDmqI4wUOjeTHb+ULcL4XNE
+ 3/+xnMJDAYRF6RrWoJzxp9cHfWhyJSeyHE+8i6Zh9JkAtnFA6aiQbMib1FZlgDfDd7QI
+ pAhA==
+X-Gm-Message-State: ANhLgQ3Lb3kLUzPwl+htN5B+YYhnvgWOion6m1hEsZlNNTh9407V3W2B
+ DmN6zTJ2c3kkdJK5fWFqimFLzKuOW7U=
+X-Google-Smtp-Source: ADFU+vuKObzOtIQYcavWtslS038rmslAmvgGsdLAzeSCRMubYCqB3UQJvpWdWX7U+idzkL1Zco+xxw==
+X-Received: by 2002:a17:902:b206:: with SMTP id
+ t6mr7223121plr.75.1584018119980; 
+ Thu, 12 Mar 2020 06:01:59 -0700 (PDT)
+Received: from omPC ([106.201.5.189])
+ by smtp.gmail.com with ESMTPSA id x70sm44680655pgd.37.2020.03.12.06.01.58
+ for <devel@lists.orangefs.org>
+ (version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Thu, 12 Mar 2020 06:01:59 -0700 (PDT)
+From: "Shivam" <shivam@seogurusllc.com>
+To: <devel@lists.orangefs.org>
+Subject: Web design and App development
+Date: Thu, 12 Mar 2020 18:26:00 -0700
+Message-ID: <1a28c01d5f8d7$403ffc90$c0bff5b0$@com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AdX41d5RZLWrokmxRrGTNwwvn7dTbw==
+Content-Language: en-us
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -40,35 +73,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, Jan Kara <jack@suse.cz>,
- Linux Doc Mailing List <linux-doc@vger.kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Amir Goldstein <amir73il@gmail.com>, Bob Copeland <me@bobcopeland.com>,
- David Howells <dhowells@redhat.com>, Joseph Qi <joseph.qi@linux.alibaba.com>,
- linux-mtd@lists.infradead.org, Tyler Hicks <code@tyhicks.com>,
- linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
- Christoph Hellwig <hch@infradead.org>, linux-nilfs@vger.kernel.org,
- Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- Chris Mason <clm@fb.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- cluster-devel@redhat.com, v9fs-developer@lists.sourceforge.net,
- Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
- Salah Triki <salah.triki@gmail.com>, Alexey Dobriyan <adobriyan@gmail.com>,
- devel@lists.orangefs.org, ecryptfs@vger.kernel.org,
- Eric Van Hensbergen <ericvh@gmail.com>, Chao Yu <chao@kernel.org>,
- Josef Bacik <josef@toxicpanda.com>, linux-fsdevel@vger.kernel.org,
- Joel Becker <jlbec@evilplan.org>,
- "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
- Anton Altaparmakov <anton@tuxera.com>, Damien Le Moal <damien.lemoal@wdc.com>,
- Luis de Bethencourt <luisbg@kernel.org>, Nicolas Pitre <nico@fluxnic.net>,
- linux-ntfs-dev@lists.sourceforge.net, Jeff Layton <jlayton@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org,
- Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
- Phillip Lougher <phillip@squashfs.org.uk>, Johannes Thumshirn <jth@kernel.org>,
- linux-erofs@lists.ozlabs.org, linux-karma-devel@lists.sourceforge.net,
- ocfs2-devel@oss.oracle.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -82,15 +86,44 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Mon, 17 Feb 2020 17:11:46 +0100
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+Hi devel@lists.orangefs.org,
 
-> There are lots of plain text documents under Documentation/filesystems.
-> 
-> Manually convert several of those to ReST and add them to the index file.
+ 
 
-OK, I've finally managed to add all the acks and wrestle this pile into
-docs-next - thanks.
+We have bunch of expert developers who can customize and create a site from
+scratch as per your needs. Our web services use the best host in the
+internet. We also provide premium themes from various word press theme
+makers and create your site in a best price. 
 
-jon
+ 
+
+Our development related services that include: 
+
+ 
+
+1 .Website redesign with highly responsive features
+
+2 .E-commerce and M-commerce
+
+3. Responsive web design
+
+4. Web Design/Development
+
+5. Mobile Apps Development (iOS and Android)
+
+6. Joomla, Magento, Wordpress, PHP and other Content Management System. 
+
+7. SEO (Search Engine Optimization)
+
+ 
+
+Thanks & Regards, 
+
+ 
+
+Shivam,
+
+ 
+
+Business Development Executive - (India)
 

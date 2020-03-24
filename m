@@ -2,54 +2,50 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C6A6184C96
-	for <lists+devel-orangefs@lfdr.de>; Fri, 13 Mar 2020 17:33:54 +0100 (CET)
-Received: from [::1] (port=37802 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 797BF191CE5
+	for <lists+devel-orangefs@lfdr.de>; Tue, 24 Mar 2020 23:34:45 +0100 (CET)
+Received: from [::1] (port=41044 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jCnFx-0007e8-2J
-	for lists+devel-orangefs@lfdr.de; Fri, 13 Mar 2020 12:33:53 -0400
-Received: from mail-ua1-f47.google.com ([209.85.222.47]:34381)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <hubcap@omnibond.com>) id 1jCnFw-0007ao-Dj
- for devel@lists.orangefs.org; Fri, 13 Mar 2020 12:33:52 -0400
-Received: by mail-ua1-f47.google.com with SMTP id g21so3766912uaj.1
- for <devel@lists.orangefs.org>; Fri, 13 Mar 2020 09:33:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=omnibond-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=02lwFBCLBcb4bzvU/oIWzhKPfBjQLcn82ZsnxwE2cWA=;
- b=KE7MohrwsXcWc+ugG2vXw416yi53NBTu1mN+sgRnlmsoSa1m5XWNGRMi05YVqhU+7X
- fLlKN/XYUPPONpc0UgOJ5NpxrGP7uTml9+QXjkk90pC5iAYsZsCDkAYdPRZY6AyPtRJ1
- RvFSLK/0nWSHeg/mkshyl7lYQVB4SOVQgBiq62kkTnBsu8eE9cJKkiAXI1MJCFf9sAlu
- yrw4TPQhbTyKO+feddsbrEcc4w3K8rT2R5CUgE+877QCYp0dqpDTPsJSdM+m2vUIi97V
- /OHCQpEwnGrmjPNrDBXPy/riC/VO4+w4ZnimIRci6/DaagzFHJIYZ2NB4cwsq4O4lVBS
- 7qhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=02lwFBCLBcb4bzvU/oIWzhKPfBjQLcn82ZsnxwE2cWA=;
- b=Qb34n4bZDEcODVaFmIP41H7mmPvd+XAUiZ+HxhjlkknL6fsgbrfzZBeFYHMWniSl+8
- UK/iWF0z83qLnbJ+E0QfPaaKSBN0/Rx4y1dyNVRSECQo8BHiVXQRYbqpXVAQDev7YStA
- BsecEZr+t+Y6LuqC3SnVikdjR2Xnycv+xvP4KcaqTxNU+R/YJGKxf9vhBswP0gtJ5ZyO
- UorttcQYHwMKtO66mhU9aOroj+yqw/RQOH7ZC/MdT5/OMpLqKsjMsB53vrHAB2Bh7wJw
- enQh21hD38C0EcOaXx+1PLySa079RVaxBVbWtM/BeNFW0SM1wijuyW6k6DJwnT11K2FF
- eVMg==
-X-Gm-Message-State: ANhLgQ1urhu3xQq4cqZp8JJfagdR9v3aOy4YtSVRCiQ/052h0QEMbPaP
- GqXemVOjBgUiGCaZd4khmUoVrW+agEOfz/0stp6v5Q==
-X-Google-Smtp-Source: ADFU+vupr5E63XsCaYXo8W5nb6d5fgOuV1xz0DHCr+5ZkFvki3Op9d+JYWFsGIBTOcaAI/TqU7tX11SdXRCzDMOlHuE=
-X-Received: by 2002:ab0:758b:: with SMTP id q11mr9002341uap.12.1584117191479; 
- Fri, 13 Mar 2020 09:33:11 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200201005639.GG23230@ZenIV.linux.org.uk>
-In-Reply-To: <20200201005639.GG23230@ZenIV.linux.org.uk>
-From: Mike Marshall <hubcap@omnibond.com>
-Date: Fri, 13 Mar 2020 12:33:00 -0400
-Message-ID: <CAOg9mSTwD1HxU=autqFDan_dSCaPOMBed-SuzW=kYjGRjKuyXA@mail.gmail.com>
-Subject: Re: [confused] can orangefs ACLs be removed at all?
-To: Al Viro <viro@zeniv.linux.org.uk>
-Content-Type: text/plain; charset="UTF-8"
+	id 1jGs8C-0006Cc-Hr
+	for lists+devel-orangefs@lfdr.de; Tue, 24 Mar 2020 18:34:44 -0400
+Received: from o16.sg.m.dripemail2.com ([168.245.51.8]:40077)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+ (Exim 4.93) (envelope-from
+ <bounces+2693180-33fb-devel=lists.orangefs.org@m.dripemail2.com>)
+ id 1jGs8B-0006BB-81
+ for devel@lists.orangefs.org; Tue, 24 Mar 2020 18:34:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; 
+ d=dripemail2.com; h=content-type:from:mime-version:to:subject; 
+ s=s1; bh=38yNe/Fd+Z0mfrT2jM8ppjih24Ot7esLAGA6zeU7IiI=; b=RdYlDMR
+ CesBWatgY6v7PcRkGVCeV8i4lT94Tz/nHmweLd+NAgMuwd7Y+zZ0RVKQcMqDuf6M
+ dqLQQxuGVHuXQnPhGiRbHSFuIvuW2iEdckpatZOvlDXEn2tsnPZIqPH6B3puQKsS
+ 517fgVLougwZI5U7b+4bDwBFLOGzZv3VwB2I=
+Received: by filter1564p1las1.sendgrid.net with SMTP id
+ filter1564p1las1-25237-5E7A8AD8-6D
+ 2020-03-24 22:34:00.999081215 +0000 UTC m=+96910.997497982
+Received: from MjY5MzE4MA (unknown)
+ by ismtpd0025p1iad2.sendgrid.net (SG) with HTTP id fUY8Njs7RQiKVObH2ypljA
+ Tue, 24 Mar 2020 22:34:00.951 +0000 (UTC)
+Date: Tue, 24 Mar 2020 22:34:01 +0000 (UTC)
+From: "Sqspace Service Management" <joe@veetrack.co.uk>
+Mime-Version: 1.0
+To: devel@lists.orangefs.org
+Message-ID: <fUY8Njs7RQiKVObH2ypljA@ismtpd0025p1iad2.sendgrid.net>
+Subject: Active involvement
+X-Drip-SendingAccount: 6441855
+X-SG-EID: rb8ZEMJ2v8XTXhbm8WmwaHqmJ0VKlETmT1ucqJP8gB8l6ihVsCclbAcFE5c6Q89adgULLzp5viW7GY
+ jy6B5VXrHIy9b3vMe1KKvZ9qb4omhX2TlJMrr6z5mkZZQZ3jwKShwqtfJOpAlMdXUmA9GK4QiITE6o
+ DEA6uX/spFRDLAval765GSWJkXooCN6wActLzsqR0Yo5nncOWF4EbieVB7DZHDHjbFFSzFpSslS33P
+ ogn/oxkj11ABIMhpMQ2e97
+X-SG-ID: gnwugAPEk90ONPODfP9Nu55FF3XXDvhTyt7SRD1G430a6/zx5T+N7/+dIvoaswzZplOXUZ63wbmI9L
+ L3Qq8YL8YQiux9taMD/FgzMvA4FSWJWE1G1x1f7qqxcxPvANkEe8nsfCrIoz3GqNqw8PC6u5yZ15fA
+ yybUBgS1pu7x74uzEyisxDqPiyPLB/y5Fn5H7kCUbWA5wuPoAhiLSqHHupMWZAB0T68+hlBe40L3jx
+ gLcA7wXcOVa5LW5qBU8iKrDAVlJVxrFXwB0UqqQjS3txvo3GTW1MtTNfQ2i0NJ83QAlUlV2W8L8O/6
+ A5FxRcS+VkOFzp3C7bfsGXbUkMeXoP8puraUXli5tR4JGJ69W+k4NL7rCfvGwdl5C1CqT8zt
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,7 +57,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -75,75 +70,12 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-I've been away from this for a while, but have been working on it
-now for several days... by working on it, I mean I've been reading
-the code back into fs and forward into the userspace part of orangefs,
-and comparing what orangefs does with what ext4 and tmpfs do when I
-set and unset acls...
+To make sure you keep getting these emails, please
+add joe@veetrack.co.uk to your address book or whitelist us. Want out
+of the loop? https://t.dripemail2.com/c/eyJhY2NvdW50X2lkIjoiNjQ0MTg1NSIsImR=
+lbGl2ZXJ5X2lkIjoiY25tMTc2NzRncWtlNjR0czEzcWYiLCJ1cmwiOiJodHRwczovL3d3dy5nZX=
+RkcmlwLmNvbS9zdWJzY3JpYmVycy8xdnZhMjkwZjZhcmRqcGU4OTJtby9zdWJzY3JpcHRpb25zP=
+2Q9Y25tMTc2NzRncWtlNjR0czEzcWZcdTAwMjZleGNsdWRlX2NsaWNrPTFcdTAwMjZpbnRlbnQ9=
+dW5zdWJzY3JpYmVcdTAwMjZfX3M9MXZ2YTI5MGY2YXJkanBlODkybW8ifQ.
 
-I can observe that these acls are foldable into mode,
-no acls are set, this asdf file is on ext4:
-
-hubcap@vm1 ~]$ ls -l asdf
--rw-rw----. 1 hubcap hubcap 0 Mar  6 15:34 asdf
-[hubcap@vm1 ~]$ setfacl -m u::rwx asdf
-[hubcap@vm1 ~]$ ls -l asdf
--rwxrw----. 1 hubcap hubcap 0 Mar  6 15:34 asdf
-[hubcap@vm1 ~]$ setfacl -m g::rwx asdf
-[hubcap@vm1 ~]$ ls -l asdf
--rwxrwx---. 1 hubcap hubcap 0 Mar  6 15:34 asdf
-[hubcap@vm1 ~]$ setfacl -m o::rwx asdf
-[hubcap@vm1 ~]$ ls -l asdf
--rwxrwxrwx. 1 hubcap hubcap 0 Mar  6 15:34 asdf
-
-There must be more, perhaps from the perspective of
-root setting the acl, or...? What are some other
-examples of acls that get folded into mode that I
-could test with?
-
-Al>> Moreover, if you change an existing ACL to something
-Al>> that is expressible by pure mode,
-
-Can you suggest an example here, too?
-
-Finally (for today :-) ) what happened here? Orangefs
-reacts differently than ext4... in both cases the acl
-was set, but on ext4 the mode was also
-changed...
-
-hubcap@vm1 ~]$ touch /pvfsmnt/asdf /home/hubcap/asdf
-[hubcap@vm1 ~]$ ls -l /pvfsmnt/asdf /home/hubcap/asdf
--rw-rw-r--. 1 hubcap hubcap 0 Mar 13 11:50 /home/hubcap/asdf
--rw-rw-r--. 1 hubcap hubcap 0 Mar 13 11:50 /pvfsmnt/asdf
-
-root@vm1 hubcap]# chown root /home/hubcap/asdf /pvfsmnt/asdf
-[root@vm1 hubcap]# ls -l /home/hubcap/asdf /pvfsmnt/asdf
--rw-rw-r--. 1 root hubcap 0 Mar 13 11:50 /home/hubcap/asdf
--rw-rw-r--. 1 root hubcap 0 Mar 13 11:50 /pvfsmnt/asdf
-[root@vm1 hubcap]# setfacl -m u:hubcap:rwx /home/hubcap/asdf /pvfsmnt/asdf
-[root@vm1 hubcap]# ls -l /home/hubcap/asdf /pvfsmnt/asdf
--rw-rwxr--+ 1 root hubcap 0 Mar 13 11:50 /home/hubcap/asdf
--rw-rw-r--+ 1 root hubcap 0 Mar 13 11:50 /pvfsmnt/asdf
-
--Mike
-
-On Fri, Jan 31, 2020 at 7:56 PM Al Viro <viro@zeniv.linux.org.uk> wrote:
->
->         Prior to 4bef69000d93 (orangefs: react properly to
-> posix_acl_update_mode's aftermath.) it used to be possible
-> to do orangefs_set_acl(inode, NULL, ACL_TYPE_ACCESS) -
-> it would've removed the corresponding xattr and that would
-> be it.  Now it fails with -EINVAL without having done
-> anything.  How is one supposed to remove ACLs there?
->
->         Moreover, if you change an existing ACL to something
-> that is expressible by pure mode, you end up calling
-> __orangefs_setattr(), which will call posix_acl_chmod().
-> And AFAICS that will happen with *old* ACL still cached,
-> so you'll get ACL_MASK/ACL_OTHER updated in the old ACL.
->
->         How can that possibly work?  Sure, you want to
-> propagate the updated mode to server - after you've
-> done the actual update (possibly removal) of ACL-encoding
-> xattr there...
-
+Unit 4 Turnbull Way, Livingston, West Lothian, EH54 8RB=

@@ -2,48 +2,50 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 797BF191CE5
-	for <lists+devel-orangefs@lfdr.de>; Tue, 24 Mar 2020 23:34:45 +0100 (CET)
-Received: from [::1] (port=41044 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01506192382
+	for <lists+devel-orangefs@lfdr.de>; Wed, 25 Mar 2020 09:58:28 +0100 (CET)
+Received: from [::1] (port=56230 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jGs8C-0006Cc-Hr
-	for lists+devel-orangefs@lfdr.de; Tue, 24 Mar 2020 18:34:44 -0400
-Received: from o16.sg.m.dripemail2.com ([168.245.51.8]:40077)
+	id 1jH1rm-0006ID-W9
+	for lists+devel-orangefs@lfdr.de; Wed, 25 Mar 2020 04:58:27 -0400
+Received: from senderb81.zcsend.net ([135.84.83.81]:44000)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
  (Exim 4.93) (envelope-from
- <bounces+2693180-33fb-devel=lists.orangefs.org@m.dripemail2.com>)
- id 1jGs8B-0006BB-81
- for devel@lists.orangefs.org; Tue, 24 Mar 2020 18:34:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; 
- d=dripemail2.com; h=content-type:from:mime-version:to:subject; 
- s=s1; bh=38yNe/Fd+Z0mfrT2jM8ppjih24Ot7esLAGA6zeU7IiI=; b=RdYlDMR
- CesBWatgY6v7PcRkGVCeV8i4lT94Tz/nHmweLd+NAgMuwd7Y+zZ0RVKQcMqDuf6M
- dqLQQxuGVHuXQnPhGiRbHSFuIvuW2iEdckpatZOvlDXEn2tsnPZIqPH6B3puQKsS
- 517fgVLougwZI5U7b+4bDwBFLOGzZv3VwB2I=
-Received: by filter1564p1las1.sendgrid.net with SMTP id
- filter1564p1las1-25237-5E7A8AD8-6D
- 2020-03-24 22:34:00.999081215 +0000 UTC m=+96910.997497982
-Received: from MjY5MzE4MA (unknown)
- by ismtpd0025p1iad2.sendgrid.net (SG) with HTTP id fUY8Njs7RQiKVObH2ypljA
- Tue, 24 Mar 2020 22:34:00.951 +0000 (UTC)
-Date: Tue, 24 Mar 2020 22:34:01 +0000 (UTC)
-From: "Sqspace Service Management" <joe@veetrack.co.uk>
-Mime-Version: 1.0
+ <bounce_642507526+a.13bcfbdbfeecad6d_11699e4bf7f043e_v53@mail3.bnws.zcsend.net>)
+ id 1jH1rl-0006Hx-FX
+ for devel@lists.orangefs.org; Wed, 25 Mar 2020 04:58:25 -0400
+Received: from 172.30.236.27 (172.30.236.27) by senderb81.zcsend.net id
+ hfcej228epg0 for <devel@lists.orangefs.org>;
+ Wed, 25 Mar 2020 01:57:37 -0700 (envelope-from
+ <bounce_642507526+a.13bcfbdbfeecad6d_11699e4bf7f043e_v53@mail3.bnws.zcsend.net>)
+DKIM-Signature: a=rsa-sha1;
+ b=EQ2NpQMC9w+KJqNxAGe8mI4y2JecZPDfAhWKnjtn/oZxXu8O8MMMQkLdoM24Dcil4X0/WKBE+6VTdMsvC66LadxJtQtjDYpETOTIzy8tDMMfRKc/2wV4wwlROV2ZZ4bv+8XRfWH2iq4yoLdC9cTCUZBewIPNqaGU7BCVivTOJcM=;
+ c=simple/simple; s=k1; d=mail3.bnws.zcsend.net; v=1;
+ bh=G3fO4SIxvrk9swY+8XfNNar4Irc=;
+ h=date:from:reply-to:to:message-id:subject:mime-version:content-type; 
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; 
+ s=k1; d=mail3.bnws.zcsend.net; 
+ b=DE0pCpps02UEgnD+V747GDOXWgcaGGFBFQITzi81PFUWKbhqZnpfpKVMDXmRElqnQEiIOWHpRM7o
+ AWX8QL8obX5056St5miO6tX1PZmqgRbDKxpN1BM+oTVpGkTnzC0rj5AdAUGYRJHIhqqVOjmCJ5Oo
+ 5knA9cdGKv0yn+V0uYo=  
+Date: Wed, 25 Mar 2020 01:57:37 -0700 (PDT)
+From: "CloudBooks" <sales@getdoctorsonline.com>
 To: devel@lists.orangefs.org
-Message-ID: <fUY8Njs7RQiKVObH2ypljA@ismtpd0025p1iad2.sendgrid.net>
-Subject: Active involvement
-X-Drip-SendingAccount: 6441855
-X-SG-EID: rb8ZEMJ2v8XTXhbm8WmwaHqmJ0VKlETmT1ucqJP8gB8l6ihVsCclbAcFE5c6Q89adgULLzp5viW7GY
- jy6B5VXrHIy9b3vMe1KKvZ9qb4omhX2TlJMrr6z5mkZZQZ3jwKShwqtfJOpAlMdXUmA9GK4QiITE6o
- DEA6uX/spFRDLAval765GSWJkXooCN6wActLzsqR0Yo5nncOWF4EbieVB7DZHDHjbFFSzFpSslS33P
- ogn/oxkj11ABIMhpMQ2e97
-X-SG-ID: gnwugAPEk90ONPODfP9Nu55FF3XXDvhTyt7SRD1G430a6/zx5T+N7/+dIvoaswzZplOXUZ63wbmI9L
- L3Qq8YL8YQiux9taMD/FgzMvA4FSWJWE1G1x1f7qqxcxPvANkEe8nsfCrIoz3GqNqw8PC6u5yZ15fA
- yybUBgS1pu7x74uzEyisxDqPiyPLB/y5Fn5H7kCUbWA5wuPoAhiLSqHHupMWZAB0T68+hlBe40L3jx
- gLcA7wXcOVa5LW5qBU8iKrDAVlJVxrFXwB0UqqQjS3txvo3GTW1MtTNfQ2i0NJ83QAlUlV2W8L8O/6
- A5FxRcS+VkOFzp3C7bfsGXbUkMeXoP8puraUXli5tR4JGJ69W+k4NL7rCfvGwdl5C1CqT8zt
-Content-Type: text/plain; charset=UTF-8
+Message-ID: <zcb.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfeecad6d.1585126657786@mail3.bnws.zcsend.net>
+Subject: Powerful Invoicing Platform
+MIME-Version: 1.0
+Feedback-ID: 1264be306:1264be306.13bcfbdbfee9e87a:US:ZohoCampaigns
+X-JID: 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.13bcfbdbfee9e87a
+X-campaignid: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfeecad6d.11699e4bf7f043e
+X-Zoho-RID: zohocampaigns.2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0.zcb.13bcfbdbfeecad6d.11699e4bf7f043e
+X-Mailer: Zoho Campaigns
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-Report-Abuse: <Please send a copy of this message along with header to abuse
+ +
+ 2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0_zcb_13bcfbdbfeecad6d@zohocampaigns.com>,
+ <https://acpo.maillist-manage.com/campaigns/ReportAbuse.zc?od=2d5a885a69b60a972aab55ec903c9ad971185630859ca1fd0&rd=13bcfbdbfeecad6d&sd=13bcfbdbfee9ec7b&n=11699e4bf7f043e>
+Content-Type: text/plain;charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
@@ -57,6 +59,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: sales@getdoctorsonline.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -70,12 +73,71 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-To make sure you keep getting these emails, please
-add joe@veetrack.co.uk to your address book or whitelist us. Want out
-of the loop? https://t.dripemail2.com/c/eyJhY2NvdW50X2lkIjoiNjQ0MTg1NSIsImR=
-lbGl2ZXJ5X2lkIjoiY25tMTc2NzRncWtlNjR0czEzcWYiLCJ1cmwiOiJodHRwczovL3d3dy5nZX=
-RkcmlwLmNvbS9zdWJzY3JpYmVycy8xdnZhMjkwZjZhcmRqcGU4OTJtby9zdWJzY3JpcHRpb25zP=
-2Q9Y25tMTc2NzRncWtlNjR0czEzcWZcdTAwMjZleGNsdWRlX2NsaWNrPTFcdTAwMjZpbnRlbnQ9=
-dW5zdWJzY3JpYmVcdTAwMjZfX3M9MXZ2YTI5MGY2YXJkanBlODkybW8ifQ.
+=C2=A0 =20
+      =20
+  =20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+=20
+           =20
+          =20
+ =20
+  =20
 
-Unit 4 Turnbull Way, Livingston, West Lothian, EH54 8RB=
+ https://acpo.campaign-view.com/ua/viewinbrowser?od=3D2d5a885a69b60a972aab5=
+5ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfeecad6d&sd=3D13bcfbdbfee9ec7b&n=
+=3D11699e4bf7f043e&mrd=3D13bcfbdbfee9ec69&m=3D1 View this email in your bro=
+wser               =20
+=20
+  =C2=A0=C2=A0=C2=A0    =20
+=20
+  =20
+
+Powerful Invoicing Platform.=20
+    =20
+=20
+  =20
+
+FOCUS ON GROWING YOUR BUSINESS=20
+We're here to help you get your finances out of the way.=20
+ https://www.cloudbooksapp.com/ CloudBooks is free,simple and secure invoic=
+ing for small businesses.=20
+    =20
+=20
+  =20
+
+Send your first invoice today=C2=A0=E2=80=94 It's free!     =20
+=20
+  =20
+
+Your Finances In One Place=20
+Enjoy a fully-featured suite of customizable business reports and summaries=
+ so you always know where your business stands.=20
+
+
+
+Accept Online Payments=20
+Accept credit cards and many payment gateways from day one, and let clients=
+ pay right from your invoice =E2=80=94 even on their mobile device.=20
+
+
+
+Track Time, Expenses & Mileage=20
+Track hourly billed tasks, expenses & trips with ease and convert them into=
+ elegant invoices or estimates at the push of a button.=20
+    =20
+  =20
+=20
+      https://www.cloudbooksapp.com/ Send your first invoice today        =
+=20
+=20
+  =20
+
+You can  https://acpo.maillist-manage.com/ua/optout?od=3D2d5a885a69b60a972a=
+ab55ec903c9ad971185630859ca1fd0&rd=3D13bcfbdbfeecad6d&sd=3D13bcfbdbfee9ec7b=
+&n=3D11699e4bf7f043e unsubscribe from this email or change your email notif=
+ications. Online version is here.=20
+=20
+          =20
+=C2=A0
+

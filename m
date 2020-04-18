@@ -2,57 +2,58 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id B46E019E7AA
-	for <lists+devel-orangefs@lfdr.de>; Sat,  4 Apr 2020 22:58:20 +0200 (CEST)
-Received: from [::1] (port=46444 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EB911AF5BA
+	for <lists+devel-orangefs@lfdr.de>; Sun, 19 Apr 2020 00:52:14 +0200 (CEST)
+Received: from [::1] (port=56650 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jKprv-0007Eo-Gi
-	for lists+devel-orangefs@lfdr.de; Sat, 04 Apr 2020 16:58:19 -0400
-Received: from mail-vs1-f66.google.com ([209.85.217.66]:44624)
+	id 1jPwJp-00013W-Aj
+	for lists+devel-orangefs@lfdr.de; Sat, 18 Apr 2020 18:52:13 -0400
+Received: from mail-ed1-f66.google.com ([209.85.208.66]:45670)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <hubcap@omnibond.com>) id 1jKprt-00073l-62
- for devel@lists.orangefs.org; Sat, 04 Apr 2020 16:58:17 -0400
-Received: by mail-vs1-f66.google.com with SMTP id e138so7249238vsc.11
- for <devel@lists.orangefs.org>; Sat, 04 Apr 2020 13:57:56 -0700 (PDT)
+ (Exim 4.93) (envelope-from <guoqing.jiang@cloud.ionos.com>)
+ id 1jPwJo-000136-EH
+ for devel@lists.orangefs.org; Sat, 18 Apr 2020 18:52:12 -0400
+Received: by mail-ed1-f66.google.com with SMTP id f12so4338417edn.12
+ for <devel@lists.orangefs.org>; Sat, 18 Apr 2020 15:51:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=omnibond-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=2x0AYyTRYtjT/SYXHm491NxzEChiRCQRcx9Z4KQvNzM=;
- b=ej6WMCwTFQHydwUw6G9KDNeQDdC/rj6vgjWFms54iDg1013xe9eqy6DrcQP5pszcji
- GnVFhEip7i+yTACoFhEqXPLV0MH50kK2C5IW2L3ZlpwFJg8p9CPq9AYci1IlVpVQzxAJ
- LGcr/ujlyBVvNeV/37rxZGR15+y2WXfZIj5GcNARTZoNAskehPNFoW3nV7f0TJZ1FmSj
- V8BZ/NS/WTBKEkdj02J8wiT5m5g3h0gyX6vPc/BLhTJGMI7nGa0bbSTqEVymhLFET42p
- YYm4a4T8YLMQBsRMTKJ30beRQ2gxhQJCKVQZxM5xRuKBwKY01JgL1CotVW4uYo/869dJ
- 8qwA==
+ d=cloud.ionos.com; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=LJG/tvH74vPoZBWRmNdYjJBmTLQ93YDBV04Re8a/V+U=;
+ b=KFN2BQBgovkjPW//Nj/G8X+du1tRzLXj3PCGFEzq/F5Zsi2k2lzaSPr7Eim84Z00wY
+ o4Zc/B9YK556Iq9QhV8vk+JD5GbiG6musD/+6BRa8VHL62dCSI+QUoXisnlz9uIMXMHL
+ yiWinSld4vUf9bOMhpCaheaghCuxM9BftbPgd0nAKIvsEAeug2B3rCDtofQvM3+nkGhF
+ oSqB6MiYRP+75flGNSdr2NK6HCegAL+XJ75G/Fjv0QjR27pJNR+BcYg+UX/UXM10NTYj
+ Zc+MD8TwBw0tfPOef1OUjuzMoceCf6+juHrK0ycAyga1RwV58qs7ET/d/p2X775r6S30
+ IXtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=2x0AYyTRYtjT/SYXHm491NxzEChiRCQRcx9Z4KQvNzM=;
- b=WuxZtffqlWSWp82JyzCLBwX52SaBrG7R2SdTDp72lFAUNLU3qIZ65JIUkdM2A3I9PA
- ljJ8d9I3l1nsl8O/v88m0q04HjYthGyLhKC9gAnBkwQZYubrgBNi1UEio8crp5MJk85q
- XevTB4oNbyYHTQvOuheF0RvciF8dycJaX9I/ViZUxvt9OMXoxiwDoATC9YU0Yn6ooMDE
- FEhNI8dyKhAko8rmibvueAJXia9B3DUQ3eEYhyOOg/APqiz060sDZlvgZeoU4Ec4A0Uo
- fHmPfb7S4qa8TRXEs1KQV9mIml53rIGJyIudQgBsQH3JH088tUSs4A2/ByAGUWLNAP/j
- 9KkA==
-X-Gm-Message-State: AGi0Puaj4X6ctdR7woblBkZK8/676iXm3GkeIOENjhldKA4QDSjNwoWT
- JPCMzeXm83jwsBcKq6Vm26KoPi1DRnWJR2AvjdBodA==
-X-Google-Smtp-Source: APiQypKxSTctjde1rLaR9pQPNwTSYPcH+H8+UEHrzbwI5KHm9VdOy5JtmGnRHHKU00mqqR//qEfeFV/mIpHn6qqq14M=
-X-Received: by 2002:a67:33cb:: with SMTP id
- z194mr11260819vsz.155.1586033856230; 
- Sat, 04 Apr 2020 13:57:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200326170705.1552562-2-hch@lst.de>
- <20200404162826.181808-1-hubcap@kernel.org>
- <20200404174346.GU21484@bombadil.infradead.org>
-In-Reply-To: <20200404174346.GU21484@bombadil.infradead.org>
-From: Mike Marshall <hubcap@omnibond.com>
-Date: Sat, 4 Apr 2020 16:57:24 -0400
-Message-ID: <CAOg9mSSrJp2dqQTNDgucLoeQcE_E_aYPxnRe5xphhdSPYw7QtQ@mail.gmail.com>
-Subject: Re: [PATCH] orangefs: complete Christoph's "remember count" reversion.
-To: Matthew Wilcox <willy@infradead.org>
-Content-Type: text/plain; charset="UTF-8"
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=LJG/tvH74vPoZBWRmNdYjJBmTLQ93YDBV04Re8a/V+U=;
+ b=VTVbIFqqDwzyBH8Ay4MOj4iF1kJaVbYaV4D5VrvVOk2ajjFqFKjPAsOztVhOTzjgKT
+ mALPsjg/bGnscHHw6dfsZu936yXAS4LzNVDhToa+3t2MJm45fUROWMaukMLao6bo/Rtb
+ b6BCsb+DeNq7gZz8zctANkolX0AcbqzBHA6+fSKl6yviANDF7XGN8ltG9KmbaDPBbl5g
+ 4U0TMzeTi8F7cR9Bqs4D3YFTWPQPOzFTV2FaqME5ZR4nuCwEShegZ+o6rDC6NCO412pv
+ H6v4RIzdFtk+dr1ce1jAF0SeBwNCLyDYCWpSVlMwyIrZ0H8nMBKJQ9SAwT23s3wMq53+
+ hN1Q==
+X-Gm-Message-State: AGi0PuYBwjrSCvuaiHVQ4Yh/672OfQqmEP+naW9Wd8YqjTdUrfpHN8iM
+ O+y4YbYHbVC07RcaVVgSL3AZRA==
+X-Google-Smtp-Source: APiQypJovF9nvn1Yr9ZkK7hvEAqP4GrPPtpF1BNuB0WcmsdP6W/7lfIf/XIOf4WoWYBYdHzCtr5a9g==
+X-Received: by 2002:aa7:d056:: with SMTP id n22mr8533808edo.281.1587250291361; 
+ Sat, 18 Apr 2020 15:51:31 -0700 (PDT)
+Received: from ls00508.pb.local ([2001:1438:4010:2540:6c58:b8bc:cdc6:2e2d])
+ by smtp.gmail.com with ESMTPSA id g21sm2616767ejm.79.2020.04.18.15.51.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 Apr 2020 15:51:30 -0700 (PDT)
+From: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
+To: linux-fsdevel@vger.kernel.org
+Subject: [RFC PATCH 4/5] orangefs: call __clear_page_buffers to simplify code
+Date: Sun, 19 Apr 2020 00:51:22 +0200
+Message-Id: <20200418225123.31850-5-guoqing.jiang@cloud.ionos.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200418225123.31850-1-guoqing.jiang@cloud.ionos.com>
+References: <20200418225123.31850-1-guoqing.jiang@cloud.ionos.com>
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,8 +65,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>, hubcap@kernel.org,
- Christoph Hellwig <hch@lst.de>, devel@lists.orangefs.org
+Cc: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>, devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -79,43 +79,79 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Matthew>  So yes, I think within the next year, you should be
-Matthew>  able to tell the page cache to allocate 4MB pages.
+Since __clear_page_buffers is exported, we can call __clear_page_buffers
+to simplify code in the four places.
 
-I can't find the ascii thumbs up emoji :-) ...
+Cc: Mike Marshall <hubcap@omnibond.com>
+Cc: Martin Brandenburg <martin@omnibond.com>
+Cc: devel@lists.orangefs.org
+Signed-off-by: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
+---
+The order for set_page_private and ClearPagePrivate is swapped in
+__clear_page_buffers, not sure it is identical or not, so this is
+RFC.
 
--Mike
+Thanks,
+Guoqing
 
-On Sat, Apr 4, 2020 at 1:43 PM Matthew Wilcox <willy@infradead.org> wrote:
->
-> On Sat, Apr 04, 2020 at 12:28:26PM -0400, hubcap@kernel.org wrote:
-> > As an aside, the page cache has been a blessing and a curse
-> > for us. Since we started using it, small IO has improved
-> > incredibly, but our max speed hits a plateau before it otherwise
-> > would have. I think because of all the page size copies we have
-> > to do to fill our 4 meg native buffers. I try to read about all
-> > the new work going into the page cache in lwn, and make some
-> > sense of the new code :-). One thing I remember is when
-> > Christoph Lameter said "the page cache does not scale", but
-> > I know the new work is focused on that. If anyone has any
-> > thoughts about how we could make improvments on filling our
-> > native buffers from the page cache (larger page sizes?),
-> > feel free to offer any help...
->
-> Umm, 4MB native buffers are ... really big ;-)  I wasn't planning on
-> going past PMD_SIZE (ie 2MB on x86) for the readahead large pages,
-> but if a filesystem wants that, then I should change that plan.
->
-> What I was planning for, but don't quite have an implementation nailed
-> down for yet, is allowing filesystems to grow the readahead beyond that
-> wanted by the generic code.  Filesystems which implement compression
-> frequently want blocks in the 256kB size range.  It seems like OrangeFS
-> would fit with that scheme, as long as I don't put a limit on what the
-> filesystem asks for.
->
-> So yes, I think within the next year, you should be able to tell the
-> page cache to allocate 4MB pages.  You will still need a fallback path
-> for when memory is too fragmented to allocate new pages, but if you're
-> using 4MB pages, then hopefully we'll be able to reclaim a clean 4MB
-> pages from elsewhere in the page cache and supply you with a new one.
+ fs/orangefs/inode.c | 17 +++++------------
+ 1 file changed, 5 insertions(+), 12 deletions(-)
+
+diff --git a/fs/orangefs/inode.c b/fs/orangefs/inode.c
+index 12ae630fbed7..8e1591d8bf24 100644
+--- a/fs/orangefs/inode.c
++++ b/fs/orangefs/inode.c
+@@ -11,6 +11,7 @@
+  */
+ 
+ #include <linux/bvec.h>
++#include <linux/buffer_head.h>
+ #include "protocol.h"
+ #include "orangefs-kernel.h"
+ #include "orangefs-bufmap.h"
+@@ -64,9 +65,7 @@ static int orangefs_writepage_locked(struct page *page,
+ 	}
+ 	if (wr) {
+ 		kfree(wr);
+-		set_page_private(page, 0);
+-		ClearPagePrivate(page);
+-		put_page(page);
++		__clear_page_buffers(page);
+ 	}
+ 	return ret;
+ }
+@@ -460,17 +459,13 @@ static void orangefs_invalidatepage(struct page *page,
+ 
+ 	if (offset == 0 && length == PAGE_SIZE) {
+ 		kfree((struct orangefs_write_range *)page_private(page));
+-		set_page_private(page, 0);
+-		ClearPagePrivate(page);
+-		put_page(page);
++		__clear_page_buffers(page);
+ 		return;
+ 	/* write range entirely within invalidate range (or equal) */
+ 	} else if (page_offset(page) + offset <= wr->pos &&
+ 	    wr->pos + wr->len <= page_offset(page) + offset + length) {
+ 		kfree((struct orangefs_write_range *)page_private(page));
+-		set_page_private(page, 0);
+-		ClearPagePrivate(page);
+-		put_page(page);
++		__clear_page_buffers(page);
+ 		/* XXX is this right? only caller in fs */
+ 		cancel_dirty_page(page);
+ 		return;
+@@ -537,9 +532,7 @@ static void orangefs_freepage(struct page *page)
+ {
+ 	if (PagePrivate(page)) {
+ 		kfree((struct orangefs_write_range *)page_private(page));
+-		set_page_private(page, 0);
+-		ClearPagePrivate(page);
+-		put_page(page);
++		__clear_page_buffers(page);
+ 	}
+ }
+ 
+-- 
+2.17.1
+
 

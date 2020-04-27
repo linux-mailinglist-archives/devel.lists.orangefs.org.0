@@ -2,41 +2,44 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 049901B94B3
-	for <lists+devel-orangefs@lfdr.de>; Mon, 27 Apr 2020 02:13:21 +0200 (CEST)
-Received: from [::1] (port=36228 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3E211B951F
+	for <lists+devel-orangefs@lfdr.de>; Mon, 27 Apr 2020 04:27:56 +0200 (CEST)
+Received: from [::1] (port=39080 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jSrOi-0003cg-8d
-	for lists+devel-orangefs@lfdr.de; Sun, 26 Apr 2020 20:13:20 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:37376)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
- (Exim 4.93) (envelope-from <willy@infradead.org>) id 1jSrOg-0003bI-AP
- for devel@lists.orangefs.org; Sun, 26 Apr 2020 20:13:18 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Sv3KzlHXHSNzqCfln1zX1+cYvetQ25Ui6UHInWko+bo=; b=rEb+lE/0+PtIQJdRbjS2xjuy+o
- oSuqS+/IwVu0sy4fCBtWk7SuEB22rklJevn4zj9wnt4SG9IaNVUSlQbdp8tLG4xGcFlChDqU9Hdp8
- LSZD0cVat+rHWqK4vYCIQfqKBNzpNloawwp5432WYgqdqYklL3xej2tZpQa1Z2c2Sp0vudw1U0aV2
- 8YhjOjoLPsdQ1qmpE/Rtx5bn40vIsybG4bpGkMU6yNDtnIlstQZWDQrLFZ6QkdRS6odl8LuHfUAhS
- BxvVdaRF++aRN9IF/VQTPEUdZwxcmS2G+OtGu4bM+Q7fR0GRS+nF/Ppq/nR8Hzzsn9U0a5/b8liA8
- TBKguqDA==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jSrNy-0003Ft-9I; Mon, 27 Apr 2020 00:12:34 +0000
-Date: Sun, 26 Apr 2020 17:12:34 -0700
-From: Matthew Wilcox <willy@infradead.org>
-To: Dave Chinner <david@fromorbit.com>
+	id 1jStUy-0005bC-0d
+	for lists+devel-orangefs@lfdr.de; Sun, 26 Apr 2020 22:27:56 -0400
+Received: from mail104.syd.optusnet.com.au ([211.29.132.246]:35112)
+ by mm1.emwd.com with esmtp (Exim 4.93)
+ (envelope-from <david@fromorbit.com>) id 1jStUw-0005aH-QJ
+ for devel@lists.orangefs.org; Sun, 26 Apr 2020 22:27:55 -0400
+Received: from dread.disaster.area (pa49-195-157-175.pa.nsw.optusnet.com.au
+ [49.195.157.175])
+ by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id B80CF82167F;
+ Mon, 27 Apr 2020 12:27:10 +1000 (AEST)
+Received: from dave by dread.disaster.area with local (Exim 4.92.3)
+ (envelope-from <david@fromorbit.com>)
+ id 1jStUD-0001QJ-Af; Mon, 27 Apr 2020 12:27:09 +1000
+Date: Mon, 27 Apr 2020 12:27:09 +1000
+From: Dave Chinner <david@fromorbit.com>
+To: Matthew Wilcox <willy@infradead.org>
 Subject: Re: [RFC PATCH 8/9] orangefs: use set/clear_fs_page_private
-Message-ID: <20200427001234.GB29705@bombadil.infradead.org>
+Message-ID: <20200427022709.GC2005@dread.disaster.area>
 References: <20200426214925.10970-1-guoqing.jiang@cloud.ionos.com>
  <20200426214925.10970-9-guoqing.jiang@cloud.ionos.com>
  <20200426222455.GB2005@dread.disaster.area>
+ <20200427001234.GB29705@bombadil.infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200426222455.GB2005@dread.disaster.area>
+In-Reply-To: <20200427001234.GB29705@bombadil.infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Optus-CM-Score: 0
+X-Optus-CM-Analysis: v=2.3 cv=X6os11be c=1 sm=1 tr=0
+ a=ONQRW0k9raierNYdzxQi9Q==:117 a=ONQRW0k9raierNYdzxQi9Q==:17
+ a=kj9zAlcOel0A:10 a=cl8xLZFz6L8A:10 a=7-415B0cAAAA:8
+ a=_ZLPnNw1jSjQLjkGmAoA:9 a=CjuIK1q_8ugA:10 a=igBNqPyMv6gA:10
+ a=biEYGPWJfzWAr4FL6Ov7:22
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,22 +66,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Mon, Apr 27, 2020 at 08:24:55AM +1000, Dave Chinner wrote:
-> > @@ -460,17 +456,13 @@ static void orangefs_invalidatepage(struct page *page,
-> >  
-> >  	if (offset == 0 && length == PAGE_SIZE) {
-> >  		kfree((struct orangefs_write_range *)page_private(page));
-> > -		set_page_private(page, 0);
-> > -		ClearPagePrivate(page);
-> > -		put_page(page);
-> > +		clear_fs_page_private(page);
+On Sun, Apr 26, 2020 at 05:12:34PM -0700, Matthew Wilcox wrote:
+> On Mon, Apr 27, 2020 at 08:24:55AM +1000, Dave Chinner wrote:
+> > > @@ -460,17 +456,13 @@ static void orangefs_invalidatepage(struct page *page,
+> > >  
+> > >  	if (offset == 0 && length == PAGE_SIZE) {
+> > >  		kfree((struct orangefs_write_range *)page_private(page));
+> > > -		set_page_private(page, 0);
+> > > -		ClearPagePrivate(page);
+> > > -		put_page(page);
+> > > +		clear_fs_page_private(page);
+> > 
+> > Ditto:
+> > 		wr = clear_fs_page_private(page);
+> > 		kfree(wr);
 > 
-> Ditto:
-> 		wr = clear_fs_page_private(page);
-> 		kfree(wr);
+> You don't want to be as succinct as the btrfs change you suggested?
+> 
+> 		kfree(clear_fs_page_private(page));
 
-You don't want to be as succinct as the btrfs change you suggested?
+That could be done, yes. I was really just trying to point out the
+use after free that was occurring here rather than write compact
+code...
 
-		kfree(clear_fs_page_private(page));
+Cheers,
 
+Dave.
+-- 
+Dave Chinner
+david@fromorbit.com
 

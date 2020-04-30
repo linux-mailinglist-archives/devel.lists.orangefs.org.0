@@ -2,59 +2,56 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC93D1C09B7
-	for <lists+devel-orangefs@lfdr.de>; Thu, 30 Apr 2020 23:53:27 +0200 (CEST)
-Received: from [::1] (port=47872 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2A8B1C0A22
+	for <lists+devel-orangefs@lfdr.de>; Fri,  1 May 2020 00:11:10 +0200 (CEST)
+Received: from [::1] (port=51002 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jUH7X-0007fs-1H
-	for lists+devel-orangefs@lfdr.de; Thu, 30 Apr 2020 17:53:27 -0400
-Received: from mail-ed1-f65.google.com ([209.85.208.65]:46248)
+	id 1jUHOf-0000BM-Q1
+	for lists+devel-orangefs@lfdr.de; Thu, 30 Apr 2020 18:11:09 -0400
+Received: from mail-il1-f196.google.com ([209.85.166.196]:45814)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <guoqing.jiang@cloud.ionos.com>)
- id 1jUH7W-0007fK-0d
- for devel@lists.orangefs.org; Thu, 30 Apr 2020 17:53:26 -0400
-Received: by mail-ed1-f65.google.com with SMTP id l3so5785705edq.13
- for <devel@lists.orangefs.org>; Thu, 30 Apr 2020 14:53:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cloud.ionos.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=0x0u2gx9fn/eR0FN5+bPGwv0n6eHZLnbohIE4ZZX1xA=;
- b=EKSoG5Ew33JLpPLoDYTtE+/Mgaiip4zvgBvwtrD+hzLSfo0W4PoRueJtf0vHDfylth
- bljRy4d4FM68XWGdNeOkwmfpot8DYA8ccYVAgwhAOhIi49XGb7to4+pAAZneDZCwf4G6
- IkFcj1IZ9Qq8NOMnothYcg8j2FPeyvEg43skasH+eZw77B+t7Qfs+j68ULZzmwKal/h3
- 9saDCk1g1y7x4x+j5cKc0w4eHvhoxpHehsWHYcMrqIF522cmVjrQX9TO1JsfPCvOuR/I
- zHxuTKM5R0LSq/EtBs1ZI6S/nV/ouTfbgPwVZmpLRJi6srnLa57HKoMQe8NfaoufTaQa
- mUJg==
+ (Exim 4.93) (envelope-from <andreas.gruenbacher@gmail.com>)
+ id 1jUHOd-0000A2-RV
+ for devel@lists.orangefs.org; Thu, 30 Apr 2020 18:11:07 -0400
+Received: by mail-il1-f196.google.com with SMTP id i16so2891051ils.12
+ for <devel@lists.orangefs.org>; Thu, 30 Apr 2020 15:10:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=2ET+MOiHcfDMgOrMdmamXFlGdEeR/f0vqWkjUxmdClw=;
+ b=DEPtrDBeYCAoQ0fIRW9vAO9AKdIBDd19yOKxqpCf33m+D4aDmFK0jWp2gDkDUfLIF3
+ a0RiY8WUBuL/OywF0Sfe7Mw+U8PZHBrvRLi/cWr1L1zS3KXtS0LME1w+kYJIPn7rausY
+ nZhWTdF599LEhKufQQYjD1zsGEBgcBeH3K1sOcIdbr8EtnqnwRv4/l6hVhEMsdoJUqpk
+ XjIQpgLOLavv3PmRpNfqyxxh4+hksm0y3AwKeb0sOmtqDJXCcblH+SeQl3NWtKJFZ0bP
+ L4LI0dNHCatdsYd8Gkx8mfgs4X1yi/Bli1OkCGFhW4U70l4V5687nZe5sfnbXXVoZr1N
+ GG5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=0x0u2gx9fn/eR0FN5+bPGwv0n6eHZLnbohIE4ZZX1xA=;
- b=Z7wdIkgp2NMYnyXHaCF2ia250U8nTcGjRHr6AfOtsS0InHaFnoFuKfTBm0M2gJPX0S
- tb7MDmmLOqG6+drPLCkd3rEtsBjCyIAUeVrc6giDWGWIj/2cch0WS2jRa0VCwvKGNZfh
- VUrEdpYqjQTxkZyeld+iv5us6f+wTTCVbfxC3bvX9eRNvnZmrpCQRwrqy0O0NwBBVeVl
- /G5q1jPLYSQ+Nh5CtElELdd+HPT4RXUbVf4uoDp1WxpBv89SrCyjuq1gTANq8u4jm1IQ
- hjazhbT3ugf+a/tcWdqth2+WyHRGaoHnY0FSA/BzhZqnXbrof5lJwFrQjPJB6CoKgCOk
- bdOQ==
-X-Gm-Message-State: AGi0PuaaOTXO24SEzblnEn2IKWyj1pdehvYZ7OTff9HDbWf4fE8d1srR
- gB1NzLDueIXUT0SbeuRIDOeS5g==
-X-Google-Smtp-Source: APiQypKmEI+P+Q9Igmy/Z+wtCcfy41Y3uqyWZUCr4Xom2jUvuVGNOvsSANgZbWuTvpeKE8zdOXrN5A==
-X-Received: by 2002:aa7:ce0f:: with SMTP id d15mr995432edv.327.1588283565020; 
- Thu, 30 Apr 2020 14:52:45 -0700 (PDT)
-Received: from ls00508.pb.local ([2001:1438:4010:2540:b82f:dfc:5e2a:e7cc])
- by smtp.gmail.com with ESMTPSA id f13sm92022ejd.2.2020.04.30.14.52.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2020 14:52:44 -0700 (PDT)
-From: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
-To: linux-fsdevel@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [RFC PATCH V2 8/9] orangefs: use attach/clear_page_private
-Date: Thu, 30 Apr 2020 23:44:49 +0200
-Message-Id: <20200430214450.10662-9-guoqing.jiang@cloud.ionos.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200430214450.10662-1-guoqing.jiang@cloud.ionos.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=2ET+MOiHcfDMgOrMdmamXFlGdEeR/f0vqWkjUxmdClw=;
+ b=JGLVgrDEH71ttk0f/WKtNTtsCQtNnNH1gpqWGaH02mJ5gPDMKQlZdMTy3ztqdKG3E1
+ lkfkeN8msHZsGU+OXRnOgzOqCj7JwpHRmY7PKOaDu1zOTlpbLxIyP14eaC6D7lSv8gk7
+ PBXaWJlBcncjacM5es7wBco4wR6OP8OeMUkztHJ+AkweZdWkUONPMnocuRyq51AkqynW
+ 6H5l+BvbGXaFFn7xK2h2ejjPgVKqTu/NdkH0VhPmgPMqTnHYgIPozHmGnaHJbyxxo1Ua
+ nP2ciniKR+WCfkWPSssKMwDdO5fodeUKG9sYtConkuPvcet/dOgv++m5Kqu/f++fCBPo
+ WCvw==
+X-Gm-Message-State: AGi0PuYoIlWu5bAKQuLbEYBghB8z0XQswEJBwhQyX3xp/kOJaCEbDWTX
+ 58tzOxWRHadx4rx5LCBO+WiKMM6aSUuoTb7bNDY=
+X-Google-Smtp-Source: APiQypJJdXHu9wsfILyXAYVgqjt8UsMKQuE8/0rB4pSAfnWGHEsBd9R1cDbXdgQq9K8UTJgqdLieT21my6+JZOjxZdE=
+X-Received: by 2002:a92:9e0b:: with SMTP id q11mr601506ili.133.1588284626957; 
+ Thu, 30 Apr 2020 15:10:26 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200430214450.10662-1-guoqing.jiang@cloud.ionos.com>
+ <20200430214450.10662-2-guoqing.jiang@cloud.ionos.com>
+In-Reply-To: <20200430214450.10662-2-guoqing.jiang@cloud.ionos.com>
+From: =?UTF-8?Q?Andreas_Gr=C3=BCnbacher?= <andreas.gruenbacher@gmail.com>
+Date: Fri, 1 May 2020 00:10:15 +0200
+Message-ID: <CAHpGcMKdzSBGZTRwuoBTuCFUX44egmutvCr9LcjYW7KpWxmhHA@mail.gmail.com>
+Subject: Re: [RFC PATCH V2 1/9] include/linux/pagemap.h: introduce
+ attach/clear_page_private
+To: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,8 +63,25 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>, david@fromorbit.com,
- willy@infradead.org, hch@infradead.org, devel@lists.orangefs.org
+Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Dave Chinner <david@fromorbit.com>, Song Liu <song@kernel.org>,
+ Yafang Shao <laoar.shao@gmail.com>, Andreas Gruenbacher <agruenba@redhat.com>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>, Chris Mason <clm@fb.com>,
+ willy@infradead.org, Christoph Hellwig <hch@infradead.org>,
+ devel@lists.orangefs.org, Chao Yu <chao@kernel.org>,
+ Josef Bacik <josef@toxicpanda.com>, linux-raid@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
+ Anton Altaparmakov <anton@tuxera.com>, Andreas Dilger <adilger@dilger.ca>,
+ Yang Shi <yang.shi@linux.alibaba.com>,
+ William Kucharski <william.kucharski@oracle.com>,
+ linux-ntfs-dev@lists.sourceforge.net,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs <linux-xfs@vger.kernel.org>,
+ "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+ Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Roman Gushchin <guro@fb.com>,
+ linux-btrfs@vger.kernel.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -81,97 +95,119 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Since the new pair function is introduced, we can call them to clean the
-code in orangefs.
+Hi,
 
-Cc: Mike Marshall <hubcap@omnibond.com>
-Cc: Martin Brandenburg <martin@omnibond.com>
-Cc: devel@lists.orangefs.org
-Signed-off-by: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
----
-RFC -> RFC V2
-1. change the name of new functions to attach/clear_page_private.
-2. avoid potential use-after-free as suggested by Dave Chinner.
+Am Do., 30. Apr. 2020 um 23:56 Uhr schrieb Guoqing Jiang
+<guoqing.jiang@cloud.ionos.com>:
+> The logic in attach_page_buffers and  __clear_page_buffers are quite
+> paired, but
+>
+> 1. they are located in different files.
+>
+> 2. attach_page_buffers is implemented in buffer_head.h, so it could be
+>    used by other files. But __clear_page_buffers is static function in
+>    buffer.c and other potential users can't call the function, md-bitmap
+>    even copied the function.
+>
+> So, introduce the new attach/clear_page_private to replace them. With
+> the new pair of function, we will remove the usage of attach_page_buffers
+> and  __clear_page_buffers in next patches. Thanks for the new names from
+> Christoph Hellwig.
+>
+> Suggested-by: Matthew Wilcox <willy@infradead.org>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: "Darrick J. Wong" <darrick.wong@oracle.com>
+> Cc: William Kucharski <william.kucharski@oracle.com>
+> Cc: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+> Cc: Andreas Gruenbacher <agruenba@redhat.com>
+> Cc: Yang Shi <yang.shi@linux.alibaba.com>
+> Cc: Yafang Shao <laoar.shao@gmail.com>
+> Cc: Song Liu <song@kernel.org>
+> Cc: linux-raid@vger.kernel.org
+> Cc: Chris Mason <clm@fb.com>
+> Cc: Josef Bacik <josef@toxicpanda.com>
+> Cc: David Sterba <dsterba@suse.com>
+> Cc: linux-btrfs@vger.kernel.org
+> Cc: Alexander Viro <viro@zeniv.linux.org.uk>
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Cc: Chao Yu <chao@kernel.org>
+> Cc: linux-f2fs-devel@lists.sourceforge.net
+> Cc: Christoph Hellwig <hch@infradead.org>
+> Cc: linux-xfs@vger.kernel.org
+> Cc: Anton Altaparmakov <anton@tuxera.com>
+> Cc: linux-ntfs-dev@lists.sourceforge.net
+> Cc: Mike Marshall <hubcap@omnibond.com>
+> Cc: Martin Brandenburg <martin@omnibond.com>
+> Cc: devel@lists.orangefs.org
+> Cc: Thomas Gleixner <tglx@linutronix.de>
+> Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> Cc: Roman Gushchin <guro@fb.com>
+> Cc: Andreas Dilger <adilger@dilger.ca>
+> Signed-off-by: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
+> ---
+> RFC -> RFC V2:  Address the comments from Christoph Hellwig
+> 1. change function names to attach/clear_page_private and add comments.
+> 2. change the return type of attach_page_private.
+>
+>  include/linux/pagemap.h | 35 +++++++++++++++++++++++++++++++++++
+>  1 file changed, 35 insertions(+)
+>
+> diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
+> index a8f7bd8ea1c6..2e515f210b18 100644
+> --- a/include/linux/pagemap.h
+> +++ b/include/linux/pagemap.h
+> @@ -205,6 +205,41 @@ static inline int page_cache_add_speculative(struct page *page, int count)
+>         return __page_cache_add_speculative(page, count);
+>  }
+>
+> +/**
+> + * attach_page_private - attach data to page's private field and set PG_private.
+> + * @page: page to be attached and set flag.
+> + * @data: data to attach to page's private field.
+> + *
+> + * Need to take reference as mm.h said "Setting PG_private should also increment
+> + * the refcount".
+> + */
+> +static inline void attach_page_private(struct page *page, void *data)
+> +{
+> +       get_page(page);
+> +       set_page_private(page, (unsigned long)data);
+> +       SetPagePrivate(page);
+> +}
+> +
+> +/**
+> + * clear_page_private - clear page's private field and PG_private.
+> + * @page: page to be cleared.
+> + *
+> + * The counterpart function of attach_page_private.
+> + * Return: private data of page or NULL if page doesn't have private data.
+> + */
+> +static inline void *clear_page_private(struct page *page)
+> +{
+> +       void *data = (void *)page_private(page);
+> +
+> +       if (!PagePrivate(page))
+> +               return NULL;
+> +       ClearPagePrivate(page);
+> +       set_page_private(page, 0);
+> +       put_page(page);
+> +
+> +       return data;
+> +}
+> +
 
- fs/orangefs/inode.c | 32 ++++++--------------------------
- 1 file changed, 6 insertions(+), 26 deletions(-)
+I like this in general, but the name clear_page_private suggests that
+this might be the inverse operation of set_page_private, which it is
+not. So maybe this can be renamed to detach_page_private to more
+clearly indicate that it pairs with attach_page_private?
 
-diff --git a/fs/orangefs/inode.c b/fs/orangefs/inode.c
-index 12ae630fbed7..139c450aca68 100644
---- a/fs/orangefs/inode.c
-+++ b/fs/orangefs/inode.c
-@@ -62,12 +62,7 @@ static int orangefs_writepage_locked(struct page *page,
- 	} else {
- 		ret = 0;
- 	}
--	if (wr) {
--		kfree(wr);
--		set_page_private(page, 0);
--		ClearPagePrivate(page);
--		put_page(page);
--	}
-+	kfree(clear_page_private(page));
- 	return ret;
- }
- 
-@@ -409,9 +404,7 @@ static int orangefs_write_begin(struct file *file,
- 	wr->len = len;
- 	wr->uid = current_fsuid();
- 	wr->gid = current_fsgid();
--	SetPagePrivate(page);
--	set_page_private(page, (unsigned long)wr);
--	get_page(page);
-+	attach_page_private(page, wr);
- okay:
- 	return 0;
- }
-@@ -459,18 +452,12 @@ static void orangefs_invalidatepage(struct page *page,
- 	wr = (struct orangefs_write_range *)page_private(page);
- 
- 	if (offset == 0 && length == PAGE_SIZE) {
--		kfree((struct orangefs_write_range *)page_private(page));
--		set_page_private(page, 0);
--		ClearPagePrivate(page);
--		put_page(page);
-+		kfree(clear_page_private(page));
- 		return;
- 	/* write range entirely within invalidate range (or equal) */
- 	} else if (page_offset(page) + offset <= wr->pos &&
- 	    wr->pos + wr->len <= page_offset(page) + offset + length) {
--		kfree((struct orangefs_write_range *)page_private(page));
--		set_page_private(page, 0);
--		ClearPagePrivate(page);
--		put_page(page);
-+		kfree(clear_page_private(page));
- 		/* XXX is this right? only caller in fs */
- 		cancel_dirty_page(page);
- 		return;
-@@ -535,12 +522,7 @@ static int orangefs_releasepage(struct page *page, gfp_t foo)
- 
- static void orangefs_freepage(struct page *page)
- {
--	if (PagePrivate(page)) {
--		kfree((struct orangefs_write_range *)page_private(page));
--		set_page_private(page, 0);
--		ClearPagePrivate(page);
--		put_page(page);
--	}
-+	kfree(clear_page_private(page));
- }
- 
- static int orangefs_launder_page(struct page *page)
-@@ -740,9 +722,7 @@ vm_fault_t orangefs_page_mkwrite(struct vm_fault *vmf)
- 	wr->len = PAGE_SIZE;
- 	wr->uid = current_fsuid();
- 	wr->gid = current_fsgid();
--	SetPagePrivate(page);
--	set_page_private(page, (unsigned long)wr);
--	get_page(page);
-+	attach_page_private(page, wr);
- okay:
- 
- 	file_update_time(vmf->vma->vm_file);
--- 
-2.17.1
+>  #ifdef CONFIG_NUMA
+>  extern struct page *__page_cache_alloc(gfp_t gfp);
+>  #else
+> --
+> 2.17.1
+>
 
+Thanks,
+Andreas
 

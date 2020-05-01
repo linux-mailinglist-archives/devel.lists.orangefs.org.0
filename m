@@ -2,33 +2,34 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 359E01C0BC6
-	for <lists+devel-orangefs@lfdr.de>; Fri,  1 May 2020 03:44:10 +0200 (CEST)
-Received: from [::1] (port=49190 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81E951C0BD2
+	for <lists+devel-orangefs@lfdr.de>; Fri,  1 May 2020 03:51:06 +0200 (CEST)
+Received: from [::1] (port=50290 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jUKin-0000Xy-8G
-	for lists+devel-orangefs@lfdr.de; Thu, 30 Apr 2020 21:44:09 -0400
-Received: from zeniv.linux.org.uk ([195.92.253.2]:45500)
+	id 1jUKpV-0000ns-PR
+	for lists+devel-orangefs@lfdr.de; Thu, 30 Apr 2020 21:51:05 -0400
+Received: from zeniv.linux.org.uk ([195.92.253.2]:45604)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
  (Exim 4.93) (envelope-from <viro@ftp.linux.org.uk>)
- id 1jUKil-0000XQ-Ri
- for devel@lists.orangefs.org; Thu, 30 Apr 2020 21:44:07 -0400
+ id 1jUKpU-0000nW-VP
+ for devel@lists.orangefs.org; Thu, 30 Apr 2020 21:51:05 -0400
 Received: from viro by ZenIV.linux.org.uk with local (Exim 4.92.3 #3 (Red Hat
- Linux)) id 1jUKhB-00FVTz-IU; Fri, 01 May 2020 01:42:29 +0000
-Date: Fri, 1 May 2020 02:42:29 +0100
+ Linux)) id 1jUKoM-00FVfr-JJ; Fri, 01 May 2020 01:49:54 +0000
+Date: Fri, 1 May 2020 02:49:54 +0100
 From: Al Viro <viro@zeniv.linux.org.uk>
 To: Matthew Wilcox <willy@infradead.org>
 Subject: Re: [RFC PATCH V2 1/9] include/linux/pagemap.h: introduce
  attach/clear_page_private
-Message-ID: <20200501014229.GB23230@ZenIV.linux.org.uk>
+Message-ID: <20200501014954.GC23230@ZenIV.linux.org.uk>
 References: <20200430214450.10662-1-guoqing.jiang@cloud.ionos.com>
  <20200430214450.10662-2-guoqing.jiang@cloud.ionos.com>
  <20200430221338.GY29705@bombadil.infradead.org>
+ <20200501014229.GB23230@ZenIV.linux.org.uk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200430221338.GY29705@bombadil.infradead.org>
+In-Reply-To: <20200501014229.GB23230@ZenIV.linux.org.uk>
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,17 +71,21 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On Thu, Apr 30, 2020 at 03:13:38PM -0700, Matthew Wilcox wrote:
-
-> > +/**
-> > + * clear_page_private - clear page's private field and PG_private.
-> > + * @page: page to be cleared.
-> > + *
-> > + * The counterpart function of attach_page_private.
-> > + * Return: private data of page or NULL if page doesn't have private data.
-> > + */
+On Fri, May 01, 2020 at 02:42:29AM +0100, Al Viro wrote:
+> On Thu, Apr 30, 2020 at 03:13:38PM -0700, Matthew Wilcox wrote:
 > 
-> Seems to me that the opposite of "attach" is "detach", not "clear".
+> > > +/**
+> > > + * clear_page_private - clear page's private field and PG_private.
+> > > + * @page: page to be cleared.
+> > > + *
+> > > + * The counterpart function of attach_page_private.
+> > > + * Return: private data of page or NULL if page doesn't have private data.
+> > > + */
+> > 
+> > Seems to me that the opposite of "attach" is "detach", not "clear".
+> 
+> Or "remove", perhaps...
 
-Or "remove", perhaps...
+Actually, "detach" is better - neither "clear" nor "remove" imply "... and give
+me what used to be attached there", as this thing is doing.
 

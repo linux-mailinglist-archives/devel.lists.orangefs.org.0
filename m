@@ -2,57 +2,66 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0710D1D70DF
-	for <lists+devel-orangefs@lfdr.de>; Mon, 18 May 2020 08:25:43 +0200 (CEST)
-Received: from [::1] (port=59242 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id C17E91D956D
+	for <lists+devel-orangefs@lfdr.de>; Tue, 19 May 2020 13:39:42 +0200 (CEST)
+Received: from [::1] (port=43026 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jaZDa-0006rJ-35
-	for lists+devel-orangefs@lfdr.de; Mon, 18 May 2020 02:25:42 -0400
-Received: from hqnvemgate24.nvidia.com ([216.228.121.143]:15810)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
- (Exim 4.93) (envelope-from <jhubbard@nvidia.com>) id 1jaZDY-0006qa-6L
- for devel@lists.orangefs.org; Mon, 18 May 2020 02:25:40 -0400
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5ec229ae0000>; Sun, 17 May 2020 23:22:38 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Sun, 17 May 2020 23:24:59 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Sun, 17 May 2020 23:24:59 -0700
-Received: from [10.2.48.175] (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 18 May
- 2020 06:24:58 +0000
-Subject: Re: [PATCH] orangefs: convert get_user_pages() --> pin_user_pages()
-To: LKML <linux-kernel@vger.kernel.org>
-References: <20200518060139.2828423-1-jhubbard@nvidia.com>
-X-Nvconfidentiality: public
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <582e6272-ca21-6300-19dd-7776e21ce002@nvidia.com>
-Date: Sun, 17 May 2020 23:24:58 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+	id 1jb0az-0002BF-JK
+	for lists+devel-orangefs@lfdr.de; Tue, 19 May 2020 07:39:41 -0400
+Received: from mail-pj1-f66.google.com ([209.85.216.66]:34900)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+ (Exim 4.93) (envelope-from <sooraj@inhouseweb.tech>)
+ id 1jb0ax-00028u-KX
+ for devel@lists.orangefs.org; Tue, 19 May 2020 07:39:39 -0400
+Received: by mail-pj1-f66.google.com with SMTP id 5so1282918pjd.0
+ for <devel@lists.orangefs.org>; Tue, 19 May 2020 04:39:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=inhouseweb.tech; s=google;
+ h=from:to:subject:date:message-id:mime-version:thread-index
+ :content-language;
+ bh=BdAYlS7TC3xIwzw+MxDwoF0S4E10WzwsrsKBCu4yU28=;
+ b=WwJ8oGi1ycuZ9awyGcETJXYssgiXEeEhcYwnzCqNvcyoZCNb8Z6qW3qcsRSN9k67xB
+ rkoZgCevZsZYiHMu7HwS1wv4xUBh9iSZ4ivsU306yOokzPmMWEHL1s2vc7MmFm4JriN0
+ hqsDWCdqIlpKHLZxC2csOJvmxjPS4OFfdzNQQm0l6k0Zw3vfh04jpbhWVywArq+JIvkP
+ sM4OO4YrudyTDhqQiKb0T4+nT8IJlG8YowW+zXhszmebKAdpC9NEerg3WzyoYhgu4E4a
+ 5JWtMQRdNCWAP0fYPp/3/JZMjTcpcDrqKU0S0BMdPGgIV/hmzODc0et6+y7utiyvBBwt
+ 8nVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :thread-index:content-language;
+ bh=BdAYlS7TC3xIwzw+MxDwoF0S4E10WzwsrsKBCu4yU28=;
+ b=IztACaLuEZO2NNcsfkxwmX1GRDKRdQuEwy5GYLSrkURhaxccMY+OYejUXNBqyAF8e0
+ StIc4mOxUt6+EO1yDfZh1WivLjEM+hdqZethDbdAXxbwcGX3Ff9wHPw/5FMSPO5WTqNd
+ T5uSmmX6z2JXeWqSXz8BpJV6Tgf+Nd0dfahZPo3xw9HS2VMDGR5l9j9s7dkJqY1W1oxz
+ 2wdYRXl0qdPaWi4M0sMLcW4G8EfR93wAjBBeMzM6lGXNcieGhR/GXqdCb0CaRDLe5IGo
+ yTeOFg8+SdK+ujLjQ23eF/L2mdRVHxIMVVlQFS8f2Py77/0e4vrpQmB4hr4nltLghQKn
+ wd3g==
+X-Gm-Message-State: AOAM530yF3aTmZbovMqGRGv2cTeAyZifi9Zd7apmcAObA5bRPvjB+SEx
+ UIyu+CrPd0PfI7C2yeM6/08XWcGIqjc=
+X-Google-Smtp-Source: ABdhPJxh7VTVF0JQogGzejcM8rjXO2n7QOcgf92UzGYnu/qYzldWYN1crXJLxhMPoTX6gW92kx7oTQ==
+X-Received: by 2002:a17:90a:2009:: with SMTP id
+ n9mr4158327pjc.81.1589888338477; 
+ Tue, 19 May 2020 04:38:58 -0700 (PDT)
+Received: from jeetuPC ([163.53.85.196])
+ by smtp.gmail.com with ESMTPSA id y23sm1032799pgc.78.2020.05.19.04.38.57
+ for <devel@lists.orangefs.org>
+ (version=TLS1 cipher=ECDHE-ECDSA-AES128-SHA bits=128/128);
+ Tue, 19 May 2020 04:38:58 -0700 (PDT)
+From: "Sooraj" <sooraj@inhouseweb.tech>
+To: <devel@lists.orangefs.org>
+Subject: Web Design
+Date: Tue, 19 May 2020 17:00:12 +0530
+Message-ID: <243101d62dd2$14ad6ba0$3e0842e0$@tech>
 MIME-Version: 1.0
-In-Reply-To: <20200518060139.2828423-1-jhubbard@nvidia.com>
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AdYtonPrUHItl3ikSD6Ab+1/aMVt/g==
+Content-Language: en-us
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1589782958; bh=l/FdtWfrvi/C3me9+/gpM2PcBKmwGcSy8/CNv2P2SqA=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=Heon1BcT9rnkVW92QlNOPPn9x8Si22vngp1+Xyj+o00ULC/EeCq8F7ZPhZi+SdQ/h
- q5ExPUV9SalajhkZ0ljXnbddbI4qkwzNowCn5IW/PcG8ZVwxnTP044fA5vnspN8KuQ
- G9m6D/T+6+Ghpcmq7lF8eOUPdr/bYEJjIiR7lPX91erq1f4DcISSmawpSH528UP5Lj
- DNy3LYzB2zVIASX/vkheEADYTUJuhhTHPLfT7AWwO8/0vaLdVZJ+iwoWQPExK1Lzob
- ezE1OlpMc1xo4W0daQH8vPEK8xJkBQ/XV3HU9UjGRtFGGKnB4359emQdNp577gJQdT
- cSDQKoAjD8hdQ==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,7 +73,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: devel@lists.orangefs.org
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -78,75 +86,47 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 2020-05-17 23:01, John Hubbard wrote:
-> This code was using get_user_pages*(), in a "Case 2" scenario
-> (DMA/RDMA), using the categorization from [1]. That means that it's
-> time to convert the get_user_pages*() + put_page() calls to
-> pin_user_pages*() + unpin_user_pages() calls.
+Hello,
 
-Oops, actually, maybe that description is wrong. This is probably
-closer to "Case 1: Direct IO"...right? I don't see an O_DIRECT
-anywhere, but there is an ioctl to do ORANGEFS_DEV_MAP, which seems
-like effectively it's doing Direct IO.
+ 
 
-(I got lulled into commit log complacency, due to sending quite a few
-non-filesystem patches that were Case 2.)
+I found your web contact email from INTERNET devel@lists.orangefs.org.
 
+ 
 
-thanks,
--- 
-John Hubbard
-NVIDIA
+I am Sooraj, (Web Designer) and I am working with a Digital Marketing Agency
+from India.
 
-> 
-> There is some helpful background in [2]: basically, this is a small
-> part of fixing a long-standing disconnect between pinning pages, and
-> file systems' use of those pages.
-> 
-> [1] Documentation/core-api/pin_user_pages.rst
-> 
-> [2] "Explicit pinning of user-space pages":
->      https://lwn.net/Articles/807108/
-> 
-> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
-> ---
-> 
->   fs/orangefs/orangefs-bufmap.c | 9 +++------
->   1 file changed, 3 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/orangefs/orangefs-bufmap.c b/fs/orangefs/orangefs-bufmap.c
-> index 2bb916d68576..538e839590ef 100644
-> --- a/fs/orangefs/orangefs-bufmap.c
-> +++ b/fs/orangefs/orangefs-bufmap.c
-> @@ -168,10 +168,7 @@ static DEFINE_SPINLOCK(orangefs_bufmap_lock);
->   static void
->   orangefs_bufmap_unmap(struct orangefs_bufmap *bufmap)
->   {
-> -	int i;
-> -
-> -	for (i = 0; i < bufmap->page_count; i++)
-> -		put_page(bufmap->page_array[i]);
-> +	unpin_user_pages(bufmap->page_array, bufmap->page_count);
->   }
->   
->   static void
-> @@ -268,7 +265,7 @@ orangefs_bufmap_map(struct orangefs_bufmap *bufmap,
->   	int offset = 0, ret, i;
->   
->   	/* map the pages */
-> -	ret = get_user_pages_fast((unsigned long)user_desc->ptr,
-> +	ret = pin_user_pages_fast((unsigned long)user_desc->ptr,
->   			     bufmap->page_count, FOLL_WRITE, bufmap->page_array);
->   
->   	if (ret < 0)
-> @@ -280,7 +277,7 @@ orangefs_bufmap_map(struct orangefs_bufmap *bufmap,
->   
->   		for (i = 0; i < ret; i++) {
->   			SetPageError(bufmap->page_array[i]);
-> -			put_page(bufmap->page_array[i]);
-> +			unpin_user_page(bufmap->page_array[i]);
->   		}
->   		return -ENOMEM;
->   	}
-> 
+ 
+
+We are providing Web Design and Web Development Service at affordable
+prices.
+
+ 
+
+We developed sites for various industries:
+
+1. Website designs
+
+2. Website development
+
+3. Graphic designs
+
+4. Facebook cover page design
+
+ 
+
+If you are interested, then I can send you our price list, company
+information and an affordable quotation with the best offer. And we work on
+new technology.
+
+ 
+
+Our pricing is very reasonable.
+
+ 
+
+Thank you
+
+Sooraj
 

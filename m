@@ -2,56 +2,68 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8AE11E318A
-	for <lists+devel-orangefs@lfdr.de>; Tue, 26 May 2020 23:54:59 +0200 (CEST)
-Received: from [::1] (port=42106 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3875A1E5B0A
+	for <lists+devel-orangefs@lfdr.de>; Thu, 28 May 2020 10:40:35 +0200 (CEST)
+Received: from [::1] (port=37906 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jdhXG-0007qW-DQ
-	for lists+devel-orangefs@lfdr.de; Tue, 26 May 2020 17:54:58 -0400
-Received: from mail-vs1-f67.google.com ([209.85.217.67]:36890)
+	id 1jeE5a-0001Wd-6D
+	for lists+devel-orangefs@lfdr.de; Thu, 28 May 2020 04:40:34 -0400
+Received: from mail-ed1-f49.google.com ([209.85.208.49]:44860)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <hubcap@omnibond.com>) id 1jdhXF-0007pj-BG
- for devel@lists.orangefs.org; Tue, 26 May 2020 17:54:57 -0400
-Received: by mail-vs1-f67.google.com with SMTP id u79so12700791vsu.4
- for <devel@lists.orangefs.org>; Tue, 26 May 2020 14:54:37 -0700 (PDT)
+ (Exim 4.93) (envelope-from <guoqing.jiang@cloud.ionos.com>)
+ id 1jeE5Y-0001Uj-Vy
+ for devel@lists.orangefs.org; Thu, 28 May 2020 04:40:33 -0400
+Received: by mail-ed1-f49.google.com with SMTP id d24so22483004eds.11
+ for <devel@lists.orangefs.org>; Thu, 28 May 2020 01:40:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=omnibond-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0jK21EhVqfBvbPITLkn+96MTGZW6Bo0ptE3mNnDRD3A=;
- b=VJFY+sE6R0lEkr2FcepjY3oBdZps0iISn6dQY5y2gFvrCz2MSn+lg0Aw+uDaS/9/K0
- +fZwAZx9BypRwHJ5b5N2BEeEZyeipRgosXa0XlUo9pjdLYPG1fSAaMdUk96eMjNpibvN
- sDrOL4pEyDyi4h6gTIgKVUwNpMNz18HQr7oWqcjlAzA/rZPn1wFrocCdJe7W0BrPJnJK
- oEgCcRj6+GWXgVuL8ADPu1yXjAz7mj+yFngENH/Jcq0haWcO11IshEC4nog2VKbuUApP
- 6D8BcyICqXQJE8snuXfTXHHUKWTlc3Ac3y1G2MKe2ow4emUmUJRcYUjMrC973SHCcKXr
- QCAw==
+ d=cloud.ionos.com; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=XDdmB/aDu7vmw0I5lDV1Q4+gB4BypwighQ3lORBH3wc=;
+ b=CAf+Dz0VmWC9ztDzhIYSQC5YVbiHg299UsxRcMebMK3XVuQcskr9cr//obYizUBr+R
+ SKVtD55+vPtxiw53ri8K5USs5DFmuFlSazeRgHvcrAmaaeDFhJ+uUJtwxZQnq+7B6oyM
+ zWNmnMPBYfdRFb5U/GUekJn3HfUFhIrm4XixJSRFtA4ymOC7zXxK8WJ1BHqFmaae6lXT
+ 5Us1elbOj6TDt69XYXExD6KadgdBL4mBFR+6Aa96MYHUMH84S/tkiyI5vphWCawc22pK
+ pe1eEI8Hp4dBVsvnANDTySVLCVBzOApuuVA4YBL8FRi/ElxKqW5yqqKIUBMAI6Szc5cX
+ vk3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=0jK21EhVqfBvbPITLkn+96MTGZW6Bo0ptE3mNnDRD3A=;
- b=lpyLvglkvtYYdMAG0/SnbGWwDSflug52cIEQU8CkmRpxIV6LdoT/3ACdXw+/uhKZ+y
- bc0UtwqxO3n7k9jb2Al6aN8xUrgDIyG0bTCvnlO6SYNsaOL7OxGvrNcshBXLbBJxUkwl
- OgaMWdU0+hS74qBAeZGIvQIwFKD6zRwluRZjZrpIA/aXPmveWtZXQEpBoG0ifwABp2X3
- AghJrwlfhvXRj12n2jkUKfuUg6I82NI5F5V2rfBposPtQ0DHhZNubrd76p0u1/gzlz2K
- AbZUHL8ZEuasZFAK0VQGsXZCYZ225aEgIAYCMLS2ZrPnB4OMRm2fz+7XVu/tprx2LT0n
- OKCQ==
-X-Gm-Message-State: AOAM531TwQSQM3O5Koamyrof4WsrOHttQ8y7cuivyGXwNp9thfsZhhrx
- jMhqgTYs7pFtfKn+ODsRsjTCup0GON/ayQ5tE/WjWA==
-X-Google-Smtp-Source: ABdhPJzzaoMzy16lHwO6Cit4whNo24TT0SRB502FPqok9VsYLq5zk1Uuoxa+iC0FlPfnq33B0P3WZwccZGYkEDw15oU=
-X-Received: by 2002:a05:6102:20cb:: with SMTP id
- i11mr2618905vsr.137.1590530055726; 
- Tue, 26 May 2020 14:54:15 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=XDdmB/aDu7vmw0I5lDV1Q4+gB4BypwighQ3lORBH3wc=;
+ b=i4RLLLns4zahk9gW4Rdws5d+TzwYnWe0EFX2IkENe4i5ZnclnnvaTrNe4tMWGrCpwW
+ 82kXqBKRnenkyPZsIn2cwsrIV+27e2eyevqs2Zalxc0OHCZ/ldpYy/0ekXR6cCdeYQ1d
+ 8gSalYwBV71W+BnkIc4it0V6VeLAf1YZW+5+DKx70zuY6I/VqmC2kjw1jHyjQUB5h8ww
+ kaq7VROUrYjZps9ZFQ20qoE6LorkbNWYF/x8udXTIGO6SZoXxb3b0Oh/3DileMpFdHDK
+ UqKMaf8UcYgS9hgQzqDick2Oj4OmGFsMxusCk+YqqvHIrqp+7IYIxkfignJPmL1R/Vm1
+ hmHw==
+X-Gm-Message-State: AOAM531P5kY9BpRVeOpmFuM8eLU9FrQPOcYdurE0hpePjQMEDpclS7YU
+ t+TtCzWiE9RfPqHVoyiFaQ7FZD/UNGp43w==
+X-Google-Smtp-Source: ABdhPJzvS0PuIZ3CoJAyjzLsVMlgK6IFKiAxLwcj9LsbX/47TMdsJOcP881ALFfWIKg9AldDIGqiIA==
+X-Received: by 2002:a50:d715:: with SMTP id t21mr1892086edi.194.1590655191533; 
+ Thu, 28 May 2020 01:39:51 -0700 (PDT)
+Received: from ?IPv6:2001:16b8:4811:7000:e80e:f5df:f780:7d57?
+ ([2001:16b8:4811:7000:e80e:f5df:f780:7d57])
+ by smtp.gmail.com with ESMTPSA id r9sm4367835edg.13.2020.05.28.01.39.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 May 2020 01:39:50 -0700 (PDT)
+Subject: Re: [PATCH 08/10] orangefs: use attach/detach_page_private
+To: Mike Marshall <hubcap@omnibond.com>
 References: <20200517214718.468-1-guoqing.jiang@cloud.ionos.com>
  <20200517214718.468-9-guoqing.jiang@cloud.ionos.com>
-In-Reply-To: <20200517214718.468-9-guoqing.jiang@cloud.ionos.com>
-From: Mike Marshall <hubcap@omnibond.com>
-Date: Tue, 26 May 2020 17:54:04 -0400
-Message-ID: <CAOg9mSQ+nGCD-k2OwWWd6Ze_PAh3mhSOwYcLugD-SQHCb0ymWw@mail.gmail.com>
-Subject: Re: [PATCH 08/10] orangefs: use attach/detach_page_private
-To: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
-Content-Type: text/plain; charset="UTF-8"
+ <CAOg9mSQ+nGCD-k2OwWWd6Ze_PAh3mhSOwYcLugD-SQHCb0ymWw@mail.gmail.com>
+From: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
+Message-ID: <bd3495e7-1820-6268-1a5a-76f54421fb16@cloud.ionos.com>
+Date: Thu, 28 May 2020 10:39:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
+MIME-Version: 1.0
+In-Reply-To: <CAOg9mSQ+nGCD-k2OwWWd6Ze_PAh3mhSOwYcLugD-SQHCb0ymWw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,112 +93,13 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-I apologize for not mentioning that I ran this patch set
-through orangefs xfstests at 5.7 rc5 with no problems
-or regressions.
+On 5/26/20 11:54 PM, Mike Marshall wrote:
+> I apologize for not mentioning that I ran this patch set
+> through orangefs xfstests at 5.7 rc5 with no problems
+> or regressions.
 
--Mike
+Glad to hear that, thanks for your effort.
 
-
-On Sun, May 17, 2020 at 5:47 PM Guoqing Jiang
-<guoqing.jiang@cloud.ionos.com> wrote:
->
-> Since the new pair function is introduced, we can call them to clean the
-> code in orangefs.
->
-> Cc: Mike Marshall <hubcap@omnibond.com>
-> Cc: Martin Brandenburg <martin@omnibond.com>
-> Cc: devel@lists.orangefs.org
-> Signed-off-by: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
-> ---
-> No change since RFC V3.
->
-> RFC V2 -> RFC V3
-> 1. rename clear_page_private to detach_page_private.
->
-> RFC -> RFC V2
-> 1. change the name of new functions to attach/clear_page_private.
-> 2. avoid potential use-after-free as suggested by Dave Chinner.
->
->  fs/orangefs/inode.c | 32 ++++++--------------------------
->  1 file changed, 6 insertions(+), 26 deletions(-)
->
-> diff --git a/fs/orangefs/inode.c b/fs/orangefs/inode.c
-> index 12ae630fbed7..48f0547d4850 100644
-> --- a/fs/orangefs/inode.c
-> +++ b/fs/orangefs/inode.c
-> @@ -62,12 +62,7 @@ static int orangefs_writepage_locked(struct page *page,
->         } else {
->                 ret = 0;
->         }
-> -       if (wr) {
-> -               kfree(wr);
-> -               set_page_private(page, 0);
-> -               ClearPagePrivate(page);
-> -               put_page(page);
-> -       }
-> +       kfree(detach_page_private(page));
->         return ret;
->  }
->
-> @@ -409,9 +404,7 @@ static int orangefs_write_begin(struct file *file,
->         wr->len = len;
->         wr->uid = current_fsuid();
->         wr->gid = current_fsgid();
-> -       SetPagePrivate(page);
-> -       set_page_private(page, (unsigned long)wr);
-> -       get_page(page);
-> +       attach_page_private(page, wr);
->  okay:
->         return 0;
->  }
-> @@ -459,18 +452,12 @@ static void orangefs_invalidatepage(struct page *page,
->         wr = (struct orangefs_write_range *)page_private(page);
->
->         if (offset == 0 && length == PAGE_SIZE) {
-> -               kfree((struct orangefs_write_range *)page_private(page));
-> -               set_page_private(page, 0);
-> -               ClearPagePrivate(page);
-> -               put_page(page);
-> +               kfree(detach_page_private(page));
->                 return;
->         /* write range entirely within invalidate range (or equal) */
->         } else if (page_offset(page) + offset <= wr->pos &&
->             wr->pos + wr->len <= page_offset(page) + offset + length) {
-> -               kfree((struct orangefs_write_range *)page_private(page));
-> -               set_page_private(page, 0);
-> -               ClearPagePrivate(page);
-> -               put_page(page);
-> +               kfree(detach_page_private(page));
->                 /* XXX is this right? only caller in fs */
->                 cancel_dirty_page(page);
->                 return;
-> @@ -535,12 +522,7 @@ static int orangefs_releasepage(struct page *page, gfp_t foo)
->
->  static void orangefs_freepage(struct page *page)
->  {
-> -       if (PagePrivate(page)) {
-> -               kfree((struct orangefs_write_range *)page_private(page));
-> -               set_page_private(page, 0);
-> -               ClearPagePrivate(page);
-> -               put_page(page);
-> -       }
-> +       kfree(detach_page_private(page));
->  }
->
->  static int orangefs_launder_page(struct page *page)
-> @@ -740,9 +722,7 @@ vm_fault_t orangefs_page_mkwrite(struct vm_fault *vmf)
->         wr->len = PAGE_SIZE;
->         wr->uid = current_fsuid();
->         wr->gid = current_fsgid();
-> -       SetPagePrivate(page);
-> -       set_page_private(page, (unsigned long)wr);
-> -       get_page(page);
-> +       attach_page_private(page, wr);
->  okay:
->
->         file_update_time(vmf->vma->vm_file);
-> --
-> 2.17.1
->
+Thanks,
+Guoqing
 

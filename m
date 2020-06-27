@@ -2,29 +2,29 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1090F206A22
-	for <lists+devel-orangefs@lfdr.de>; Wed, 24 Jun 2020 04:27:46 +0200 (CEST)
-Received: from [::1] (port=57780 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id B226B20C4C3
+	for <lists+devel-orangefs@lfdr.de>; Sun, 28 Jun 2020 00:50:41 +0200 (CEST)
+Received: from [::1] (port=52934 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1jnv8a-0006j7-W2
-	for lists+devel-orangefs@lfdr.de; Tue, 23 Jun 2020 22:27:44 -0400
-Received: from smtp13.smtpout.orange.fr ([80.12.242.135]:27122
+	id 1jpJei-0004PV-GQ
+	for lists+devel-orangefs@lfdr.de; Sat, 27 Jun 2020 18:50:40 -0400
+Received: from smtp04.smtpout.orange.fr ([80.12.242.126]:22588
  helo=smtp.smtpout.orange.fr)
  by mm1.emwd.com with esmtps  (TLS1) tls TLS_DHE_RSA_WITH_AES_128_CBC_SHA
- (Exim 4.93) (envelope-from <karen@pei.com>) id 1jnv8a-0006iJ-1W
- for devel@lists.orangefs.org; Tue, 23 Jun 2020 22:27:44 -0400
-Received: from DESKTOP-Q5JCF6G ([90.3.146.230]) by mwinf5d71 with ME
- id uqBE220044yUvma03qT1vq; Wed, 24 Jun 2020 04:27:02 +0200
+ (Exim 4.93) (envelope-from <karen@pei.com>) id 1jpJeh-0004No-68
+ for devel@lists.orangefs.org; Sat, 27 Jun 2020 18:50:39 -0400
+Received: from DESKTOP-Q5JCF6G ([217.128.198.197]) by mwinf5d08 with ME
+ id wNpv2200B4G1gB503Npwc9; Sun, 28 Jun 2020 00:49:57 +0200
 X-ME-Helo: DESKTOP-Q5JCF6G
-X-ME-Date: Wed, 24 Jun 2020 04:27:02 +0200
-X-ME-IP: 90.3.146.230
+X-ME-Date: Sun, 28 Jun 2020 00:49:57 +0200
+X-ME-IP: 217.128.198.197
 From: "Ms Karen Ngui" <karen@pei.com>
-Subject: To ~~~ devel@lists.orangefs.org
+Subject: To ~~> devel@lists.orangefs.org
 To: <devel@lists.orangefs.org>
 MIME-Version: 1.0
-Date: Tue, 23 Jun 2020 19:27:02 -0700
-Message-Id: <23002020062719E741D35D50$204E22F8FD@DESKTOPQJCFG>
+Date: Sat, 27 Jun 2020 15:49:56 -0700
+Message-Id: <275320200649153DF456E013$71368836E6@DESKTOPQJCFG>
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33

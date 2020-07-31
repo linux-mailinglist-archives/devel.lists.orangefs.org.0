@@ -2,44 +2,50 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5A58214DFB
-	for <lists+devel-orangefs@lfdr.de>; Sun,  5 Jul 2020 18:33:13 +0200 (CEST)
-Received: from [::1] (port=59746 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94C39233EA6
+	for <lists+devel-orangefs@lfdr.de>; Fri, 31 Jul 2020 07:25:35 +0200 (CEST)
+Received: from [::1] (port=53714 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1js7Zo-00060P-Iv
-	for lists+devel-orangefs@lfdr.de; Sun, 05 Jul 2020 12:33:12 -0400
-Received: from wrqvfbns.outbound-mail.sendgrid.net ([149.72.251.38]:29466)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
- (Exim 4.93)
- (envelope-from <bounces+17344838-c199-devel=lists.orangefs.org@sendgrid.net>)
- id 1js7Zm-000608-Lo
- for devel@lists.orangefs.org; Sun, 05 Jul 2020 12:33:10 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.net; 
- h=from:to:subject:mime-version:content-type; s=smtpapi; 
- bh=iionp6wdOTXXVZagR3VB2BJEUuaGhEfi04F3gUIWVKE=; b=NCaotu6He5PM0
- 7JS+ULVTNsQQon8qB6M9PuPobR1WA79nXN8Yg2dRrclYEsJZdJ0Dk6P7r/8l5lXZ
- CcYvjbpzmuI5RKaLI+8UfPOSzDo/GCOwuI+SIoa101tMixoF6bz4chZW+coB7xIn
- oF+n014bS6ZwGE1l+NP4qrIVoGZSqc=
-Received: by filter0441p1iad2.sendgrid.net with SMTP id
- filter0441p1iad2-26928-5F02009C-20
- 2020-07-05 16:32:28.550910327 +0000 UTC m=+494952.468739907
-Received: from fjceis (unknown)
- by ismtpd0001p1hnd1.sendgrid.net (SG) with ESMTP id 5WsI1a1PR6WuXQ-K2k--nw
- for <devel@lists.orangefs.org>; Sun, 05 Jul 2020 16:32:28.149 +0000 (UTC)
-From: Amazon <Amazon@xnkpwx.com>
-To: devel <devel@lists.orangefs.org>
-Subject: =?iso-2022-jp?B?GyRCJCo7WUonJCRKfUshJE4+cEpzJHI5OT83GyhC?=
-Date: Sun, 05 Jul 2020 16:32:28 +0000 (UTC)
-Message-ID: <00f943ef62bd$9d818031$d7f2dd94$@fjceis>
+	id 1k1NXy-0005rG-9U
+	for lists+devel-orangefs@lfdr.de; Fri, 31 Jul 2020 01:25:34 -0400
+Received: from mx.metalurgs.lv ([81.198.125.103]:60420)
+ by mm1.emwd.com with esmtps (TLS1) tls TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA
+ (Exim 4.93) (envelope-from <paulvinus12@gmail.com>)
+ id 1k1NXw-0005qa-Px
+ for devel@lists.orangefs.org; Fri, 31 Jul 2020 01:25:32 -0400
+Received: from unknown (localhost [127.0.0.1])
+ by mx.metalurgs.lv (Postfix) with ESMTP id 4951D65987
+ for <devel@lists.orangefs.org>; Fri, 31 Jul 2020 08:24:40 +0300 (EEST)
+Received: from kas30pipe.localhost (localhost [127.0.0.1])
+ by mx.metalurgs.lv (Postfix) with ESMTP id C7B486183D
+ for <devel@lists.orangefs.org>; Fri, 31 Jul 2020 08:24:29 +0300 (EEST)
+Received: by mx.metalurgs.lv (Postfix, from userid 1005)
+ id 6EF6F5FCFE; Fri, 31 Jul 2020 08:12:44 +0300 (EEST)
+Received: from servidor.phd.local (unknown [179.228.196.235])
+ (Authenticated sender: admin)
+ by mx.metalurgs.lv (Postfix) with ESMTPA id B72D15D967
+ for <devel@lists.orangefs.org>; Fri, 31 Jul 2020 08:12:43 +0300 (EEST)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 16.0
-X-SG-EID: rb8ZEMJ2v8XTXhbm8WmwaHqmJ0VKlETmT1ucqJP8gB/L6D/jtVd9LAZnf7eCX01gwiaU1HMR0ZaGXT
- 6NvoNt4e8vhokjjGhWVJnXCD8dSdS4GKZNKTTMofzyzf3POlBp5iMUP062McXhkhWMw4fCQppKt1kF
- R0WKlCvqyFSQE5woDiPX+LT/o6H8+2qqLdTkiT9Lh0qShrPdX81l2W7koA==
-Content-Type: text/plain;
-	charset="iso-2022-jp"
-Content-Transfer-Encoding: base64
+To: devel@lists.orangefs.org
+From: "PAUL Vinus " <paulvinus12@gmail.com>
+Date: Fri, 31 Jul 2020 02:25:08 -0300
+X-SpamTest-Envelope-From: paulvinus12@gmail.com
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 71303 [Jan 01 2015]
+X-SpamTest-Info: {DATE: unreal year}
+X-SpamTest-Method: none
+X-SpamTest-Rate: 30
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+Message-ID: <20200731051244.6EF6F5FCFE@mx.metalurgs.lv>
+Subject: Financial capability to finance any investment  000
+X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.39/RELEASE,
+ bases: 20140401 #7726142, check: 20200731 notchecked
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
@@ -52,6 +58,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: pvinus791@gmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -65,26 +72,11 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-GyRCJCo7WUonJCRKfUshJE4+cEpzJHI5OT83JDckRiQvJEAkNSQkISMbKEJVcGRhdGUgZGVmYXVs
-dCBjYXJkIGZvciB5b3VyIG1lbWJlcnNoaXAuDQoNCiANCiAbJEIlXiUkJTklSCUiGyhCPyAbJEIl
-PyUkJWAlOyE8JWsbKEI/IBskQiUuJVUlSDd0GyhCIA0KDQogDQoNCg0KQW1hem9uGyRCJVclaSUk
-JWAkciQ0TXhNUUQ6JC0kIiRqJCwkSCQmJDQkNiQkJF4kOSEjJCo1Uk1NJE4bKEJBbWF6b24bJEIl
-VyVpJSQlYDJxMHc7cTNKJE8hIhsoQjIwMjAvMDcvMDYbJEIkSzk5PzckcjdeJCgkXiQ5ISMkKkQ0
-JFkkNyQ/JEgkMyRtISIycUhxJE4kKjtZSickJCRLO0hNUSRHJC0ka00tOHokSiUvJWwlOCVDJUgl
-KyE8JUkkLCUiJSslJiVzJUgkS0VQTz8kNSRsJEYkJCReJDskcyEjJS8lbCU4JUMlSCUrITwlST5w
-SnMkTjk5PzchIj83JDckJCUvJWwlOCVDJUglKyE8JUkkTkRJMkMkSyREJCQkRiRPMEoyPCROPGo9
-ZyRyJDQzTkcnJC8kQCQ1JCQhIxsoQg0KDQoNCg0KMS4gGyRCJSIlKyUmJXMlSCU1ITwlUyU5JCsk
-aRsoQkFtYXpvbhskQiVXJWklJCVgMnEwdz5wSnMkcjRJTX0kOSRrJEslIiUvJTslOSQ3JF4kOSEj
-GyhCDQoNCg0KMi4gQW1hem9uGyRCJVclaSUkJWAkS0VQTz8kNyQ/GyhCQW1hem9uLmNvLmpwGyRC
-JE4lIiUrJSYlcyVIJHI7SE1RJDckRiU1JSQlcyUkJXMkNyReJDkhIxsoQg0KDQoNCjMuIBskQjo4
-QiYkS0k9PCgkNSRsJEYkJCRrIVY4PTpfJE47WUonSn1LISFXJE4yPCRLJCIkayFWO1lKJ0p9SyEk
-ckpROTkkOSRrIVckTiVqJXMlLyRyJS8laiVDJS8kNyReJDkhIxsoQg0KDQoNCjQuIBskQk0tOHo0
-fDhCJE45OT83JF4kPyRPPzckNyQkJS8lbCU4JUMlSCUrITwlST5wSnMkckZ+Tk8kNyRGJC8kQCQ1
-JCQhIxsoQg0KDQoNCg0KQW1hem9uGyRCJVclaSUkJWAkcjdRQjMkNyRGJDRNeE1RJCQkPyRAJC8k
-PyRhJEshIjJxSHEkTiQqO1lKJyQkJEskNDtYRGokJCQ/JEAkJCQ/JS8lbCU4JUMlSCUrITwlSSQs
-O0hNUSRHJC0kSiQkPmw5ZyRPISIlIiUrJSYlcyVIJEtFUE8/JDUkbCRGJCQka0pMGyhCIBskQiRO
-JS8lbCU4JUMlSCUrITwlSSRLMnFIcSRyQEE1YSQ1JDskRkQ6JC0kXiQ5ISMycUhxJE5AQTVhJCw9
-UE1oJEokJD5sOWckTyEiJCo1Uk1NJE4bKEJBbWF6b24bJEIlVyVpJSQlYDJxMHc7cTNKJE88Ojh6
-JDchIkZDRTUkciQ0TXhNUSRHJC0kSiQvJEokaiReJDkhIxsoQg0KDQoNCkFtYXpvbi5jby5qcBsk
-QiUrJTklPyVeITwlNSE8JVMlORsoQiANCg0KDQoNCg0KIA0KGyRCO1lKJ0p9SyEkTj5wSnMkcjk5
-PzckOSRrGyhCIA0KDQoNCg0KIA0KDQo=
+Attention: devel@lists.orangefs.org Good Day , Our Group have the financial=
+ capability to finance any investment portfolio as far as is genuine, all w=
+e need is a capable business partner that possesses investment strategies f=
+or profitable business information for good turn over within 10-30years. Ou=
+r Partners are willing to invest in any good Viable Projects with good ROI.=
+ We can provide proof of funds on demand, after certification of your docum=
+ents/details. Please write me back if you can work with me on this project.=
+ Thank You, Best Regards PAUL Vinus

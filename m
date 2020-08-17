@@ -2,33 +2,54 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id A931423E381
-	for <lists+devel-orangefs@lfdr.de>; Thu,  6 Aug 2020 23:25:34 +0200 (CEST)
-Received: from [::1] (port=41238 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8513D245CB8
+	for <lists+devel-orangefs@lfdr.de>; Mon, 17 Aug 2020 08:58:53 +0200 (CEST)
+Received: from [::1] (port=33054 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1k3nOH-000235-Cz
-	for lists+devel-orangefs@lfdr.de; Thu, 06 Aug 2020 17:25:33 -0400
-Received: from [222.122.229.61] (port=39543 helo=spam.hackers.com)
- by mm1.emwd.com with esmtps  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
- (Exim 4.93) (envelope-from <sabok@edu2080.co.kr>) id 1k3nOF-0001z0-5d
- for devel@lists.orangefs.org; Thu, 06 Aug 2020 17:25:31 -0400
-Received: from unknown (HELO WIN-M2C48FJBLX3)
- (sabok@edu2080.co.kr@103.138.108.11)
- by 222.122.229.61 with ESMTP; 6 Aug 2020 23:24:45 +0900
-X-Original-SENDERIP: 103.138.108.11
-X-Original-SENDERCOUNTRY: unknown
-X-Original-MAILFROM: sabok@edu2080.co.kr
-X-Original-RCPTTO: devel@lists.orangefs.org
-From: "Mr. Philip Walter" <sabok@edu2080.co.kr>
-Subject: Loan Offer
-To: devel@lists.orangefs.org
+	id 1k7Z6a-00040i-DY
+	for lists+devel-orangefs@lfdr.de; Mon, 17 Aug 2020 02:58:52 -0400
+Received: from mail-wm1-f65.google.com ([209.85.128.65]:33508)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+ (Exim 4.93) (envelope-from <yourdomainguru.libeth15@gmail.com>)
+ id 1k7Z6Y-00040S-Iy
+ for devel@lists.orangefs.org; Mon, 17 Aug 2020 02:58:50 -0400
+Received: by mail-wm1-f65.google.com with SMTP id f18so12586162wmc.0
+ for <devel@lists.orangefs.org>; Sun, 16 Aug 2020 23:58:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=zisyWTWhKO8ofAiSyJQ8wBDlGbq0ZEeEYAe5rvi3Wk4=;
+ b=Tq49/8m1A5ZJfedyLnX0JpMzlj+/nwMVXNn2NnUtVGvoMt/C4wyBhHp9s2VxU6Cllx
+ JMujCrYdLBHrukFCqffGSNHFDOiFWLirUaj4KTHkQBuJS3o0sb5DrvIpWMY5GZAnrluu
+ zhePUljf8DFxPg8sWoxSinX/GmFXvsdPuKMRS6mWwLU3oTFljXaG1ZgJTlxlmuDBKysQ
+ VcswsHiJvD86wolPR0FEgV1aPFN/chhtlzt4WKkDm4JzDK5y3n33wEFhDZMc5OcU+wsO
+ WJBHqjIrtXILdtzFAb3cMp6PnfFVWf8cOgnSuUaQ7aaiCt9zT7x2Al9n97zQdfwUxPRA
+ PNKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=zisyWTWhKO8ofAiSyJQ8wBDlGbq0ZEeEYAe5rvi3Wk4=;
+ b=pW8GV8ySc9INclBG7vYXstJDfq6YIWZe1lH8IKAmc1vG+RpzeBR2965gmCUSEn69zg
+ Kjb4pIBqqjwvglVyHdTRxh93AC0gM77bKQneEmxEOO8ktcLnE8F5rLE3hZYJM07cs2er
+ vGx4dULOxaDHhdm3Zu6qWdUmRCmqgwHeMRgAkiRsI/1zY0xFSKFL8yWdCsQxkKswwR6w
+ 2hci12FnzPPXIRK/CqKKenVsJplgNOPcEEWWyFIIVicfPBAN/cqRZ3fr1/JbvYDnfS/6
+ R+MJPoG0nz5Fpsp/Po/h3JraLavhrLQEyIqGgUdtxaOWpl8mgh9xLaCsXjxndpf+drC6
+ ShsQ==
+X-Gm-Message-State: AOAM533kn9TUW6w1XGy7PgOZ6tj61QZe923z8+2jDljEdx1tnriGPtnr
+ btDl53ia6Nk/TXydVyTxcPPt9BCSveUavzB9QPYkVEkL9zJIVQ==
+X-Google-Smtp-Source: ABdhPJxFrqRMvn1nb+4CAzIzI+3zBCrfiZgpEIfelMHhvdarTFrQHp3scPG6wEnRLBaYzfEwIM77ox29uI7fXprwMSY=
+X-Received: by 2002:a1c:1f85:: with SMTP id
+ f127mr14098942wmf.154.1597647489174; 
+ Sun, 16 Aug 2020 23:58:09 -0700 (PDT)
 MIME-Version: 1.0
-Date: Thu, 6 Aug 2020 07:24:46 -0700
-Content-Type: text/plain
+From: Libeth Lapso <yourdomainguru.libeth15@gmail.com>
+Date: Mon, 17 Aug 2020 14:57:56 +0800
+Message-ID: <CAEcfj0pxuLV44R+binS4Kg7hshyHvbOuc5fG05HhGOjHO29OGg@mail.gmail.com>
+Subject: EasyBackups.co is for sale!
+To: devel@lists.orangefs.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
-Message-ID: <mailman.3441.1596749132.29776.devel_lists.orangefs.org@lists.orangefs.org>
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
 Precedence: list
@@ -40,7 +61,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: guanrateeloan@gmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -54,15 +74,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
- - This mail is in HTML. Some elements may be ommited in plain text. -
+*EasyBackups.co *is for sale!
 
-Attention, Do you need Max Loan,  Do you need a loan to clear your deb=
-ts ? Are you going to increase your finances ? You are a business pers=
-on who wants to expand his / her company. We give loan to individual a=
-nd cooperate bodies ranging from ?100,000 euros to ?1,000,000.00 euros=
-, we also offer personal loans from the tune of  ?5,000.00 euros to ?5=
-0 Million euros for a period of 1 to 20 years. Please get back to us i=
-f you are interested.
+Hello, my name is Libeth from Domain Nerdz. We have a domain that is
+currently on sale that you might be interested in *(EasyBackups.co**).*
 
-Contact person: Mr. Philip Walter
-Whatsappp +447787831965
+Anytime someone types Easy Backups, Easy Backup Software, The Best Easy
+Backups, or any other phrase with these keywords into their browser your
+site could be the first they see!
+
+Avg Google Search Results are (keyword): 30,300,000
+<https://www.google.com/search?bih=3D568&biw=3D1242&rlz=3D1C1CHBF_enPH882PH=
+882&hl=3Den-GB&sxsrf=3DALeKk01pByIwzHj5utt3vzomQk4xhWmgeA%3A1597317708373&e=
+i=3DTCI1X9qqFs6R9QOf9LTYBg&q=3DEasy+Backups&oq=3DEasy+Backups&gs_lcp=3DCgZw=
+c3ktYWIQAzIECAAQHjIGCAAQChAeOgQIABAKUO38E1iBlhRgtJcUaABwAHgCgAGLBIgB6gySAQs=
+wLjIuMC4xLjAuMpgBAKABAqABAaoBB2d3cy13aXrAAQE&sclient=3Dpsy-ab&ved=3D0ahUKEw=
+jagOeUiJjrAhXOSH0KHR86DWsQ4dUDCAw&uact=3D5>
+.
+You can easily redirect all the traffic this domain gets to your current
+site!
+
+The internet is the most efficient and easiest way to acquire new customers=
+.
+
+.CO is a very popular extension that is well known worldwide.
+
+Priced at only $198 for a limited time! If interested please go to
+*EasyBackups.co
+<https://dan.com/buy-domain/EasyBackups.co>* and select Buy Now, or
+purchase directly at GoDaddy.
+Act Fast! First person to select Buy Now gets it!
+
+Thank you very much for your time.
+Domain Nerdz
+Libeth Lapso

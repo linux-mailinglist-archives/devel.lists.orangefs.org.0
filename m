@@ -2,58 +2,28 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D13E2609C4
-	for <lists+devel-orangefs@lfdr.de>; Tue,  8 Sep 2020 07:05:23 +0200 (CEST)
-Received: from [::1] (port=52476 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F2F32680DD
+	for <lists+devel-orangefs@lfdr.de>; Sun, 13 Sep 2020 20:47:27 +0200 (CEST)
+Received: from [::1] (port=55056 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kFVoo-0006hN-3U
-	for lists+devel-orangefs@lfdr.de; Tue, 08 Sep 2020 01:05:22 -0400
-Received: from mail-lj1-f180.google.com ([209.85.208.180]:41316)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <boyd@omnibond.com>) id 1kFVom-0006gW-Dz
- for devel@lists.orangefs.org; Tue, 08 Sep 2020 01:05:20 -0400
-Received: by mail-lj1-f180.google.com with SMTP id y4so18324981ljk.8
- for <devel@lists.orangefs.org>; Mon, 07 Sep 2020 22:05:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=omnibond-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DAYHs4r3oGTuiH+NF0Eye2fTbDH98DNkLH7UPCbpF2c=;
- b=GJDg1fRy+mLj31us9x+sDWnBckuQabV5PftfFisM+ma0gtHKnrhHRzJ/8HxD2QCyw+
- mFRjnnL5GZkeg2uoI6xvErfYkpPTmquupOasDwEFL96zmv81TdPTPe2qp+AcLY9sPDlG
- ljLs8k25IpKobJM8PExRYLA8cvC/5bCdo5qwXrIJy2MVwKwVde3JHdWQkJnqdPvDmJGA
- Z6tQRqTrET+hEuXIBgrwb49iEWeI5num7zaEWcQQCGk56ddUvfDTgHSefPY2MvIAGSl6
- IbRkToWkVsAOUeibw2D8l3AgM2jUf+V/F202+ZkjjPBW8+18tJLc9bAWbHTucxQsv+br
- SCQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=DAYHs4r3oGTuiH+NF0Eye2fTbDH98DNkLH7UPCbpF2c=;
- b=lLGuH7SbwAkr5A2H3aeh0OGsuxW+3ZMScC6ETG3ZWnE1WWRFDG6UNT2d60lo9lITG1
- ijC59lVoxZZRvZrvVdluVpBR5IQrZdrWgLfEkN6hXFslfEjx2fLk9F+aAYGM+Iqsr54g
- CBZFuh9lmptOGbRcORQIQxpCatL99nxfqm3bDT9j6+Ggmfiw65g4TzQe2OPxUgEHu30w
- ziHezyIUBuBH2oVzPrsFIFQLWFZv7mq8uFmT7iP79HMOyIUENIrfak6xmRzsVOgHSgDS
- yPpofRdSH1MVfJBmAJAgbHAxOTUL10cYttzGMjcJz0uIg5YGX+4gOu2/1QnzpmcVaCCH
- bDeA==
-X-Gm-Message-State: AOAM531f75gH6LQYYovmtyGw258AQvPCxwl8IX6+qOGIpOCDIHvvYhHH
- h9LoJ2BUhncZxQWboWH7Zrho9JdtDWuXvjemkEF9WQ==
-X-Google-Smtp-Source: ABdhPJyVJivwSCIxGyFVNhN5ljdDNR/U/3sdEl7+sU35CrFwFUXYnseHbl1QU4Ed+ZVyVQsdvUT2Xp87zTLNa4vk8Y8=
-X-Received: by 2002:a2e:b4ba:: with SMTP id q26mr10731640ljm.79.1599541478666; 
- Mon, 07 Sep 2020 22:04:38 -0700 (PDT)
+	id 1kHX26-0004RP-7f
+	for lists+devel-orangefs@lfdr.de; Sun, 13 Sep 2020 14:47:26 -0400
+Received: from server.samueleschiavo.it ([87.76.28.30]:50616)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+ (Exim 4.93) (envelope-from <support@videomakervicenza.it>)
+ id 1kHX24-0004R1-GO
+ for devel@lists.orangefs.org; Sun, 13 Sep 2020 14:47:24 -0400
+Received: by server.samueleschiavo.it (Postfix, from userid 10036)
+ id CD20B54AA64; Sun, 13 Sep 2020 20:46:42 +0200 (CEST)
+To: devel@lists.orangefs.org
+Subject: Auszeichnungen gewinnen
+Date: Sun, 13 Sep 2020 18:46:42 +0000
+From: El Gordo de la Primitiva Lotterien Spanien <support@videomakervicenza.it>
+Message-ID: <168c15f5fc00687b27b82ecaca3d9207@www.videomakervicenza.it>
 MIME-Version: 1.0
-References: <45e50a753ef44cb68cee6bdf12717f59@huawei.com>
-In-Reply-To: <45e50a753ef44cb68cee6bdf12717f59@huawei.com>
-From: Boyd Wilson <boyd@omnibond.com>
-Date: Tue, 8 Sep 2020 01:04:12 -0400
-Message-ID: <CAMJ-+6o_vx=eai2sb6Rtpe8rQE+VYxgqzyDSdjLADTWjHLQMRA@mail.gmail.com>
-Subject: Re: UCX support for OrangeFS
-To: Alex Margolin <alex.margolin@huawei.com>
-Cc: "devel@lists.orangefs.org" <devel@lists.orangefs.org>,
- Michael Laufer <michael.laufer@huawei.com>, 
- Support at OrangeFS <support@orangefs.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.33
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
 Precedence: list
@@ -65,6 +35,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: santalucia.sg.es@spainmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -78,100 +49,71 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Alex,
-I hope you are well.    Adding OpenUCX to OrangeFS sounds like an
-interesting project.    Let me make some comments inline:
+El Gordo de la Primitiva Lotterien Spanien                          
+Adresse:                                          
+Calle del Príncipe de Vergara, 38B, 28001 Madrid España                                             
+E mail:]anspruchgewinn.mmt.es@spainmail.com]
+Kontakt aufnehmen unter:]  34602 810 185 fax  34935457490]
+Aktenzeichen:]P09/01/02/2020.]
+Losnummer:] ESP 4447/1146411880201]
+ Datum: 10/09/2020
+ 
+                                                   
+Hallo,         
+                  
+                           OFFIZIELLE MITTEILUNG,
+ 
+Diese El Gordo de la Primitiva Sommer Bonanza  Lotterie wurde   und Ministerio de Industria, Comercio y Turismo  gesponsert um Tourismus in España  zu fördern.
+ 
+Wir sind erfreut Ihnen mit zu teilen, dass die Gewinner des Sonder Spanish Tourismus Promotional Draw bekannt gegeben worden sind. Die offizielle Liste der Gewinner  erschien am  Samstag der 22/08/2020. 
+ 
+Ihre email adresse  mit der anhängenden Losnummer: ESP 4447/1146411880201  und mit der Seriennummer: ESP/018811-2020 zog die Glücksnummer: 6.16.18.33.47.51 Bonu:29,El Gordo de la Primitiva  Lotterie  6 /49 in der 3. Kategorie.
+ 
+Sie sind damit gewinner von: €991,000.00 Euro. Die Summe ergibt sich aus einer Gewinnausschüttung von: €6937,000.00 Euro, die durch die ersten sieben (7) Gewinner aus der gleichen Kategorie geteilt wurde.  Dir gewinn ist bei einer sicherheitsfirma hinterlegt und in ihren namen/email  versichert. um keine komplikationen bei der abwicklung der zahlung zu verursachen bitten wir sie diese offizielle mitteilung , diskret zu behandeln.,es ist ein teil unseres sicherheitsprotokolls und garantiert ihnen einen reibungslosen Ablauf.
+ 
+Alle gewinner wurden per computer aus Urlaubshotels, Fluggesellschaften und Reisebüros mailen Daten von fünf Millionen (5000000) Email adressen ausgewählt, als teil unserer Internationalen tourismus promotion programms, welches wir einmal im jahr veranstalten um Tourismus in Spanien zu fördern.
+ 
+Bitte kontaktieren sie unseren auslands sachbearbeiter Herr Gabriel  bei der sicherheitsfirma Santalucia Sicherheitsfirma:Per Email an:beratergabriel.sp@consultant.com oder anrufen: 34 602 810 185 & Fax:  34 931 70 2120, um Ihr Geld schnell zu bekommen.
+ 
+Denken Sie daran, jeder gewinnanspruch muss bis zum 30/9/2020 Angemeldete sein. Jeder nicht angemeldet Gewinnanspruch verfällt und geht zuruck an das Spanische Staatskasse.
+  
+WICHTIG: um verzögerungen und komplikationen zu vermeiden, bitte immer Aktenzeichen angeben.  Anbei ein anmeldeformular, bitte ausfüllen und zurück Per email an:beratergabriel.sp@consultant.com oder anrufen:  34 602 810185 & Fax:  34 931 70 2120 die sicherheitsfirma Santalucia Sicherheitsfirma.
+ 
+HERZLICHEN GLUCKWUNSCH…!
+Mit freundlichen Grüßen
+MARIA HIDALGO
+VIZEPRÄSIDENTIN
+ 
+BÜRO,SANTALUCIA SEGUROS S.A España 
+Plaza España, 15 - -16                            
+Madrid, 28008 España
+                           
+ 
+ANMELDEFORMULAR ZUR GEWINNANSPRUCHS
+_____________________________________________ 
+Bitte füllen Sie das Formular sorgfältig aus und senden es per e mail:santalucia.sg.es@spainmail.com an der Santalucia Sicherheitsfirma mit Kopie Ihres Personalausweises oder Reisepasses.
+ 
+GEWINNBETRAG:_____ AKTENZEICHEN __________
+NAME:____________ VORNAME:_________________
+GEBURTSDATUM:_____NATIONALITAT_____________
+LOSNUMMER:___________ GLÜCKSZAHLEN ________
+STRASSE:_______________ NUMMER:_____________
+WOHNORT:_____ POSTLEITZAHL_____LAND ________
+Direkter Kontakt E-Mail_____________________
+TELEFON:__________ HANDY:__________ FAX:_____
+BERUF:_____ FAMILIENSTAND:_____(GESCHLECHT)___    
+ 
+WELCHE ZAHLUNGSFORM BEVORZUGEN SIE?  (A) BANKÜBERWEISUNG:  (B) BARSCHECK  
+BANKDATEN SIND NUR NOTWENDIG WENN SIE SICH FÜR EINE BANKÜBERWEISUNG ENTSCHIEDEN HABEN.
+ 
+NAME DES GELDINSTITUTS:______________
+KONTONUMMER:________________________ 
+IBAN:_______________________________
+BANK ADDRESS:________________________
 
-On Mon, Sep 7, 2020 at 4:44 AM Alex Margolin <alex.margolin@huawei.com>
-wrote:
-
-> Hello,
->
-> My name is Alex, and I'm a (hands-on) software architect with the Israeli
-> research center of Huawei. My team's main focus is MPI and low-latency
-> networks. I've been looking into parallel filesystems, and I installed
-> OrangeFS on a small cluster to try it out. I encountered some issues, some
-> known (github issue #77) and others probably less so (though this might be
-> related to our unique network setup).
->
->
-We have done some work on RoCE that has not made it out of a branch, I am
-checking to see if this could possibly help with this.
-
-
-> I'm writing to you because I'm considering adding OpenUCX support to
-> OrangeFS (and contributing this code to the community). It looks pretty
-> straightforward, at least the part of adding a BMI module recognizing
-> "ucx://". Before I get ahead of myself, I have a few questions:
->
-> 1. Does OrangeFS require the contributors to sign any papers? clearly, the
-> code I submit upstream will become open source, but some projects also
-> require signing a CLA.
->
-
-We try to make contributing easy and don't require a CLA, we do require the
-code that is brought in to be compatible with how OrangeFS is licensed.
-
-
->
-> 2. What is OrangeFS's malloc override used for? I'm asking because UCX
-> typically uses malloc hooks for memory registration, so I'm concerned the
-> two will conflict.
->
->
-I will check on this.
-
-
-> 3. UCX is typically configured (e.g. which device to use) using
-> environment variables, which is fine for MPI but may not be appropriate for
-> a system daemon. Any suggestions on how to pass such BMI-module-related
-> parameters to the OrangeFS client and server (on boot)?
->
->
-We will have to look at this.
-
-
-> 4. I'll be experimenting with OrangeFS on a 10-node cluster used for I/O
-> intensive MPI runs, where each compute node also has an NVMe SSD (hosting
-> OrangeFS over f2fs). I'm counting on UCX to use RDMA, thus offloading the
-> work traditionally done by OrangeFS server+client so that their overhead
-> would be minimal (OrangeFS metadata is all on a storage node, accessible
-> from the compute nodes via RDMA). Am I missing something? Is there
-> something I can do to significantly improve this setup, e.g., split the
-> metadata across the nodes as well?
->
-
-OrangeFS Metadata can be configured/distributed in several different ways,
-and is accessed through BMI.   One of the standard configurations is to
-have metadata on each of the storage nodes (as long as there are not a very
-large number of storage nodes - diminishing returns).
-
-
->
-> 5. I didn't find almost any information about the filesystem architecture,
-> namely the way caching works (both on clients and the metadata servers),
-> the layout/logic for distributing files across the storage servers, how is
-> the gossip used, etc. Could you please point me to such material, if
-> exists? Actually, most of all, I'm interested in how MPI I/O uses
-> OrangeFS's parallelism - if you have any material on that, it would be
-> tremendously helpful.
->
-
-There are a couple of caches (attribute cache, page cache with the upstream
-kernel module, etc..).   I will try to dig up some information that covers
-this as well as any MPI I/O in OrangeFS material.
-
-thanks!
--b
+ 
+     ERKLÄRUNG DES BEGÜNSTIGTEN
+ICH ___________________________BESTÄTIGE HIERMIT, DASS ALLE INFORMATIONEN, KORREKT SIND, UND DIE VERANSTALTER DER El SPANISH LOTTERY / SANTALUCIA SICHERHEITSFIRMA NICHT VERANTWORTLICH GEMACHT WERDEN, WENN ES ZU EINER UNBERECHTIGTEN ZAHLUNG DURCH UNGENAUE INFORMATIONEN, DIE ICH IN DIESEM FORMULAR ANGEBE KOMMT.DASS 10% PROVISION DER SANTA LUCIA SECURITY COMPANY GEH?REN, SOBALD SIE IHREN GEWINN FONDS ERHALTEN. DIESE ZEHN PROZENT WERDEN IHNEN SOFORT ZURÜCKGEGEBEN, SIE ERHALTEN IHREN GEWINN AUF IHREM KONTO. (ACHTUNG Wir bitten Sie, auf diese E-Mail-Adresse zu antworten(santalucia.sg.es@spainmail.com) BÜRO-KONTOINFORMATIONEN-IBAN ES17 2100 5624 1102 0011 7719 SWIFT CODE: CAIXESBBXXX.  KONTONAME,LA PLACITA DEL MIRADOR S.L SPAIN.
+Urheberrecht© 2002-2020 Multi-Staat Lotterie Verband. Alle Rechte
 
 
->
-> I'll appreciate any feedback you can provide.
->
-> Best regards,
-> Alex Margolin
-> HPC Software Architect
-> Huawei Smart Platforms Innovation Lab
-> Email: alex.margolin@huawei.com
->
->

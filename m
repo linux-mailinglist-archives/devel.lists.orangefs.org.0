@@ -2,65 +2,52 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52C0A26F528
-	for <lists+devel-orangefs@lfdr.de>; Fri, 18 Sep 2020 06:35:41 +0200 (CEST)
-Received: from [::1] (port=58382 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17EEC27517E
+	for <lists+devel-orangefs@lfdr.de>; Wed, 23 Sep 2020 08:29:06 +0200 (CEST)
+Received: from [::1] (port=38252 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kJ87X-0002Ey-Uk
-	for lists+devel-orangefs@lfdr.de; Fri, 18 Sep 2020 00:35:39 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:44863)
+	id 1kKyH2-00039H-ST
+	for lists+devel-orangefs@lfdr.de; Wed, 23 Sep 2020 02:29:04 -0400
+Received: from mail-lj1-f193.google.com ([209.85.208.193]:39525)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <poppy@cleversearch.info>)
- id 1kJ87W-0002E1-1r
- for devel@lists.orangefs.org; Fri, 18 Sep 2020 00:35:38 -0400
-Received: by mail-pl1-f195.google.com with SMTP id j7so2300130plk.11
- for <devel@lists.orangefs.org>; Thu, 17 Sep 2020 21:35:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cleversearch.info; s=google;
- h=from:to:subject:date:message-id:mime-version:thread-index
- :content-language;
- bh=69r9cMJFdSv4c+Klfj/FZeYl3vgl8E9DzIHhVwkQ5Kk=;
- b=hkaJbznd0xFSHcXG+AzmUlfBsi9c0bEQxx2xsG3dJlZvja/+Nu3uawttp94mm8TRAZ
- aUShdnJ8Kv8udt5/wv3ZKX+PEs8LND7r/fuMCk7KJMKIFZYDw/eSMM2d8Sb52AJ2Cmcj
- Qno5qsNek9/QbAweKrSR0TyfpwCoZzeP4ionry1oUYVgoIjCmZ/pxwPaeltIXHABjJNe
- U04IISIB7/MhQcMB9MbVa0O5U2whuON+ypKtB+npwFD74KPr7dZBCDNfipyoKwT9F0bc
- lqNCJ92mvQRrjA8MjDliL7fWahnqN2u4N6pPVrPCxb9mDsyRvu0bQS9Wgef06wON6yXv
- m6jA==
+ (Exim 4.93) (envelope-from <yourdomainguru.des66@gmail.com>)
+ id 1kKyH1-00038w-C5
+ for devel@lists.orangefs.org; Wed, 23 Sep 2020 02:29:03 -0400
+Received: by mail-lj1-f193.google.com with SMTP id u21so16214921ljl.6
+ for <devel@lists.orangefs.org>; Tue, 22 Sep 2020 23:28:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=IWxQPd5pURezdfDAmOBe7vgYo2hsTvBdFENT/N7vfc8=;
+ b=cKEN4RO+6qEED7D9XUUKGX9FSsyD6Cu5g19UlXlFEwks19NobARIykCwa89ibP66F+
+ L7yx14Gw5aRjC4UXcEQMtyAYEFjbNiMS5E/ZzAjiIiLy3UMG9qjQNOmqOBNerKVLVdX6
+ u+p0wCWMm9M0peLorrGPFIaFmjgw8twaOg2oxVlfibs24MPa0D19Avz7Lx4Me/Q8dPPU
+ HHErQvY5mcRC4n/FN8cJTtP2N0WHANfu8Nb4g7yKXiyifw1tOUa+7O3DFruPVm+0qtRE
+ mjAKymo1nrSAVreByxKPeYKPrJh4tFbpgiWE/9G4jwdBzXvwaNhTQfyc70MBjqze4qaB
+ fihA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :thread-index:content-language;
- bh=69r9cMJFdSv4c+Klfj/FZeYl3vgl8E9DzIHhVwkQ5Kk=;
- b=HV2fgX7FtGLtwA0vNu79oWpSykwR7wfUGCXpSCs2VGB9Z1117cLl3o0OvjKGgwhXXr
- ujvVrr0/8GCVpcx5v43zEU30Aot/XtHrabnQVLncWUWQxYmvoYGRAjqc8bmvakMcJBpO
- Yob2Hbc9CETi2i3Vg3B1w4RlRbQ+hWwr/RycIS2ybd10AyepTi7prr2/hW84bzyNjedj
- lKEhywCBX+Z1OMlEitOMOOgtMLbK13K8mCWqemPdkC7sALwvoNP9tsaUY8pYp190lz/O
- BbfxZLxogn/0O5NoC7H1up8+SIxXdB8COwTshNOC/q2Tyj/znKYVXn650k0/Ao9LNmyp
- lU8Q==
-X-Gm-Message-State: AOAM531119t9DpLtIPeIeBIYUsBlf7FWFPWT8BilQ6IgdWlZd+Tp8SHE
- 5dWWydkxkULiEnWBpU2H62pNC2ZFLSEoyAtR
-X-Google-Smtp-Source: ABdhPJwBmWRd6Cnto9DnzWWVn1B5tEMleAK7beL5K+yH/GYaWxARl2IOAFXvCBuWFUAl0Kddb8R5+Q==
-X-Received: by 2002:a17:902:6ac7:b029:d0:89f3:28d1 with SMTP id
- i7-20020a1709026ac7b02900d089f328d1mr30637325plt.13.1600403696752; 
- Thu, 17 Sep 2020 21:34:56 -0700 (PDT)
-Received: from a ([223.235.16.81])
- by smtp.gmail.com with ESMTPSA id hk17sm1151073pjb.14.2020.09.17.21.34.55
- for <devel@lists.orangefs.org>
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 17 Sep 2020 21:34:56 -0700 (PDT)
-From: "Poppy" <poppy@cleversearch.info>
-To: <devel@lists.orangefs.org>
-Subject: Website Designing
-Date: Fri, 18 Sep 2020 10:02:32 +0530
-Message-ID: <a4f101d68d75$0f546ed0$2dfd4c70$@cleversearch.info>
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=IWxQPd5pURezdfDAmOBe7vgYo2hsTvBdFENT/N7vfc8=;
+ b=Uc4SUU1KrECvWCjKvHY0Vhd9lo7/oMZZkgwUB4qYVd2eX9YFa/5B7+1b2KGIWh8+fe
+ y3CS97LW4qGsxO44HXWLxz2md4w6WV8eL4I3NgGaWcJSHFQezUkpdpzLO92Rz5LnZn4K
+ vQVo/kBSshmpJ/PNBmy+1EDskZXt6Qp70U1n1IKGb3r5HuSsD5ZXOGBWkYl6XPdu8/pC
+ Swv7SP7OJ0Ale2N12LpoIcEd1UglYr6FIWTEJ22tt/y1AydtdNL49krGVuy12pwzFTNE
+ MzKMMydWcC6D9D0v4LluR6pti/xOsqTfKvcjPQltq99XQT4hkYGhApb6sFr7MGRxeb1l
+ jb9w==
+X-Gm-Message-State: AOAM533VRTPsV3zJ0/+RMAK6GcPkoG5B2ObN8O0vrzXtt3K+T/gfCdqr
+ FHkGLt2q8DPKhhqh8F6k0dhbwHqtcYJnbju07Nc+ti8pog8=
+X-Google-Smtp-Source: ABdhPJw1/8G+pB33tyIHrxcHAp0RazJuS0NqmWdtHDLHKYAU8U+rmZAePyXyheEbZZSDOWDhSHTASGJvzfTU+XASvMg=
+X-Received: by 2002:a2e:8017:: with SMTP id j23mr2486406ljg.108.1600842501344; 
+ Tue, 22 Sep 2020 23:28:21 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AdaMzJZ6P7pfY7f+R/WVReRY20ozow==
-Content-Language: en-us
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: maria lourdes layson <yourdomainguru.des66@gmail.com>
+Date: Wed, 23 Sep 2020 14:28:04 +0800
+Message-ID: <CAM2SEj=+Y=rHvQjk4rcctXOBTwKof-GyhzW=iA70Xr137+_0NA@mail.gmail.com>
+Subject: LargeFileHosting.com For Sale
+To: devel@lists.orangefs.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
@@ -86,41 +73,40 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi, 
+*LargeFileHosting.com *is for sale!
 
-I am Poppy, Web Development Manager in India and I work with 100+experienced
-IT professionals who are into:
+Hello, my name is Lourdes from Domain Nerdz. We have a domain that is
+currently on sale that you might be interested in *(LargeFileHosting.com*
+*).*
 
- 
+Anytime someone types File Hosting, Large File Hosting, The Best Large File
+Hosting, or any other phrase with these keywords into their browser your
+site could be the first they see!
 
-Website Designing, Web Development, PHP Development, e-Commerce solutions,
-Sales Force solutions, iPhone And Android Apps Development.
+Avg Google Search Results are (keyword): 110,000,000
+<https://www.google.com/search?sxsrf=3DALeKk00XVS5p1MAYPLdETHDsTE8krRm_jQ%3=
+A1600494879838&ei=3DH51lX6rCMo_6wQOmgKzABQ&q=3DLarge+File+Hosting&oq=3DLarg=
+e+File+Hosting&gs_lcp=3DCgZwc3ktYWIQAzICCAAyBggAEBYQHjIGCAAQFhAeMgYIABAWEB5=
+Q6YwQWOmMEGCMkRBoAHAAeACAAc8BiAHPAZIBAzItMZgBAKABAqABAaoBB2d3cy13aXrAAQE&sc=
+lient=3Dpsy-ab&ved=3D0ahUKEwjqzZuGxPTrAhUPfXAKHSYAC1gQ4dUDCA0&uact=3D5>
+You can easily redirect all the traffic this domain gets to your current
+site!
 
- 
+GoDaddy.com
+<https://www.estibot.com/appraise?a=3Dget&id=3D55842778&domain=3Dlargefileh=
+osting.com&source=3Dappraise>
+  appraises this domain at $2,100.
 
-May I know if you are interested in any of these services?
+The internet is the most efficient and easiest way to acquire new customers=
+.
 
-I would also like to recommend you our SEO service for better exposure and
-branding.
 
- 
+Priced at only $398 for a limited time! If interested please go to
+*LargeFileHosting.com
+<http://largefilehosting.com/>* and select Buy Now, or purchase directly at
+GoDaddy.
+Act Fast! First person to select Buy Now gets it!
 
-If you are interested, then I can send you our past work details, company
-information and an affordable quotation with the best offer.
-
- 
-
-For an effective conversation, please share your Phone Number, WhatsApp
-Number or Skype ID, along with the preferred time to contact you. Someone
-from our team will contact you according to your schedule.
-
-  
-
-Thanks & Regards
-
-Poppy   
-
-Web Development Manager
-
- 
-
+Thank you very much for your time.
+Domain Nerdz
+Maria Lourdes Layson

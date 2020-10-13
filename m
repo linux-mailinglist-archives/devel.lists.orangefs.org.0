@@ -2,61 +2,63 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 392CA2830D9
-	for <lists+devel-orangefs@lfdr.de>; Mon,  5 Oct 2020 09:26:26 +0200 (CEST)
-Received: from [::1] (port=32840 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95F2328C816
+	for <lists+devel-orangefs@lfdr.de>; Tue, 13 Oct 2020 07:03:45 +0200 (CEST)
+Received: from [::1] (port=53434 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kPKt7-0004WS-0n
-	for lists+devel-orangefs@lfdr.de; Mon, 05 Oct 2020 03:26:25 -0400
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:44971)
+	id 1kSCTP-0003zu-Ra
+	for lists+devel-orangefs@lfdr.de; Tue, 13 Oct 2020 01:03:43 -0400
+Received: from mail-pg1-f193.google.com ([209.85.215.193]:43322)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <vedanshi@aptenia.in>) id 1kPKt5-0004W3-IV
- for devel@lists.orangefs.org; Mon, 05 Oct 2020 03:26:23 -0400
-Received: by mail-pg1-f196.google.com with SMTP id 7so5428214pgm.11
- for <devel@lists.orangefs.org>; Mon, 05 Oct 2020 00:26:03 -0700 (PDT)
+ (Exim 4.93) (envelope-from <alondra@nitroinfotech.info>)
+ id 1kSCTO-0003rW-5I
+ for devel@lists.orangefs.org; Tue, 13 Oct 2020 01:03:42 -0400
+Received: by mail-pg1-f193.google.com with SMTP id r10so16715855pgb.10
+ for <devel@lists.orangefs.org>; Mon, 12 Oct 2020 22:03:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=aptenia-in.20150623.gappssmtp.com; s=20150623;
+ d=nitroinfotech.info; s=google;
  h=from:to:subject:date:message-id:mime-version:thread-index
  :content-language;
- bh=CGxjdpgIwqhoJF9JVPNrZhOqxshHq5sdtN/fV1Jpkq8=;
- b=iIr9kXmY80HlTMh2hqznH6BUorABSz0jl53NLtxaQpSJEo735+1Mi9ZNFWZrpLoixe
- vx/Xq3th3w7JB5VFl+J1Tp5QAC/zX/razvnAvI9bL6P04dZ+0vv3F8ysG8bLNK6JQkd+
- rqutQClx3K1gnpqG6ZLK2BLDoOmiBA4clYKMCuJR1KM5Q3Yy3htlmZfWzRj0sQWhDl+v
- fA/2X7lK42mZMOlDkPMgkTX22fPJVqEyKeDfZDE8LUMEgUzPq47BkYHSeZSsKQj5BH6x
- dyJ6v8aBWlimrQlg2ujTA/TyNkwWUY3DMtiiys/p4wyPnaDECqVCj3XnQDuj/wBlohve
- pAqg==
+ bh=VKfPIHmvV9poDlftPu6vNCPWEFtZ0HiWPyVr0O7X5Hk=;
+ b=SxNOonfLeaQ6Cv7EITWubq4qcV33N8doQDGqqGEa3PjNVq6HqVmx2I0lW7fdoc9iD2
+ 9VYpnOpmxG7SszqrMTY2CzYkK9/cuEZfnrb92RkPYEeiJrUAz5wDmcDzaXAJDIPm3dIO
+ RONmAKyBLh62C68JiesRAA9Aacv/2WulSYT1UXndmBSMAil0SVDSmh8tMEQ5icQKmc/6
+ zPw6HaCmtEhFrbcl7a2iIW6I53HHH8SjtsiGoCfRkEnnAwJ3eds1O5JEUttn8xVQNNTL
+ j+Teg5FBfKsw84zH0y0b3wQ3hJVeKeXtOuYnLXIa7R83nlebIFnkJgCawQqSd3Ct8aju
+ jwlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:mime-version
  :thread-index:content-language;
- bh=CGxjdpgIwqhoJF9JVPNrZhOqxshHq5sdtN/fV1Jpkq8=;
- b=GiP51sKjHxh65mAYASnX8JVwRoBRsVCkmMtGw+MvkQg4R2IIO7KcO4nXB+n52PEScf
- cCSoGmisGqA5xQrJeFgFYgWaqqJh/lDWQZAm9m1aCREYv4FmihrWsSdjxCRQRBlRG/mE
- XWxgmoQ3tQrnqwBFizGMxDmgGjhX5xWYvxvjDkoQYyix1DBAICoe22gIuyzghz9d48Mi
- nG9wVmLpIAWHpM3lDWER16rWzW3+WUXB3awYrPD9coN3Y8ol/jEdGhgMnBo3VR+4dQcS
- d2TadJorXCbwWL5jdQ7r80btNe3pgMeKDl0B38Dc0Rf4cN5f2GrW1LG0+zzNMmGxvOWY
- ji7g==
-X-Gm-Message-State: AOAM531MSfhvG5ulo6nTmRm/17SbjAijYJVRBt8f05y3gtjcub2tCeyX
- qs6oC7/IkbPWYBfO3loXA5tmwHd0AsfTsoN+
-X-Google-Smtp-Source: ABdhPJx6jiZpk8Ayaw1i+87C8RPBcBA9JJ6M6Wkp16i2rfpLKFjZunCuY2V+Ujtp2gzHbPCtaX4iJQ==
-X-Received: by 2002:aa7:8ad5:0:b029:142:2501:34df with SMTP id
- b21-20020aa78ad50000b0290142250134dfmr16155146pfd.56.1601882741600; 
- Mon, 05 Oct 2020 00:25:41 -0700 (PDT)
-Received: from omPC ([106.215.28.225])
- by smtp.gmail.com with ESMTPSA id n5sm5649773pff.190.2020.10.05.00.25.40
+ bh=VKfPIHmvV9poDlftPu6vNCPWEFtZ0HiWPyVr0O7X5Hk=;
+ b=UYEdbbUbifYEYA/WU15ERDQk+JVqy4pWD0EuIYSi0h4gKCCWQ/YCmtykNppVoMT907
+ lxprOROLgqXiO48b7n7SESIuRo4rlhuagyQgGjvhprA0NbDXBrBPL5zrxo7tbOwWc2fr
+ c6ZTWxmT/TD/TkIoamnh/kN0420elMsYYhKBr8WY/WZB6mLp3LkNOdTtkaKhMbr08Dq8
+ PWvgJITMPvxwMCOgwvSRsH1d+cpQzAhnKmh+3RN9V+3/KZpnM43dThimo+Y5zwMuC5KP
+ NItlJJbG48bdD8xy0NvW5sA9O9n0L3XllDwpHuO3tEQJRhNrDuuMjApxM6/e3o09+UVg
+ mRaA==
+X-Gm-Message-State: AOAM531lJHdJKlkyGY4GhjtrNfbqaISPgo9VZHrxyDYeqLnuOn8jNMfC
+ d3yfI6moMo3HoCitP5+gyA1sHJbg4UWTsXtg
+X-Google-Smtp-Source: ABdhPJy93oJTbhLHUzgQisisK0f6PbiPqhL/u0JatofZSAxsmOjCInlODSnStsvv1yFq1JPOW+dVaA==
+X-Received: by 2002:a17:90a:1050:: with SMTP id
+ y16mr10176684pjd.164.1602565381276; 
+ Mon, 12 Oct 2020 22:03:01 -0700 (PDT)
+Received: from AkkiJanya ([180.151.94.49])
+ by smtp.gmail.com with ESMTPSA id y4sm5609510pgs.0.2020.10.12.22.02.59
  for <devel@lists.orangefs.org>
- (version=TLS1 cipher=ECDHE-ECDSA-AES128-SHA bits=128/128);
- Mon, 05 Oct 2020 00:25:40 -0700 (PDT)
-From: "Vedanshi" <vedanshi@aptenia.in>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 12 Oct 2020 22:03:00 -0700 (PDT)
+From: Alondra <alondra@nitroinfotech.info>
+X-Google-Original-From: "Alondra" <Alondra@nitroinfotech.info>
 To: <devel@lists.orangefs.org>
-Subject: Web Development Offer...
-Date: Mon, 5 Oct 2020 12:54:58 -0700
-Message-ID: <76e001d69b51$8168e5c0$843ab140$@in>
+Subject: Website Designing 
+Date: Tue, 13 Oct 2020 10:25:53 +0530
+Message-ID: <74ffe01d6a11e$1e6a92c0$5b3fb840$@info>
 MIME-Version: 1.0
 X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AdabTymgsRLv4qw+SwufsehXPkOx7w==
-Content-Language: en-us
+Thread-Index: AdagllLFeiqVFd8FQaCXpH66hshLJg==
+Content-Language: en-in
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -85,43 +87,66 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi devel@lists.orangefs.org,
+Hi, 
 
-    
+I am Alondra, Web Development Manager in India and I work with
+100+experienced IT professionals who are into:
 
-I'm a web developer who builds amazing looking websites for small
-businesses. I'd like to have the chance to show you how I can improve for
-your business.
+
+Our Specialization
+
+
+Website Designing 
+
+Web Development 
+
+PHP Development
+
+
+e-Commerce solutions
+
+Wordpress Development
+
+Web Applications
+
+
+iOS and Android Apps Development
+
+Sales Force solutions
+
+
+Technology Version Upgrade
+
+Website Redesign
+
+
+Shopify 
+
+Magento
+
+Joomla
+
+
+SEO
+
+SMO
+
+PPC
+
+May I know if you are interested in any of these services?
+
+If you are interested, then I can send you our past work details, company
+information and an affordable quotation.
+
+For an effective conversation, please share your Phone Number, WhatsApp
+Number or Skype ID, along with the preferred time to contact you. Someone
+from our team will contact you according to your schedule.
+
+Thanks & Regards
+Alondra
+Web Development Manager
 
  
 
-I'm an expert in the Wordpress website platform and many other platforms and
-shopping carts.
-
  
-
-I can upgrade your existing website or build you a new one completely that
-has all of the modern features and functionality. Would you be available in
-the next few days for a quick consultation?
-
- 
-
-I'd like to share with you my ideas and some expert advice, show you my past
-work with other clients, get your feedback, and give you a proposal.
-
- 
-
-My rates are affordable.
-
- 
-
-Thank You.
-
- 
-
-Vedanshi,
-
- 
-
-Web Team.
 

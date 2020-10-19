@@ -2,66 +2,54 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95F2328C816
-	for <lists+devel-orangefs@lfdr.de>; Tue, 13 Oct 2020 07:03:45 +0200 (CEST)
-Received: from [::1] (port=53434 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEA4D292C89
+	for <lists+devel-orangefs@lfdr.de>; Mon, 19 Oct 2020 19:19:59 +0200 (CEST)
+Received: from [::1] (port=50396 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kSCTP-0003zu-Ra
-	for lists+devel-orangefs@lfdr.de; Tue, 13 Oct 2020 01:03:43 -0400
-Received: from mail-pg1-f193.google.com ([209.85.215.193]:43322)
+	id 1kUYpC-00050K-KZ
+	for lists+devel-orangefs@lfdr.de; Mon, 19 Oct 2020 13:19:58 -0400
+Received: from mail-io1-f72.google.com ([209.85.166.72]:40984)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <alondra@nitroinfotech.info>)
- id 1kSCTO-0003rW-5I
- for devel@lists.orangefs.org; Tue, 13 Oct 2020 01:03:42 -0400
-Received: by mail-pg1-f193.google.com with SMTP id r10so16715855pgb.10
- for <devel@lists.orangefs.org>; Mon, 12 Oct 2020 22:03:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nitroinfotech.info; s=google;
- h=from:to:subject:date:message-id:mime-version:thread-index
- :content-language;
- bh=VKfPIHmvV9poDlftPu6vNCPWEFtZ0HiWPyVr0O7X5Hk=;
- b=SxNOonfLeaQ6Cv7EITWubq4qcV33N8doQDGqqGEa3PjNVq6HqVmx2I0lW7fdoc9iD2
- 9VYpnOpmxG7SszqrMTY2CzYkK9/cuEZfnrb92RkPYEeiJrUAz5wDmcDzaXAJDIPm3dIO
- RONmAKyBLh62C68JiesRAA9Aacv/2WulSYT1UXndmBSMAil0SVDSmh8tMEQ5icQKmc/6
- zPw6HaCmtEhFrbcl7a2iIW6I53HHH8SjtsiGoCfRkEnnAwJ3eds1O5JEUttn8xVQNNTL
- j+Teg5FBfKsw84zH0y0b3wQ3hJVeKeXtOuYnLXIa7R83nlebIFnkJgCawQqSd3Ct8aju
- jwlQ==
+ (Exim 4.93) (envelope-from
+ <3lMqNXwwJBWMOJEBM.BPVTTBHNBJM.DPNEFWFMMJTUT.PSBOHFGT.PSH@trix.bounces.google.com>)
+ id 1kUYpB-0004yb-TJ
+ for devel@lists.orangefs.org; Mon, 19 Oct 2020 13:19:57 -0400
+Received: by mail-io1-f72.google.com with SMTP id j21so593539iog.8
+ for <devel@lists.orangefs.org>; Mon, 19 Oct 2020 10:19:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:reply-to:message-id:date:subject:from:to;
+ bh=cCs77xy6+ZxT7H3HlBLweYsR//JJXkb+T1zOqqXJwis=;
+ b=Co2PAflze2cm6MSVmbmuGEgm7qggPt8ozsQnTUmtSpluObCc/TsyoAzJHEmMw1A6ca
+ SDs/gQT2OEUDDeGLCqXJR7pqVtZKR5nrUwwZ1V5scbrWPl4H3NOMproldVe+N1NaN0tp
+ kfIr/KFwlKM5qe3BjWKXYjTco57DPIWTBEyO7E+1fbt3ixkBWuMxFhNDTM9vKYKD734z
+ clhzySr7zHamGigOsUUYXX+WyOXDiTyLyAaRhmHGq2ySvRVlRzibItuk7oMwqKoI4wkp
+ cdp2HACmdY4kBowrYT0hOeZNjuzyV4FoKddtpBv5E5+PPlKQEVT2ymAYxQCVgBs8sZdA
+ CUYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :thread-index:content-language;
- bh=VKfPIHmvV9poDlftPu6vNCPWEFtZ0HiWPyVr0O7X5Hk=;
- b=UYEdbbUbifYEYA/WU15ERDQk+JVqy4pWD0EuIYSi0h4gKCCWQ/YCmtykNppVoMT907
- lxprOROLgqXiO48b7n7SESIuRo4rlhuagyQgGjvhprA0NbDXBrBPL5zrxo7tbOwWc2fr
- c6ZTWxmT/TD/TkIoamnh/kN0420elMsYYhKBr8WY/WZB6mLp3LkNOdTtkaKhMbr08Dq8
- PWvgJITMPvxwMCOgwvSRsH1d+cpQzAhnKmh+3RN9V+3/KZpnM43dThimo+Y5zwMuC5KP
- NItlJJbG48bdD8xy0NvW5sA9O9n0L3XllDwpHuO3tEQJRhNrDuuMjApxM6/e3o09+UVg
- mRaA==
-X-Gm-Message-State: AOAM531lJHdJKlkyGY4GhjtrNfbqaISPgo9VZHrxyDYeqLnuOn8jNMfC
- d3yfI6moMo3HoCitP5+gyA1sHJbg4UWTsXtg
-X-Google-Smtp-Source: ABdhPJy93oJTbhLHUzgQisisK0f6PbiPqhL/u0JatofZSAxsmOjCInlODSnStsvv1yFq1JPOW+dVaA==
-X-Received: by 2002:a17:90a:1050:: with SMTP id
- y16mr10176684pjd.164.1602565381276; 
- Mon, 12 Oct 2020 22:03:01 -0700 (PDT)
-Received: from AkkiJanya ([180.151.94.49])
- by smtp.gmail.com with ESMTPSA id y4sm5609510pgs.0.2020.10.12.22.02.59
- for <devel@lists.orangefs.org>
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 12 Oct 2020 22:03:00 -0700 (PDT)
-From: Alondra <alondra@nitroinfotech.info>
-X-Google-Original-From: "Alondra" <Alondra@nitroinfotech.info>
-To: <devel@lists.orangefs.org>
-Subject: Website Designing 
-Date: Tue, 13 Oct 2020 10:25:53 +0530
-Message-ID: <74ffe01d6a11e$1e6a92c0$5b3fb840$@info>
+ h=x-gm-message-state:mime-version:reply-to:message-id:date:subject
+ :from:to;
+ bh=cCs77xy6+ZxT7H3HlBLweYsR//JJXkb+T1zOqqXJwis=;
+ b=LztnvvplSnnynxSU6x1I+m5k4eElQSQO29A/bFctLfu8juemJkBEKpZdPOsrJ1Pfhu
+ 6p7Z7yNHhVaWR8asIpjbh/YNvc/XYNCpZzBwBjkyf8Aui2P9X3jtd5mV/1EtrhwHWPM8
+ oAoBvlc6XN1yPMitsx5cNxovStrTaDXtaBlE4p7qO75fkna49B2bia+aE/T+TMesCXTs
+ eN2WkpQ+wapMQuLizFhgRm9zMIgyy7ybGh+U77AGLGxuuk+T+4OkqBm6SHpCGgvYKLBO
+ ZoFeVP6ZTpnLpkSpqOM9BhyMxeTx3AYszAeGM9rvxVUhp6xCrY3Lo1yPXCX6CUW0uWsj
+ iiDA==
+X-Gm-Message-State: AOAM5321mCjls8v4uVEH67ijUBi4T4GxoxWGRYNXlaxxyDF5n2K7YjRX
+ ZRG1oQ6cacl0UtrSQX7mr/lYyetMNrFg7UcemGw+
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AdagllLFeiqVFd8FQaCXpH66hshLJg==
-Content-Language: en-in
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-Received: by 2002:a02:5d85:: with SMTP id w127mt865241jaa.76.1603127956854; 
+ Mon, 19 Oct 2020 10:19:16 -0700 (PDT)
+X-No-Auto-Attachment: 1
+Message-ID: <00000000000065f02f05b2095043@google.com>
+Date: Mon, 19 Oct 2020 17:19:17 +0000
+Subject: Urgent Email From Miss Nidal Aoussa.
+From: nidal.aoussa@gmail.com
+To: devel@lists.orangefs.org
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
@@ -74,6 +62,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: nidal.aoussa@gmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -87,66 +76,30 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi, 
-
-I am Alondra, Web Development Manager in India and I work with
-100+experienced IT professionals who are into:
-
-
-Our Specialization
-
-
-Website Designing 
-
-Web Development 
-
-PHP Development
-
-
-e-Commerce solutions
-
-Wordpress Development
-
-Web Applications
-
-
-iOS and Android Apps Development
-
-Sales Force solutions
-
-
-Technology Version Upgrade
-
-Website Redesign
-
-
-Shopify 
-
-Magento
-
-Joomla
-
-
-SEO
-
-SMO
-
-PPC
-
-May I know if you are interested in any of these services?
-
-If you are interested, then I can send you our past work details, company
-information and an affordable quotation.
-
-For an effective conversation, please share your Phone Number, WhatsApp
-Number or Skype ID, along with the preferred time to contact you. Someone
-from our team will contact you according to your schedule.
-
-Thanks & Regards
-Alondra
-Web Development Manager
-
- 
-
- 
-
+SmUgdm91cyBhaSBpbnZpdMOpIMOgIHJlbXBsaXIgbGUgZm9ybXVsYWlyZSBzdWl2YW50wqA6DQpG
+b3JtdWxhaXJlIHNhbnMgdGl0cmUNCg0KUG91ciByZW1wbGlyIGNlIGZvcm11bGFpcmUsIGNvbnN1
+bHRlesKgOg0KaHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vZm9ybXMvZC9lLzFGQUlwUUxTZVl0aFpm
+aE5RNlpfUVN0Nmw3SDVpMm9Jd0tuSXk5NmlLaTFMZjdrT2NNYXpseURnL3ZpZXdmb3JtP3ZjPTAm
+YW1wO2M9MCZhbXA7dz0xJmFtcDtmbHI9MCZhbXA7dXNwPW1haWxfZm9ybV9saW5rDQoNCkhlbGxv
+IERlYXIsDQoNCkkgYW0gdmVyeSBzb3JyeSB0aGF0IG15IGxldHRlciBtYXkgY29tZSBhcyBhIHN1
+cnByaXNlIHRvIHlvdSBzaW5jZSB3ZSBoYXZlICANCm5ldmVyIG1ldCBlYWNoIG90aGVyIGJlZm9y
+ZS4gSSBhbSBNaXNzIE5pZGFsIEFvdXNzYS4gSSBhbSB0aGUgb25seSBkYXVnaHRlciAgDQpvZiBD
+aGVpa2ggQWcgQW91c3NhLCB0aGUgUHJlc2lkZW50IG9mIChIQ1VBKSBpbiBNYWxpIHdobyB3YXMg
+YXNzYXNpbmF0ZWQgb24gIA0KdGhlIG9jdG9icmUgMjAxNi4NCg0KaHR0cHM6Ly93d3cuamV1bmVh
+ZnJpcXVlLmNvbS8zNjU0MzIvcG9saXRpcXVlL21hbGktc2FpdC1vbi1tb3J0LWRlLWNoZWlraC1h
+Zy1hb3Vzc2EvDQpodHRwczovL2ZyLndpa2lwZWRpYS5vcmcvd2lraS9DaGVpa2hfQWdfQW91c3Nh
+DQoNCkkgaGF2ZSBhIGJ1c2luZXNzIHRyYW5zYWN0aW9uIHdoaWNoIGkgc29saWNpdCB5b3VyIGhl
+bHAuIEl0IGlzIGFsbCBhYm91dCBhICANCmZ1bmQgdG8gYmUgdHJhbnNmZXJyZWQgaW4geW91ciBj
+b3VudHJ5IGZvciB1cmdlbnQgaW52ZXN0bWVudCBvbiBpbXBvcnRhbnQgIA0KcHJvamVjdHMuIEkg
+d2FudCB5b3UgdG8gZ3VpZGUgbWUgYW5kIGludmVzdCB0aGlzIG1vbmV5IGluIHlvdXIgY291bnRy
+eS4gIA0KVGhpcyBmdW5kIGFtb3VudCB0byBFbGV2ZW4gTWlsbGlvbnMgRml2ZSBIdW5kcmVkIFRo
+b3VzYW5kIFVuaXRlZCBTdGF0ZXMgIA0KZG9sbGFycyB3aGljaCBpIGluaGVyaXRlZCBmcm9tIG15
+IGxhdGUgZGFkLi4gSWYgeW91IGFyZSBjYXBhYmxlIG9mIGhhbmRsaW5nICANCm9yIHBhcnRpY2lw
+YXRlIGluIHRoaXMgdHJhbnNhY3Rpb24sIGtpbmRseSByZXNwb25kIHF1aWNrbHkgdGhyb3VnaCBt
+eSAgDQpwcml2YXRlIGVtYWlscyB0byBlbmFibGUgbWUgZ2l2ZSB5b3UgbW9yZSBkZXRhaWxzIGFi
+b3V0IHRoaXMgZnVuZCBhbmQgaG93ICANCnRoaXMgcHJvamVjdCBzaGFsbCBiZSBjYXJyaWVkIG91
+dC4gSSB3aWxsIGFjY29yZCB5b3UgMjAlIG9mIHRoZSB0b3RhbCBmdW5kICANCmZvciB5b3VyIGtp
+bmQgYXNzaXN0YW5jZS4gUmVzcG9uZCB0aHJvdWdoIHRoaXMgbXkgcHJpdmF0ZSBlbWFpbHMgYWRk
+cmVzc2VzICANCmJlbG93Lg0KDQpNaXNzIE5pZGFsIEFvdXNzYQ0KRW1haWw6ICggbmlkYWwua29u
+ZzIwMjBAZ21haWwuY29tICkNCg0KR29vZ2xlwqBGb3JtcyB2b3VzIHBlcm1ldCBkZSBjcsOpZXIg
+ZGVzIGVucXXDqnRlcyBldCBkJ2VuIGFuYWx5c2VyIGxlcyAgDQpyw6lzdWx0YXRzLg0K

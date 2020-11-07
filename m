@@ -2,49 +2,49 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F12D2AA40D
-	for <lists+devel-orangefs@lfdr.de>; Sat,  7 Nov 2020 10:00:15 +0100 (CET)
-Received: from [::1] (port=42742 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64DE12AA40E
+	for <lists+devel-orangefs@lfdr.de>; Sat,  7 Nov 2020 10:00:26 +0100 (CET)
+Received: from [::1] (port=42750 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kbK50-0003Ft-JK
-	for lists+devel-orangefs@lfdr.de; Sat, 07 Nov 2020 04:00:14 -0500
-Received: from mail-qv1-f72.google.com ([209.85.219.72]:51178)
+	id 1kbK5B-0003GX-Kx
+	for lists+devel-orangefs@lfdr.de; Sat, 07 Nov 2020 04:00:25 -0500
+Received: from mail-qt1-f199.google.com ([209.85.160.199]:37041)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
  (Exim 4.93) (envelope-from
- <382GmXw4JBVQz4B.w2D09FSQOO28w47.yA8z0H0774EFE.ADw9201E.AD2@trix.bounces.google.com>)
- id 1kbK4y-0003EM-W3
- for devel@lists.orangefs.org; Sat, 07 Nov 2020 04:00:13 -0500
-Received: by mail-qv1-f72.google.com with SMTP id l16so2195132qvt.17
- for <devel@lists.orangefs.org>; Sat, 07 Nov 2020 00:59:52 -0800 (PST)
+ <3_WGmXw4JBV49EL.6CNAJPcaYYCI6EH.8KI9ARAHHEOPO.KN6JCABO.KNC@trix.bounces.google.com>)
+ id 1kbK5A-0003EQ-Ge
+ for devel@lists.orangefs.org; Sat, 07 Nov 2020 04:00:24 -0500
+Received: by mail-qt1-f199.google.com with SMTP id w88so2393082qtd.4
+ for <devel@lists.orangefs.org>; Sat, 07 Nov 2020 01:00:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:reply-to:message-id:date:subject:from:to;
- bh=N7X+eb468duzBYN4Yo9katVQHuvcJ3XoQJ6r71Pfzyw=;
- b=pjtpevA5sI9RYvWwEwVeKlDUk3iGPHripwJykjD0nPPhZMtV2pmNjIE4vpO+lXxFiO
- +154LX4zSYc1Mz7jfz88/NubjdDtJABH/qHLgK0eigr/0rH0OkReuvzRpFLboNsnsRgR
- kLgpRcVdTY0z7AMwOP8JQUbtAIi9kO8kVMBx+gbmGi9PYKzwOu4+g8qzi1jguv4sFO/g
- xjwx4sRrUcKFYwdR/5vX44TQdB11KZkwdHs1lPXPVSzcf2nl6n1J/WcCbcEOjtSUPc8+
- v1y8s3jnCqpNa/xnOhILw3eJqWk3pGYUYqE4yWRK6MKaGGdgkF4rZYF3m6RuURnIz+Qi
- dTDQ==
+ bh=i25UmNYuTW/Cmn0i3kQiNkd+wt8+VvjxI1zZ1hnXYFs=;
+ b=R3McOU3MSnSMSLl8bfLr2VuK5kdMda1U8vzeZqyhj8UI6m7YyNS3bn4JRbmIIJLfpK
+ WVK1l1wAp9r86sVZ0xHYoewx1e8dAsdfjEypB0mDQdyKAfVHXS0+MfukSa79nwHhWD4u
+ l3y76QrANqvosN2sBAzQLU2x5okYMfH0Vf/SOUrdMHtMPQlUHhXqdcnbNz/9SqpMT/vb
+ FADTy1ck2pm4r8/RzJATqTkhcohT1f0e5pn1HV8QVJumn6n1f+VbqLkGVLxuYIIKB0eT
+ krcJ17hocvgKxPotjQIeluZdRJd44UJYGwMAna7L252lhnxAnwfnFgDZLwlX/nM1HDLY
+ 8Z1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:reply-to:message-id:date:subject
  :from:to;
- bh=N7X+eb468duzBYN4Yo9katVQHuvcJ3XoQJ6r71Pfzyw=;
- b=FkY43iRLtnWq7Rzqp+le1E/wiYS+k021r8N7TVBvGNvHe6r3+POHsYMUQnQkcRnQ4x
- XCdUe2csTR83jb/bRkIKVfaTUYHy4sUTDeQHQA06FTww8tuYyn+HvW+JX3xesdZRBELa
- DXjouWm85pluxiG/DfRn+cSA4XWAEWLg6iBQtArg0zE/7MUk9haQzrGw06zIkelK1CSO
- 3xUv9P96a0vEhSb8pAfUPgcmA+fJMBD/mHNenGR8Ki2UEvTPTnyQUyjAYFwaTflw4isM
- syBjmekwIOwt7VGUyCorTfOZn4JRsyYqFO1Vdh5SfT7fjRJE6Hip76pyi6/TOhkSPBTe
- 5cew==
-X-Gm-Message-State: AOAM531mgjunXhZC2BalSDXw107EF4l4mG+ol6avBKz+2b9aexCMwz0Z
- 6YZAv8bJLOA1LnZtdaMKo0nWDgStu2Mo9DtBJ0QE
+ bh=i25UmNYuTW/Cmn0i3kQiNkd+wt8+VvjxI1zZ1hnXYFs=;
+ b=OqOBJowN3T1iNnEEPliQqtZXvSDRfHI1KoPp1KcIEQ9Eg+1WHoV5wRe1QbQXhGVQIt
+ ggfjoRg3V0HRizW4ZrzMiXAvYBXb8QMg/scB+wtlDOByzFwOJt5CAsccEow7q9uGItoU
+ wRVVsN8LTYKqP7Ob6MMbOO8jHsh/GsjPnNoXwLN5Kqi1FpiFcoNs84N71gA7OqCousm5
+ AS+tb561nlOf+Fasl3Y0f9/dDEF5XJKeV8Be+0snt+QwHEMu18eh2Ewd+Ud9tV3/a1GD
+ Fegx1aeWlPMWwfN1CJHFjSXgQ8jOgwnYVHbR1r7siQXSFaRcaFKO7X4aPcRp8yCDQkRP
+ p0fA==
+X-Gm-Message-State: AOAM532eogkWlbI6DlH0JdNfrO58++N7Knd65ooSTn/6d+Z0eA6xxgpT
+ qYkymUd6wCNUseEBmUt9nrY3JNxRiid6GhCBy4uc
 MIME-Version: 1.0
-X-Received: by 2002:ac8:5d53:: with SMTP id g19mt5442503qtx.306.1604739571939; 
- Sat, 07 Nov 2020 00:59:31 -0800 (PST)
+X-Received: by 2002:ac8:24ca:: with SMTP id t10mt5412906qtt.7.1604739581465;
+ Sat, 07 Nov 2020 00:59:41 -0800 (PST)
 X-No-Auto-Attachment: 1
-Message-ID: <00000000000024999905b3808cec@google.com>
-Date: Sat, 07 Nov 2020 08:59:32 +0000
+Message-ID: <000000000000b5fdd005b3808c52@google.com>
+Date: Sat, 07 Nov 2020 08:59:44 +0000
 Subject: U.S. Customs and Border Protection.
 From: dip.agrent6422@gmail.com
 To: devel@lists.orangefs.org

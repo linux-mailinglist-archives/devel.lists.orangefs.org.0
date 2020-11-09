@@ -2,53 +2,30 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64DE12AA40E
-	for <lists+devel-orangefs@lfdr.de>; Sat,  7 Nov 2020 10:00:26 +0100 (CET)
-Received: from [::1] (port=42750 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 898962AAE97
+	for <lists+devel-orangefs@lfdr.de>; Mon,  9 Nov 2020 01:49:02 +0100 (CET)
+Received: from [::1] (port=38070 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kbK5B-0003GX-Kx
-	for lists+devel-orangefs@lfdr.de; Sat, 07 Nov 2020 04:00:25 -0500
-Received: from mail-qt1-f199.google.com ([209.85.160.199]:37041)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from
- <3_WGmXw4JBV49EL.6CNAJPcaYYCI6EH.8KI9ARAHHEOPO.KN6JCABO.KNC@trix.bounces.google.com>)
- id 1kbK5A-0003EQ-Ge
- for devel@lists.orangefs.org; Sat, 07 Nov 2020 04:00:24 -0500
-Received: by mail-qt1-f199.google.com with SMTP id w88so2393082qtd.4
- for <devel@lists.orangefs.org>; Sat, 07 Nov 2020 01:00:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:reply-to:message-id:date:subject:from:to;
- bh=i25UmNYuTW/Cmn0i3kQiNkd+wt8+VvjxI1zZ1hnXYFs=;
- b=R3McOU3MSnSMSLl8bfLr2VuK5kdMda1U8vzeZqyhj8UI6m7YyNS3bn4JRbmIIJLfpK
- WVK1l1wAp9r86sVZ0xHYoewx1e8dAsdfjEypB0mDQdyKAfVHXS0+MfukSa79nwHhWD4u
- l3y76QrANqvosN2sBAzQLU2x5okYMfH0Vf/SOUrdMHtMPQlUHhXqdcnbNz/9SqpMT/vb
- FADTy1ck2pm4r8/RzJATqTkhcohT1f0e5pn1HV8QVJumn6n1f+VbqLkGVLxuYIIKB0eT
- krcJ17hocvgKxPotjQIeluZdRJd44UJYGwMAna7L252lhnxAnwfnFgDZLwlX/nM1HDLY
- 8Z1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:reply-to:message-id:date:subject
- :from:to;
- bh=i25UmNYuTW/Cmn0i3kQiNkd+wt8+VvjxI1zZ1hnXYFs=;
- b=OqOBJowN3T1iNnEEPliQqtZXvSDRfHI1KoPp1KcIEQ9Eg+1WHoV5wRe1QbQXhGVQIt
- ggfjoRg3V0HRizW4ZrzMiXAvYBXb8QMg/scB+wtlDOByzFwOJt5CAsccEow7q9uGItoU
- wRVVsN8LTYKqP7Ob6MMbOO8jHsh/GsjPnNoXwLN5Kqi1FpiFcoNs84N71gA7OqCousm5
- AS+tb561nlOf+Fasl3Y0f9/dDEF5XJKeV8Be+0snt+QwHEMu18eh2Ewd+Ud9tV3/a1GD
- Fegx1aeWlPMWwfN1CJHFjSXgQ8jOgwnYVHbR1r7siQXSFaRcaFKO7X4aPcRp8yCDQkRP
- p0fA==
-X-Gm-Message-State: AOAM532eogkWlbI6DlH0JdNfrO58++N7Knd65ooSTn/6d+Z0eA6xxgpT
- qYkymUd6wCNUseEBmUt9nrY3JNxRiid6GhCBy4uc
-MIME-Version: 1.0
-X-Received: by 2002:ac8:24ca:: with SMTP id t10mt5412906qtt.7.1604739581465;
- Sat, 07 Nov 2020 00:59:41 -0800 (PST)
-X-No-Auto-Attachment: 1
-Message-ID: <000000000000b5fdd005b3808c52@google.com>
-Date: Sat, 07 Nov 2020 08:59:44 +0000
-Subject: U.S. Customs and Border Protection.
-From: dip.agrent6422@gmail.com
-To: devel@lists.orangefs.org
-Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+	id 1kbvMj-0006n7-7s
+	for lists+devel-orangefs@lfdr.de; Sun, 08 Nov 2020 19:49:01 -0500
+Received: from [185.14.29.128] (port=56919 helo=vpass.ne.jp)
+ by mm1.emwd.com with esmtp (Exim 4.93)
+ (envelope-from <obyaokdxz@vpass.ne.jp>) id 1kbvMi-0006ia-2C
+ for devel@lists.orangefs.org; Sun, 08 Nov 2020 19:49:00 -0500
+Message-ID: <5006D52E679827CC7699933272B2513F@vpass.ne.jp>
+From: =?utf-8?B?5LiJ5LqV5L2P5Y+L44Kr44O844OJ?= <vpass.ne.jp>
+To: <devel@lists.orangefs.org>
+Subject: =?utf-8?B?77yc6YeN6KaB77ye44CQ5LiJ5LqV5L2P5Y+L44Kr44O844OJ44CR44GU5Yip55So56K66KqN44Gu44GK?=
+ =?utf-8?B?6aGY44GE?=
+Date: Sun, 8 Nov 2020 16:48:49 -0800
+Mime-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5512
+X-MimeOLE: Produced By Microsoft MimeOLE V6.3.9600.16384
+Content-Type: text/plain;
+	charset="utf-8"
 Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
@@ -62,7 +39,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: dip.agrent6422@gmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -76,26 +52,22 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-SSd2ZSBpbnZpdGVkIHlvdSB0byBmaWxsIG91dCB0aGUgZm9sbG93aW5nIGZvcm06DQpVbnRpdGxl
-ZCBmb3JtDQoNClRvIGZpbGwgaXQgb3V0LCB2aXNpdDoNCmh0dHBzOi8vZG9jcy5nb29nbGUuY29t
-L2Zvcm1zL2QvZS8xRkFJcFFMU2U4dUEyeEZfVWFLV3Y0WXo2WUhPdkRqeXBPdHFvSkw5aWNnQ0ZZ
-dWNwbXNVV1RGUS92aWV3Zm9ybT92Yz0wJmFtcDtjPTAmYW1wO3c9MSZhbXA7ZmxyPTAmYW1wO3Vz
-cD1tYWlsX2Zvcm1fbGluaw0KDQpHb29kIG1vcm5pbmcgdG8geW91Lg0KDQpUaGlzIG1lc3NhZ2Ug
-aXMgY29taW5nIHRvIHlvdSBmcm9tIFUuUy4gQ3VzdG9tcyBhbmQgQm9yZGVyIFByb3RlY3Rpb24g
-LSAgDQpDaGllZiBNb3VudGFpbiBQb3J0IG9mIEVudHJ5LCBUaGUgbWVzc2FnZSBpcyBiZWNhdXNl
-IG9mIHlvdXIgcGFja2FnZSBib3ggIA0Kd2hpY2ggd2FzIGp1c3QgcmVsZWFzZWQgYW5kIGNsZWFy
-ZWQgYWJvdXQgMzAgbWludXRlcyBhZ2/igKYgd2Ugd2FudCB5b3UgdG8gIA0KY29tZSBkb3duIGhl
-cmUgaW4gcGVyc29uIGFuZCB0YWtlIGF3YXkgeW91ciBwYWNrYWdlIHdpdGhvdXQgYW55IHF1ZXN0
-aW9uIG9yICANCmRlbGF5IGZyZWVseSAoQWRkcmVzczogMTM5NSBDaGllZiBNb3VudGFpbiBId3ks
-IEJhYmIsIE1UIDU5NDExLCBVbml0ZWQgIA0KU3RhdGVzKQ0KYnV0IGlmIGl0IGNhbuKAmXQgYmUg
-cG9zc2libGUgZm9yIHlvdSB0byBjb21lIGRvd24gZHVlIHRvIHdvcmtpbmcgaG91ciBqdXN0ICAN
-CmdvIGRvd24gdG8gYW55IG5lYXJlc3Qgc3RvcmUgYnV5IHN0ZWFtIGNhcmQgb3Igbm9yZHN0cm9t
-IGNhcmQgb2YgJDE5MCBhbmQgIA0Kc2VuZCBpdCB0byB5b3VyIGRlbGl2ZXJ5IGFnZW50IHZpYSBl
-IGVtYWlsIChob25vcmFibGVoYXJyaXNvbjJAZ21haWwuY29tKSAgDQpvciBwaG9uZSArMSAoMjE2
-KSA0NjUtNTMxNyBpIGV4cGVjdCB5b3VyIHVyZ2VudCBjYWxsIHBsZWFzZSBhbHNvIHByb3ZpZGUg
-IA0KeW91ciBhZGRyZXNzIHdoZXJlIHlvdSB3YW50IHlvdXIgcGFja2FnZSBib3ggdG8gYmUgZGVs
-aXZlcmVkIHRvICB5b3UgaW4gIA0KbmV4dCA0IGhvdXJzIHlvdSB3aWxsIGNvbmZpcm0geW91ciBw
-YWNrYWdlIGltbWVkaWF0ZWx5LCBwbGVhc2UgZG9u4oCZdCBpZ25vcmUgIA0KdGhpcyBtZXNzYWdl
-IGJlY2F1c2UgeW91IGFyZSB2ZXJ5IGx1Y2t5IHBlcnNvbiB0b2RheeKApi4uDQoNClUuUy4gQ3Vz
-dG9tcyBhbmQgQm9yZGVyIFByb3RlY3Rpb24uDQoNCkdvb2dsZSBGb3JtczogQ3JlYXRlIGFuZCBh
-bmFseXplIHN1cnZleXMuDQo=
+DQoNCuOBhOOBpOOCguW8iuekvuOCq+ODvOODieOCkuOBlOWIqeeUqOOBhOOBn+OBoOOBjeOBguOC
+iuOBjOOBqOOBhuOBlOOBluOBhOOBvuOBmeOAgg0KDQrmmKjku4rjga7nrKzkuInogIXkuI3mraPl
+iKnnlKjjga7mgKXlopfjgavkvLTjgYTjgIHlvIrnpL7jgafjga/jgIzkuI3mraPliKnnlKjnm6Po
+ppbjgrfjgrnjg4bjg6DjgI3jgpLlsI7lhaXjgZfjgIEyNOaZgumWkzM2NeaXpeS9k+WItuOBp+OC
+q+ODvOODieOBruOBlOWIqeeUqOOBq+WvvuOBmeOCi+ODouODi+OCv+ODquODs+OCsOOCkuihjOOB
+o+OBpuOBiuOCiuOBvuOBmeOAgg0KDQrjgZPjga7jgZ/jgbPjgIHjgZTmnKzkurrmp5jjga7jgZTl
+iKnnlKjjgYvjganjgYbjgYvjgpLnorroqo3jgZXjgZvjgabjgYTjgZ/jgaDjgY3jgZ/jgYTjgYrl
+j5blvJXjgYzjgYLjgorjgb7jgZfjgZ/jga7jgafjgIHoqqDjgavli53miYvjgarjgYzjgonjgIHj
+gqvjg7zjg4njga7jgZTliKnnlKjjgpLkuIDpg6jliLbpmZDjgZXjgZvjgabjgYTjgZ/jgaDjgY3j
+gIHjgZTpgKPntaHjgZXjgZvjgabjgYTjgZ/jgaDjgY3jgb7jgZfjgZ/jgIINCg0K44Gk44GN44G+
+44GX44Gm44Gv44CB5Lul5LiL44G444Ki44Kv44K744K544Gu5LiK44CB44Kr44O844OJ44Gu44GU
+5Yip55So56K66KqN44Gr44GU5Y2U5Yqb44KS44GK6aGY44GE6Ie044GX44G+44GZ44CCDQrjgZTl
+m57nrZTjgpLjgYTjgZ/jgaDjgZHjgarjgYTloLTlkIjjgIHjgqvjg7zjg4njga7jgZTliKnnlKjl
+iLbpmZDjgYzntpnntprjgZXjgozjgovjgZPjgajjgoLjgZTjgZbjgYTjgb7jgZnjga7jgafjgIHk
+uojjgoHjgZTkuobmib/kuIvjgZXjgYTjgIINCg0K4pag44GU5Yip55So56K66KqN44Gv44GT44Gh
+44KJDQoNCuOAgGh0dHA6Ly9zbWNjLWNhY2MubWFjYy54eXovDQoNCuKWoOeZuuihjOiAheKWoA0K
+5LiJ5LqV5L2P5Y+L44Kr44O844OJ5qCq5byP5Lya56S+DQrjgIBodHRwOi8vc21jYy1jYWNjLm1h
+Y2MueHl6Lw0K44CSMTA1LTgwMTEg5p2x5Lqs6YO95riv5Yy65rW35bK4MeS4geebrjLnlaoyMOWP
+tyDmsZDnlZnjg5Pjg6vjg4fjgqPjg7PjgrANCg0KDQouLi4=

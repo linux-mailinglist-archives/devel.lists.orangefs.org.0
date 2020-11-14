@@ -2,54 +2,54 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C74A2AD716
-	for <lists+devel-orangefs@lfdr.de>; Tue, 10 Nov 2020 14:06:57 +0100 (CET)
-Received: from [::1] (port=35296 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id E72712B2CA1
+	for <lists+devel-orangefs@lfdr.de>; Sat, 14 Nov 2020 11:18:23 +0100 (CET)
+Received: from [::1] (port=46818 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kcTMO-0004Se-02
-	for lists+devel-orangefs@lfdr.de; Tue, 10 Nov 2020 08:06:56 -0500
-Received: from mail-lj1-f195.google.com ([209.85.208.195]:36421)
+	id 1kdsdS-0007HZ-RF
+	for lists+devel-orangefs@lfdr.de; Sat, 14 Nov 2020 05:18:22 -0500
+Received: from mail-vk1-f200.google.com ([209.85.221.200]:46818)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <caandicecromwell@gmail.com>)
- id 1kcTMM-0004Ru-Er
- for devel@lists.orangefs.org; Tue, 10 Nov 2020 08:06:54 -0500
-Received: by mail-lj1-f195.google.com with SMTP id v18so14598560ljc.3
- for <devel@lists.orangefs.org>; Tue, 10 Nov 2020 05:06:34 -0800 (PST)
+ (Exim 4.93) (envelope-from
+ <3w66vXw8JBeINYHMXLiih.YVMELKQEMP.GSQHIZIPPMWXW.SVERKIJW.SVK@trix.bounces.google.com>)
+ id 1kdsdR-0007Fz-EI
+ for devel@lists.orangefs.org; Sat, 14 Nov 2020 05:18:21 -0500
+Received: by mail-vk1-f200.google.com with SMTP id g3so3298967vkl.13
+ for <devel@lists.orangefs.org>; Sat, 14 Nov 2020 02:18:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:sender:from:date:message-id:subject:to;
- bh=1nZt2V13IF96wueoi15K3hELdEYYZFj2bifKL+recFs=;
- b=QleDGFZvlS5uBoSEnmE9H9c/91cxlAYwFa9RfEfYXEQ8fBhh9m0x+E5DFM3WViHeBP
- HwBCbxEm6Ye3mBsitOsXtxlrx1l85tKT0FBYi0Tnwoc9zifmLEP0DSUV9bMKBwhxGtWU
- ngzBhZnyYRA2brzZ8hE2ecLkoALkfYNYgPnHlMNk+qFNcQ2YlokODnXYYL0j24MnUqIs
- xX+luA+IgJLPShYCGk8zeth5Q8keGjAGdN4L8YlnH2STPeoBMjPxLrjeIcfKLvfeUd5T
- ZVYpZtWUpqDj4F0OTiiFDIfOzrIOqpqq5p2XoRudGOnd7YzMyv2Gu97csjwG5eVcfthC
- GZmg==
+ h=mime-version:reply-to:message-id:date:subject:from:to;
+ bh=VJUe++z3NoHdjLAM7HgJ2nC0yIb6xXdId4cCJZoNF7s=;
+ b=hP/P27Rm148pHcgm2JE7JKFx3tDpwmcVhil3R+zEK5SIoza0sdTShLPudpV4sTe89n
+ iGLAycqSSmeCC2K1sHLtg8Q9LHUpP2JCRXZUlXDoqid0LNLjYFp+VouWwtHmk8CCpLGL
+ 2So1yiq674+PJNuIs2ORFkiOa/QCOcUnc3aKElWsYH9Hjv9VwCmON7GMkh87Gtr0PoFi
+ sTP2qaszp47EHPUWzdunxZz66aqlPBWeTYSuMkEwXOoDWhkWlnHsH6FmtUxIKhJuRSN3
+ pQiD7pRjMgz1WsVCi6xsvCPq8oO2SS1f9OIjNFTLZe5XOvQ6fMjYTlsFljmHloEz23C/
+ ZNHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
- :to; bh=1nZt2V13IF96wueoi15K3hELdEYYZFj2bifKL+recFs=;
- b=ifnejDiLl/MDDC+bbsUsyiSIWZw1iXxVdFOm+OJFqCsx8V3R2NSijZ1iA9uXsN0TlM
- SyLEXggNWa3d3pxVy73vgafpQQA4wci41cRKOZ6xmHpEDllZdjIruMsk1o/sfiI9n2bF
- v1LIAJZL7QtJdyFZB54JJoBalfeUbmCxGN59e6mrvErV82/SMDUblWnxVVOIaXBgsCvA
- 0D8Ro7TFU9jwdBWWTvDGaRi21AlJhjyU0PyKfWrvOQ4LiRsljfSRcDeLQ5MKA0LNpD8N
- 2MY7wO2rpvb+IBdHyMbd7JTZlRtpI2zL3w9sgE0zlV+71JEroTQO6ZuNtxrczze2kAiu
- OuRA==
-X-Gm-Message-State: AOAM533wgK1LkgdH/a138qe1IZaEwPoFfEVhuqbQilTr6UkP97jWTNTB
- tCXjnYccLyjAee8jjFhiIoY4kICSzKdkpvHShFtNtukM
-X-Google-Smtp-Source: ABdhPJxl25P45YesDgomIdxh7TZwBIuvpjANXdB5NaznyF9X4nKnPeTJtHAu9txFyV+dwx04zSAH6VRzQ2pSJlrTYWM=
-X-Received: by 2002:a2e:8295:: with SMTP id y21mr7833274ljg.153.1605013572750; 
- Tue, 10 Nov 2020 05:06:12 -0800 (PST)
-Received: from 52669349336 named unknown by gmailapi.google.com with HTTPREST; 
- Tue, 10 Nov 2020 05:06:12 -0800
+ h=x-gm-message-state:mime-version:reply-to:message-id:date:subject
+ :from:to;
+ bh=VJUe++z3NoHdjLAM7HgJ2nC0yIb6xXdId4cCJZoNF7s=;
+ b=ZhxjG60RcOSe9RfvmhzUfwac76ea9ZXQGALNt5KjqQpADQn/O1eR2oZXXcMVmvDlRj
+ J+VIiXOkGmWoX3hMoIn+xmSvoK0404lYWBieAANhRQa7v/4H0W9tRJTrpk8pagx0QVGC
+ 5x4guGnAks1C0eZATj5pIzhP7dNma1Ge6+oTPot/WtLjjFminzUZhukRB3tTGLpPnhPg
+ c9dG3DdWSIt88N6fUJyRk6qC3hK9OE6L2pY9jvpxBAsFmhyu8tymfgpFvP0N5HvKJpvG
+ c9RUp4OTkfLOIVGMpSPaDXWHA3eAYAXNm6cjYh0GLnHFGn/OIYy5Sm60kKnvcArffFd7
+ Ke+g==
+X-Gm-Message-State: AOAM530gKwfqvS37TLNdMTEt7i0uqNecD59PsXpoiZ/Fz9HUhJtGIksr
+ 8c9Fd7PK2Zih/Ori9kWSoEJOzl1F1u5rctvhCmlH
 MIME-Version: 1.0
-From: Candice Cromwell <caandicecromwell@gmail.com>
-Date: Tue, 10 Nov 2020 05:06:12 -0800
-X-Google-Sender-Auth: qpEpxYoVgC3fXcSOAVaGU-U9K-M
-Message-ID: <CANn-P6RSOu7HfTuQWsTCNg+5P_g6W7D3qQ0fVJzFBwEapMFg-Q@mail.gmail.com>
-Subject: orangefs.org - See How to Improve your Website Business
-To: Devel <devel@lists.orangefs.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Received: by 2002:a67:73c1:: with SMTP id o184mt3892439vsc.18.1605349059490; 
+ Sat, 14 Nov 2020 02:17:39 -0800 (PST)
+X-No-Auto-Attachment: 1
+Message-ID: <0000000000006e882b05b40e74ce@google.com>
+Date: Sat, 14 Nov 2020 10:17:40 +0000
+Subject: HOSPITAL MESSAGE
+From: judith443.uriah@gmail.com
+To: devel@lists.orangefs.org
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
@@ -62,6 +62,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: judith443.uriah@gmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -75,37 +76,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hello orangefs.org Team,
-
-I hope you are doing well!
-
-Sorry to inform you that your website domain is highly inactive on big
-search engines like Google, Yahoo, Bing, etc. I thought you would like to
-know that why you are getting less visitors on your website. Just Have a
-look at the below stated issue that your website might be facing.
-
-Some of the issues are
-
-   - Relevant keywords problem
-   - Website having off page and on page issues
-   - HTML validation
-   - Website quality is not high enough
-
-So the solution to this is
-
-   - Bring your keyword at the first page
-   - Increase of conversation rate
-   - Getting a high ROI
-
-We will help you to get your website larger visitors and get a higher rank
-in all search engines. I have also prepared a free analysis report, just
-rely on this email if you want to get.
-
-Waiting for your valid response.
-
-With Warm Regards
-
-*Candice Cromwell *
-
-Business Development Executive
-[image: beacon]
+SmUgdm91cyBhaSBpbnZpdMOpIMOgIHJlbXBsaXIgbGUgZm9ybXVsYWlyZSBzdWl2YW50wqA6DQpG
+b3JtdWxhaXJlIHNhbnMgdGl0cmUNCg0KUG91ciByZW1wbGlyIGNlIGZvcm11bGFpcmUsIGNvbnN1
+bHRlesKgOg0KaHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vZm9ybXMvZC9lLzFGQUlwUUxTYzJCbHhx
+UjlpTGEyN1RON082XzZuNFF2TkxGajRzRHlXcDhlbGc0MVBXajFIV3NnL3ZpZXdmb3JtP3ZjPTAm
+YW1wO2M9MCZhbXA7dz0xJmFtcDtmbHI9MCZhbXA7dXNwPW1haWxfZm9ybV9saW5rDQoNCg0KRGVh
+cmVzdA0KDQpJIGhhdmUgdG8gYXBvbG9naXplIGZvciBzZW5kaW5nIHlvdSBhbiB1bndlbGNvbWVk
+IG1lc3NhZ2UgYmVjYXVzZSBJIGtub3cgIA0KdGhpcyBpcyBub3QgYSBwcmVkaWN0YWJsZSB3YXkg
+dG8gZW5jb3VyYWdlIGNvbW11bmljYXRpb24gd2l0aCBhIHN0cmFuZ2VyIGF0ICANCnRoZSBzYW1l
+IHRpbWUsIGZvcmdpdmUgbWUgZm9yIGNvbnRhY3RpbmcgeW91IHdpdGhvdXQga25vd2luZyB5b3Ug
+cGVyc29uYWxseS4NCg0KSW4gYW55IGNhc2UsIEkgYW0gd3JpdGluZyB0byB5b3UgZnJvbSB0aGUg
+aG9zcGl0YWwgd2hlcmUgSSBoYXZlIGJlZW4gIA0KaG9zcGl0YWxpemVkIGZvciBlc29waGFnZWFs
+IGNhbmNlciBvdmVyIHRoZSBwYXN0IHNpeCBtb250aHMuIEluIGZhY3QsIEkgIA0KaGF2ZSBwZXJm
+b3JtZWQgbWFueSB1bnN1Y2Nlc3NmdWwgc3VyZ2VyaWVzIGluIHRoZSBwYXN0IGFuZCByZWNlbnRs
+eSBteSAgDQpkb2N0b3IgdG9sZCBtZSB0aGF0IEkgb25seSBoYXZlIGEgZmV3IHBlcmlvZHMgdG8g
+bGl2ZSBiZWNhdXNlIG9mIHRoZSBjYW5jZXIgIA0KZGFtYWdlLg0KDQpBZnRlciBsZWFybmluZyB0
+aGF0IEkgaGFkIGEgMTAlIGNoYW5jZSB0byBzdXJ2aXZlIGFub3RoZXIgc3VyZ2VyeSwgYW5kIGEg
+IA0Kc2hvcnQgcGVyaW9kIG9mIGxpZmUgZ2F2ZSBtZSBhIGxvdCBvZiB3b3JyaWVzIGJlY2F1c2Ug
+SSBhbSBhIDY2LXllYXItb2xkICANCndpZG93IHdpdGggbm8gY2hpbGRyZW4uDQoNCkluaXRpYWxs
+eSwgSSB3YW50ZWQgdG8gY3JlYXRlIGEgY2hhcml0eSBwcm9qZWN0IHRvIGZ1bGZpbGwgdGhlIHdp
+c2ggb2YgbXkgIA0KbGF0ZSBodXNiYW5kLCBidXQgbXkgY3VycmVudCBoZWFsdGggY29uZGl0aW9u
+IHdpbGwgbm90IGFsbG93IG1lIHRvICANCmltcGxlbWVudCB0aGUgcHJvamVjdCBteXNlbGYuDQoN
+CkkgZGVjaWRlIHRvIGNhbGwgeW91IHVudGlsIEkgbWFrZSB5b3UgdGhlIGJlbmVmaWNpYXJ5IG9m
+IHRoZSBmdW5kIHRoYXQgSSAgDQppbmhlcml0ZWQgZnJvbSBteSBsYXRlIGh1c2JhbmQgc28gdGhh
+dCB5b3UgY2FuIGNyZWF0ZSBhIGNoYXJpdGFibGUgcHJvamVjdCAgDQp0aGF0IGJlbmVmaXRzIHN0
+cmVldCBjaGlsZHJlbiBhbmQgb3JwaGFucyBpbiB0aGUgbWVhbnRpbWUgd2hlbiB5b3UgYWNjZXB0
+ICANCnRoaXMgb2ZmZXIsIDcwJSBvZiB0aGUgZnVuZCB3aWxsIGJlIHVzZWQgZm9yIHRoZSBwcm9q
+ZWN0IGFuZCAzMCUgdG8geW91Lg0KSSBob3BlIHRvIGhlYXIgZnJvbSB5b3UNClRoYW5rIHlvdSB2
+ZXJ5IG11Y2gNCg0KDQpHb29nbGXCoEZvcm1zIHZvdXMgcGVybWV0IGRlIGNyw6llciBkZXMgZW5x
+dcOqdGVzIGV0IGQnZW4gYW5hbHlzZXIgbGVzICANCnLDqXN1bHRhdHMuDQo=

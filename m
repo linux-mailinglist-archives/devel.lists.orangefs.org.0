@@ -2,51 +2,51 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id D274A2C7ADF
-	for <lists+devel-orangefs@lfdr.de>; Sun, 29 Nov 2020 20:12:14 +0100 (CET)
-Received: from [::1] (port=38544 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BDD42CA63B
+	for <lists+devel-orangefs@lfdr.de>; Tue,  1 Dec 2020 15:52:54 +0100 (CET)
+Received: from [::1] (port=41252 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kjS7G-00046o-IV
-	for lists+devel-orangefs@lfdr.de; Sun, 29 Nov 2020 14:12:10 -0500
-Received: from mail-yb1-f199.google.com ([209.85.219.199]:50526)
+	id 1kk71Q-0006zQ-Nk
+	for lists+devel-orangefs@lfdr.de; Tue, 01 Dec 2020 09:52:52 -0500
+Received: from mail-ot1-f69.google.com ([209.85.210.69]:38765)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
  (Exim 4.93) (envelope-from
- <3YPLDXw4JBVk29C1CDFII9JTUS7D19C.3FD45M5CC9JKJ.FI1E756J.FI7@trix.bounces.google.com>)
- id 1kjS7F-00043Y-6O
- for devel@lists.orangefs.org; Sun, 29 Nov 2020 14:12:09 -0500
-Received: by mail-yb1-f199.google.com with SMTP id n186so13193777ybg.17
- for <devel@lists.orangefs.org>; Sun, 29 Nov 2020 11:11:48 -0800 (PST)
+ <3mVjGXwwJBWgPKYYZGRKeihhMSGOR.IUSJKbKRROYZY.UXGTMKLY.UXM@trix.bounces.google.com>)
+ id 1kk71P-0006ye-86
+ for devel@lists.orangefs.org; Tue, 01 Dec 2020 09:52:51 -0500
+Received: by mail-ot1-f69.google.com with SMTP id c9so1032482oto.5
+ for <devel@lists.orangefs.org>; Tue, 01 Dec 2020 06:52:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:reply-to:message-id:date:subject:from:to;
- bh=CmI4IboNPbFdLN5QOtCBFwjL+OFYYHHc9HnZtQTbaNo=;
- b=rU6CTJiLfuLAf+Xh7Wqpt5RMHGGJHXAGrorT0hYbuTA1l7phRj8UijRKo58qpkx8H0
- yctECeDVg+XxrR2CSGEzDXbl7+RnF00P4/HDRn4rRdeYAjHHVONmh9HtEwtevFiMoA1g
- qHm0Zn6CIkFASBgI7pXrwDau4O34O1RzESDXqXz2SJUMccaeHXlH1TEU69zSHwLhPghZ
- 7oIQdVXVL9t32hgg6i2AnKGJKUx39iHT8PNBnBxAoM4T3CGvNjKIBLvtijuKrOl9dvV6
- Cts3dtMunHvck9K6hgk1YNhnpPH7LtTY//dnsen1bsDWwaYgERZBss2wrWiLQ+xJG2YP
- vUcg==
+ bh=zeteiNmZO5ltj+wpNLNdavBeFD8Yybv1BDGIeFN104k=;
+ b=md1RD85zAtLYEINVxxI5vZBswDuKySgN8LE9tnEpggaWeHRNgUkgzF7/10kdaa/eAS
+ VMoRRCaPg0+GYuIDpCvFmkIwW88OqRNH+ZtuyAgUjpmRBEFNpvigsQqyL6ANlccWUe8r
+ OxLhhMBWKc8CcrpqcAfhPaK/hZNOVgSqnCWQK4t1LdKCy2m+KfC45Pih0bHBJbIIi/l/
+ SWafMs/imPFzFM4Fw5mjOVhQ4VeJLIpw8tPTFbbmpTPlvaEY6/uQnl6nL7UYkc6D/Pws
+ eTThR71Xemw1S8cndxq6XzJdA0ADS52i6Ib9grmAQ47oxSA0cL+Bj0iiYLGOgipKe2BQ
+ P5LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:reply-to:message-id:date:subject
  :from:to;
- bh=CmI4IboNPbFdLN5QOtCBFwjL+OFYYHHc9HnZtQTbaNo=;
- b=uWQ88xTTgQFfampHRCK5yuLwzNhsm6zAiVzyzgqAtKwt4JDHCOHzyqaKAkaD0oUUwP
- vL0uIY9YEVapoCQ2H1oXrTrOXZRFQfmSj6wTRa+moX/lGDVKFMq/xx8HuSEQZwxnJRDS
- gMxUQHxOCIePqInguOEqurhlrxTLymK6mszyg8sEKIEjQuXDGJ6d4Oos+FcEbgaKimQ1
- YJ2UFoqycLgm6dxFL/LoLirIrrkg8rZrzFrbrb8IIrVyFvM0ir+kaPmksPIQ2NZHyAgY
- OBRH3ciTfa2XEoGXzTiXa0X79hcLX1gN278G+bJ7U12oT/tdaxDfmj7znGFOa2VSuC6Z
- v27g==
-X-Gm-Message-State: AOAM530PtWpfU5tesNnIPPm6qindY+DvKyjjQeCQ1fNVBx5TOpkUdVuP
- C7fT9zVO/gijk5q1OX01MpRDi8mlFAi3h6oi1mE8
+ bh=zeteiNmZO5ltj+wpNLNdavBeFD8Yybv1BDGIeFN104k=;
+ b=kKbcTmVPs/dL2jIAYdYzCXGTc7FHT+oHhW6/4yzlmOf7lVm1Tp8TRHenprf/Y0Bctw
+ sZ/jqSYed5fYM1brmlLxlrqYF4T1gXwBUsDZbjPAr4S1gHF5ITFot9LbXOGWDf0Rbdfq
+ AuA+mmROqHvvLzjKT9ZTM+DNfj5T2Fz5xEwzbWAykD0sI0vxnu3Mn21Ut0HksSywi8fr
+ PLkUTiNKbgDDgpUx4aCkmwVNnQzKEZ+irVGz8I5xR3Ai9X4ny2xLoHbugDuCIdfDleE5
+ PRCwqi4Pq+Znqz4a8DPm0PD6stEkkoj+Xrr5+gsV9VQ5VY9AOHJkRayLRIaRR9PdWBoa
+ 657w==
+X-Gm-Message-State: AOAM5315EyuZD4r6+2pdrMuU7Hwt4vwuzsK0+3ykpoq53G5LLuhxZtFU
+ li3bwDYtoWobO0nwkB4TqCxm3V1s4/WJJYrq0EIc
 MIME-Version: 1.0
-X-Received: by 2002:a25:84ce:: with SMTP id x14mt20184504ybm.512.1606677088116; 
- Sun, 29 Nov 2020 11:11:28 -0800 (PST)
+X-Received: by 2002:aca:554d:: with SMTP id j74mt2147136oib.62.1606834329616; 
+ Tue, 01 Dec 2020 06:52:09 -0800 (PST)
 X-No-Auto-Attachment: 1
-Message-ID: <0000000000001b313a05b543a9bb@google.com>
-Date: Sun, 29 Nov 2020 19:11:28 +0000
-Subject: Congratulation! (Mega Millions Lottery)
-From: bilalmorris231@gmail.com
+Message-ID: <0000000000006e22ef05b56845e2@google.com>
+Date: Tue, 01 Dec 2020 14:52:10 +0000
+Subject: DEAR FRIEND,
+From: jesstaley211@gmail.com
 To: devel@lists.orangefs.org
 Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
@@ -61,7 +61,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: bilalmorris231@gmail.com
+Reply-To: jesstaley211@gmail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -75,33 +75,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-I've invited you to fill out the following form:
+I've invited you to fill in the following form:
 Untitled form
 
-To fill it out, visit:
-https://docs.google.com/forms/d/e/1FAIpQLSejitRsY0yrE6F4TILKy0bfmau43DYeveiXnH_uGVxYOKKetw/viewform?vc=0&amp;c=0&amp;w=1&amp;flr=0&amp;usp=mail_form_link
+To fill it in, visit:
+https://docs.google.com/forms/d/e/1FAIpQLSfi2v_QwY_KtQFRSv66gKQXWIyn7sbvAx1_r8wjAat6yYUKUw/viewform?vc=0&amp;c=0&amp;w=1&amp;flr=0&amp;usp=mail_form_link
 
-Congratulations You have won $ 850,000.00USD Your E-Mail Name Is Among
-the Lucky Winners at Mega Millions Lottery Online promo, Ticket Number
-(88910), For more information contact us Via Tel: +44} 7045746552. or
-reply to this email: peterjeng042@gmail.com
+Dear,
 
-Your winning reference numbers are PMG / EBD / 850AF and will Instruct you
-on claim arrangements for your winning prize.
+I am Engr Uduak Walter Onnoghen, the son of the recently suspended Chief  
+Justice of Nigeria. I write to make a plea to you as one of my father`s  
+friends, who works with the Ministry of Finance under foreign Contractors  
+payment Reconciliation Department , advised.
 
-Please note this, You are only required to forward your Name and your  
-Address.
+To be precise, my father`s case is still under investigation as such, there  
+are some hidden funds which i want to keep in safer hands so that this  
+Government will not get hold of it.
 
-Your Full Name.
-Your Age.
-Your Country / Home Address.
-Your Telephone Number.
-Your Occupation.
+This is a secret. Even my father`s friends do not know i am communicating  
+with you over this.
 
-Thank you and once More Congratulations.
+Please, if you are interested in helping me out by receiving the Fund,  
+reply me (engrudukwalteronnoghen@yahoo.com ) for more details.
 
-Yours faithfully,
-Agent Morris Bilal.
-Claims / verification Agent,
+Thanks
 
-Google Forms: Create and analyze surveys.
+Engr U.W Onnoghen.
+engrudukwalteronnoghen@yahoo.com
+
+Google Forms: Create and analyse surveys.

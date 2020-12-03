@@ -2,45 +2,67 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FAE62CD248
-	for <lists+devel-orangefs@lfdr.de>; Thu,  3 Dec 2020 10:15:48 +0100 (CET)
-Received: from [::1] (port=38370 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C39B2CD6CC
+	for <lists+devel-orangefs@lfdr.de>; Thu,  3 Dec 2020 14:31:15 +0100 (CET)
+Received: from [::1] (port=40734 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kkkiJ-00008x-88
-	for lists+devel-orangefs@lfdr.de; Thu, 03 Dec 2020 04:15:47 -0500
-Received: from a48-130.smtp-out.amazonses.com ([54.240.48.130]:34525)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+	id 1kkohW-0000Fa-1a
+	for lists+devel-orangefs@lfdr.de; Thu, 03 Dec 2020 08:31:14 -0500
+Received: from walmailout08.yourhostingaccount.com ([65.254.253.235]:56233)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
  (Exim 4.93) (envelope-from
- <0100017627e23180-42859b2d-f1eb-4538-9e96-f230524d60b1-000000@amazonses.com>)
- id 1kkkiH-00006x-5r
- for devel@lists.orangefs.org; Thu, 03 Dec 2020 04:15:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=nrze2r45efaozbld4layspc6t7qluttw; d=radiuswebtools.com;
- t=1606986904;
- h=Message-ID:Date:Subject:From:Reply-To:To:MIME-Version:Content-Type;
- bh=3F5Ii0Je6cMIbUP5544wSzE36oRjf7+z6eaptUQpq2s=;
- b=Yk+LpVBrJU2tjCoeMFKsHbYbXnx5j+6wDzOEJKKERQEr0/p9/b5hhULDlRizaFhl
- lURNr5Ri9EJbh9SKkx0y2Qi0CX1N6P9wz/LJbEVc3mr3Jm6AEEQ9JD7ZS4UNAZ71WkO
- 1jIvQ9zxfdobXG1oydNKlPUTQIUMz21wUfJxizos=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1606986904;
- h=Message-ID:Date:Subject:From:Reply-To:To:MIME-Version:Content-Type:Feedback-ID;
- bh=3F5Ii0Je6cMIbUP5544wSzE36oRjf7+z6eaptUQpq2s=;
- b=BKHJY7sP7AjAOkmkkvAuIlnwSNkoiGP9mtHOJCKXq3Cur2bdCy5vcSHAMzsCK9B3
- IphLKim/3Z6jb4m2dbgR/a7i4X27NSnRIIykv0tl4xlu4WO+nVWmhW3M3nf/pj8cu9W
- cGH6bo7bipQ8JXr198PMVCvRCYIR02q3jAgBlTq8=
-Message-ID: <0100017627e23180-42859b2d-f1eb-4538-9e96-f230524d60b1-000000@email.amazonses.com>
-Date: Thu, 3 Dec 2020 09:15:04 +0000
-Subject: Subscribe to Our Enewsletter (Website Form Submission)
-From: Alpha Background Investigations <no-reply@radiuswebtools.com>
+ <SRS0=tcadRR=FH=a3cube-inc.com=federico@yourhostingaccount.com>)
+ id 1kkohU-0000F0-Ek
+ for devel@lists.orangefs.org; Thu, 03 Dec 2020 08:31:12 -0500
+Received: from mailscan02.yourhostingaccount.com ([10.1.15.2]
+ helo=walmailscan02.yourhostingaccount.com)
+ by walmailout08.yourhostingaccount.com with esmtp (Exim)
+ id 1kkogp-0006d7-Th
+ for devel@lists.orangefs.org; Thu, 03 Dec 2020 08:30:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=a3cube-inc.com; s=dkim; h=Sender:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Date:Message-ID:Subject:From:To:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=fRQVWpyaSsMEApa9apkYdp+wSRAq6jWNpNncYbFppO0=; b=WepJxd8X+AYMA1V6sF6uKeLoM+
+ qVp554GIDbWd8l5VIbXrRMAeS0yN3zHTNYk6JPTAzD3lILbYUgYppChSuOTwO4QuzaPuOX3qcQ3VL
+ 76B0Ax2/muDLSE1ELqMkkpwVJjQ7DP0vL8HxN/KbtIrzzfnWYk+YIxYMwfx516Oe23JoK4e4IpnFm
+ 9s8LxxiV27If99RtdlAEN5glUilk2dORmwr0o4IoaM9/JGMvl/vb2P+ZDAVSn0f8fMrPi6eIxnBX3
+ rQkcgA36UM70IgTaqRtjxAaejPao9sqTGRl/u+fJ+OWA+I2KhUZMlxS8ZbJ27lxAT5e0Lz2s68yQa
+ 8k1erIQA==;
+Received: from [10.114.3.21] (helo=walimpout01)
+ by walmailscan02.yourhostingaccount.com with esmtp (Exim)
+ id 1kkogp-0006as-L7
+ for devel@lists.orangefs.org; Thu, 03 Dec 2020 08:30:31 -0500
+Received: from walauthsmtp57.yourhostingaccount.com ([10.1.18.57])
+ by walimpout01 with 
+ id zpWU230041Dsn0S01pWXfQ; Thu, 03 Dec 2020 08:30:31 -0500
+X-Authority-Analysis: v=2.3 cv=Q5RJH7+a c=1 sm=1 tr=0
+ a=btOFxceCRkvPd4MWh4haiQ==:117 a=wwTng74EcZ0buN1tViw3lg==:17
+ a=IkcTkHD0fZMA:10 a=zTNgK-yGK50A:10 a=ddCU1J1SIDsA:10
+ a=If22vhhw9Mc4Ff1N9fgA:9 a=QEXdDO2ut3YA:10 a=ZxKL5li47UoA:10
+Received: from 195-72-210-229-static.intercom.it ([195.72.210.229]:39360
+ helo=[192.168.1.147])
+ by walauthsmtp57.yourhostingaccount.com with esmtpa (Exim)
+ id 1kkogm-0002xj-A3
+ for devel@lists.orangefs.org; Thu, 03 Dec 2020 08:30:28 -0500
 To: devel@lists.orangefs.org
+From: Federico Strati <federico@a3cube-inc.com>
+Subject: About redundancy apart heartbeat
+Message-ID: <ca2261a8-da13-889d-a846-6c5bac7e0615@a3cube-inc.com>
+Date: Thu, 3 Dec 2020 14:30:26 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-SES-Outgoing: 2020.12.03-54.240.48.130
-Feedback-ID: 1.us-east-1.wiVJVpPx5ixHeLFHmT6hoDglX3jT99G+XwKQKxL33mg=:AmazonSES
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.33
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-EN-UserInfo: 5e98131c36d934fff30f0e78511f000a:931c98230c6409dcc37fa7e93b490c27
+X-EN-AuthUser: federico@a3cube-inc.com
+X-EN-OrigIP: 195.72.210.229
+X-EN-OrigHost: 195-72-210-229-static.intercom.it
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
 Precedence: list
@@ -52,7 +74,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Reply-To: Alpha Background Investigations <webmaster@alphabackgroundchecks.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -66,33 +87,18 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-<p>
-=09Thank you for subscribing to our enewsletter. You will be added to our e=
-mailing list and will begin receiving the enewsletter with the next issue.<=
-/p>
-<p>
-=09If this subscription is in error, please contact us to be removed from t=
-he list.</p>
-<p>
-=09Thank you.</p>
+Hello,
 
-<p>For your convenience, here is a summary of the no=
-n-secure elements of the submission:</p>
+is there some mirroring scheme available in OrangeFS 2.9.8 for redundancy ?
 
-<hr>
+Apart from the HA obtained via heartbeat.
 
+I see in the code the files "create-immutable-copies.sm" and "mirror.sm".
 
-<h3></h3>
-<str=
-ong>Name </strong>: =F0=9F=93=8C =D0=9F=D0=BE=D0=B7=D0=B4=D1=80=D0=B0=D0=
-=B2=D0=BB=D1=8F=D0=B5=D0=BC! =D0=A1=D1=80=D0=B5=D0=B4=D0=B8 =D0=BF=D0=BE=
-=D0=BB=D1=8C=D0=B7=D0=BE=D0=B2=D0=B0=D1=82=D0=B5=D0=BB=D0=B5=D0=B9, =D0=
-=92=D1=8B =D0=B1=D1=8B=D0=BB=D0=B8 =D0=B2=D1=8B=D0=B1=D1=80=D0=B0=D0=BD=
-=D1=8B =D0=BF=D0=BE=D0=B1=D0=B5=D0=B4=D0=B8=D1=82=D0=B5=D0=BB=D0=B5=D0=
-=BC! =D0=98=D1=81=D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D1=83=D0=B9=D1=82=D0=B5 =
-=D0=92=D0=B0=D1=88 =D0=BB=D0=B8=D1=87=D0=BD=D1=8B=D0=B9 =D0=B1=D0=B8=D0=
-=BB=D0=B5=D1=82 =D0=BF=D0=BE =D1=81=D1=81=D1=8B=D0=BB=D0=BA=D0=B5: http://b=
-it.do/fLxi4?jb584 =F0=9F=93=8C<br />
-<strong>Email </strong>: devel@lists=
-.orangefs.org<br />
+Thanks in advance
+
+Kind regards
+
+Federico Strati
+
 

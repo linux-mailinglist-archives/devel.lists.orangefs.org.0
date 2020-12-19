@@ -2,52 +2,40 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 797DA2DDC31
-	for <lists+devel-orangefs@lfdr.de>; Fri, 18 Dec 2020 00:56:18 +0100 (CET)
-Received: from [::1] (port=48228 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id B124C2DED25
+	for <lists+devel-orangefs@lfdr.de>; Sat, 19 Dec 2020 06:20:22 +0100 (CET)
+Received: from [::1] (port=41892 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kq385-0005Vx-5P
-	for lists+devel-orangefs@lfdr.de; Thu, 17 Dec 2020 18:56:17 -0500
-Received: from mail-il1-f182.google.com ([209.85.166.182]:33819)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <gayatridevi457900@gmail.com>)
- id 1kq384-0005Rg-5j
- for devel@lists.orangefs.org; Thu, 17 Dec 2020 18:56:16 -0500
-Received: by mail-il1-f182.google.com with SMTP id x15so585665ilq.1
- for <devel@lists.orangefs.org>; Thu, 17 Dec 2020 15:55:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=RAXyj1fswYxIgdQ6udc3Z7tWCfzpyeRbMlzSxMeFim8=;
- b=JIiyy7SU7vgpGSKG2FxLNbj+9Br24UQwY+wIIOMqGkTva0dywF3SBno7nGeFXLRFtj
- K1EeMH5Zy/4dFvQPEuSirvVrlfkMnlnbvKakef+SX7PtsSM8k/WghT7Gy3NMcNyP2iGI
- WNa+L8PnWAWA9UZCdSI8Y0NpCCj0O3Hw0hd+79y3YembFnBl+ooWVsDvEZtngv3PXHF3
- vtu0dBTjOi6O22u9Hs92uC40KgkRrnuQANGakqByKcw0rGaEgRDDV4uSnz828XkC/9jx
- gWB5s5IYxHkmYl93pWdPGCmNAzRYOzcwpHSevsMnrg6oOZabvhpGrgyyqrJbF6/ybDdI
- c5Fw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=RAXyj1fswYxIgdQ6udc3Z7tWCfzpyeRbMlzSxMeFim8=;
- b=kbg6mQbs7l2Jwymht32U8qoANOht/AZxzo0kEnxsnpJTYFtTI0jrnkiheqYbpxhkU/
- 3+EYLNgHAQpWK1KmLNwiclG0+A06/XItCEoIhix33lsSqJRq58UyeuJ/iRIcsV1l6HGp
- a4tqTE+qNL0G02eJn583DZQkxD4c09eulAY4xW6DssFgbfHDuDX+3p2NDBE4hBITleCv
- DPlyWN8ElIlmEzEmYJo+YLz+/gsPC2Ai7aDo8IqTwo5KvLbeCBDluBfuDcv/i3FZVHdf
- h/VJMIPf9ZSuej2K74npfTR6DnI4+05lkzrDxOI5lfVGPHWNewU+U0l4hqC0UmTiUjeh
- hSSQ==
-X-Gm-Message-State: AOAM531YgtRNwwnzGxB79+wHdJbXHT19ay8a0ny3I5qdE25+6LBd6+UP
- ijCh1ef+jicmPOXDHkfVyD7hpYXM94BGR3Jl/5hAVmBF
-X-Google-Smtp-Source: ABdhPJyeU9gdrk2iMh/mLVRhSoWSJlajeAOHIUZ6BSgPiRoRuEePvn9N1JEDGBsBfCiDuinIsbHNZJqLF8xWmGsLXl4=
-X-Received: by 2002:a92:9f8d:: with SMTP id z13mr1325287ilk.90.1608249334993; 
- Thu, 17 Dec 2020 15:55:34 -0800 (PST)
+	id 1kqUfF-0000JF-DS
+	for lists+devel-orangefs@lfdr.de; Sat, 19 Dec 2020 00:20:21 -0500
+Received: from casper.infradead.org ([90.155.50.34]:39282)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+ (Exim 4.93) (envelope-from <willy@infradead.org>) id 1kqUfE-0000IA-MC
+ for devel@lists.orangefs.org; Sat, 19 Dec 2020 00:20:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=TARKRSXf7326kO0qCmfUIKv486q/szb6N/69HhzDey0=; b=YbsRvyx1wjoh6xiZB57/1lgbpU
+ iwesdLeyBD5NlC5Ebn55VCHGoE/DxpCuJ0L6/ymooF9ySssio42lEqyLae/84EJYfShO/3D5C/uov
+ ZUhibatmwQKaa2bRcIjyC4cfUeF+ePFwjYluYrNBiAbRSPmyc1PlgFryWptalK9e7LVM7L7h//1jw
+ LRzsD4I1TkBdfWOjJ0/pCYlaVE94YT3bf7xHQ0vtQ6YMmjXINBk/5nOf/7qc55Z1pxJ7Df7HwGbU8
+ IqINRT8F3FkK2YAifRhYvOoBGGDS8CBO/j3uHzoYUy+kfPMv5Wlz5Ntalex0MHvDk+ISZ1tjIuHz4
+ Pml8KPWA==;
+Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1kqUdo-0000CE-Sl; Sat, 19 Dec 2020 05:18:52 +0000
+Date: Sat, 19 Dec 2020 05:18:52 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: linux-fsdevel@vger.kernel.org
+Subject: Re: set_page_dirty vs truncate
+Message-ID: <20201219051852.GP15600@casper.infradead.org>
+References: <20201218160531.GL15600@casper.infradead.org>
+ <20201218220316.GO15600@casper.infradead.org>
 MIME-Version: 1.0
-From: Gayatri Devi <gayatridevi457900@gmail.com>
-Date: Fri, 18 Dec 2020 05:25:22 +0530
-Message-ID: <CAGayoN9TZbDuHRXSa4R_AARm_R+J4=UvU3b9-YHD6fYQWA=kYg@mail.gmail.com>
-Subject: 
-To: devel@lists.orangefs.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.33
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201218220316.GO15600@casper.infradead.org>
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
 Precedence: list
@@ -59,6 +47,16 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Cc: linux-cifs@vger.kernel.org, jfs-discussion@lists.sourceforge.net,
+ Miklos Szeredi <miklos@szeredi.hu>, Dave Kleikamp <shaggy@kernel.org>,
+ Richard Weinberger <richard@nod.at>,
+ Dominique Martinet <asmadeus@codewreck.org>, linux-um@lists.infradead.org,
+ linux-nfs@vger.kernel.org, Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Steve French <sfrench@samba.org>, linux-ntfs-dev@lists.sourceforge.net,
+ Hans de Goede <hdegoede@redhat.com>, devel@lists.orangefs.org,
+ Anna Schumaker <anna.schumaker@netapp.com>,
+ v9fs-developer@lists.sourceforge.net, Jeff Dike <jdike@addtoit.com>,
+ Anton Altaparmakov <anton@tuxera.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -71,5 +69,70 @@ X-Authenticated-Sender: mm1.emwd.com: mailman@lists.orangefs.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
+
+On Fri, Dec 18, 2020 at 10:03:16PM +0000, Matthew Wilcox wrote:
+> On Fri, Dec 18, 2020 at 04:05:31PM +0000, Matthew Wilcox wrote:
+> > A number of implementations of ->set_page_dirty check whether the page
+> > has been truncated (ie page->mapping has become NULL since entering
+> > set_page_dirty()).  Several other implementations assume that they can do
+> > page->mapping->host to get to the inode.  So either some implementations
+> > are doing unnecessary checks or others are vulnerable to a NULL pointer
+> > dereference if truncate() races with set_page_dirty().
+> > 
+> > I'm touching ->set_page_dirty() anyway as part of the page folio
+> > conversion.  I'm thinking about passing in the mapping so there's no
+> > need to look at page->mapping.
+> > 
+> > The comments on set_page_dirty() and set_page_dirty_lock() suggests
+> > there's no consistency in whether truncation is blocked or not; we're
+> > only guaranteed that the inode itself won't go away.  But maybe the
+> > comments are stale.
+> 
+> The comments are, I believe, not stale.  Here's some syzbot
+> reports which indicate that ext4 is seeing races between set_page_dirty()
+> and truncate():
+> 
+>  https://groups.google.com/g/syzkaller-lts-bugs/c/s9fHu162zhQ/m/Phnf6ucaAwAJ
+> 
+> The reproducer includes calls to ftruncate(), so that would suggest
+> that's what's going on.
+
+Hmmm ... looks like __set_page_dirty_nobuffers() has a similar problem:
+
+{
+        lock_page_memcg(page);
+        if (!TestSetPageDirty(page)) {
+                struct address_space *mapping = page_mapping(page);
+                unsigned long flags;
+
+                if (!mapping) {
+                        unlock_page_memcg(page);
+                        return 1;
+                }
+
+                xa_lock_irqsave(&mapping->i_pages, flags);
+                BUG_ON(page_mapping(page) != mapping);
+
+sure, we check that the page wasn't truncated between set_page_dirty()
+and the call to TestSetPageDirty(), but we can truncate dirty pages
+with no problem.  So between the call to TestSetPageDirty() and
+the call to xa_lock_irqsave(), the page can be truncated, and the
+BUG_ON should fire.
+
+I haven't been able to find any examples of this, but maybe it's just a very
+narrow race.  Does anyone recognise this signature?  Adding the filesystems
+which use __set_page_dirty_nobuffers() directly without extra locking.
+
+$ git grep set_page_dirty.*=.*__set_page_dirty_nobuffers
+fs/9p/vfs_addr.c:       .set_page_dirty = __set_page_dirty_nobuffers,
+fs/cifs/file.c: .set_page_dirty = __set_page_dirty_nobuffers,
+fs/cifs/file.c: .set_page_dirty = __set_page_dirty_nobuffers,
+fs/fuse/file.c: .set_page_dirty = __set_page_dirty_nobuffers,
+fs/hostfs/hostfs_kern.c:        .set_page_dirty = __set_page_dirty_nobuffers,
+fs/jfs/jfs_metapage.c:  .set_page_dirty = __set_page_dirty_nobuffers,
+fs/nfs/file.c:  .set_page_dirty = __set_page_dirty_nobuffers,
+fs/ntfs/aops.c: .set_page_dirty = __set_page_dirty_nobuffers,   /* Set the page dirty
+fs/orangefs/inode.c:    .set_page_dirty = __set_page_dirty_nobuffers,
+fs/vboxsf/file.c:       .set_page_dirty = __set_page_dirty_nobuffers,
 
 

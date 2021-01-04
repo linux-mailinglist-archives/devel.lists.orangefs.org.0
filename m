@@ -2,54 +2,59 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 891E22DEDA1
-	for <lists+devel-orangefs@lfdr.de>; Sat, 19 Dec 2020 08:05:07 +0100 (CET)
-Received: from [::1] (port=44394 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0869B2E8FDE
+	for <lists+devel-orangefs@lfdr.de>; Mon,  4 Jan 2021 06:01:28 +0100 (CET)
+Received: from [::1] (port=48806 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kqWIc-0006TF-Qe
-	for lists+devel-orangefs@lfdr.de; Sat, 19 Dec 2020 02:05:06 -0500
-Received: from hqnvemgate25.nvidia.com ([216.228.121.64]:13545)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
- (Exim 4.93) (envelope-from <jhubbard@nvidia.com>) id 1kqWIb-0006Sc-NF
- for devel@lists.orangefs.org; Sat, 19 Dec 2020 02:05:05 -0500
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5fdda5f80000>; Fri, 18 Dec 2020 23:04:24 -0800
-Received: from [10.2.61.104] (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Sat, 19 Dec
- 2020 07:04:23 +0000
-Subject: Re: set_page_dirty vs truncate
-To: Matthew Wilcox <willy@infradead.org>
-References: <20201218160531.GL15600@casper.infradead.org>
- <20201218220316.GO15600@casper.infradead.org>
- <20201219051852.GP15600@casper.infradead.org>
- <7a7c3052-74c7-c63b-5fe3-65d692c1c5d1@nvidia.com>
- <20201219065057.GR15600@casper.infradead.org>
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <43f05a8f-25ce-a400-5825-d8fa159ee7f6@nvidia.com>
-Date: Fri, 18 Dec 2020 23:04:23 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101
- Thunderbird/84.0
+	id 1kwHzd-0007eH-Sf
+	for lists+devel-orangefs@lfdr.de; Mon, 04 Jan 2021 00:01:21 -0500
+Received: from mail-ot1-f44.google.com ([209.85.210.44]:40728)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+ (Exim 4.93) (envelope-from <alison.c@junilearning.co>)
+ id 1kwHzc-0007cp-4v
+ for devel@lists.orangefs.org; Mon, 04 Jan 2021 00:01:20 -0500
+Received: by mail-ot1-f44.google.com with SMTP id j12so24953102ota.7
+ for <devel@lists.orangefs.org>; Sun, 03 Jan 2021 21:00:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=junilearning-co.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:from:mailmergekey:date:message-id:subject:to;
+ bh=5OnU/jhxKtGPt2nMuorKo8uoAf92oh4t+u/FHQNFOJg=;
+ b=C5txd+4/eApe8zYBm940dsRRNPQ3HqVg/Wru1ww9KNDZJLGYP4kCaZGs44QpCxxcqp
+ qexvYJ/Sbk3/rQ8XkLXxJsDxSmxVFf/o62OXHhIQcm0yIbrCrS3NJu0apsLlXOR1+o8G
+ sQLA6jVQN8cYqQwGNgetItu+t0qIgsRAKtn8dHhAwZuK+LVCSLr+6J9X/pOzrubh/JOe
+ YW/6d7uMYZGuZyFNmq6IMqg8M9Nqsnl5xq+uceFbO6M8h6IfSSKaukBJYENVqAIHnIll
+ rpdN6abCXJx+W2Vo7QWx/m2v5FF2RkJhGFK8QWV/50Xwg7FEhuc84jwY1WJauS8cRWUl
+ n1Hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:mailmergekey:date:message-id
+ :subject:to;
+ bh=5OnU/jhxKtGPt2nMuorKo8uoAf92oh4t+u/FHQNFOJg=;
+ b=WuB+Ern8LpyBXk96opc/WmHEr/9KHnOWgta9E3T/c2ajCt2LBBCPozPbsHA2UAqH4Y
+ 87Jh8/3NCYZeO6yIOTbhd01F4mQcX1FwqazgQWygjxV5zREJMpCiz6DFNIcTuC8k+GVZ
+ tA4wdEj07dlz5zZKNFMhMK/iwm0OBzE/Aw7L1vtJadtYeGvhgFKRZnnPmcnqW2iwcyfA
+ e+PNNxAD67glwAEN3Y9zEHcRVGv3hHoBNpI0K+CmZ7qYtdB5RJAvscFYA60dLYOm0D8Z
+ +z7GVUiGlzfe7Jjl8mlbAdnoB75I25Zb8EP7XlJINPhz9FvxjesN/M78Ff7ili2isx6B
+ 8puw==
+X-Gm-Message-State: AOAM5304kTFf2JOr63ELZLrRBjFz3mfzIUnbiMHCVoJ8HMi4FN9fc3Yk
+ /qzbRhHaUSWb2b5I5W2HH7XG5eIlaw4VRYMvinG7HVaU5mLfYw==
+X-Google-Smtp-Source: ABdhPJy5v0PJpjTold26DosGuONlFgV3zdts7zYq3OEbG5xeGb1MaKR5JCw1OCwhS7lC/3M64ju+W6ZAk8rx1Ijp6Zc=
+X-Received: by 2002:a05:6830:1e41:: with SMTP id
+ e1mr51928577otj.143.1609736438934; 
+ Sun, 03 Jan 2021 21:00:38 -0800 (PST)
+Received: from 326440123436 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 4 Jan 2021 00:00:38 -0500
 MIME-Version: 1.0
-In-Reply-To: <20201219065057.GR15600@casper.infradead.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1608361464; bh=A9fBx0IN5qsLyTEaO2K4aLwibDOVSe+bKLpimCocLwU=;
- h=Subject:To:CC:References:From:Message-ID:Date:User-Agent:
- MIME-Version:In-Reply-To:Content-Type:Content-Language:
- Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
- b=Bgc3aR4z753YGJlW70WoLrtQ1KN8IbRzq31juKs6PfBN2zkSGHtinWPesncivbs4W
- VzTsGi5zW6I314mN0sALuVKM7eV85d/U7RnCFRj/tuktF25zg4GPCpkEmzSS3hoUHK
- PP07gVgvL8A0z77WSBOvwn20T/s6MvL8eDcowYD4Rs6BCV3hJUYhWaiMpxkCZoQAqY
- RxKeghrOfimP4wXYxSRuO2xATbM6n5/MhNO06xr/el270Y+5EbFgXIlop0FK1iDT07
- VWPAhXQlelzCRLSGyvDrtBjTpyiR5AjbZTqDfGwl3tId3hrMABj+K1hpMKyp1AXgv6
- lwMu3rKNfv89A==
+From: Alison C <alison.c@junilearning.co>
+mailmergekey: agxzfm1haWxmb29nYWVySAsSDE9yZ2FuaXphdGlvbiIPanVuaWxlYXJuaW5nLmNvDAsSBFVzZXIYgIDysbP23QgMCxIJTWFpbE1lcmdlGICAqvLMtboJDA
+Date: Mon, 4 Jan 2021 00:00:38 -0500
+Message-ID: <CAGEyE-aEB_hMGNa8n1BiWyZYaSdbCY-7G=GFdkmrFdfEN-cgjg@mail.gmail.com>
+Subject: Content + Marketing Partnership
+To: devel@lists.orangefs.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
 Precedence: list
@@ -61,16 +66,6 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, jfs-discussion@lists.sourceforge.net,
- Miklos Szeredi <miklos@szeredi.hu>, Dave Kleikamp <shaggy@kernel.org>,
- Richard Weinberger <richard@nod.at>,
- Dominique Martinet <asmadeus@codewreck.org>, linux-um@lists.infradead.org,
- linux-nfs@vger.kernel.org, Trond Myklebust <trond.myklebust@hammerspace.com>,
- Steve French <sfrench@samba.org>, linux-ntfs-dev@lists.sourceforge.net,
- Hans de Goede <hdegoede@redhat.com>, devel@lists.orangefs.org,
- Anna Schumaker <anna.schumaker@netapp.com>, linux-fsdevel@vger.kernel.org,
- v9fs-developer@lists.sourceforge.net, Jeff Dike <jdike@addtoit.com>,
- Anton Altaparmakov <anton@tuxera.com>
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -84,75 +79,51 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-On 12/18/20 10:50 PM, Matthew Wilcox wrote:
-...
->>> Hmmm ... looks like __set_page_dirty_nobuffers() has a similar problem:
->>>
->>> {
->>>           lock_page_memcg(page);
->>>           if (!TestSetPageDirty(page)) {
->>>                   struct address_space *mapping = page_mapping(page);
->>>                   unsigned long flags;
->>>
->>>                   if (!mapping) {
->>>                           unlock_page_memcg(page);
->>>                           return 1;
->>>                   }
->>>
->>>                   xa_lock_irqsave(&mapping->i_pages, flags);
->>>                   BUG_ON(page_mapping(page) != mapping);
->>>
->>> sure, we check that the page wasn't truncated between set_page_dirty()
->>> and the call to TestSetPageDirty(), but we can truncate dirty pages
->>> with no problem.  So between the call to TestSetPageDirty() and
->>> the call to xa_lock_irqsave(), the page can be truncated, and the
->>> BUG_ON should fire.
->>>
->>> I haven't been able to find any examples of this, but maybe it's just a very
->>> narrow race.  Does anyone recognise this signature?  Adding the filesystems
->>> which use __set_page_dirty_nobuffers() directly without extra locking.
->>
->>
->> That sounds like the same *kind* of failure that Jan Kara and I were
->> seeing on live systems[1], that led eventually to the gup-to-pup
->> conversion exercise.
->>
->> That crash happened due to calling set_page_dirty() on pages that had no
->> buffers on them [2]. And that sounds like *exactly* the same thing as
->> calling __set_page_dirty_nobuffers() without extra locking. So I'd
->> expect that it's Just Wrong To Do, for the same reasons as Jan spells
->> out very clearly in [1].
-> 
-> Interesting.  It's a bit different, *but* Jan's race might be what's
-> causing this symptom.  The reason is that the backtrace contains
-> set_page_dirty_lock() which holds the page lock.  So there can't be
-> a truncation race because truncate holds the page lock when calling
-> ->invalidatepage.
-> 
-> That said, the syzbot reproducer doesn't have any O_DIRECT in it
-> either.  So maybe this is some other race?
+Hi there!
 
-Jan's race can be also be reproduced *without* O_DIRECT. I first saw
-it via a program that just did these steps on a normal ext4 filesystem:
+My name is Alison Clarke and I=E2=80=99m from the Juni Learning
+<https://junilearning.com/> team. We are an award-winning online computer
+science and mathematics academy that offers private online courses to
+students from ages 8=E2=80=9318. You can give this feature on PC Mag
+<https://www.pcmag.com/news/this-startup-connects-your-kid-with-ivy-league-=
+student-instructors>
+a read to know more about us.
 
-a) pin ext4 file-backed pages, via get_user_pages(). Actually the way
-it got here was due to using what *looked* like anonymous RAM to the
-program, but was really file-backed RAM, because the admin had it
-set up to mount ext4 on /tmp, instead of using tmpfs, to "save RAM",
-but I digress. :)
+Our program helps bright young minds develop their interest and passion for
+analytical and technical subjects outside of school, and we want to inspire
+kids and their parents to check out how much fun learning could be. I
+thought we could team up with orangefs.org and share our content with you
+and your audience. This would help us reach out to more parents with
+similar interests, and at the same time, if you need additional content for
+your blog, we could help you out, too. In case you=E2=80=99re interested, h=
+ere=E2=80=99s a
+sample of an article that you can publish on your site:
 
-b) wait a while, optionally do some DMA on the pages from a GPU, drink
-coffee...
+How to Teach Kids Variables
 
-c) call set_pages_dirty()
+https://docs.google.com/document/d/1PmKOdAL_QKutFkJZ2pc3SE63sxExJV2xG2erKOX=
+evmY/edit?usp=3Dsharing
 
-d) unpin the pages
+Alternatively, you may also simply use our links as external sources in
+your own articles.
 
-e) BUG_ON() in page_buffers().
+Should you agree to a partnership with us, we have a dedicated social media
+team that would be more than happy to share with and promote your own
+content to our followers. This way, we could help boost each other=E2=80=99=
+s reach.
 
+Please let me know what you think, or if you have any questions - I would
+be delighted to discuss this in further detail.
 
-thanks,
--- 
-John Hubbard
-NVIDIA
+Thank you for your time and have a great day!
 
+Best,
+
+Ali
+
+*If you do not wish to receive any email from us in the future, please let
+me know and I=E2=80=99ll remove you from our mailing list (no hard feelings=
+!).
+Thank you!
+
+=E1=90=A7

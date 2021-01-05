@@ -2,59 +2,68 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0869B2E8FDE
-	for <lists+devel-orangefs@lfdr.de>; Mon,  4 Jan 2021 06:01:28 +0100 (CET)
-Received: from [::1] (port=48806 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBAE82EAF93
+	for <lists+devel-orangefs@lfdr.de>; Tue,  5 Jan 2021 17:05:09 +0100 (CET)
+Received: from [::1] (port=41468 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kwHzd-0007eH-Sf
-	for lists+devel-orangefs@lfdr.de; Mon, 04 Jan 2021 00:01:21 -0500
-Received: from mail-ot1-f44.google.com ([209.85.210.44]:40728)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <alison.c@junilearning.co>)
- id 1kwHzc-0007cp-4v
- for devel@lists.orangefs.org; Mon, 04 Jan 2021 00:01:20 -0500
-Received: by mail-ot1-f44.google.com with SMTP id j12so24953102ota.7
- for <devel@lists.orangefs.org>; Sun, 03 Jan 2021 21:00:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=junilearning-co.20150623.gappssmtp.com; s=20150623;
- h=mime-version:from:mailmergekey:date:message-id:subject:to;
- bh=5OnU/jhxKtGPt2nMuorKo8uoAf92oh4t+u/FHQNFOJg=;
- b=C5txd+4/eApe8zYBm940dsRRNPQ3HqVg/Wru1ww9KNDZJLGYP4kCaZGs44QpCxxcqp
- qexvYJ/Sbk3/rQ8XkLXxJsDxSmxVFf/o62OXHhIQcm0yIbrCrS3NJu0apsLlXOR1+o8G
- sQLA6jVQN8cYqQwGNgetItu+t0qIgsRAKtn8dHhAwZuK+LVCSLr+6J9X/pOzrubh/JOe
- YW/6d7uMYZGuZyFNmq6IMqg8M9Nqsnl5xq+uceFbO6M8h6IfSSKaukBJYENVqAIHnIll
- rpdN6abCXJx+W2Vo7QWx/m2v5FF2RkJhGFK8QWV/50Xwg7FEhuc84jwY1WJauS8cRWUl
- n1Hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:mailmergekey:date:message-id
- :subject:to;
- bh=5OnU/jhxKtGPt2nMuorKo8uoAf92oh4t+u/FHQNFOJg=;
- b=WuB+Ern8LpyBXk96opc/WmHEr/9KHnOWgta9E3T/c2ajCt2LBBCPozPbsHA2UAqH4Y
- 87Jh8/3NCYZeO6yIOTbhd01F4mQcX1FwqazgQWygjxV5zREJMpCiz6DFNIcTuC8k+GVZ
- tA4wdEj07dlz5zZKNFMhMK/iwm0OBzE/Aw7L1vtJadtYeGvhgFKRZnnPmcnqW2iwcyfA
- e+PNNxAD67glwAEN3Y9zEHcRVGv3hHoBNpI0K+CmZ7qYtdB5RJAvscFYA60dLYOm0D8Z
- +z7GVUiGlzfe7Jjl8mlbAdnoB75I25Zb8EP7XlJINPhz9FvxjesN/M78Ff7ili2isx6B
- 8puw==
-X-Gm-Message-State: AOAM5304kTFf2JOr63ELZLrRBjFz3mfzIUnbiMHCVoJ8HMi4FN9fc3Yk
- /qzbRhHaUSWb2b5I5W2HH7XG5eIlaw4VRYMvinG7HVaU5mLfYw==
-X-Google-Smtp-Source: ABdhPJy5v0PJpjTold26DosGuONlFgV3zdts7zYq3OEbG5xeGb1MaKR5JCw1OCwhS7lC/3M64ju+W6ZAk8rx1Ijp6Zc=
-X-Received: by 2002:a05:6830:1e41:: with SMTP id
- e1mr51928577otj.143.1609736438934; 
- Sun, 03 Jan 2021 21:00:38 -0800 (PST)
-Received: from 326440123436 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 4 Jan 2021 00:00:38 -0500
-MIME-Version: 1.0
-From: Alison C <alison.c@junilearning.co>
-mailmergekey: agxzfm1haWxmb29nYWVySAsSDE9yZ2FuaXphdGlvbiIPanVuaWxlYXJuaW5nLmNvDAsSBFVzZXIYgIDysbP23QgMCxIJTWFpbE1lcmdlGICAqvLMtboJDA
-Date: Mon, 4 Jan 2021 00:00:38 -0500
-Message-ID: <CAGEyE-aEB_hMGNa8n1BiWyZYaSdbCY-7G=GFdkmrFdfEN-cgjg@mail.gmail.com>
-Subject: Content + Marketing Partnership
+	id 1kwopT-0007xe-HR
+	for lists+devel-orangefs@lfdr.de; Tue, 05 Jan 2021 11:05:03 -0500
+Received: from mailout04.yourhostingaccount.com ([65.254.254.66]:36049
+ helo=walmailout04.yourhostingaccount.com)
+ by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+ (Exim 4.93) (envelope-from
+ <SRS0=5jf79/=GI=a3cube-inc.com=federico@yourhostingaccount.com>)
+ id 1kwopR-0007xE-GJ
+ for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:05:01 -0500
+Received: from mailscan04.yourhostingaccount.com ([10.1.15.4]
+ helo=walmailscan04.yourhostingaccount.com)
+ by walmailout04.yourhostingaccount.com with esmtp (Exim)
+ id 1kwoom-0006Xy-Ut
+ for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:04:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=a3cube-inc.com; s=dkim; h=Sender:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Date:Message-ID:Subject:From:To:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ATJgR6kXDeQeNFt9m2llDCgBuRTFKi1WaolPnFHK/4Y=; b=1mxInzr+qo6m2DOaAFdXRqTUez
+ 6utJcHOpSmoXvbQWmwMBF+9pkv8r4+aT13Ny70qteXXoKGPclZt7rNvPd2WMpTnyZDjieBHc8V4sY
+ QgcHbWPcWf0LsLRHWT0ynz8+KrKjJP839YejRTt2TGejKVecNmP2zZQwFoiAJGkxjpjJ6oHCbT9NS
+ bE9xlI4jvEhK6ys8LgECBn+xBqvcrOC/wk3t71RmpPUMboghAFy6+nMHhM2tzRicOOD6e7jRhYj5M
+ 6tAPqJJBcPsPPffMtU14y2rqSvjGYTc3+R3Ww2OiYvxD26xc3fhzB0PNlM+cExVw3EHexFOpCfMNe
+ A3t23GIA==;
+Received: from [10.114.3.22] (helo=walimpout02)
+ by walmailscan04.yourhostingaccount.com with esmtp (Exim)
+ id 1kwoom-0005Oo-N4
+ for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:04:20 -0500
+Received: from walauthsmtp58.yourhostingaccount.com ([10.1.18.58])
+ by walimpout02 with 
+ id D44H2400G1FATLi0144LrZ; Tue, 05 Jan 2021 11:04:20 -0500
+X-Authority-Analysis: v=2.3 cv=BvkGPbf5 c=1 sm=1 tr=0
+ a=mQqFl7BC3sBhAACsXUcyHA==:117 a=wwTng74EcZ0buN1tViw3lg==:17
+ a=IkcTkHD0fZMA:10 a=EmqxpYm9HcoA:10 a=ddCU1J1SIDsA:10 a=mV9VRH-2AAAA:8
+ a=lOuxqPblUzKIRfRDcS8A:9 a=QEXdDO2ut3YA:10
+Received: from 195-72-210-229-static.intercom.it ([195.72.210.229]:38288
+ helo=[192.168.1.147])
+ by walauthsmtp58.yourhostingaccount.com with esmtpa (Exim)
+ id 1kwooj-0008PF-Cg
+ for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:04:17 -0500
 To: devel@lists.orangefs.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.33
+From: Federico Strati <federico@a3cube-inc.com>
+Subject: failing jni compilation on CentOS 8.2/8.2 with latest packages
+Message-ID: <ad65f828-e8ac-a0fb-28b5-eab83d916313@a3cube-inc.com>
+Date: Tue, 5 Jan 2021 17:04:15 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-EN-UserInfo: 5e98131c36d934fff30f0e78511f000a:931c98230c6409dcc37fa7e93b490c27
+X-EN-AuthUser: federico@a3cube-inc.com
+X-EN-OrigIP: 195.72.210.229
+X-EN-OrigHost: 195-72-210-229-static.intercom.it
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
 Precedence: list
@@ -79,51 +88,83 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hi there!
+Hello,
 
-My name is Alison Clarke and I=E2=80=99m from the Juni Learning
-<https://junilearning.com/> team. We are an award-winning online computer
-science and mathematics academy that offers private online courses to
-students from ages 8=E2=80=9318. You can give this feature on PC Mag
-<https://www.pcmag.com/news/this-startup-connects-your-kid-with-ivy-league-=
-student-instructors>
-a read to know more about us.
+I got this error from the jni compilation:
 
-Our program helps bright young minds develop their interest and passion for
-analytical and technical subjects outside of school, and we want to inspire
-kids and their parents to check out how much fun learning could be. I
-thought we could team up with orangefs.org and share our content with you
-and your audience. This would help us reach out to more parents with
-similar interests, and at the same time, if you need additional content for
-your blog, we could help you out, too. In case you=E2=80=99re interested, h=
-ere=E2=80=99s a
-sample of an article that you can publish on your site:
+-----------------------------------
 
-How to Teach Kids Variables
+JAVA_HOME="/usr/lib/jvm/java-15-openjdk-15.0.1.9-2.rolling.el8.x86_64-fastdebug" 
+mvn -f src/client/jni/pom.xml clean install
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------< org.orangefs.usrint:orangefs-jni 
+ >------------------
+[INFO] Building orangefs-jni 2.9.7
+[INFO] --------------------------------[ jar 
+]---------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ orangefs-jni ---
+[INFO] Deleting /root/orangefs-v.2.9.8.tar/src/client/jni/target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ 
+orangefs-jni ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory 
+/root/orangefs-v.2.9.8.tar/src/client/jni/src/main/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ 
+orangefs-jni ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 14 source files to 
+/root/orangefs-v.2.9.8.tar/src/client/jni/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR :
+[INFO] -------------------------------------------------------------
+[ERROR] Source option 5 is no longer supported. Use 7 or later.
+[ERROR] Target option 5 is no longer supported. Use 7 or later.
+[INFO] 2 errors
+[INFO] -------------------------------------------------------------
+[INFO] 
+------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] 
+------------------------------------------------------------------------
+[INFO] Total time: 2.547 s
+[INFO] Finished at: 2021-01-05T16:38:53+01:00
+[INFO] 
+------------------------------------------------------------------------
+[ERROR] Failed to execute goal 
+org.apache.maven.plugins:maven-compiler-plugin:3.1:compile 
+(default-compile) on project orangefs-jni: Compilation failure: 
+Compilation failure:
+[ERROR] Source option 5 is no longer supported. Use 7 or later.
+[ERROR] Target option 5 is no longer supported. Use 7 or later.
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the 
+-e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, 
+please read the following articles:
+[ERROR] [Help 1] 
+http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+make: Nothing to be done for 'all'.
+-----------------------------------
 
-https://docs.google.com/document/d/1PmKOdAL_QKutFkJZ2pc3SE63sxExJV2xG2erKOX=
-evmY/edit?usp=3Dsharing
+for java I use the latest packages from CentOS 8.2:
 
-Alternatively, you may also simply use our links as external sources in
-your own articles.
+dnf install java-latest-openjdk.x86_64
 
-Should you agree to a partnership with us, we have a dedicated social media
-team that would be more than happy to share with and promote your own
-content to our followers. This way, we could help boost each other=E2=80=99=
-s reach.
+dnf install java-latest-openjdk-devel-fastdebug.x86_64
 
-Please let me know what you think, or if you have any questions - I would
-be delighted to discuss this in further detail.
+dnf install maven
 
-Thank you for your time and have a great day!
+Any idea on the error cause ?
 
-Best,
+Thanks in advance
 
-Ali
+Federico
 
-*If you do not wish to receive any email from us in the future, please let
-me know and I=E2=80=99ll remove you from our mailing list (no hard feelings=
-!).
-Thank you!
 
-=E1=90=A7

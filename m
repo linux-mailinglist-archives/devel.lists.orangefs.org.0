@@ -2,68 +2,27 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBAE82EAF93
-	for <lists+devel-orangefs@lfdr.de>; Tue,  5 Jan 2021 17:05:09 +0100 (CET)
-Received: from [::1] (port=41468 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id C96752EB9E7
+	for <lists+devel-orangefs@lfdr.de>; Wed,  6 Jan 2021 07:15:18 +0100 (CET)
+Received: from [::1] (port=49704 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kwopT-0007xe-HR
-	for lists+devel-orangefs@lfdr.de; Tue, 05 Jan 2021 11:05:03 -0500
-Received: from mailout04.yourhostingaccount.com ([65.254.254.66]:36049
- helo=walmailout04.yourhostingaccount.com)
+	id 1kx26H-0006Jo-H1
+	for lists+devel-orangefs@lfdr.de; Wed, 06 Jan 2021 01:15:17 -0500
+Received: from [180.215.226.213] (port=58296 helo=suemall.cn)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
- (Exim 4.93) (envelope-from
- <SRS0=5jf79/=GI=a3cube-inc.com=federico@yourhostingaccount.com>)
- id 1kwopR-0007xE-GJ
- for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:05:01 -0500
-Received: from mailscan04.yourhostingaccount.com ([10.1.15.4]
- helo=walmailscan04.yourhostingaccount.com)
- by walmailout04.yourhostingaccount.com with esmtp (Exim)
- id 1kwoom-0006Xy-Ut
- for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:04:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=a3cube-inc.com; s=dkim; h=Sender:Content-Transfer-Encoding:Content-Type:
- MIME-Version:Date:Message-ID:Subject:From:To:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ATJgR6kXDeQeNFt9m2llDCgBuRTFKi1WaolPnFHK/4Y=; b=1mxInzr+qo6m2DOaAFdXRqTUez
- 6utJcHOpSmoXvbQWmwMBF+9pkv8r4+aT13Ny70qteXXoKGPclZt7rNvPd2WMpTnyZDjieBHc8V4sY
- QgcHbWPcWf0LsLRHWT0ynz8+KrKjJP839YejRTt2TGejKVecNmP2zZQwFoiAJGkxjpjJ6oHCbT9NS
- bE9xlI4jvEhK6ys8LgECBn+xBqvcrOC/wk3t71RmpPUMboghAFy6+nMHhM2tzRicOOD6e7jRhYj5M
- 6tAPqJJBcPsPPffMtU14y2rqSvjGYTc3+R3Ww2OiYvxD26xc3fhzB0PNlM+cExVw3EHexFOpCfMNe
- A3t23GIA==;
-Received: from [10.114.3.22] (helo=walimpout02)
- by walmailscan04.yourhostingaccount.com with esmtp (Exim)
- id 1kwoom-0005Oo-N4
- for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:04:20 -0500
-Received: from walauthsmtp58.yourhostingaccount.com ([10.1.18.58])
- by walimpout02 with 
- id D44H2400G1FATLi0144LrZ; Tue, 05 Jan 2021 11:04:20 -0500
-X-Authority-Analysis: v=2.3 cv=BvkGPbf5 c=1 sm=1 tr=0
- a=mQqFl7BC3sBhAACsXUcyHA==:117 a=wwTng74EcZ0buN1tViw3lg==:17
- a=IkcTkHD0fZMA:10 a=EmqxpYm9HcoA:10 a=ddCU1J1SIDsA:10 a=mV9VRH-2AAAA:8
- a=lOuxqPblUzKIRfRDcS8A:9 a=QEXdDO2ut3YA:10
-Received: from 195-72-210-229-static.intercom.it ([195.72.210.229]:38288
- helo=[192.168.1.147])
- by walauthsmtp58.yourhostingaccount.com with esmtpa (Exim)
- id 1kwooj-0008PF-Cg
- for devel@lists.orangefs.org; Tue, 05 Jan 2021 11:04:17 -0500
-To: devel@lists.orangefs.org
-From: Federico Strati <federico@a3cube-inc.com>
-Subject: failing jni compilation on CentOS 8.2/8.2 with latest packages
-Message-ID: <ad65f828-e8ac-a0fb-28b5-eab83d916313@a3cube-inc.com>
-Date: Tue, 5 Jan 2021 17:04:15 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim 4.93) (envelope-from <admin@suemall.cn>) id 1kx26F-0006Ii-Ro
+ for devel@lists.orangefs.org; Wed, 06 Jan 2021 01:15:16 -0500
+Message-ID: <20210106141431178207@suemall.cn>
+From: =?utf-8?B?VUPjgqvjg7zjg4k=?= <uccard.co.jp>
+To: <devel@lists.orangefs.org>
+Subject: =?utf-8?B?77yc6YeN6KaB77ye44CQVUPjgqvjg7zjg4njgJHjgZTliKnnlKjnorroqo3jga7jgYrpoZjjgYQ=?=
+Date: Wed, 6 Jan 2021 14:14:17 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-EN-UserInfo: 5e98131c36d934fff30f0e78511f000a:931c98230c6409dcc37fa7e93b490c27
-X-EN-AuthUser: federico@a3cube-inc.com
-X-EN-OrigIP: 195.72.210.229
-X-EN-OrigHost: 195-72-210-229-static.intercom.it
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
 Precedence: list
@@ -88,83 +47,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Hello,
-
-I got this error from the jni compilation:
-
------------------------------------
-
-JAVA_HOME="/usr/lib/jvm/java-15-openjdk-15.0.1.9-2.rolling.el8.x86_64-fastdebug" 
-mvn -f src/client/jni/pom.xml clean install
-[INFO] Scanning for projects...
-[INFO]
-[INFO] ------------------< org.orangefs.usrint:orangefs-jni 
- >------------------
-[INFO] Building orangefs-jni 2.9.7
-[INFO] --------------------------------[ jar 
-]---------------------------------
-[INFO]
-[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ orangefs-jni ---
-[INFO] Deleting /root/orangefs-v.2.9.8.tar/src/client/jni/target
-[INFO]
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ 
-orangefs-jni ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory 
-/root/orangefs-v.2.9.8.tar/src/client/jni/src/main/resources
-[INFO]
-[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ 
-orangefs-jni ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 14 source files to 
-/root/orangefs-v.2.9.8.tar/src/client/jni/target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR :
-[INFO] -------------------------------------------------------------
-[ERROR] Source option 5 is no longer supported. Use 7 or later.
-[ERROR] Target option 5 is no longer supported. Use 7 or later.
-[INFO] 2 errors
-[INFO] -------------------------------------------------------------
-[INFO] 
-------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] 
-------------------------------------------------------------------------
-[INFO] Total time: 2.547 s
-[INFO] Finished at: 2021-01-05T16:38:53+01:00
-[INFO] 
-------------------------------------------------------------------------
-[ERROR] Failed to execute goal 
-org.apache.maven.plugins:maven-compiler-plugin:3.1:compile 
-(default-compile) on project orangefs-jni: Compilation failure: 
-Compilation failure:
-[ERROR] Source option 5 is no longer supported. Use 7 or later.
-[ERROR] Target option 5 is no longer supported. Use 7 or later.
-[ERROR] -> [Help 1]
-[ERROR]
-[ERROR] To see the full stack trace of the errors, re-run Maven with the 
--e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR]
-[ERROR] For more information about the errors and possible solutions, 
-please read the following articles:
-[ERROR] [Help 1] 
-http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-make: Nothing to be done for 'all'.
------------------------------------
-
-for java I use the latest packages from CentOS 8.2:
-
-dnf install java-latest-openjdk.x86_64
-
-dnf install java-latest-openjdk-devel-fastdebug.x86_64
-
-dnf install maven
-
-Any idea on the error cause ?
-
-Thanks in advance
-
-Federico
-
-
+VUPjgqvkuIDjg4njgqLjg4jjg6bkuIAt44ON44OD44OIIeODgOOCpOODq+WkluOCkuOBk37liKnn
+lKjjgYTjgZ/jgaDjgY3jgIHoqqDjgavjgYLjgorjgYzjgajjgYbjgZbjgYTjgb7jgZkNClVDIENB
+UkTjgqLjg4Pjg4jjg6bkuIDjg43jg4Pjg4ggIQ0K5pys44Oh5LiA44Or44Gv44OJ44Oh44Kk44Oz
+44Gu6YGL55SoKOODoeS4gOODq+mAgeWPl+S/oeOChOODm+S4gOODoOODmeS4gOOCuOOBruihqOek
+uinjgavplqLjgo/jgovph43opoHjgarpgJrnn6Xjgajjgarjgorjgb7jgZnjgIINCuOBhOOBpOOC
+glVD44Kr5LiA44OJ44KS44GU5Yip55So44GX44Gf44Gg44GN44GC44KK44GM44Go44GG44GU44GW
+44GE44G+44GZ44CCDQoNCuW8iuekvuOBp+OBr+OAgeOBiuWuouanmOOBq+WuieW/g+OBl+OBpuOC
+q+S4gOODieOCkuOBlOWIqeeUqOOBhOOBn+OBoOOBj+OBk+OBqOOCkuebrueahOOBq+OAgQ0K56ys
+5LiJ6ICF44Gr44KI44KL5LiN5q2j5L2/55So44KS6Ziy5q2i44GZ44KL44Oi44OL44K/44Oq44Oz
+44Kw44KS6KGM44Gj44Gm44GE44G+44GZ44CCDQrlvZPnpL7jga7jgYLjgarjgZ/jga7jgqLjgqvj
+gqbjg7Pjg4jjgavjgYrjgZfjgabmgqrmhI/jga7jgYLjgovnrKzkuInogIXjga7jg63jgrDjgqTj
+g7PjgpLmpJzlh7rjgZfjgb7jgZfjgZ/jgIINCuOBquOBiuOAgeOBlOWlkee0hOOBn+OBoOOBhOOB
+puOBhOOCi+OCq+S4gOODieOBq+OBpOOBhOOBpuOBr+OAgeesrOS4ieiAheOBq+OCiOOCi+S4jeat
+o+S9v+eUqOOBrg0K5Y+v6IO95oCn44GM44GU44GW44GE44G+44GZ44Gu44Gn44CB44Kr5LiA44OJ
+44Gu44GU5Yip55So44KS5LiA5pmC55qE44Gr5YGc5q2i44GV44Gb44Gm44GE44Gf44Gg44GE44Gm
+44GE44KL44CBDQrjgoLjgZfjgY/jga/ku4rlvozlgZzmraLjgZXjgZvjgabjgYTjgZ/jgaDjgY/l
+oLTlkIjjgYzjgZTjgZbjgYTjgb7jgZnjgIINCuOBlOS4jeS+v+OBqOOBlOW/g+mFjeOCkuOBiuOB
+i+OBkeOBl+OBvuOBl+OBpuiqoOOBq+eUs+OBl+ios+OBlOOBluOBhOOBvuOBm+OCk+OBjOOAgQ0K
+5L2V44Go44Ge44GU55CG6Kej6LOc44KK44Gf44GP44GK6aGY44GX55Sz44GX44GC44GS44G+44GZ
+44CCDQp1Y+OCq+S4gOODieS8muWToeOCteS4gOODk+OCueOBuOOBruaDheWgseWGjeeiuuiqjeOC
+kuaXqeaApeOBq+OBiumhmOOBhOOBl+OBvuOBmeOAgg0K44Ki44OD44OI44Ol5LiA44ON44OD44OI
+44Ot44Kw44Kk44OzDQrilqAg5rOo5oSP5LqL6aCFDQrigLvjgZPjga7jg6HkuIDjg6vjga9OZXTj
+gqLjg7PjgrXkuIDjgYvjgonoh6rli5XphY3kv6HjgZfjgabjgYrjgorjgb7jgZnjgIINCuKAu+OB
+tuOBk+OBruODoeS4gOODq+OBp+OBr+OAgeesrOS4ieiAheOBq+OCiOOCi+S4jeato+S9v+eUqOOB
+ruWPr+iDveaAp+OCkuaknOefpeOBl+OBvuOBl+OBn+OBruOBp+OAgeOBlOmAo+e1oeOCkuW3ruOB
+l+OBguOBkuOBvuOBl+OBn+OAgg0K4oC75pys44Oh5LiA44Or44Gr44GU6L+U5L+h44GX44Gf44Gg
+44GN44G+44GX44Gm44KC44CB44GU6LOq5ZWPP+OBlOS+nemgvOOBquOBqeOBq+OBiuetlOOBiOOB
+p+OBjeOBvuOBm+OCk+OBruOBp+OAgeOBguOCieOBi+OBmOOCgeOBlOS6huaJv+OBj+OBoOOBleOB
+hOOAguKAu+ODoeS4gOODq+OBq+mWouOBmeOCi+WQhOeoruOBiuaJi+e2muOBjeaWueazleOBq+OB
+pOOBjeOBvuOBl+OBpuOBr+OAgeS7peS4i+OCkuOBlOeiuuiqjeOBj+OBoOOBleOBhOOAgg0KaHR0
+cDovL3d3dzIudWNjYXJkLmNvLmpwL2F0dS9tYWlsX3RvaWF3YXNlLmh0bWw=

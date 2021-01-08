@@ -2,26 +2,30 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id C96752EB9E7
-	for <lists+devel-orangefs@lfdr.de>; Wed,  6 Jan 2021 07:15:18 +0100 (CET)
-Received: from [::1] (port=49704 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98FAC2EFC05
+	for <lists+devel-orangefs@lfdr.de>; Sat,  9 Jan 2021 01:06:56 +0100 (CET)
+Received: from [::1] (port=35102 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1kx26H-0006Jo-H1
-	for lists+devel-orangefs@lfdr.de; Wed, 06 Jan 2021 01:15:17 -0500
-Received: from [180.215.226.213] (port=58296 helo=suemall.cn)
- by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
- (Exim 4.93) (envelope-from <admin@suemall.cn>) id 1kx26F-0006Ii-Ro
- for devel@lists.orangefs.org; Wed, 06 Jan 2021 01:15:16 -0500
-Message-ID: <20210106141431178207@suemall.cn>
-From: =?utf-8?B?VUPjgqvjg7zjg4k=?= <uccard.co.jp>
-To: <devel@lists.orangefs.org>
-Subject: =?utf-8?B?77yc6YeN6KaB77ye44CQVUPjgqvjg7zjg4njgJHjgZTliKnnlKjnorroqo3jga7jgYrpoZjjgYQ=?=
-Date: Wed, 6 Jan 2021 14:14:17 +0800
+	id 1ky1mR-0001K5-Bd
+	for lists+devel-orangefs@lfdr.de; Fri, 08 Jan 2021 19:06:55 -0500
+Received: from mail.otichearing.com ([202.181.196.249]:53654
+ helo=vm.otichearing.com)
+ by mm1.emwd.com with esmtps  (TLS1.2) tls TLS_ECDH_anon_WITH_AES_256_CBC_SHA
+ (Exim 4.93) (envelope-from <support@otichearing.com>)
+ id 1ky1mO-0001Jj-Vc
+ for devel@lists.orangefs.org; Fri, 08 Jan 2021 19:06:53 -0500
+Received: by vm.otichearing.com (Postfix, from userid 5004)
+ id BA40565B068B; Sat,  9 Jan 2021 06:59:10 +0800 (HKT)
+To: devel@lists.orangefs.org
+Subject: ESP
+X-PHP-Originating-Script: 5004:kbfcxuydnh.php
+Date: Fri, 8 Jan 2021 22:59:10 +0000
+From: El_Gordo_Primitiva <support@otichearing.com>
+Message-ID: <10b5ea14f369932e21e12bfbed6acfb7@www.otichearing.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.33
 X-BeenThere: devel@lists.orangefs.org
 X-Mailman-Version: 2.1.33
@@ -34,6 +38,7 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Subscribe: <http://lists.orangefs.org/mailman/listinfo/devel_lists.orangefs.org>, 
  <mailto:devel-request@lists.orangefs.org?subject=subscribe>
+Reply-To: DrEnriqueBlanco@mail.com
 Errors-To: devel-bounces@lists.orangefs.org
 Sender: "Devel" <devel-bounces@lists.orangefs.org>
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -47,34 +52,126 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-VUPjgqvkuIDjg4njgqLjg4jjg6bkuIAt44ON44OD44OIIeODgOOCpOODq+WkluOCkuOBk37liKnn
-lKjjgYTjgZ/jgaDjgY3jgIHoqqDjgavjgYLjgorjgYzjgajjgYbjgZbjgYTjgb7jgZkNClVDIENB
-UkTjgqLjg4Pjg4jjg6bkuIDjg43jg4Pjg4ggIQ0K5pys44Oh5LiA44Or44Gv44OJ44Oh44Kk44Oz
-44Gu6YGL55SoKOODoeS4gOODq+mAgeWPl+S/oeOChOODm+S4gOODoOODmeS4gOOCuOOBruihqOek
-uinjgavplqLjgo/jgovph43opoHjgarpgJrnn6Xjgajjgarjgorjgb7jgZnjgIINCuOBhOOBpOOC
-glVD44Kr5LiA44OJ44KS44GU5Yip55So44GX44Gf44Gg44GN44GC44KK44GM44Go44GG44GU44GW
-44GE44G+44GZ44CCDQoNCuW8iuekvuOBp+OBr+OAgeOBiuWuouanmOOBq+WuieW/g+OBl+OBpuOC
-q+S4gOODieOCkuOBlOWIqeeUqOOBhOOBn+OBoOOBj+OBk+OBqOOCkuebrueahOOBq+OAgQ0K56ys
-5LiJ6ICF44Gr44KI44KL5LiN5q2j5L2/55So44KS6Ziy5q2i44GZ44KL44Oi44OL44K/44Oq44Oz
-44Kw44KS6KGM44Gj44Gm44GE44G+44GZ44CCDQrlvZPnpL7jga7jgYLjgarjgZ/jga7jgqLjgqvj
-gqbjg7Pjg4jjgavjgYrjgZfjgabmgqrmhI/jga7jgYLjgovnrKzkuInogIXjga7jg63jgrDjgqTj
-g7PjgpLmpJzlh7rjgZfjgb7jgZfjgZ/jgIINCuOBquOBiuOAgeOBlOWlkee0hOOBn+OBoOOBhOOB
-puOBhOOCi+OCq+S4gOODieOBq+OBpOOBhOOBpuOBr+OAgeesrOS4ieiAheOBq+OCiOOCi+S4jeat
-o+S9v+eUqOOBrg0K5Y+v6IO95oCn44GM44GU44GW44GE44G+44GZ44Gu44Gn44CB44Kr5LiA44OJ
-44Gu44GU5Yip55So44KS5LiA5pmC55qE44Gr5YGc5q2i44GV44Gb44Gm44GE44Gf44Gg44GE44Gm
-44GE44KL44CBDQrjgoLjgZfjgY/jga/ku4rlvozlgZzmraLjgZXjgZvjgabjgYTjgZ/jgaDjgY/l
-oLTlkIjjgYzjgZTjgZbjgYTjgb7jgZnjgIINCuOBlOS4jeS+v+OBqOOBlOW/g+mFjeOCkuOBiuOB
-i+OBkeOBl+OBvuOBl+OBpuiqoOOBq+eUs+OBl+ios+OBlOOBluOBhOOBvuOBm+OCk+OBjOOAgQ0K
-5L2V44Go44Ge44GU55CG6Kej6LOc44KK44Gf44GP44GK6aGY44GX55Sz44GX44GC44GS44G+44GZ
-44CCDQp1Y+OCq+S4gOODieS8muWToeOCteS4gOODk+OCueOBuOOBruaDheWgseWGjeeiuuiqjeOC
-kuaXqeaApeOBq+OBiumhmOOBhOOBl+OBvuOBmeOAgg0K44Ki44OD44OI44Ol5LiA44ON44OD44OI
-44Ot44Kw44Kk44OzDQrilqAg5rOo5oSP5LqL6aCFDQrigLvjgZPjga7jg6HkuIDjg6vjga9OZXTj
-gqLjg7PjgrXkuIDjgYvjgonoh6rli5XphY3kv6HjgZfjgabjgYrjgorjgb7jgZnjgIINCuKAu+OB
-tuOBk+OBruODoeS4gOODq+OBp+OBr+OAgeesrOS4ieiAheOBq+OCiOOCi+S4jeato+S9v+eUqOOB
-ruWPr+iDveaAp+OCkuaknOefpeOBl+OBvuOBl+OBn+OBruOBp+OAgeOBlOmAo+e1oeOCkuW3ruOB
-l+OBguOBkuOBvuOBl+OBn+OAgg0K4oC75pys44Oh5LiA44Or44Gr44GU6L+U5L+h44GX44Gf44Gg
-44GN44G+44GX44Gm44KC44CB44GU6LOq5ZWPP+OBlOS+nemgvOOBquOBqeOBq+OBiuetlOOBiOOB
-p+OBjeOBvuOBm+OCk+OBruOBp+OAgeOBguOCieOBi+OBmOOCgeOBlOS6huaJv+OBj+OBoOOBleOB
-hOOAguKAu+ODoeS4gOODq+OBq+mWouOBmeOCi+WQhOeoruOBiuaJi+e2muOBjeaWueazleOBq+OB
-pOOBjeOBvuOBl+OBpuOBr+OAgeS7peS4i+OCkuOBlOeiuuiqjeOBj+OBoOOBleOBhOOAgg0KaHR0
-cDovL3d3dzIudWNjYXJkLmNvLmpwL2F0dS9tYWlsX3RvaWF3YXNlLmh0bWw=
+
+
+
+
+                                      El_Gordo_Primitiva
+
+calle estaben collantes 12
+
+28017 Madrid Spain
+
+Tell 34 911 231 117 fax, 34 912 916 313.
+
+Offizielle mitteilung
+
+Des präsidenten der internationalen
+
+Promotion-gewinnzuteilung
+
+Referenznummer:Esp/15286114
+
+Bearbeitungsnummer:665002
+
+Email.bilbaogroupo@gmail.com
+
+ 
+
+Guten Tag,
+
+ 
+
+                         Offizielle Gewinnbenachritigung
+
+ Wir sind erfreut Ihnen mitteilen zu können, das die Gewinnliste Lotto
+
+Programm am 19/12/2020. erschienen ist. Die offizielle Liste der Gewinner
+
+erschien am 08/01/2021. Ihr Name wurde auf dem Los mit der Nummer: 025.
+
+114649 .750 und mit der Seriennummer: 791026-57 registriert. Die
+
+Glücksnummer: 4-6-9-11-19-23 * 10 hat in der 4. Kategorie gewonnen.
+
+ 
+
+ Sie sind damit Gewinner von: 935.470,00 € (Neun Hundert Fünfunddreissig
+
+Tausend Vierhundert Und Siebzig Euro). Die Summe ergibt sich aus einer
+
+Gewinnausschüttung von EURO: 16.626.870,00 (Sechzehn Millionen Sechshundert
+
+Sechsundzwanzig Tausend Achthundert Und Siebzig Euro). Die Summe wurde durch
+
+17 Gewinner aus der gleichen Kategorie geteilt. Herzlichen Glückwunsch!
+
+Der Gewinn ist bei einer Sicherheitsfirma hinterlegt und in ihrem Namen
+
+versichert. Um keine Komplikationen bei der Abwicklung der Auszahlung zu
+
+verursachen bitten wir Sie diese offizielle Mitteilung diskret zu behandeln,
+
+sie ist Teil unseres Sicherheitsprotokolls und garantiert Ihnen einen
+
+reibunglosen Ablauf.
+
+ Einmal im Jahr veranstalten wir eine Auslosung, in der die Gewinner von
+
+unserem Computer, aus 45.000 Namen aus Asien, Europa, Australien und Amerika,
+
+gezogen werden.
+
+Bitte kontaktieren Sie unseren Auslandssachbearbeiter Dr,Enrique Blanco bei
+
+der Sicherheitfirma GRUPO BILBAO S.L. Tel: 0034 685 091 224. Email:
+
+EnriqueBlanco@post.com
+
+.Bitte denken Sie daran, jeder Gewinnanspruch muss bis zum 29/01/2021.
+
+Angemeldete sein. Jeder nicht angemeldet Gewinnanspruch verfällt und geht
+
+zurück an das MINISTERIO DE ECONOMIA Y HACIENDA. Bitte denken sie auch daran
+
+das 10% Ihres gewinnes an die Sicherheitsfirma GRUPO BILBAO S.L. geht. Namen
+
+versichert ist.
+
+ WICHTIG: Um Verzögerungen und Komplikationen zu vermeiden, geben Sie bitte
+
+immer die Referenz- und Bearbeitungsnummer an. Adressänderungen teilen Sie
+
+uns bitte umgehend mit. Anbei ein Anmeldeformular, bitte ausfüllen und per
+
+Email an die Sicherheitsfirma GRUPO BILBAO S.L.on Email:
+
+alvarosanchez@email.com
+
+schicken.
+
+Bitte Füllen Sie Die Unten Angegebenen Daten Aus:
+
+(1) Frau Oder Herr:___________________ (2)Name:______________________________
+
+(3) Vorname:__________________________ (4)Adresse:___________________________
+
+(5) Plz:______________________________ (6)Stadt:_____________________________
+
+(7) Geburtsdatum:_____________________ (8)Nationalität:______________________
+
+(9) Telefon:__________________________ (10)Mobil:____________________________
+
+(11) Fax:_____________________________ (12)Email:____________________________
+
+(13) Beruf:___________________________ (14)Sprache/S:________________________
+
+ Die oben genannten, Anforderungen sind erforderlich. Herzliche
+
+Glückwünsche noch einmal.
+
+Carl Francisco Leon
+
+PRÄSIDENT.
+
+

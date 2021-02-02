@@ -2,63 +2,62 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EFD830A243
-	for <lists+devel-orangefs@lfdr.de>; Mon,  1 Feb 2021 07:59:15 +0100 (CET)
-Received: from [::1] (port=60220 helo=mm1.emwd.com)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEB0530BB0C
+	for <lists+devel-orangefs@lfdr.de>; Tue,  2 Feb 2021 10:36:10 +0100 (CET)
+Received: from [::1] (port=56886 helo=mm1.emwd.com)
 	by mm1.emwd.com with esmtp (Exim 4.93)
 	(envelope-from <devel-bounces@lists.orangefs.org>)
-	id 1l6TB4-0005VX-6X
-	for lists+devel-orangefs@lfdr.de; Mon, 01 Feb 2021 01:59:14 -0500
-Received: from mail-pl1-f196.google.com ([209.85.214.196]:35759)
+	id 1l6s6T-0001e5-Kw
+	for lists+devel-orangefs@lfdr.de; Tue, 02 Feb 2021 04:36:09 -0500
+Received: from mail-pj1-f65.google.com ([209.85.216.65]:37858)
  by mm1.emwd.com with esmtps (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- (Exim 4.93) (envelope-from <daisy@growthrecords.com>)
- id 1l6TB2-0005Ti-95
- for devel@lists.orangefs.org; Mon, 01 Feb 2021 01:59:12 -0500
-Received: by mail-pl1-f196.google.com with SMTP id g3so9439792plp.2
- for <devel@lists.orangefs.org>; Sun, 31 Jan 2021 22:58:52 -0800 (PST)
+ (Exim 4.93) (envelope-from <mya@searchranknow.com>)
+ id 1l6s6S-0001d5-94
+ for devel@lists.orangefs.org; Tue, 02 Feb 2021 04:36:08 -0500
+Received: by mail-pj1-f65.google.com with SMTP id g15so1999706pjd.2
+ for <devel@lists.orangefs.org>; Tue, 02 Feb 2021 01:35:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=growthrecords.com; s=google;
+ d=searchranknow-com.20150623.gappssmtp.com; s=20150623;
  h=from:to:subject:date:message-id:mime-version:thread-index
  :content-language;
- bh=CQQIU/s8/DuoKBrspRep4Zrts5nRfqG429oApVzxoSA=;
- b=SkKyO5whF0ak7Luff0mXsIXTcL+S8/RpBjRbjPv1bU0otbJOkhNdPbREWWVlGZV/Vt
- cxzmsypXcioshtTECKeqrQpW14Ibj7fatW5na0zZm7JZC5HfJrt6+lQ5Qs6t8lo3Fftr
- Ty1tbTuzsOaRbAWwa0nihvDGGFpPVPw/Vu49furWbCSjcdPkQjcaoLkj9O4eEbi/8l95
- aRthRlfa0SzmVOE6gcPRDKyGzswg0oYXwLmuzkdD8gUYomJQ75bq6oMTa244a53EWRaM
- qjHOP3JIMI11BK5q3w9H2pXo7feflRx8VwcogkflcV4otTJxAVa4PfXqZkvGicF08NlP
- V0YA==
+ bh=7T5pbcbwWl0lYHkjXrAOvIGOk6aqPEOA9GFhuWn8TY0=;
+ b=KKzcTQC403vSpvl1yVe/YUs9lQ0irB9/1zVOkVDd9z0uPPkifkyhAMgaimO115iso5
+ oJIyCTGtX6rGhNZx6ftpDYNDVqE0iIj+pOtuIdjkg60XBrfCdH6rSF/NQrvEwF3OvGoR
+ 0m1Va6R7WMLfDFBIYO1X01dYFrnsKUZRjYbMLzq+AAg5xtvxSQ3GjII87daGfHWrRFl+
+ 1VtEnNpfLU139n6Is+2MEoTS9HxtLED4EB1tIzAUF0k/xxUK7DlpziCmHMAZeX6w1swb
+ G4wLuUbZsRJGZ09zO35QOELkvYlEKtlcljXRx2jEM0WAMS0zc3JqIqRox6OVq7RBXo/O
+ sjVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:mime-version
  :thread-index:content-language;
- bh=CQQIU/s8/DuoKBrspRep4Zrts5nRfqG429oApVzxoSA=;
- b=L1wV2Avgo9MCjGjCL8xHXL1XbAKT+SvnZckvBN6cZ53zmSGPvu2ufns8XyQwm9afb+
- C7CLcFeAwlKFg4HwnVz2F9SOSidCIuRRN2TjnDm2mTjAfdqfrUN5duh1SDhhbemtWPlu
- RGBEYyI21DRDBNn/By/LX7bioagJnVm9Nr3ynLdFf1DLeqw7Tl9MJtPIFKj1kfRUp/c3
- NE5frVKMXsupE6MXXEofsNy39FINyefUPj0t0JbmmZlrciPM8QZO0jMDpAc/pxLHKdaM
- RYbw4miifo0CvJdmlkg3seveCnw0bPrR7GpHHzb7j71trXS+y4CTdcYhSD8ibc6AVRMN
- hang==
-X-Gm-Message-State: AOAM530jZRWpgweRHs6k0P9vajxqMi+yApUCTxk5kAWVsWSwR5ortgrK
- YG3tl76aP080OoPfKx0XvByQhbVBSmUOvg==
-X-Google-Smtp-Source: ABdhPJyqABcyNtMGYl3Fd2dl/HxgvvyZoBp0swnsscEI/SxuzjthcddbFnYJG6e4MZOlwzOzAW8nUw==
-X-Received: by 2002:a17:90b:e14:: with SMTP id
- ge20mr1528542pjb.207.1612162710742; 
- Sun, 31 Jan 2021 22:58:30 -0800 (PST)
-Received: from jeetuPC ([203.122.30.136])
- by smtp.gmail.com with ESMTPSA id r30sm15360378pjg.43.2021.01.31.22.58.29
+ bh=7T5pbcbwWl0lYHkjXrAOvIGOk6aqPEOA9GFhuWn8TY0=;
+ b=ZW5/dw6HYHTLPWjTkZnZgD8xGvbvXCcAZqPKnXb+OpE1hQsowvhtpw3BWcOJxGMSl/
+ a0yF64hDZemZ41cG8OlNcACapq3HEzaYfGs4DC/jKr608v5x2uUsZwztLh1NDeCXhARA
+ OKrwIWLB/W7lknX6kTZc6zapMuYFoYX6y7OO1qfd3QbG2+YMUa2IhyGCogm6diHIN5xx
+ L/QtS6GUEFfz2UbFI4FJTk241STTNUb1ZpAtuM8bkBRSEPJr3iW+kBboqoqW95x8xl8v
+ v5TBAmIltpIfqwWblW4WL4OJLysFM/t0GRjE78c4/rJaWCIPVWSrsReUaBzN+jO3j8Qk
+ XoAw==
+X-Gm-Message-State: AOAM5339cAlhYVpSKVLmFS+oWHNS8Ui2OQbTPbhlI7eUs237iapwQTOn
+ W6Evyu1PmebKK5veUVZQHcDvZjhNOjRveA==
+X-Google-Smtp-Source: ABdhPJzHurruyNg08RLhbq7PweT5htu6uKlhmDukOgqmHp4b3BBMobuTHpG/eccnFdMXKS9ZDjSQ0A==
+X-Received: by 2002:a17:902:b688:b029:dc:240a:2bd7 with SMTP id
+ c8-20020a170902b688b02900dc240a2bd7mr21407514pls.50.1612258526908; 
+ Tue, 02 Feb 2021 01:35:26 -0800 (PST)
+Received: from DESKTOP481PC44 ([180.151.91.189])
+ by smtp.gmail.com with ESMTPSA id q24sm21092251pfs.72.2021.02.02.01.35.25
  for <devel@lists.orangefs.org>
- (version=TLS1 cipher=ECDHE-ECDSA-AES128-SHA bits=128/128);
- Sun, 31 Jan 2021 22:58:30 -0800 (PST)
-From: Daisy <daisy@growthrecords.com>
-X-Google-Original-From: "Daisy" <Daisy@growthrecords.com>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 02 Feb 2021 01:35:26 -0800 (PST)
+From: "Mya" <mya@searchranknow.com>
 To: <devel@lists.orangefs.org>
 Subject: Website Designing 
-Date: Mon, 1 Feb 2021 12:25:35 +0530
-Message-ID: <2783f01d6f867$9f3d4140$ddb7c3c0$@com>
+Date: Tue, 2 Feb 2021 15:03:01 +0530
+Message-ID: <1e6ae01d6f946$bd747040$385d50c0$@searchranknow.com>
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: Adb26ME+5OWDkcttRT+bTsO2igObBQ==
-Content-Language: en-us
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: Adb4eyw6IgvmEJ8PTuehbJPIHKbVFQ==
+Content-Language: en-in
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -89,7 +88,7 @@ X-Source-Dir:
 
 Hi, 
 
-I am Daisy, Web Development Manager in India and I work with 100+experienced
+I am Mya, Web Development Manager in India and I work with 100+experienced
 IT professionals who are into:
 
 
@@ -143,10 +142,8 @@ Number or Skype ID, along with the preferred time to contact you. Someone
 from our team will contact you according to your schedule.
 
 Thanks & Regards
-Daisy
+Mya
 Web Development Manager
-
- 
 
  
 

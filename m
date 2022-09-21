@@ -2,77 +2,77 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8E095E53C2
-	for <lists+devel-orangefs@lfdr.de>; Wed, 21 Sep 2022 21:26:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 331F85E53CD
+	for <lists+devel-orangefs@lfdr.de>; Wed, 21 Sep 2022 21:30:20 +0200 (CEST)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id 7015C38446E
-	for <lists+devel-orangefs@lfdr.de>; Wed, 21 Sep 2022 15:26:14 -0400 (EDT)
+	by mm1.emwd.com (Postfix) with ESMTP id 7790138446E
+	for <lists+devel-orangefs@lfdr.de>; Wed, 21 Sep 2022 15:30:19 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=harmony;
-	t=1663788374; bh=o+v5eytP7rCBx6gZq3eJ3mGrk3RuwfyPgMfL659y8CU=;
+	t=1663788619; bh=63SlgQZTRncG55Ep7bzFqtBLqSxrd8Fn1j7cPQ01YVo=;
 	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
 	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
 	 List-Unsubscribe:From;
-	b=XBOzDwh5nAhWe+lAetsMhdmWHQYO12wE8iNVDoFi6EvYFNg9drCsWrXPgCSDCracD
-	 9miJ+V6CBhjSV03wIb3CSj7AYAvSUGcXkmL34aunqrqWbuLO2r62PqaMeXAcEKnB0W
-	 wbasBj4MZ09E47qEaT59JprPxsd6y/QSRGy9dXJo7KNpIBTdFLGFUjz+Qj6JzGdx2h
-	 dBmsNzhievHnm6iB6KHQ3JJY7S7JPDEyXjHvKqHasU0MOlFkxXdXEooAqF+UiKK0Fw
-	 6ZPGfcfZ08QwmHSOQr8/tn0uppEHE4Cua3ehFlkB6fbCV9VDnhDcchkKSBHboJIK9P
-	 MgC0qC6OFossg==
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
-	by mm1.emwd.com (Postfix) with ESMTPS id 7ABB338446B
-	for <devel@lists.orangefs.org>; Wed, 21 Sep 2022 15:26:11 -0400 (EDT)
+	b=d1KENwPoocQ/+MYM+g55BzXjoxaqfZWT1BntI2aFQUi/Bg2Flu51cAj68vtcNhtqc
+	 9cVpRq3xYTgWxVoqezwa9oW9ZZsj4kHdFjBzdChOBWEN5bkh4EniC6c983IfgEhcFn
+	 XimSXZ+YTDOz+opZGQOBtD62K0El9U61TKQK585rNm5oCyZVNHWBgrBK9aW4cCVYlG
+	 C1zCdMW8AgQogolPI7+mxYfnEOAymBHGFn5QTeeizJDGy/oB0VRYdCsrGcnm7DQhMz
+	 as8mG7gF516lAPz1YgT8bjs+4c18wYiFN259+zpLVWI6WWCJP/9jZ+k/TA2iuX6QuK
+	 LHHaSL6jQLq6A==
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+	by mm1.emwd.com (Postfix) with ESMTPS id B9016384413
+	for <devel@lists.orangefs.org>; Wed, 21 Sep 2022 15:30:17 -0400 (EDT)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20210112.gappssmtp.com header.i=@omnibond-com.20210112.gappssmtp.com header.b="0A5e59ms";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20210112.gappssmtp.com header.i=@omnibond-com.20210112.gappssmtp.com header.b="LGZQUM5u";
 	dkim-atps=neutral
-Received: by mail-lj1-f171.google.com with SMTP id b6so8223848ljr.10
-        for <devel@lists.orangefs.org>; Wed, 21 Sep 2022 12:26:11 -0700 (PDT)
+Received: by mail-lf1-f48.google.com with SMTP id a2so10915611lfb.6
+        for <devel@lists.orangefs.org>; Wed, 21 Sep 2022 12:30:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=omnibond-com.20210112.gappssmtp.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date;
-        bh=SB0ZL3ET5KIRiXLzJBPRplLaECUUBPQ/n6fLwa5hHA8=;
-        b=0A5e59msr8vZ9yyswtDGOENd9aDNdfqvLUSiJXcQicnCVo7nNeHpFu+d6Ow6+qNhTS
-         Y2q5K1hAOfFO8+dpOCigOXgV8M/pbEe3K7y/rzqqGL9LoNChUSrb2pkRahORLufp2uNQ
-         9/oUFyzHqOtmTjXzT2Z7oSDKN1xJNpAa0Jddb+aLcNc3tirgXmbXVuyZxc6e131yIVjQ
-         hQjxxLXeVO80G3jl+jikLL6WUSmyipysOAZvj17vDHGMjtMHuSwGQCGI3PBFtLO1iMbA
-         DCFoh4lvIspc37sZc8KmWtDoE3ohyFq5MLu1QUZTYY3o/XeGP6Hc4ouQGPbnMpjRPjtw
-         jLnw==
+        bh=dUp34wU+rIvE4FOjS5Am/ggzUEg/7JO0XLgISf2jrDw=;
+        b=LGZQUM5uwNtvfEAnEipVUgYMt8A/QPJi5hFGTf7gwQ6wrDOPADB7dHS4qztxecH83g
+         HN3PlnCcmM2S+9Dqtj0e+4k76s3izpY45yp+vTPj8lW+5Mom7CnGmud1TWNxhpcltpO6
+         iFtf5vWOUHTxYoSdIlX6Ak9KxNt8fv7V2e3dDVnJiM0PRIWjNgt308OIYxchyRJc22xa
+         wfsr2ZsmSJ3yLWEMyGQalEMQ94cejM8fZMnVDqI3muwy09C3+DpcLntI/iBAN1nPVKhU
+         OBcnz7eyyomdZ6/bWSyPqffGe/B9xUM7LHpFZ/BgygwY/J42u0tcpHt1xz2lweAogtPN
+         2pYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=SB0ZL3ET5KIRiXLzJBPRplLaECUUBPQ/n6fLwa5hHA8=;
-        b=mgWxlLXqzR6lkL9c4pouNT9RHmseHcpG6+N0FMIoZ+AqM6+WCyrhjFtMKflaua8ixd
-         XrHxf0S2y+JsRbT7/fSeqWdbnjuN47DNSDD2iEYl7HNIRqEPNpt3aMeCzq3h2G1SD/OV
-         9QNsPbSK4qAQdBPtI/IBosHbkvK7z4kfOZk22nR+lbnAIUIZTndtrlUcVo1zrox8lE1t
-         OiEMrbPcRQUev5gaWMM6c7wr3BlRbj1VloMU0V1Tn8EW+U+SWmNg+umVgAS7GgZEyILi
-         8VjhxkMxh4lr+BTTCefziLobLP5GmDAmNLD0ebmPt15bpvOR4Cpnkuv/70/uINLDxMYQ
-         EXcw==
-X-Gm-Message-State: ACrzQf2rSDsuTIHTFGsCSnlY2+myjAFFUbJEZcsPAxYSr8GsOZOm9W3e
-	JRkoUnrrEqfGF7xQ1QXmqCMQ1q17Qjq7np9h3AX7qw==
-X-Google-Smtp-Source: AMsMyM5KO0UwDQkeO6ykB9BNj9gI3KAjgKqiJnM2Fz59q7a2ZikJNq5vRGZQQczhPRWAQLxQ28aQDNsI3e9uHsuaO08=
-X-Received: by 2002:a2e:9b89:0:b0:26a:a004:ac3 with SMTP id
- z9-20020a2e9b89000000b0026aa0040ac3mr8832429lji.104.1663788369753; Wed, 21
- Sep 2022 12:26:09 -0700 (PDT)
+        bh=dUp34wU+rIvE4FOjS5Am/ggzUEg/7JO0XLgISf2jrDw=;
+        b=VB9D045lO8dJw6fC7b6tKcmLO/yDB9oy0mH7iFW1pOpTJIvhi1RDcutoek9ZOQk5Go
+         0MOLcZcUcz0eJ3wL22Xhdt5rVk2BuIyByfolpItGLWe4MjNT6cYUcItZ8pn2zbCfmKbE
+         q+JJmMpIvuNdn3zW7qUzj0Dcne064T8qOWt5uX60PUNhESe7VZxpGcO5rOx3/siluHVM
+         7AyRIIzKzp/X2D96TFVsmOmNDn2G8yIL8EgttNqjVsEv0V3355VPEW9Raqd7jxOhlgue
+         P0wE6FI+mljumKeIYNDSfeLsSIAzMLEXNvXPuA7pZGnhMGl8N+97fPKrSPNkv0CATyGv
+         Tjuw==
+X-Gm-Message-State: ACrzQf0s56kuNeLYC7a+jOlP/kkG/OgIbTeNY7WkPuXYd4j/BDfO9S23
+	2jZwiXBIG9p6Z4e55ephU8c+NY+yuDwBduZp4fb/Fg==
+X-Google-Smtp-Source: AMsMyM4UjQA3cdxDZHWf6B8Ig1L9lp1kN2mKmfQIDi7llbNq2QI0D/11Csj2bu9m2IEMtgRC8FBiF9mNgEoT6WvdSzo=
+X-Received: by 2002:a05:6512:12d6:b0:49f:48d4:a1c4 with SMTP id
+ p22-20020a05651212d600b0049f48d4a1c4mr10901513lfg.52.1663788616355; Wed, 21
+ Sep 2022 12:30:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <YvvBs+7YUcrzwV1a@ZenIV> <CAHk-=wgkNwDikLfEkqLxCWR=pLi1rbPZ5eyE8FbfmXP2=r3qcw@mail.gmail.com>
- <Yvvr447B+mqbZAoe@casper.infradead.org> <dc966283-d0b9-b411-0792-c8553b948c2e@canonical.com>
-In-Reply-To: <dc966283-d0b9-b411-0792-c8553b948c2e@canonical.com>
+References: <YwFANLruaQpqmPKv@ZenIV> <YwFCIkDT7sFO1D9N@ZenIV>
+In-Reply-To: <YwFCIkDT7sFO1D9N@ZenIV>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Wed, 21 Sep 2022 15:25:58 -0400
-Message-ID: <CAOg9mSRjo-UZ+3OMVZ4VekwSLzmAe0=+t1kr47K_gFzfp-wUwQ@mail.gmail.com>
-Subject: Re: [apparmor] Switching to iterate_shared
-To: Matthew Wilcox <willy@infradead.org>, linux-fsdevel <linux-fsdevel@vger.kernel.org>
+Date: Wed, 21 Sep 2022 15:30:05 -0400
+Message-ID: <CAOg9mSQwjKVDJLCHLTpQyAWkCoaAA37U0LkyG6AqvmYdZP_JnA@mail.gmail.com>
+Subject: Re: [PATCH 8/8] orangefs: use ->f_mapping
+To: Al Viro <viro@zeniv.linux.org.uk>, Mike Marshall <hubcapsc@gmail.com>,
+	devel@lists.orangefs.org
 Content-Type: text/plain; charset="UTF-8"
-Message-ID-Hash: J6BTGIH2KUG6GPYW7EIAXVZFKWA3NRAZ
-X-Message-ID-Hash: J6BTGIH2KUG6GPYW7EIAXVZFKWA3NRAZ
+Message-ID-Hash: 7UGXYZ5HSLTNXF4YGF6HY5OHWRQERTR7
+X-Message-ID-Hash: 7UGXYZ5HSLTNXF4YGF6HY5OHWRQERTR7
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: devel@lists.orangefs.org
+CC: linux-fsdevel@vger.kernel.org
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/J6BTGIH2KUG6GPYW7EIAXVZFKWA3NRAZ/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/7UGXYZ5HSLTNXF4YGF6HY5OHWRQERTR7/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -80,103 +80,42 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
->> At least CEPH has active maintainers...
+I added this patch to one of the 6.0 rc's that I've been
+running through xfstests, no regressions... so...
 
-Well that's just mean :-) ...
+You can add tested by me if you'd like...
 
-Anywho...
-
->> in many cases, the existing iterate() implementation works just fine as iterate_shared().
->> https://lwn.net/Articles/686943/
-
-I changed the orangefs .iterate to .iterate_shared... ls still works,
-find still works,
-xfstests shows no regressions...
-
-I found and ran my getdents program from back when we were working to
-go upstream...
-it works the same with .iterate as it does with .iterate_shared...
+Thanks!
 
 -Mike
 
-On Thu, Aug 18, 2022 at 12:15 PM John Johansen
-<john.johansen@canonical.com> wrote:
+
+On Sat, Aug 20, 2022 at 4:20 PM Al Viro <viro@zeniv.linux.org.uk> wrote:
 >
-> On 8/16/22 12:11, Matthew Wilcox wrote:
-> > On Tue, Aug 16, 2022 at 11:58:36AM -0700, Linus Torvalds wrote:
-> >> That said, our filldir code is still confusing as hell. And I would
-> >> really like to see that "shared vs non-shared" iterator thing go away,
-> >> with everybody using the shared one - and filesystems that can't deal
-> >> with it using their own lock.
-> >>
-> >> But that's a completely independent wart in our complicated filldir saga.
-> >>
-> >> But if somebody were to look at that iterate-vs-iterate_shared, that
-> >> would be lovely. A quick grep shows that we don't have *that* many of
-> >> the non-shared cases left:
-> >>
-> >>        git grep '\.iterate\>.*='
-> >>
-> >> seems to imply that converting them to a "use my own load" wouldn't be
-> >> _too_ bad.
-> >>
-> >> And some of them might actually be perfectly ok with the shared
-> >> semantics (ie inode->i_rwsem held just for reading) and they just were
-> >> never converted originally.
-> >
-> > What's depressing is that some of these are newly added.  It'd be
-> > great if we could attach something _like_ __deprecated to things
-> > that checkpatch could pick up on.
-> >
-> > fs/adfs/dir_f.c:        .iterate        = adfs_f_iterate,
-> > fs/adfs/dir_fplus.c:    .iterate        = adfs_fplus_iterate,
-> >
-> > ADFS is read-only, so must be safe?
-> >
-> > fs/ceph/dir.c:  .iterate = ceph_readdir,
-> > fs/ceph/dir.c:  .iterate = ceph_readdir,
-> >
-> > At least CEPH has active maintainers, cc'd
-> >
-> > fs/coda/dir.c:  .iterate        = coda_readdir,
-> >
-> > Would anyone notice if we broke CODA?  Maintainers cc'd anyway.
-> >
-> > fs/exfat/dir.c: .iterate        = exfat_iterate,
-> >
-> > Exfat is a new addition, but has active maintainers.
-> >
-> > fs/jfs/namei.c: .iterate        = jfs_readdir,
-> >
-> > Maintainer cc'd
-> >
-> > fs/ntfs/dir.c:  .iterate        = ntfs_readdir,         /* Read directory contents. */
-> >
-> > Maybe we can get rid of ntfs soon.
-> >
-> > fs/ocfs2/file.c:        .iterate        = ocfs2_readdir,
-> > fs/ocfs2/file.c:        .iterate        = ocfs2_readdir,
-> >
-> > maintainers cc'd
-> >
-> > fs/orangefs/dir.c:      .iterate = orangefs_dir_iterate,
-> >
-> > New; maintainer cc'd
-> >
-> > fs/overlayfs/readdir.c: .iterate        = ovl_iterate,
-> >
-> > Active maintainer, cc'd
-> >
-> > fs/proc/base.c: .iterate        = proc_##LSM##_attr_dir_iterate, \
-> >
-> > Hmm.  We need both SMACK and Apparmor to agree to this ... cc's added.
+> ... and don't check for impossible conditions - file_inode() is
+> never NULL in anything seen by ->release() and neither is its
+> ->i_mapping.
 >
-> This is fine for AppArmor
+> Signed-off-by: Al Viro <viro@zeniv.linux.org.uk>
+> ---
+>  fs/orangefs/file.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
 >
->
-> >
-> > fs/vboxsf/dir.c:        .iterate = vboxsf_dir_iterate,
-> >
-> > Also newly added.  Maintainer cc'd.
-> >
+> diff --git a/fs/orangefs/file.c b/fs/orangefs/file.c
+> index 86810e5d7914..732661aa2680 100644
+> --- a/fs/orangefs/file.c
+> +++ b/fs/orangefs/file.c
+> @@ -417,9 +417,7 @@ static int orangefs_file_release(struct inode *inode, struct file *file)
+>          * readahead cache (if any); this forces an expensive refresh of
+>          * data for the next caller of mmap (or 'get_block' accesses)
+>          */
+> -       if (file_inode(file) &&
+> -           file_inode(file)->i_mapping &&
+> -           mapping_nrpages(&file_inode(file)->i_data)) {
+> +       if (mapping_nrpages(file->f_mapping)) {
+>                 if (orangefs_features & ORANGEFS_FEATURE_READAHEAD) {
+>                         gossip_debug(GOSSIP_INODE_DEBUG,
+>                             "calling flush_racache on %pU\n",
+> --
+> 2.30.2
 >

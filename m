@@ -2,77 +2,73 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 216F763F329
-	for <lists+devel-orangefs@lfdr.de>; Thu,  1 Dec 2022 15:54:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE67364CFF3
+	for <lists+devel-orangefs@lfdr.de>; Wed, 14 Dec 2022 20:15:57 +0100 (CET)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id C3F513849C7
-	for <lists+devel-orangefs@lfdr.de>; Thu,  1 Dec 2022 09:54:48 -0500 (EST)
+	by mm1.emwd.com (Postfix) with ESMTP id 4262E3842FA
+	for <lists+devel-orangefs@lfdr.de>; Wed, 14 Dec 2022 14:15:56 -0500 (EST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1669906488; bh=ORl4hEpjTG8TO16ayw88erOhxC5VtE1FBPr2JIVRuA4=;
-	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
-	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
-	 List-Unsubscribe:From;
-	b=F+2V1de7qJS+w6iSfjYg0NTOK1nMFUFRD/0Iv3kXPdwG58HBVGUYTwv9MASMA64GB
-	 gQrKsZ1XVMdO1fzJTE5o75u0PyEtjKmq/SJb/6G/s/IulD3PzBDHQmOLs/XiVN2vtY
-	 UVdTmJ08kvTRrxibZ+ooqCNFyIruU3nCF6uW+WLwE5C2WEWFRRZqP/lnL0Pd4QlKdJ
-	 DSsXOuJ0btJgw3oy9AUlMVYxMLVgr/HDTQemdjlcu+9Yq4C0vNddfisOMRHwgYiTZf
-	 5rJkChyQedkzy437d3mkGUw/PZKdB3JFN/Kw/iGnd04oO2Jt0U+2ph8pqwl6Sd7sp+
-	 nONky91AE9Y1g==
-Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
-	by mm1.emwd.com (Postfix) with ESMTPS id 572E138414E
-	for <devel@lists.orangefs.org>; Thu,  1 Dec 2022 09:54:46 -0500 (EST)
+	t=1671045356; bh=xqI9sBRYonkCEakhxtSiO7JMYMOJShZg+QBf7tQrR1A=;
+	h=From:Date:Subject:To:CC:List-Id:List-Archive:List-Help:List-Owner:
+	 List-Post:List-Subscribe:List-Unsubscribe:From;
+	b=YKcCF3yBy7FK/LVZdak8DZBEQQaiKQ/CtabCAwJCfPrMa1yyroEyHS3VejAD8TT8P
+	 ihCJwqMdGjxfYDABZra2HVsTOlllJngzEkdOEc3Ap3biuK8AVBRWG0hQrQRCO4J6sU
+	 /LICno3iwayBxbw/Ki2l9zXwBQPMJnVrR3TQATi1VUL++oX4DCV8thvl1AcIhzIOEX
+	 6kjuRalx+OFM/qUkRd/1KBDK6gYHRzy0L6ccBSrbRy42De/Wx8rqqJRayxbAYGQZ3L
+	 4rzaPAUQgo2y5tqQaD4Hd025AhLNPnk8ewNwLWQ05uDrlXj85SpvMjOxlxKyWS+r2q
+	 9i4jTixaOffQQ==
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
+	by mm1.emwd.com (Postfix) with ESMTPS id 148603842A2
+	for <devel@lists.orangefs.org>; Wed, 14 Dec 2022 14:15:53 -0500 (EST)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20210112.gappssmtp.com header.i=@omnibond-com.20210112.gappssmtp.com header.b="05RRT9h2";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20210112.gappssmtp.com header.i=@omnibond-com.20210112.gappssmtp.com header.b="dR+feQN0";
 	dkim-atps=neutral
-Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-3691e040abaso19493437b3.9
-        for <devel@lists.orangefs.org>; Thu, 01 Dec 2022 06:54:46 -0800 (PST)
+Received: by mail-qv1-f54.google.com with SMTP id d13so411283qvj.8
+        for <devel@lists.orangefs.org>; Wed, 14 Dec 2022 11:15:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=omnibond-com.20210112.gappssmtp.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=mgILPj6YlVYMz9mNkAtSfNEKlZlLXzmDmVWH3GNz5OQ=;
-        b=05RRT9h2U2pxZd/Pw/gCD7JozZfbmA2lGkJEMPmhM42QcRotpIpXQFu+Gb87znLnmn
-         Ab1zsDGz4pfLvvUAI41az+swDjn3rVndSEehwZi4SSzOH6GzajO1qNXSWFHltmwrajco
-         G/Uh64r1+OV5Nf5w+SidgAlWAM781Es2J9aefLqTcoi5JrzGMIuwB9Uzc9KO9GeR2/oC
-         rBJmsnLUM22wR524doHEoDMHX/c507aF3W2Vatgk++KGamGxSMHnYxrchGMYxdoe61HJ
-         I41wxfFYoCduWdfEzYfItzKASdtgfKSdxgeoufPz01nP0d/+cBSD7lSo3n/Lkpxw+YrS
-         uaig==
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=8hfd8zAToSdzoK0fgf7KAIEFt+FxnQhco6jJDWQ8kcw=;
+        b=dR+feQN0VFxYmzmPqpClZWVGlfFTTob0isDNrP7epY7UpEsSnly93dg8s/XEKllovj
+         tETGg8V/bNsv0TetZPWH1+eCm6rHOmwe3F+EAfyYLaszin7VR7QSwJnJAZcvsIaBFtUI
+         WBqlHvNzR4ocrWP6HRv+JEJtTwI9hQIahHkaxOfJTdLt+T25MneMN2G1Uh8W63IZDQIc
+         wLNBxrX1SXS6dSekF2cYwHujD4bqfPKmPAfHKchzmI1jkW4le4Y4ZVkBzbnlzqCZQCvl
+         u4NpGyM8aM2Lp3XbyfCMgbbjPQBYlb4D3hpSfglotEhvTbJDcB+hcZ09QNfTKr/h11tM
+         s0vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mgILPj6YlVYMz9mNkAtSfNEKlZlLXzmDmVWH3GNz5OQ=;
-        b=QPx0rJIDgtndbnxFXnHRem8w/cXn85h5l+pZ8LyMeV4i4Ofuf+m2I09Ks4/xXW6GI/
-         yInzsqtzqnGpYQjLLpIqMAV+ZBxlWIj0p7MjlnX0HbkAAl9WtleuaD7xWdg9bRMnokI0
-         mwEgGSfkhxS6n5oG9cPuKWGNDp/zsD96kBWYKhq6pEECXX0wdMA6W0NME84BKRn2CYlN
-         Gf2I7FFO6xvsd2nMJV5gXy/Hh18QaXsSakOsSl14JVAn1V60d8CoN7fOTxRzg4LpaNEt
-         w05ZrsUpIQczcKW9zsTxphDDAQHeCOeuvHJ6SRa0i/eCw20a6J3Zr+rMYc04MWxhNxPp
-         xw9A==
-X-Gm-Message-State: ANoB5pkUySuNbAPrGt8gaiwcYB+5DOV/2btl1/A4zIdT4L1vK3xXLh1p
-	hJ8ROIyvlOr9T25bzyR3om34kb3g3gBsVuWCgZOq5w==
-X-Google-Smtp-Source: AA0mqf51m5HaDH1La8mvQJR0+JnNZYvXebPlMjYaEvi5nYBDGylEcv80JjlF5iG50ghBfOzUAMUIBiJDu55ZRmrgdJc=
-X-Received: by 2002:a05:690c:58b:b0:3ce:e06a:942c with SMTP id
- bo11-20020a05690c058b00b003cee06a942cmr13626877ywb.37.1669906485631; Thu, 01
- Dec 2022 06:54:45 -0800 (PST)
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=8hfd8zAToSdzoK0fgf7KAIEFt+FxnQhco6jJDWQ8kcw=;
+        b=Jy5xfGdf9lDiM1fprgERwLmq/O+ALH05kzhHj5lY86jWglCTJBVWLa4DVQf4tIyLP0
+         JTOIiMG5b98u4bwydOCFhLu7gl3iNdD45BppaMjtGJD5nWmI5nlMbD7ORB36QnzF4l5e
+         9OBZ7qKExnWDE/maFDEM7kwz8gB5UzGasDkdAJzMxK1ZyP0DY72An826I0WulRhIBnPg
+         5VYcW3f9AB+6Pu3/vWyhAYJsBkS8pCSBJD6rdd83KnYNZC8sFRQXFCr48OxXkdbkOpwj
+         Fo6A2bIcWNCDAEDeaL9pp/lnzspKujSlNdDiVk8MyHMQP38tFY9iVsxzSPpZFMKYAXAx
+         qPBQ==
+X-Gm-Message-State: ANoB5pkb2wcOdmqj/vUj0hwJQJYBW88HHJ9IdEyGX1V6iAGDiyFinGbJ
+	bXPxlnAeKJW2ArDfHqZwSmxtzNPs5KUNlZ2VNFG9SA==
+X-Google-Smtp-Source: AA0mqf53mDWZFIYq5wZXD6e8D8URM20PslKERiFkl3uLqhw2khmXGyf37Rj510P8fAs0dRrRGp1Fi8yrK36O3OCTlMM=
+X-Received: by 2002:a0c:90c3:0:b0:4c7:e13:6459 with SMTP id
+ p61-20020a0c90c3000000b004c70e136459mr36460242qvp.11.1671045353367; Wed, 14
+ Dec 2022 11:15:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20221018044007.907751-1-zhangxiaoxu5@huawei.com>
-In-Reply-To: <20221018044007.907751-1-zhangxiaoxu5@huawei.com>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Thu, 1 Dec 2022 09:54:34 -0500
-Message-ID: <CAOg9mSSnGkuMtp0c7iGxTNNCT7iH4eug+ozsF3bjztz0xW3H-A@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Fix some problem about the sysfs/debugfs
-To: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
+Date: Wed, 14 Dec 2022 14:15:42 -0500
+Message-ID: <CAOg9mSR0m_Tb_1uKHMXseJ2AEUpvN3siaJd9rC-Fykx4QEXMXA@mail.gmail.com>
+Subject: [GIT PULL] orangefs pull request for 6.2
+To: Linus Torvalds <torvalds@linux-foundation.org>
 Content-Type: text/plain; charset="UTF-8"
-Message-ID-Hash: ULETIOGYKTYW55VPOXEKWGGHUCZG2JBV
-X-Message-ID-Hash: ULETIOGYKTYW55VPOXEKWGGHUCZG2JBV
+Message-ID-Hash: 7V5NBIJ3BQ4DSVDOKIDZTUTE3E545XWN
+X-Message-ID-Hash: 7V5NBIJ3BQ4DSVDOKIDZTUTE3E545XWN
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: devel@lists.orangefs.org, martin@omnibond.com
+CC: devel@lists.orangefs.org, linux-fsdevel <linux-fsdevel@vger.kernel.org>
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/ULETIOGYKTYW55VPOXEKWGGHUCZG2JBV/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/7V5NBIJ3BQ4DSVDOKIDZTUTE3E545XWN/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -80,32 +76,47 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-Hello Zhang...
+The following changes since commit b7b275e60bcd5f89771e865a8239325f86d9927d:
 
-Thanks for your patches. Not only do they make sense to me and cause no
-xfstests regressions, they reliably cause generic/438 to pass (instead of
-failing or hanging)...
+  Linux 6.1-rc7 (2022-11-27 13:31:48 -0800)
 
-I have most recently compared 6.1.0-rc7 and 6.1.0-rc7+your-patches.
+are available in the Git repository at:
 
-Are you going to submit them during the merge window, or should I?
+  https://git.kernel.org/pub/scm/linux/kernel/git/hubcap/linux.git/
+tags/for-linus-6.2-ofs1
 
--Mike
+for you to fetch changes up to 31720a2b109b3080eb77e97b8f6f50a27b4ae599:
 
-On Mon, Oct 17, 2022 at 11:38 PM Zhang Xiaoxu <zhangxiaoxu5@huawei.com> wrote:
->
->
-> Zhang Xiaoxu (4):
->   orangefs: Fix sysfs not cleanup when dev init failed
->   orangefs: Fix kmemleak in orangefs_prepare_debugfs_help_string()
->   orangefs: Fix kmemleak in orangefs_sysfs_init()
->   orangefs: Fix kmemleak in orangefs_{kernel,client}_debug_init()
->
->  fs/orangefs/orangefs-debugfs.c | 29 +++-----------
->  fs/orangefs/orangefs-mod.c     |  8 ++--
->  fs/orangefs/orangefs-sysfs.c   | 71 ++++++++++++++++++++++++++++++----
->  3 files changed, 73 insertions(+), 35 deletions(-)
->
-> --
-> 2.31.1
->
+  orangefs: Fix kmemleak in orangefs_{kernel,client}_debug_init()
+(2022-12-07 15:18:30 -0500)
+
+----------------------------------------------------------------
+orangefs: four fixes from Zhang Xiaoxu and two from Colin Ian King
+
+Zhang: fixed problems with memory leaks on exit in sysfs and debufs.
+fs/orangefs/orangefs-debugfs.c
+fs/orangefs/orangefs-sysfs.c
+fs/orangefs/orangefs-debugfs.c
+fs/orangefs/orangefs-mod.c
+
+Colin: removed an unused variable and an unneeded assignment.
+fs/orangefs/file.c
+fs/orangefs/inode.c
+
+----------------------------------------------------------------
+Colin Ian King (2):
+      orangefs: remove variable i
+      orangefs: remove redundant assignment to variable buffer_index
+
+Zhang Xiaoxu (4):
+      orangefs: Fix sysfs not cleanup when dev init failed
+      orangefs: Fix kmemleak in orangefs_prepare_debugfs_help_string()
+      orangefs: Fix kmemleak in orangefs_sysfs_init()
+      orangefs: Fix kmemleak in orangefs_{kernel,client}_debug_init()
+
+ fs/orangefs/file.c             |  1 -
+ fs/orangefs/inode.c            |  2 --
+ fs/orangefs/orangefs-debugfs.c | 29 ++++-------------
+ fs/orangefs/orangefs-mod.c     |  8 ++---
+ fs/orangefs/orangefs-sysfs.c   | 71 +++++++++++++++++++++++++++++++++++++-----
+ 5 files changed, 73 insertions(+), 38 deletions(-)

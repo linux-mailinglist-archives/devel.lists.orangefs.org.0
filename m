@@ -2,70 +2,70 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 720F7896FF2
-	for <lists+devel-orangefs@lfdr.de>; Wed,  3 Apr 2024 15:15:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7AE089E054
+	for <lists+devel-orangefs@lfdr.de>; Tue,  9 Apr 2024 18:26:27 +0200 (CEST)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id 336303853CF
-	for <lists+devel-orangefs@lfdr.de>; Wed,  3 Apr 2024 09:15:11 -0400 (EDT)
+	by mm1.emwd.com (Postfix) with ESMTP id 7AA673858B8
+	for <lists+devel-orangefs@lfdr.de>; Tue,  9 Apr 2024 12:26:26 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1712150111; bh=m8vRG88FNKwizdEjO/c/t64mIYd2qCldOAH8zF37jpU=;
+	t=1712679986; bh=ulQ6PWJvV5PaX5ZxY16FXaf8ZFkz5DuHJFEVcGtM+6s=;
 	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
 	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
 	 List-Unsubscribe:From;
-	b=B3Lm/VsSXhkhNm7vh2ym+D8hbni/KaYCSLdX0hHZNZQxUT96WEPey7DlnpWNl0des
-	 FUC+EsUBJ1ep+/snFZA+1rBZDneWOtIZv3CUVpMWifYm/vcJ8x+d3eLUjPZoXEMQd1
-	 HYJ4N/Nm5JJ0vOdzQcoONa9dLl4nIentcRAMPw0la1MPv3IXmSOUdb1UavYvd7zlgd
-	 8sgdO1Snpf3vnWVUx+x+fgOwZT8EJDLenHfXXXR+N6WTGG+ir81NuPpyRJo+ts3pqs
-	 6IB6lL8x9sCiug96fu0XBdV3nne3DrhMxiQupQvMG2yf9hE8PIRdVo/7YOgMBzSVEZ
-	 r7Is5SwdOrbmA==
-Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
-	by mm1.emwd.com (Postfix) with ESMTPS id 874E43853CE
-	for <devel@lists.orangefs.org>; Wed,  3 Apr 2024 09:15:08 -0400 (EDT)
+	b=2RYb4C0z+r+t4LHhWC3MIufCuxIbgwRjvymKbUNywLyTCo1pqTMnpvRt/S4x44HRh
+	 zgZ0BlYsdrSji3UiiBJ0I0HwsqlZXtSQVHh8tSRe/+sofsGIvB0GiVLar47CHkzfbt
+	 RfLOa+OeGqTBt9dudTfUf/TUpVaddlerXjqIzI7YI4rAkiJGy/YDXsgzhn0XfZOSrM
+	 a3KJQ3+NG9ZmixYrcaAbWxQZf2frH0xhNlds1dXek/SH/ThqhcajDQh3hvys5wj6V6
+	 cgFNcMHpC/z7y/gM9ESOCbNH47TMBixUYRcfe5nRN00CfCngRLdHfJ1nX/dXgytPMf
+	 WmgmQXoNxvOWg==
+Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
+	by mm1.emwd.com (Postfix) with ESMTPS id DC84F38589F
+	for <devel@lists.orangefs.org>; Tue,  9 Apr 2024 12:26:24 -0400 (EDT)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="CpJGbjQo";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="r+azfqJ1";
 	dkim-atps=neutral
-Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-5a7bbafb946so1291208eaf.2
-        for <devel@lists.orangefs.org>; Wed, 03 Apr 2024 06:15:08 -0700 (PDT)
+Received: by mail-oi1-f171.google.com with SMTP id 5614622812f47-3c5f97ada37so488351b6e.3
+        for <devel@lists.orangefs.org>; Tue, 09 Apr 2024 09:26:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712150107; x=1712754907;
+        d=1e100.net; s=20230601; t=1712679984; x=1713284784;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sPbrOyf+WH3LEFByBVjd+RN6Vyy+2vOeO98hIRaqQ9s=;
-        b=jb3P1v/wAL3j626xJgHKhP0hkbGLFSoweier01RNQK0AbWdeHPXBC8KgxJia+i9Bjf
-         ateI9nZZhfjRqGVLiRLePFw5cPGe/zlZEXxjNyQSqEFfX5CvK5HKTEkAM52hLMK4V3xw
-         cQznx5b/fXkT4rDQ1EC4gKVbBsZWmpfIcCG/3Wxs/CH/0wtWEvBJoZZjHnnQf3bjPX7N
-         4PhwGmf2WrmclHN61rpC8c9wIdojQfXZNJwEUVWc0ET+Dix2vxIdQIkwaBf+W0EE/BG1
-         rARmVBz3rMbfMpLBjdZmqOdC4yAFLLWEjJYtVJuE6SH6HudI/hYxZCivuxiWK8CTdg0Z
-         dqVQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWA0jt7HZgtxWnOByr7zpl89tZOTf1IwZfXvHXrUs6P4Ik+ouToAphiXET610nJkqvL5TjkLl4oTB+tvL+gdnDn6O47jlbWtUw=
-X-Gm-Message-State: AOJu0YwKAazgIMp2U4JvEsUXdOmDFKRh3GGaCyPMjhNrdxGXolmNwVxB
-	og0PrZ3O5fl46eLmw9pQd1kJG/he48mUNt6nBJhDxcHv/ZFRgeD/ctKaYOAIZo/kdT595PCLuKW
-	zVam0nvIV4V4HSnkhXzlKIZ2x2N42977UjxBM
-X-Google-Smtp-Source: AGHT+IHynG/6vnesdgrFbSespFgf+tjzJxeuEecAnZ9LoEzbZsyl/DJ98pbGh+3WDjfxscRbv5KPEGx2DICPSrmMYeg=
-X-Received: by 2002:a4a:dc98:0:b0:5a4:ae86:118f with SMTP id
- g24-20020a4adc98000000b005a4ae86118fmr11506801oou.8.1712150107554; Wed, 03
- Apr 2024 06:15:07 -0700 (PDT)
+        bh=ty4BwWZvIxrkPVChPVI3LUwWVMwSnCumX0TJmcBbQqg=;
+        b=TKrlpS+1ylt27MFZsnN/9bYxtaTj6CtlyIW86bfus095p4cMpWAU8qB3fOpC1Cm2kt
+         k10M2emcZXmyHQpjLTMVsEwcJePMSwQL71JInrr5mt98HuhLC8Rty0y8dfoC1l6mL2tz
+         q2crMKV+nVkxdQFNseBXM9yICqK17geehrTjUC4rrcAZ+vTbo62Sr7Q6wro07Jv7I5/f
+         udmIsjmiHO7abepOjtT2fiu62cCQ02m68a4GNuEyvD0AIYMgnJAD3Uiw/dES5TmOhspC
+         mxPtghgsZaRvHz3s+35YKf71nqSFEfiTelN2mGyk8SRj0Exos9gTC9VeIWR7yXna3iVd
+         SCBA==
+X-Forwarded-Encrypted: i=1; AJvYcCVRCqmlfIguwo4Xs0XxD0NdEpnEQ/E1FaSXoxznbv+MxZ5qtYP9qy7b2mY0esMjDqfYbpEVDSnnGl6Me+nioHOMuTQLruFZHrA=
+X-Gm-Message-State: AOJu0Yxfw44sHg/mOb8/W46kUz1hUFUCml90PXMYs6yB1vNbe0+7p1Cn
+	hbegQOq2KzqPcqYeek6kPx9yQmwBO4Gxg8CQoPnOe+ofOKsExfBPZIH6Jgw9P3LsDuBYhVdSdRB
+	6E++g21aIBQB7RVWq94LjSHLEyXJ+8rMXqf5K
+X-Google-Smtp-Source: AGHT+IGk9zeM/N1DPlYlaCC9lnhI09RgSyk5wLF389LHAoEWRcSGe8ivncZBC049o6kWoqphMSspeffsfT//EijA7Lc=
+X-Received: by 2002:a05:6808:1a:b0:3c5:f51e:a0a1 with SMTP id
+ u26-20020a056808001a00b003c5f51ea0a1mr6217029oic.51.1712679984020; Tue, 09
+ Apr 2024 09:26:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240322-strncpy-fs-orangefs-dcache-c-v1-1-15d12debbf38@google.com>
- <20240401-redewendung-retten-132ff0ea272d@brauner>
-In-Reply-To: <20240401-redewendung-retten-132ff0ea272d@brauner>
+References: <20240408075052.3304511-1-arnd@kernel.org> <20240408143623.t4uj4dbewl4hyoar@quack3>
+ <CAFhGd8ohK=tQ+_qBQF5iW10qoySWi6MsGNoL3diBGHsgsP+n_A@mail.gmail.com> <96b55a64-2bcf-44da-a728-ae54e2a73343@app.fastmail.com>
+In-Reply-To: <96b55a64-2bcf-44da-a728-ae54e2a73343@app.fastmail.com>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Wed, 3 Apr 2024 09:14:56 -0400
-Message-ID: <CAOg9mSRa0PnFHSJAjOO=kjJKEG1_usREYO5QM+_Wt0VYsbVf8w@mail.gmail.com>
-Subject: Re: [PATCH] orangefs: cleanup uses of strncpy
-To: Christian Brauner <brauner@kernel.org>
+Date: Tue, 9 Apr 2024 12:26:12 -0400
+Message-ID: <CAOg9mSSMAao4WpZWmVhsqLwsn=sfs05XPVuHMdjH0wUyWET_WQ@mail.gmail.com>
+Subject: Re: [PATCH] [RESEND] orangefs: fix out-of-bounds fsid access
+To: Arnd Bergmann <arnd@arndb.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: 7EDN4KBKALIEI45BJ7DEXEY47PMWOTE4
-X-Message-ID-Hash: 7EDN4KBKALIEI45BJ7DEXEY47PMWOTE4
+Message-ID-Hash: WCJ77GBI3FYNUOVKA5T64VUADV5ZPCNJ
+X-Message-ID-Hash: WCJ77GBI3FYNUOVKA5T64VUADV5ZPCNJ
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Martin Brandenburg <martin@omnibond.com>, Justin Stitt <justinstitt@google.com>, devel@lists.orangefs.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>
+CC: Justin Stitt <justinstitt@google.com>, Jan Kara <jack@suse.cz>, Arnd Bergmann <arnd@kernel.org>, linux-fsdevel@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Martin Brandenburg <martin@omnibond.com>, devel@lists.orangefs.org, Vlastimil Babka <vbabka@suse.cz>, Kees Cook <keescook@chromium.org>, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/7EDN4KBKALIEI45BJ7DEXEY47PMWOTE4/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/WCJ77GBI3FYNUOVKA5T64VUADV5ZPCNJ/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -73,51 +73,36 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-Hi...
+I applied Arnd's patch on top of Linux 6.9-rc3 and
+ran through xfstests with no issue.
 
-I b4'd this patch (I love b4) and applied it to 6.9.0-rc2
-and ran it through xfstests with no regressions, so please
-add a tested-by for hubcap@omnibond.com.
+Also, instead of Arnd's patch, I used Jan's idea:
 
-Thanks...
++
++       buf->f_fsid.val[0] =3D ORANGEFS_SB(sb)->fs_id;
++       buf->f_fsid.val[1] =3D ORANGEFS_SB(sb)->id;
++
 
--Mike Marshall
+And ran that through as well, no issue.
 
-On Mon, Apr 1, 2024 at 4:53=E2=80=AFAM Christian Brauner <brauner@kernel.or=
-g> wrote:
+Sorry for missing the earlier patch.
+
+-Mike
+
+On Tue, Apr 9, 2024 at 1:55=E2=80=AFAM Arnd Bergmann <arnd@arndb.de> wrote:
 >
-> On Fri, 22 Mar 2024 21:41:18 +0000, Justin Stitt wrote:
-> > strncpy() is deprecated for use on NUL-terminated destination strings
-> > [1] and as such we should prefer more robust and less ambiguous string
-> > interfaces.
+> On Mon, Apr 8, 2024, at 23:21, Justin Stitt wrote:
+> > On Mon, Apr 8, 2024 at 7:36=E2=80=AFAM Jan Kara <jack@suse.cz> wrote:
+> >> Frankly, this initializer is hard to understand for me. Why not simple=
+:
+> >>
+> >>         buf->f_fsid[0] =3D ORANGEFS_SB(sb)->fs_id;
+> >>         buf->f_fsid[1] =3D ORANGEFS_SB(sb)->id;
+> >>
 > >
-> > There is some care taken to ensure these destination buffers are
-> > NUL-terminated by bounding the strncpy()'s by ORANGEFS_NAME_MAX - 1 or
-> > ORANGEFS_MAX_SERVER_ADDR_LEN - 1. Instead, we can use the new 2-argumen=
-t
-> > version of strscpy() to guarantee NUL-termination on the destination
-> > buffers while simplifying the code.
-> >
-> > [...]
+> > +1 for this idea, seems easier to read for me.
 >
-> If this needs to go separately from the vfs trees let me know.
+> Yes, good idea, I'll send this as v2 after my next round
+> of build testing.
 >
-> ---
->
-> Applied to the vfs.misc branch of the vfs/vfs.git tree.
-> Patches in the vfs.misc branch should appear in linux-next soon.
->
-> Please report any outstanding bugs that were missed during review in a
-> new review to the original patch series allowing us to drop it.
->
-> It's encouraged to provide Acked-bys and Reviewed-bys even though the
-> patch has now been applied. If possible patch trailers will be updated.
->
-> Note that commit hashes shown below are subject to change due to rebase,
-> trailer updates or similar. If in doubt, please check the listed branch.
->
-> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-> branch: vfs.misc
->
-> [1/1] orangefs: cleanup uses of strncpy
->       https://git.kernel.org/vfs/vfs/c/fc10fed37526
+>       Arnd

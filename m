@@ -2,69 +2,64 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BD3C968B37
-	for <lists+devel-orangefs@lfdr.de>; Mon,  2 Sep 2024 17:43:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 717B397DAD0
+	for <lists+devel-orangefs@lfdr.de>; Sat, 21 Sep 2024 01:41:34 +0200 (CEST)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id 9BFC1385275
-	for <lists+devel-orangefs@lfdr.de>; Mon,  2 Sep 2024 11:43:57 -0400 (EDT)
+	by mm1.emwd.com (Postfix) with ESMTP id E50BA385388
+	for <lists+devel-orangefs@lfdr.de>; Fri, 20 Sep 2024 19:41:32 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1725291837; bh=sEb+OcdC9gCNvNOC3NFpeSme4gxyvyjHtnQPYmlX2LA=;
-	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
-	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
-	 List-Unsubscribe:From;
-	b=UbpLKw7GcuBWkg8M4UQ6GCjQub77WQDa1KR73edXm3If/dCEfrFDgnQU2VAmHHYpq
-	 JDM60+WyPd/VFY9kA4PNTQDM/GJBMBlKpQ4GmCB+iOwDJQedifH0e/779nBDs8E4zR
-	 +uRxFiwG7KaLOsaxGofprHjxL1+SuKU2ERL9y89qpGZAHK6f1XTPqvXAVy3z6MQQA7
-	 iRyPL487X9vflTOCyckTMph8IIclabLRccTbA75d1rD2i1uABntO8m+iAFRieHmZqO
-	 fxCI7bkMyOfHHwRLURvnN05txOEhS4ysmQwcX6y+GD0Ac9N513emS7+cOrAT3xNobr
-	 HXra7V6cBGBtw==
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
-	by mm1.emwd.com (Postfix) with ESMTPS id 3284C3850F7
-	for <devel@lists.orangefs.org>; Mon,  2 Sep 2024 11:43:53 -0400 (EDT)
+	t=1726875692; bh=BWbr7lgRbE1fc81eCV90O8aJB7YrFzUOlrsqNgjVbO0=;
+	h=From:Date:Subject:To:CC:List-Id:List-Archive:List-Help:List-Owner:
+	 List-Post:List-Subscribe:List-Unsubscribe:From;
+	b=NIAs1uQ4nUQvFPZye4+Ds4HhQz1B9+OKt9mm7idPTQN+S3VQbPA5e0pd1slnJJkrV
+	 fxGKFrGoM290SwmLzmEXnBlNmORIcSUSVB8vXzWG7fEokYEW9RQ/Dex/Hwq6E8r1vS
+	 EFfhZNusl8fnvwoPu5+vvAnaFSgHtjh8q64bVCIWkXzeDh43YaYHU53TXLrr5DhFo9
+	 EtB79sEKbT+5qa+VvyIxtJbhskqadxskcbsLXxs96fwbVilEZ8G1036fU/ndEFI0v2
+	 3YUlbXCMesdE5IsqcU2yEcALCAsD5jTcUijO8ndUAuVNh5EJ6O/xMqPYLRFz5iwS6T
+	 30YTTddTsWUTg==
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+	by mm1.emwd.com (Postfix) with ESMTPS id 5F6DC38537E
+	for <devel@lists.orangefs.org>; Fri, 20 Sep 2024 19:41:29 -0400 (EDT)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="uBXrlD2+";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="yc88iHsT";
 	dkim-atps=neutral
-Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-3df0dc53ec1so2528709b6e.1
-        for <devel@lists.orangefs.org>; Mon, 02 Sep 2024 08:43:53 -0700 (PDT)
+Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-458320b30e7so17157321cf.0
+        for <devel@lists.orangefs.org>; Fri, 20 Sep 2024 16:41:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725291833; x=1725896633;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eaMZuoyuMjVGXv0JBzZXwm4uNmeB/j0jqFPSyYjgGNU=;
-        b=RThAqEGIY8a71y+gEUyDUhw8g7OFgye0fP+0raINDKibJyMyegpqJv4YGf04u+rQow
-         tHX4DNPSbReGsh9SY+jsm8sLu12M/nX8bOPnTdjzsVPYdDEog7LRiHn4bFlUcOQgPK8e
-         FrJJ928hPEy6HFJojaTTVOVICE7sk/KjuKkXKgk7eZJ9N9A3hrYVy3Cj7jxlksjt5NhD
-         v+itEtLudIT/5/6/l6xTV61XSP8l8fra/60hFjOc8UkM2jupnBGEFgFAcAyiKCz9MTEC
-         8bAumMYdxQ/aEbN/Vd1Gzse6aXo3Quo/o6px6Ek8a0iBQXrxw8EeHQtKImOmn2PI9OXO
-         jKqg==
-X-Forwarded-Encrypted: i=1; AJvYcCUIHXatNlOzoI1p4ehgPPYHm3g5VJ03XH3QAFqkioBVWBs1sQxevH1+yZyMGCDXd9OiZ23tKA==@lists.orangefs.org
-X-Gm-Message-State: AOJu0YyjSdPAFX1b6xysMcwOsmDeqk0FeB8TUEVI5dBPHdqfxrXshhHI
-	0Ts0OiOSiyKwJliuMgPnpp0r3e0hj3d2jmWTKIjzST/UkCGtOyhhkxmG526z7+AZoeKYkXHgMaM
-	lt10gGOG4LesrKj8f5ouREPsbMI21I+VonCBr
-X-Google-Smtp-Source: AGHT+IEWxPGfaDFWsNpdd4EG+IxUnWMe7NHb9ezQ65K83eSadMMQXw1y/wPLtjxaWQgduOUO88droN1b3VI5ag1d3wI=
-X-Received: by 2002:a05:6808:2118:b0:3d5:63a2:6064 with SMTP id
- 5614622812f47-3df1d6e4689mr9868226b6e.39.1725291833372; Mon, 02 Sep 2024
- 08:43:53 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1726875689; x=1727480489;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=CS7nHL0YpSltim+yTiE07vu+ADr6RRyFUsXhX72Lm08=;
+        b=NHd1q7mY9WhO0mxiLeRNpgft+pKxey753841U1cfXqBp63phZS6H807+w2l8JjaYd/
+         59u/GCDFXvtfFJ/ta8OMXGX16PawQ6uyHvn6+8yUVtoMkPQxxEc8cTO4Ms7lF+Er7ysz
+         zz+eFXJqSLuDisa3o+aSk3J+T1qEnCfkniHoCMnVObnEYCM83xS3vw73s/aEFLBBQB+K
+         z8kLHoOmbopQ/hLC3jQvXbJ1iyWT87sz323Q9V29ayQNfzfAo2+UT7mq9vOFNgo2Loeo
+         e9xB7WlMMlMIFxtJoTNKJWJP41zVBly/FveJI6BrXirwbmK8OQx2ouj7BQOoJtAF8HB3
+         6ifA==
+X-Forwarded-Encrypted: i=1; AJvYcCWD3+uMNu4bWfk/CQaqrglR22hIsQC2BomuL+JjJ8t61cYYPhKjMPoJ3QuajXrvUaofYcRqtw==@lists.orangefs.org
+X-Gm-Message-State: AOJu0Yw/UA4PbQDc31rDctosA+ukYJFBLL3xlJkcvdOfPVf4Mk0U6GMN
+	uoKxnXcw3Pw5Kigx3dvwbyhy4b8LfAFKuyxZMa2dIhEPD24cEBTItAgUvuIfkOXYQk0WoHCTvBU
+	itM6S50NZmMyJdWdE+BQpwzHR5ZJjLJZQDakl
+X-Google-Smtp-Source: AGHT+IG+Ixo9qjTFl2HOI5Xkq6nqqBs1gxciRek3ByfdYFARKrNFjKypDa9WFze+Mti4qvm3q73n7+DnFzd8+TnDO1g=
+X-Received: by 2002:ac8:5d8a:0:b0:458:a70:d9b5 with SMTP id
+ d75a77b69052e-45b204f133amr71475171cf.15.1726875688686; Fri, 20 Sep 2024
+ 16:41:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240826150418.3500117-1-huangxiaojia2@huawei.com>
-In-Reply-To: <20240826150418.3500117-1-huangxiaojia2@huawei.com>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Mon, 2 Sep 2024 11:43:42 -0400
-Message-ID: <CAOg9mSRc5gVCTEQOmcEKQN4=+T=-mFwHxCAsWJc9C422st4Tvg@mail.gmail.com>
-Subject: Re: [PATCH -next] orangefs: Constify struct kobj_type
-To: Huang Xiaojia <huangxiaojia2@huawei.com>, Mike Marshall <hubcap@omnibond.com>
+Date: Fri, 20 Sep 2024 19:41:17 -0400
+Message-ID: <CAOg9mSSU61P0en4i0aLF=+CiTXkV7LzkB9XGuJ3FTQBrq52BQA@mail.gmail.com>
+Subject: [GIT PULL] orangefs changes for 6.12
+To: Linus Torvalds <torvalds@linux-foundation.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: 3WV7RDGVP6Z2UNVS3J5MBHMOFY3L2A6M
-X-Message-ID-Hash: 3WV7RDGVP6Z2UNVS3J5MBHMOFY3L2A6M
+Message-ID-Hash: EGU2H6MLO2IHSKRMQQGGLEP3G3GXSLPT
+X-Message-ID-Hash: EGU2H6MLO2IHSKRMQQGGLEP3G3GXSLPT
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: martin@omnibond.com, yuehaibing@huawei.com, devel@lists.orangefs.org
+CC: linux-fsdevel <linux-fsdevel@vger.kernel.org>, devel@lists.orangefs.org
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/3WV7RDGVP6Z2UNVS3J5MBHMOFY3L2A6M/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/EGU2H6MLO2IHSKRMQQGGLEP3G3GXSLPT/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -72,115 +67,29 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-I looked at what your patch does and looked to see that other
-filesystems have done the same thing. I ran xfstests on 6.11-rc5
-with your patch applied and got no regressions. I'll ask Linus to
-pull your patch in the next merge window unless you have another
-plan...
+Hi Linus...
 
-Thanks!
+Sorry I fat-fingered my tag...
 
--Mike
+The following changes since commit 5be63fc19fcaa4c236b307420483578a56986a37:
 
-On Mon, Aug 26, 2024 at 10:56=E2=80=AFAM Huang Xiaojia <huangxiaojia2@huawe=
-i.com> wrote:
->
-> 'struct kobj_type' is not modified. It is only used in kobject_init()
-> which takes a 'const struct kobj_type *ktype' parameter.
->
-> Constifying this structure moves some data to a read-only section,
-> so increase over all security.
->
-> On a x86_64, compiled with defconfig:
-> Before:
-> =3D=3D=3D=3D=3D=3D
->    text    data     bss     dec     hex filename
->    7036    2136      56    9228    240c fs/orangefs/orangefs-sysfs.o
->
-> After:
-> =3D=3D=3D=3D=3D=3D
->    text    data     bss     dec     hex filename
->    7484    1880      56    9420    24cc fs/orangefs/orangefs-sysfs.o
->
-> Signed-off-by: Huang Xiaojia <huangxiaojia2@huawei.com>
-> ---
->  fs/orangefs/orangefs-sysfs.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
->
-> diff --git a/fs/orangefs/orangefs-sysfs.c b/fs/orangefs/orangefs-sysfs.c
-> index be4ba03a01a0..04e15dfa504a 100644
-> --- a/fs/orangefs/orangefs-sysfs.c
-> +++ b/fs/orangefs/orangefs-sysfs.c
-> @@ -904,7 +904,7 @@ static void orangefs_obj_release(struct kobject *kobj=
-)
->         orangefs_obj =3D NULL;
->  }
->
-> -static struct kobj_type orangefs_ktype =3D {
-> +static const struct kobj_type orangefs_ktype =3D {
->         .sysfs_ops =3D &orangefs_sysfs_ops,
->         .default_groups =3D orangefs_default_groups,
->         .release =3D orangefs_obj_release,
-> @@ -951,7 +951,7 @@ static void acache_orangefs_obj_release(struct kobjec=
-t *kobj)
->         acache_orangefs_obj =3D NULL;
->  }
->
-> -static struct kobj_type acache_orangefs_ktype =3D {
-> +static const struct kobj_type acache_orangefs_ktype =3D {
->         .sysfs_ops =3D &orangefs_sysfs_ops,
->         .default_groups =3D acache_orangefs_default_groups,
->         .release =3D acache_orangefs_obj_release,
-> @@ -998,7 +998,7 @@ static void capcache_orangefs_obj_release(struct kobj=
-ect *kobj)
->         capcache_orangefs_obj =3D NULL;
->  }
->
-> -static struct kobj_type capcache_orangefs_ktype =3D {
-> +static const struct kobj_type capcache_orangefs_ktype =3D {
->         .sysfs_ops =3D &orangefs_sysfs_ops,
->         .default_groups =3D capcache_orangefs_default_groups,
->         .release =3D capcache_orangefs_obj_release,
-> @@ -1045,7 +1045,7 @@ static void ccache_orangefs_obj_release(struct kobj=
-ect *kobj)
->         ccache_orangefs_obj =3D NULL;
->  }
->
-> -static struct kobj_type ccache_orangefs_ktype =3D {
-> +static const struct kobj_type ccache_orangefs_ktype =3D {
->         .sysfs_ops =3D &orangefs_sysfs_ops,
->         .default_groups =3D ccache_orangefs_default_groups,
->         .release =3D ccache_orangefs_obj_release,
-> @@ -1092,7 +1092,7 @@ static void ncache_orangefs_obj_release(struct kobj=
-ect *kobj)
->         ncache_orangefs_obj =3D NULL;
->  }
->
-> -static struct kobj_type ncache_orangefs_ktype =3D {
-> +static const struct kobj_type ncache_orangefs_ktype =3D {
->         .sysfs_ops =3D &orangefs_sysfs_ops,
->         .default_groups =3D ncache_orangefs_default_groups,
->         .release =3D ncache_orangefs_obj_release,
-> @@ -1132,7 +1132,7 @@ static void pc_orangefs_obj_release(struct kobject =
-*kobj)
->         pc_orangefs_obj =3D NULL;
->  }
->
-> -static struct kobj_type pc_orangefs_ktype =3D {
-> +static const struct kobj_type pc_orangefs_ktype =3D {
->         .sysfs_ops =3D &orangefs_sysfs_ops,
->         .default_groups =3D pc_orangefs_default_groups,
->         .release =3D pc_orangefs_obj_release,
-> @@ -1165,7 +1165,7 @@ static void stats_orangefs_obj_release(struct kobje=
-ct *kobj)
->         stats_orangefs_obj =3D NULL;
->  }
->
-> -static struct kobj_type stats_orangefs_ktype =3D {
-> +static const struct kobj_type stats_orangefs_ktype =3D {
->         .sysfs_ops =3D &orangefs_sysfs_ops,
->         .default_groups =3D stats_orangefs_default_groups,
->         .release =3D stats_orangefs_obj_release,
-> --
-> 2.34.1
->
+  Linux 6.11-rc5 (2024-08-25 19:07:11 +1200)
+
+are available in the Git repository at:
+
+  git://git.kernel.org/pub/scm/linux/kernel/git/hubcap/linux.git
+tags/for-linux-6.12-ofs1
+
+for you to fetch changes up to 96319dacaf15f666bcba7275953d780e23fe9e75:
+
+  orangefs: Constify struct kobj_type (2024-09-06 10:18:17 -0400)
+
+----------------------------------------------------------------
+orangefs: Constify struct kobj_type
+
+----------------------------------------------------------------
+Huang Xiaojia (1):
+      orangefs: Constify struct kobj_type
+
+ fs/orangefs/orangefs-sysfs.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)

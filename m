@@ -2,71 +2,72 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F3DC9E3A2F
-	for <lists+devel-orangefs@lfdr.de>; Wed,  4 Dec 2024 13:44:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 398459FF2A5
+	for <lists+devel-orangefs@lfdr.de>; Wed,  1 Jan 2025 01:10:45 +0100 (CET)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id 4FB6A3855D6
-	for <lists+devel-orangefs@lfdr.de>; Wed,  4 Dec 2024 07:44:49 -0500 (EST)
+	by mm1.emwd.com (Postfix) with ESMTP id 3F2373853B2
+	for <lists+devel-orangefs@lfdr.de>; Tue, 31 Dec 2024 19:10:43 -0500 (EST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1733316289; bh=p8U5N7eOgaHbGroo6CGwLdSunVzDQRv4NF+rxSTo7D4=;
-	h=References:In-Reply-To:From:Date:Subject:To:List-Id:List-Archive:
-	 List-Help:List-Owner:List-Post:List-Subscribe:List-Unsubscribe:
-	 From;
-	b=a2joir10okJ/GRHO4I/xQYe03k6JhPHkm52v5i7EKePRhqFwi06FK215IsxImikfX
-	 T85aSrYb+HLqOY32EoDoj/29n7RPRoaXGezIf3C3q1kUXOk29C6wgG9W8ci1YegA+l
-	 06HILLl1H+ixVT4lXe7DEWUJyN6D/NkK7VMmtIe9Np5wdfm6VK2pGnAyc4ewjNwgy4
-	 nuM/3cow5eIDWXlFZB/HO6cscIDZZ/x9CfC6TGhZ7rbxT8odLbzvCFkeBVy72fzynr
-	 AFwrBvLyuiiWAZETGf/+Uk3kG/BhHiOpo0mcjEAbgunYKa8mWgyJzXUBYPViAKVvAH
-	 d6zWgGJuV3Kyg==
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	by mm1.emwd.com (Postfix) with ESMTPS id 4676538558F
-	for <devel@lists.orangefs.org>; Wed,  4 Dec 2024 07:44:44 -0500 (EST)
+	t=1735690243; bh=sH7vUZeXg6kjI5/VazDxOZamWZgUUvVrbXkMHX4mJh4=;
+	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
+	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
+	 List-Unsubscribe:From;
+	b=UR+OacQbjxGZpfbVEXTmyvlgbftLfQHhTEeM7LUF4FYj0Uyy3i8vACgkcBoAQ6wlv
+	 29gP8dOKGJbZ5vvdWB4KXSGcbsUs5hgNEK6xtNbfpKjZGSZTFdj00IrqxPLVdLAMFy
+	 aUXroFSXgfAK1RWu/FX0b7W8RjMmD3Mlltlo6kGSttENLCvGCd9tMF8hjrq5619jvG
+	 48EF2mME6PS9vHoHSTgxfpkJ891VetSwwbgDddVdi1gBTdCnhX3ddjAIF0AT7CzweZ
+	 d8d/dK+Jvq/9FX81LFcG4F8mK+hQf/tgMFCjFghk+XQNS7H35K3TEHmSivuToxU10P
+	 YdTQxwvmzELGg==
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+	by mm1.emwd.com (Postfix) with ESMTPS id E9B28385392
+	for <devel@lists.orangefs.org>; Tue, 31 Dec 2024 19:10:40 -0500 (EST)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="OW1BJ5PO";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="CX2Iiuyn";
 	dkim-atps=neutral
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-215d92702feso5820255ad.1
-        for <devel@lists.orangefs.org>; Wed, 04 Dec 2024 04:44:44 -0800 (PST)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-2ee74291415so11315092a91.3
+        for <devel@lists.orangefs.org>; Tue, 31 Dec 2024 16:10:40 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733316284; x=1733921084;
-        h=content-transfer-encoding:to:subject:message-id:date:from
+        d=1e100.net; s=20230601; t=1735690240; x=1736295040;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OLHoqfZuXr0T3EBegaMu9E+vGqRUgACnHd+ErPoaQEE=;
-        b=eaFnapIK5ZEtqHwtq0Uttvmr/jURWlfm4u+IPjWaUVf4dcQio9gQcMcnKKnFJLhn3F
-         WKJTXzZHOPifPd8ccMx76w54JwX3ZcWbmgrATqrNIHLj7uRIE30Px7AS5v7fXtFNNHrx
-         XNl6fwvKCiMxJuSQ2z08vXUhrKEOWzhojttmM7hFYPSR9u7cuRZJASs84ds9XWMdZmEq
-         T3czC/kjF0dyj01f1kdOseJssNNkscj+XWKjy9AdweJ8QvoQObKroKrfIHNsWZwDenfg
-         uVr5zQKVKKmu/qHG78ksli/EN+2P2ruUF48wheVOMo/qzbpUk/cdF7d68cJxYJy2M/Q4
-         1HRQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVCZe+y6QlC2tq4pOo/VNwaAqBgU8rFKIYlcMbtaEbn0b7vOF6VNHU83/3OOFXuwIz4B6PQKQ==@lists.orangefs.org
-X-Gm-Message-State: AOJu0YypVtdO5z+vYiiZIs5hcdWap/nA1l4TjkcuVmYM8pv22pOyay2N
-	K701UJsMoCDkmXm97tQT4aAAuNn0Ed1+pwq8eD9NEHVU+lYnemKGAcBKxjefbR5TpytiLwTpxOn
-	MFXni+owJ2rrhZetAzeqM2LNyN3bw8Yh2aJSI
-X-Gm-Gg: ASbGncuJi5C20VjAFKEslT+JFb8T3zowOB7OvNLyqeZ8D12S3uXODJJ5SLrynDngZqA
-	VESfCUy+0EGZ88ojoUDry4au0ZH+QlRHlMgeAfW0PuA==
-X-Google-Smtp-Source: AGHT+IGLYXAil4YBT9KEzgc/riB6FuydkXKjmod24lT19ipTGIX+eMkC1ZgdGzBUwRuelHHAVAS3FoDv2XG8jH90cac=
-X-Received: by 2002:a17:902:ec8b:b0:215:19ae:77bf with SMTP id
- d9443c01a7336-215bd0d8999mr82552125ad.19.1733316283696; Wed, 04 Dec 2024
- 04:44:43 -0800 (PST)
+        bh=iWsbIHSxHp/8XP19+VdnK1LhM0aqc30LSYc/EvUzwvQ=;
+        b=eSheZNiGetT64UHq7gmgvo5LOuIkWD9IF3UMUVTKdNGVbSAtR+Gqa4ArOg1VKQ/kRL
+         choB64C7oeiSCIZBZvCrY+At3G+O8ZMxfsGa8gWTC3jAu/ZEWHSM84gfUbuVWysO5QsX
+         AB1UKKdMz7lxLqYQXAIqxTB6VD/5DmkE4JKV2y6N0WxYFTNp0oE5oZ/Ww9qUhdxIwokU
+         YvZQ8C0Yn7DvddyR0Vq3DgsHCE856HDcsANhnR1Az5hpQ+TL8T07fXhpHInWrKFBtdFL
+         sk8AD2S09GudilMoyK9vQR2YUpdYDFd2Rk4eYH7e94Q4gClNV+VmDNyc+trSS3MsyWm4
+         5ebQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWdwbSx66KsuHnny5mW43bMCwrt+m9eIlR5ueogshydgMru2WgB2G3vY026b3WT0l3yZ1CEtQ==@lists.orangefs.org
+X-Gm-Message-State: AOJu0Yw9eDA+ehmhCK+wYPJyVJse0z27wTa3yzAXjsMNRfwMipNy/FM6
+	ikyh54sGpa/Qys0mzDFMitr5Rq17Ul3WvPi34Ch2EV3V7U6tyJU9J84FZ6iclq9Pa0x2PCPBUyn
+	QBk5YsrHsAvYkOFVXmH8gZ1KacjoAQugAex2I
+X-Gm-Gg: ASbGncsmu0qY2SVJOzw1UHrvAzu++VF4HM+tR0Gz30m2vh7Pi/VANrk7nHWEaB9WfoJ
+	/VPUpWSc0jJVG2aAI1A1RXggAW2EF58T3lajj7xRWJ4H6DnBHMQ==
+X-Google-Smtp-Source: AGHT+IFqdnhhQwG8yGZ7u4C9v4WxXrCNAVpj3Wn07+1rLwm/04ve6+w/0FXRILlZxBUUcgfUOR8LKEEc6a+adrYMIDc=
+X-Received: by 2002:a17:90b:54cb:b0:2ee:ba84:5cac with SMTP id
+ 98e67ed59e1d1-2f452dfd2eamr62199123a91.7.1735690239783; Tue, 31 Dec 2024
+ 16:10:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20241122-guestmem-library-v5-0-450e92951a15@quicinc.com> <20241122-guestmem-library-v5-1-450e92951a15@quicinc.com>
-In-Reply-To: <20241122-guestmem-library-v5-1-450e92951a15@quicinc.com>
+References: <6767aabc.050a0220.25abdd.0136.GAE@google.com> <tencent_10DB52C0066E89812EDE2ECC0CB0E7EE4606@qq.com>
+ <20241222103522.GE1977892@ZenIV>
+In-Reply-To: <20241222103522.GE1977892@ZenIV>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Wed, 4 Dec 2024 07:44:31 -0500
-Message-ID: <CAOg9mSRqCnSManMT38-EdbSTHotAg9KFbEpg9feCDQPFWrgHzw@mail.gmail.com>
-Subject: Re: [PATCH v5 1/2] filemap: Pass address_space mapping to ->free_folio()
-To: Elliot Berman <quic_eberman@quicinc.com>, linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-	Mike Marshall <hubcap@omnibond.com>, devel@lists.orangefs.org
+Date: Tue, 31 Dec 2024 19:10:28 -0500
+Message-ID: <CAOg9mSSSD3xg9CjtbWYaYTcrLOhdfF4=_pPbO6Dp+cC1jn3Skw@mail.gmail.com>
+Subject: Re: [PATCH] orangefs: fix a oob in orangefs_debug_write
+To: Al Viro <viro@zeniv.linux.org.uk>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: 3VQQAMUEYNKWQYS6WOX5XXCZZH3UOBPK
-X-Message-ID-Hash: 3VQQAMUEYNKWQYS6WOX5XXCZZH3UOBPK
+Message-ID-Hash: HT7KNFP7JXJA5YXPXFEUAFNL42Q74AXJ
+X-Message-ID-Hash: HT7KNFP7JXJA5YXPXFEUAFNL42Q74AXJ
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Edward Adam Davis <eadavis@qq.com>, syzbot+fc519d7875f2d9186c1f@syzkaller.appspotmail.com, devel@lists.orangefs.org, linux-kernel@vger.kernel.org, martin@omnibond.com, syzkaller-bugs@googlegroups.com
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/3VQQAMUEYNKWQYS6WOX5XXCZZH3UOBPK/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/HT7KNFP7JXJA5YXPXFEUAFNL42Q74AXJ/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -74,249 +75,44 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-Hi Elliot...
+I used Al's suggestion on top of 6.13.0-rc5 and ran
+it through xfstests with no problem. Since I doubt xfstests
+runs down this code path I also did some other tests.
 
-I added your "v5 1/2" patch to "Linux 6.13-rc1" and ran it through
-xfstests with no regressions.
+I made some files with comma separated debug settings and
+catted them onto /sys/kernel/debug/orangefs/kernel-debug.
 
-you can add my Tested-by: Mike Marshall <hubcap@omnibond.com>
+When I caused the file to be longer than
+ORANGEFS_MAX_DEBUG_STRING_LEN
+I could see that execution flowed down the
+code path with Al's suggested changes, and
+the proper thing happened.
+
+Anywho... I'll send this up in the merge window unless
+someone else (Edward?) plans to...
 
 -Mike
 
-On Fri, Nov 22, 2024 at 12:30=E2=80=AFPM Elliot Berman <quic_eberman@quicin=
-c.com> wrote:
+On Sun, Dec 22, 2024 at 5:35=E2=80=AFAM Al Viro <viro@zeniv.linux.org.uk> w=
+rote:
 >
-> When guest_memfd becomes a library, a callback will need to be made to
-> the owner (KVM SEV) to update the RMP entry for the page back to shared
-> state. This is currently being done as part of .free_folio() operation,
-> but this callback shouldn't assume that folio->mapping is set/valid.
+> On Sun, Dec 22, 2024 at 04:14:13PM +0800, Edward Adam Davis wrote:
+> > syzbot report a slab-out-of-bounds Read in orangefs_debug_write. [1]
+> >
+> > The string passed in from userspace is not terminated with a NULL chara=
+cter,
+> > which causes strlen to go out of bounds.
+> >
+> > Use kstrndup to replace kstrdup.
 >
-> The mapping is well-known to callers of .free_folio(), so pass that
-> mapping so the callback can access the mapping's private data.
->
-> Link: https://lore.kernel.org/all/15f665b4-2d33-41ca-ac50-fafe24ade32f@re=
-dhat.com/
-> Suggested-by: David Hildenbrand <david@redhat.com>
-> Acked-by: David Hildenbrand <david@redhat.com>
-> Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
-> ---
->  Documentation/filesystems/locking.rst |  2 +-
->  fs/nfs/dir.c                          | 11 ++++++-----
->  fs/orangefs/inode.c                   |  3 ++-
->  include/linux/fs.h                    |  2 +-
->  mm/filemap.c                          |  9 +++++----
->  mm/secretmem.c                        |  3 ++-
->  mm/vmscan.c                           |  4 ++--
->  virt/kvm/guest_memfd.c                |  3 ++-
->  8 files changed, 21 insertions(+), 16 deletions(-)
->
-> diff --git a/Documentation/filesystems/locking.rst b/Documentation/filesy=
-stems/locking.rst
-> index f5e3676db954b5bce4c23a0bf723a79d66181fcd..f1a20ad5edbee70c1a3c8d8a9=
-bfc0f008a68985b 100644
-> --- a/Documentation/filesystems/locking.rst
-> +++ b/Documentation/filesystems/locking.rst
-> @@ -258,7 +258,7 @@ prototypes::
->         sector_t (*bmap)(struct address_space *, sector_t);
->         void (*invalidate_folio) (struct folio *, size_t start, size_t le=
-n);
->         bool (*release_folio)(struct folio *, gfp_t);
-> -       void (*free_folio)(struct folio *);
-> +       void (*free_folio)(struct address_space *, struct folio *);
->         int (*direct_IO)(struct kiocb *, struct iov_iter *iter);
->         int (*migrate_folio)(struct address_space *, struct folio *dst,
->                         struct folio *src, enum migrate_mode);
-> diff --git a/fs/nfs/dir.c b/fs/nfs/dir.c
-> index 492cffd9d3d845723b5f3d0eea3874b1f1773fe1..54e7069013ef2a63db24491fa=
-65059e5ad68057a 100644
-> --- a/fs/nfs/dir.c
-> +++ b/fs/nfs/dir.c
-> @@ -55,7 +55,7 @@ static int nfs_closedir(struct inode *, struct file *);
->  static int nfs_readdir(struct file *, struct dir_context *);
->  static int nfs_fsync_dir(struct file *, loff_t, loff_t, int);
->  static loff_t nfs_llseek_dir(struct file *, loff_t, int);
-> -static void nfs_readdir_clear_array(struct folio *);
-> +static void nfs_readdir_clear_array(struct address_space *, struct folio=
- *);
->  static int nfs_do_create(struct inode *dir, struct dentry *dentry,
->                          umode_t mode, int open_flags);
->
-> @@ -218,7 +218,8 @@ static void nfs_readdir_folio_init_array(struct folio=
- *folio, u64 last_cookie,
->  /*
->   * we are freeing strings created by nfs_add_to_readdir_array()
->   */
-> -static void nfs_readdir_clear_array(struct folio *folio)
-> +static void nfs_readdir_clear_array(struct address_space *mapping,
-> +                                   struct folio *folio)
->  {
->         struct nfs_cache_array *array;
->         unsigned int i;
-> @@ -233,7 +234,7 @@ static void nfs_readdir_clear_array(struct folio *fol=
-io)
->  static void nfs_readdir_folio_reinit_array(struct folio *folio, u64 last=
-_cookie,
->                                            u64 change_attr)
->  {
-> -       nfs_readdir_clear_array(folio);
-> +       nfs_readdir_clear_array(folio->mapping, folio);
->         nfs_readdir_folio_init_array(folio, last_cookie, change_attr);
->  }
->
-> @@ -249,7 +250,7 @@ nfs_readdir_folio_array_alloc(u64 last_cookie, gfp_t =
-gfp_flags)
->  static void nfs_readdir_folio_array_free(struct folio *folio)
->  {
->         if (folio) {
-> -               nfs_readdir_clear_array(folio);
-> +               nfs_readdir_clear_array(folio->mapping, folio);
->                 folio_put(folio);
+> Better to replace
+>         if (count > ORANGEFS_MAX_DEBUG_STRING_LEN + 1) {
+>                 silly =3D count;
+>                 count =3D ORANGEFS_MAX_DEBUG_STRING_LEN + 1;
 >         }
->  }
-> @@ -391,7 +392,7 @@ static void nfs_readdir_folio_init_and_validate(struc=
-t folio *folio, u64 cookie,
->         if (folio_test_uptodate(folio)) {
->                 if (nfs_readdir_folio_validate(folio, cookie, change_attr=
-))
->                         return;
-> -               nfs_readdir_clear_array(folio);
-> +               nfs_readdir_clear_array(folio->mapping, folio);
+> with
+>         if (count > ORANGEFS_MAX_DEBUG_STRING_LEN) {
+>                 silly =3D count;
+>                 count =3D ORANGEFS_MAX_DEBUG_STRING_LEN;
 >         }
->         nfs_readdir_folio_init_array(folio, cookie, change_attr);
->         folio_mark_uptodate(folio);
-> diff --git a/fs/orangefs/inode.c b/fs/orangefs/inode.c
-> index aae6d2b8767df04714647db5fe1e5ce54c092fce..2d554102ba9ac83acd2b637d4=
-568090717e87f94 100644
-> --- a/fs/orangefs/inode.c
-> +++ b/fs/orangefs/inode.c
-> @@ -470,7 +470,8 @@ static bool orangefs_release_folio(struct folio *foli=
-o, gfp_t foo)
->         return !folio_test_private(folio);
->  }
->
-> -static void orangefs_free_folio(struct folio *folio)
-> +static void orangefs_free_folio(struct address_space *mapping,
-> +                               struct folio *folio)
->  {
->         kfree(folio_detach_private(folio));
->  }
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index e3c603d01337650d562405500013f5c4cfed8eb6..6e5b5cc99750a685b217cb827=
-3c38e7f6bf5ae86 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -417,7 +417,7 @@ struct address_space_operations {
->         sector_t (*bmap)(struct address_space *, sector_t);
->         void (*invalidate_folio) (struct folio *, size_t offset, size_t l=
-en);
->         bool (*release_folio)(struct folio *, gfp_t);
-> -       void (*free_folio)(struct folio *folio);
-> +       void (*free_folio)(struct address_space *, struct folio *folio);
->         ssize_t (*direct_IO)(struct kiocb *, struct iov_iter *iter);
->         /*
->          * migrate the contents of a folio to the specified target. If
-> diff --git a/mm/filemap.c b/mm/filemap.c
-> index 36d22968be9a1e10da42927dd627d3f22c3a747b..2c8d92dd9d5dd433acbf1b871=
-56eb2e68337332d 100644
-> --- a/mm/filemap.c
-> +++ b/mm/filemap.c
-> @@ -235,12 +235,12 @@ void __filemap_remove_folio(struct folio *folio, vo=
-id *shadow)
->
->  void filemap_free_folio(struct address_space *mapping, struct folio *fol=
-io)
->  {
-> -       void (*free_folio)(struct folio *);
-> +       void (*free_folio)(struct address_space *, struct folio *);
->         int refs =3D 1;
->
->         free_folio =3D mapping->a_ops->free_folio;
->         if (free_folio)
-> -               free_folio(folio);
-> +               free_folio(mapping, folio);
->
->         if (folio_test_large(folio))
->                 refs =3D folio_nr_pages(folio);
-> @@ -814,7 +814,8 @@ EXPORT_SYMBOL(file_write_and_wait_range);
->  void replace_page_cache_folio(struct folio *old, struct folio *new)
->  {
->         struct address_space *mapping =3D old->mapping;
-> -       void (*free_folio)(struct folio *) =3D mapping->a_ops->free_folio=
-;
-> +       void (*free_folio)(struct address_space *, struct folio *) =3D
-> +               mapping->a_ops->free_folio;
->         pgoff_t offset =3D old->index;
->         XA_STATE(xas, &mapping->i_pages, offset);
->
-> @@ -843,7 +844,7 @@ void replace_page_cache_folio(struct folio *old, stru=
-ct folio *new)
->                 __lruvec_stat_add_folio(new, NR_SHMEM);
->         xas_unlock_irq(&xas);
->         if (free_folio)
-> -               free_folio(old);
-> +               free_folio(mapping, old);
->         folio_put(old);
->  }
->  EXPORT_SYMBOL_GPL(replace_page_cache_folio);
-> diff --git a/mm/secretmem.c b/mm/secretmem.c
-> index 3afb5ad701e14ad87b6e5173b2974f1309399b8e..8643d073b8f3554a18d419353=
-fa604864de224c1 100644
-> --- a/mm/secretmem.c
-> +++ b/mm/secretmem.c
-> @@ -152,7 +152,8 @@ static int secretmem_migrate_folio(struct address_spa=
-ce *mapping,
->         return -EBUSY;
->  }
->
-> -static void secretmem_free_folio(struct folio *folio)
-> +static void secretmem_free_folio(struct address_space *mapping,
-> +                                struct folio *folio)
->  {
->         set_direct_map_default_noflush(&folio->page);
->         folio_zero_segment(folio, 0, folio_size(folio));
-> diff --git a/mm/vmscan.c b/mm/vmscan.c
-> index 749cdc110c745944cd455ae9c5a4c373f631341d..419dc63de05095be298fee724=
-891f0665a397a7b 100644
-> --- a/mm/vmscan.c
-> +++ b/mm/vmscan.c
-> @@ -765,7 +765,7 @@ static int __remove_mapping(struct address_space *map=
-ping, struct folio *folio,
->                 xa_unlock_irq(&mapping->i_pages);
->                 put_swap_folio(folio, swap);
->         } else {
-> -               void (*free_folio)(struct folio *);
-> +               void (*free_folio)(struct address_space *, struct folio *=
-);
->
->                 free_folio =3D mapping->a_ops->free_folio;
->                 /*
-> @@ -794,7 +794,7 @@ static int __remove_mapping(struct address_space *map=
-ping, struct folio *folio,
->                 spin_unlock(&mapping->host->i_lock);
->
->                 if (free_folio)
-> -                       free_folio(folio);
-> +                       free_folio(mapping, folio);
->         }
->
->         return 1;
-> diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-> index 47a9f68f7b247f4cba0c958b4c7cd9458e7c46b4..24dcbad0cb76e353509cf4718=
-837a1999f093414 100644
-> --- a/virt/kvm/guest_memfd.c
-> +++ b/virt/kvm/guest_memfd.c
-> @@ -358,7 +358,8 @@ static int kvm_gmem_error_folio(struct address_space =
-*mapping, struct folio *fol
->  }
->
->  #ifdef CONFIG_HAVE_KVM_ARCH_GMEM_INVALIDATE
-> -static void kvm_gmem_free_folio(struct folio *folio)
-> +static void kvm_gmem_free_folio(struct address_space *mapping,
-> +                               struct folio *folio)
->  {
->         struct page *page =3D folio_page(folio, 0);
->         kvm_pfn_t pfn =3D page_to_pfn(page);
->
-> --
-> 2.34.1
->
+> instead, so that we wouldn't have to deal with lack of NUL anywhere.

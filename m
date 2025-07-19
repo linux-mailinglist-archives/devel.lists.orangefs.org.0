@@ -2,72 +2,74 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8B38AEFE03
-	for <lists+devel-orangefs@lfdr.de>; Tue,  1 Jul 2025 17:24:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F4199B0B043
+	for <lists+devel-orangefs@lfdr.de>; Sat, 19 Jul 2025 15:29:58 +0200 (CEST)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id EDC0B385376
-	for <lists+devel-orangefs@lfdr.de>; Tue,  1 Jul 2025 11:24:13 -0400 (EDT)
+	by mm1.emwd.com (Postfix) with ESMTP id B8A42385A36
+	for <lists+devel-orangefs@lfdr.de>; Sat, 19 Jul 2025 09:29:57 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1751383453; bh=KA9ODyRRf+UBfYBzhhZp8RYRH1PTEq1C15fpPH4METo=;
+	t=1752931797; bh=whJVn6VSMC2cD2DwHewKa7SpgnwQzzGtDP72KQTJahM=;
 	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
 	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
 	 List-Unsubscribe:From;
-	b=N+oHHte9cEfBwyCiTBGvrMFDv3XR0/7Z8vb0Fh48nCa9sAaP17dflRl5pkuJifNv6
-	 WvYdPHPhyIaONT2xIUMHWm/9EimTiYJKPdiwifge8OZQ/qVBG3VldL7Hfo7+nQ6dZ4
-	 0Eg9z+lSOgWjTnJU7dSDwPTmcxberF3hBmGsxlAd8OoXkW3Byc604pulezk/SQFRU0
-	 6ngttBv/xs91zApzMpD57YPPepsJ58DNT9Wg7cItbutcGEIbtR8OJVGO/CuBupxE76
-	 YDaNSIdiJCUrXDzkIAetI7K2xJqjg7hsacaMm/0meUOq23OnuG3wQrbUF3VkY5xnWj
-	 2rsmWWIwG9Jyw==
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
-	by mm1.emwd.com (Postfix) with ESMTPS id 1EC7E380AF7
-	for <devel@lists.orangefs.org>; Tue,  1 Jul 2025 11:24:11 -0400 (EDT)
+	b=3fmOjfpHwD+wIoSWGHJ7rPikdmPhOcSU9Ae3tBX6MZJ38qgMJS3tqpnSwkgl6gMK6
+	 lXwi0+q/i/4bRW1rYAVYZhK2Fi+wn4q2WQZrfU/cs5PDdtUC1vF47Oyrvcf1W+ZR0j
+	 5QLgvUmt2WXu2QVnkOOfWl3HXugVw38aBqJ7l6+zsK6tcQ5LbkmsebK/10flKBKXoo
+	 1WrWgSoD7yl69Tlfziy2ZGOpJC71TcnSvdD+kKBmFqh7mZHeq8FIHqA78POqpAblgw
+	 b2N0y2jKifnX1R6t+9lgkQ0PP875yXXLFSLJuB/y+cma0xPkndT6NkMFfq+JQTx6AT
+	 0zJGzcbYMyLnA==
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+	by mm1.emwd.com (Postfix) with ESMTPS id 9317E385A33
+	for <devel@lists.orangefs.org>; Sat, 19 Jul 2025 09:29:55 -0400 (EDT)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="lPQbKEGm";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="w3UXAXsn";
 	dkim-atps=neutral
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3122a63201bso2310412a91.0
-        for <devel@lists.orangefs.org>; Tue, 01 Jul 2025 08:24:11 -0700 (PDT)
+Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-b2c4331c50eso2377306a12.3
+        for <devel@lists.orangefs.org>; Sat, 19 Jul 2025 06:29:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751383451; x=1751988251;
+        d=1e100.net; s=20230601; t=1752931794; x=1753536594;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=DtMZYsy2INz7OM+nmuG6EuPPR9OM94xwy6B8MUHX1WY=;
-        b=I5IXCjF7JXC0j9HrO4INQjfJSUegXHSBwYhF5XAX07olNymW/fps/9hQXqgdQD6CWi
-         tKTwFJVzu5y/2N8hqFxenjG5l8Ms4eI1N+8e0AsAQ6kEhUoYtJKRilDieKepf/fH2dLb
-         zWdZRjJiuW8VVP8ZurjxoD1WhDFoWpIZDpLBzkhudoM8NqRtS5dao3kbDNCOzotADCMq
-         8T77+GAMpRytVKDNPTvqprwvOndMXKLAmzIIUcF2D+NGKZ4CxZVH12mJ0dBL50RrNYwg
-         rNN9wJPwZYyqc44NTLWzjlbScEdoeiZFY05RA7+fAhD97jzBPd/0sju05KRVY1cQ79EE
-         bUsQ==
-X-Gm-Message-State: AOJu0Yw/B/kWCJFZjNjAAuSkAcqRfeAtc5hy4mo8W7W4VgCOyQRU3Mwe
-	1LfAHvBzDJc4CMJO3HqWiuW7/gByNO1ru7yXeI7QTVNe61288sL4S+8ezFJaP/qhR/kkcsmszCT
-	2hY07w1ROQ5TCuKLPrl+RfKKlEjqxXgsdCuhHFSbt
-X-Gm-Gg: ASbGncuhGoe/ZsQ33yh5/mhHyv4yHBq8Oixlm7kJ1T25lduf3yxgwv+e5pSqd6gVBSc
-	VqzPeZuUOOMmLb+b6x4AHeUNY4s6hVtXmcXXpVTIunhWUZjNHLvES3V1LG+XdUUzovb+H3n0YOQ
-	DluTojESLPuMm3/XVjUsrPWdJgsCNfmeAWKkJPbT4X+mCII7OOyXXQSEg=
-X-Google-Smtp-Source: AGHT+IHI0Dve+NCFkA17jJsHD2vjpfbyP+YtEvQH8vjGVnJrWzDYwPZNbMLX1MSm5FQn0EApBiwCpvGbWtB2BSHF5/Q=
-X-Received: by 2002:a17:90b:2dd1:b0:311:f05b:869b with SMTP id
- 98e67ed59e1d1-318c930f9e9mr21667197a91.30.1751383450909; Tue, 01 Jul 2025
- 08:24:10 -0700 (PDT)
+        bh=qZOOflxBKdTH5b7sIlGbxa3QYBsytIH9IOezkOXa6OE=;
+        b=Bpg4vL1fwmo+RkLjayrnbKnm1YXYd5NzvDcApKspP148Cmk/MP2jTsveZ/u3WmrD9X
+         LfXfUNk8kvpjlKPoyDrdk3VcSnidyU6zAnsAdYxvqS/5aOa2/Jp7FqXpdxEPB7cjUz7F
+         Rr9yAxXBLdp35rpnnER+IjY7lSE+/RKzf+XuR7c0f5UQaWhGRE/gVc/QevXpwod1IsO0
+         z8/OiiiZDxuEcetKiSCy20XcNk/Bp0J8pyo3I1s+e2207S5yFcFRQaG1Cf1JVFGaxp2G
+         Uhwq1KBA76ZMkREGTD/vfkc5whgqZ5VSXU8J5UzLF8M5E382yayf/t1fyR+NwayOGvs5
+         nGvg==
+X-Forwarded-Encrypted: i=1; AJvYcCVxRhCDbJHLx8OytvMR0Le0j6XDP2+LK/E+VgUDlrXM6n9UOrRgUAWXRm/3TjLFoftQq5q+Ug==@lists.orangefs.org
+X-Gm-Message-State: AOJu0Yz2PiU+vA/nQ8WMX7Fz6s0nqiaAth4lFmPiLFXGKe5DstU3sI6w
+	uJ6n4MU96cqPTPFf/yzDDEoRgvNbNpPkY2NrMUJQZNFUUCUzNwbftXT5f73NOZJoiz3X6T4+nSB
+	+UFGgzNLT0Hw6WNIdQ8mTyJhBTrhdGFmIWwOmrhrH
+X-Gm-Gg: ASbGncvPGkx5VzTtcEbKnAN3iaCzi+dI/uzbXkJ5rnmtO2j/J61X4CPQpmIpMkqQMAZ
+	Te3rvUNyAXeuiTs5yo6u1L1BGFHOLCLO+3TVRAvAIGF34r8Lh8dl/MsL/Qy9PUF7Ge3UoyCdzLk
+	gmgw1erhS2uwa8HlRn8bAIXaqehZwsWyhrvJOtWS3dOrbOvtzwBN7F3J4nCSSibm/PBfgVREkjA
+	tADejFgTuB/vxFB6C+Wu/YR9+Avjw==
+X-Google-Smtp-Source: AGHT+IGTMsKtP2G3Wisl71duPg2R8F8xhT5SbykvwIvTBfZDhFArqc4cu/N0+DDO+BgZ49g18kmBZYIKUOKMHB/tIAs=
+X-Received: by 2002:a17:90b:3d8c:b0:316:3972:b9d0 with SMTP id
+ 98e67ed59e1d1-31c9e5fcacfmr22074724a91.0.1752931794326; Sat, 19 Jul 2025
+ 06:29:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250624152545.36763-1-shankari.ak0208@gmail.com> <CAPRMd3kM8Eaf64vdMd+43cuV-QTBca9Zxm+Ou4S-DFCY5ovDBQ@mail.gmail.com>
-In-Reply-To: <CAPRMd3kM8Eaf64vdMd+43cuV-QTBca9Zxm+Ou4S-DFCY5ovDBQ@mail.gmail.com>
+References: <7c4eef67-7bbc-4a4d-ba10-ccf30c6afcdb@sabinyo.mountain>
+In-Reply-To: <7c4eef67-7bbc-4a4d-ba10-ccf30c6afcdb@sabinyo.mountain>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Tue, 1 Jul 2025 11:23:59 -0400
-X-Gm-Features: Ac12FXyZ5SO4i36eiyT3nJ2ClMSI9KR9oOEBuBstY0HrkZKGrIFtXNJsB9FYKdM
-Message-ID: <CAOg9mST4S-d=Fcio64MLVHouSmNi2P7r9Fc8pMHL1HyWCYnT0A@mail.gmail.com>
-Subject: Re: [PATCH v2] fs: orangefs: replace scnprintf() with sysfs_emit()
-To: Shankari Anand <shankari.ak0208@gmail.com>
+Date: Sat, 19 Jul 2025 09:29:43 -0400
+X-Gm-Features: Ac12FXwk323ZxD0gV07N4nak0N32Rmf-A61cgZKPwrhzUMCykchXRr8i91VBpZ4
+Message-ID: <CAOg9mSSnnLf_uoM1pQp4yMjd4e=q07PjBWw62ch3P+V1c--+Dw@mail.gmail.com>
+Subject: Re: [PATCH next] fs/orangefs: Use scnprintf() instead of snprintf()
+To: Dan Carpenter <dan.carpenter@linaro.org>, Mike Marshall <hubcap@omnibond.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: QBZ3LB3CZRJNN234BEGDRRX46TR7IYQS
-X-Message-ID-Hash: QBZ3LB3CZRJNN234BEGDRRX46TR7IYQS
+Message-ID-Hash: NSYKVFHVOZ3XHJ52KJHWSDPSGFFW3EZ3
+X-Message-ID-Hash: NSYKVFHVOZ3XHJ52KJHWSDPSGFFW3EZ3
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: devel@lists.orangefs.org, linux-fsdevel <linux-fsdevel@vger.kernel.org>
+CC: Amir Mohammad Jahangirzad <a.jahangirzad@gmail.com>, Martin Brandenburg <martin@omnibond.com>, devel@lists.orangefs.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/QBZ3LB3CZRJNN234BEGDRRX46TR7IYQS/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/NSYKVFHVOZ3XHJ52KJHWSDPSGFFW3EZ3/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -75,129 +77,58 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-I have it xfstested and plan to upload it along with a couple of other
-patches to my linux-next tree soon...
+Thanks. I noticed the "returns the number of bytes
+which *would* have been copied" issue when I read the
+snprintf man page while looking at the patch. I'll see
+about making this change in my "next" before the
+rc period is over...
 
-Thanks!
+Also, while looking at this patch, I made
+an xfstest that includes buffer overflow attempts
+and other bogus input. It would be, of course,
+an orangefs specific xfstest... I wonder if I
+should try to get it pulled into the main xfstests
+repo?
 
 -Mike
 
-On Tue, Jul 1, 2025 at 2:13=E2=80=AFAM Shankari Anand <shankari.ak0208@gmai=
-l.com> wrote:
+On Fri, Jul 18, 2025 at 5:24=E2=80=AFPM Dan Carpenter <dan.carpenter@linaro=
+.org> wrote:
 >
-> Hello, can this patch be picked for review?
+> We recently changed this code from using sprintf() to using snprintf()
+> as a kernel hardening measure.  However, that's still not ideal.  The
+> snprintf() function returns the number of bytes which *would* have been
+> copied if we had enough space while the snprintf() function returns the
+> number of bytes which are *actually* copied.
 >
-> On Tue, Jun 24, 2025 at 8:56=E2=80=AFPM Shankari Anand
-> <shankari.ak0208@gmail.com> wrote:
-> >
-> > Documentation/filesystems/sysfs.rst mentions that show() should only
-> > use sysfs_emit() or sysfs_emit_at() when formating the value to be
-> > returned to user space. So replace scnprintf() with sysfs_emit().
-> >
-> > Signed-off-by: Shankari Anand <shankari.ak0208@gmail.com>
-> > ---
-> > v1 -> v2: Fix minor parameter error
-> > ---
-> >  fs/orangefs/orangefs-sysfs.c | 28 ++++++++++------------------
-> >  1 file changed, 10 insertions(+), 18 deletions(-)
-> >
-> > diff --git a/fs/orangefs/orangefs-sysfs.c b/fs/orangefs/orangefs-sysfs.=
-c
-> > index 04e15dfa504a..b89e516f9bdc 100644
-> > --- a/fs/orangefs/orangefs-sysfs.c
-> > +++ b/fs/orangefs/orangefs-sysfs.c
-> > @@ -217,36 +217,31 @@ static ssize_t sysfs_int_show(struct kobject *kob=
-j,
-> >
-> >         if (!strcmp(kobj->name, ORANGEFS_KOBJ_ID)) {
-> >                 if (!strcmp(attr->attr.name, "op_timeout_secs")) {
-> > -                       rc =3D scnprintf(buf,
-> > -                                      PAGE_SIZE,
-> > +                       rc =3D sysfs_emit(buf,
-> >                                        "%d\n",
-> >                                        op_timeout_secs);
-> >                         goto out;
-> >                 } else if (!strcmp(attr->attr.name,
-> >                                    "slot_timeout_secs")) {
-> > -                       rc =3D scnprintf(buf,
-> > -                                      PAGE_SIZE,
-> > +                       rc =3D sysfs_emit(buf,
-> >                                        "%d\n",
-> >                                        slot_timeout_secs);
-> >                         goto out;
-> >                 } else if (!strcmp(attr->attr.name,
-> >                                    "cache_timeout_msecs")) {
-> > -                       rc =3D scnprintf(buf,
-> > -                                      PAGE_SIZE,
-> > +                       rc =3D sysfs_emit(buf,
-> >                                        "%d\n",
-> >                                        orangefs_cache_timeout_msecs);
-> >                         goto out;
-> >                 } else if (!strcmp(attr->attr.name,
-> >                                    "dcache_timeout_msecs")) {
-> > -                       rc =3D scnprintf(buf,
-> > -                                      PAGE_SIZE,
-> > +                       rc =3D sysfs_emit(buf,
-> >                                        "%d\n",
-> >                                        orangefs_dcache_timeout_msecs);
-> >                         goto out;
-> >                 } else if (!strcmp(attr->attr.name,
-> >                                    "getattr_timeout_msecs")) {
-> > -                       rc =3D scnprintf(buf,
-> > -                                      PAGE_SIZE,
-> > +                       rc =3D sysfs_emit(buf,
-> >                                        "%d\n",
-> >                                        orangefs_getattr_timeout_msecs);
-> >                         goto out;
-> > @@ -256,14 +251,12 @@ static ssize_t sysfs_int_show(struct kobject *kob=
-j,
-> >
-> >         } else if (!strcmp(kobj->name, STATS_KOBJ_ID)) {
-> >                 if (!strcmp(attr->attr.name, "reads")) {
-> > -                       rc =3D scnprintf(buf,
-> > -                                      PAGE_SIZE,
-> > +                       rc =3D sysfs_emit(buf,
-> >                                        "%lu\n",
-> >                                        orangefs_stats.reads);
-> >                         goto out;
-> >                 } else if (!strcmp(attr->attr.name, "writes")) {
-> > -                       rc =3D scnprintf(buf,
-> > -                                      PAGE_SIZE,
-> > +                       rc =3D sysfs_emit(buf,
-> >                                        "%lu\n",
-> >                                        orangefs_stats.writes);
-> >                         goto out;
-> > @@ -497,19 +490,18 @@ static ssize_t sysfs_service_op_show(struct kobje=
-ct *kobj,
-> >                 if (strcmp(kobj->name, PC_KOBJ_ID)) {
-> >                         if (new_op->upcall.req.param.op =3D=3D
-> >                             ORANGEFS_PARAM_REQUEST_OP_READAHEAD_COUNT_S=
-IZE) {
-> > -                               rc =3D scnprintf(buf, PAGE_SIZE, "%d %d=
-\n",
-> > +                               rc =3D sysfs_emit(buf, "%d %d\n",
-> >                                     (int)new_op->downcall.resp.param.u.
-> >                                     value32[0],
-> >                                     (int)new_op->downcall.resp.param.u.
-> >                                     value32[1]);
-> >                         } else {
-> > -                               rc =3D scnprintf(buf, PAGE_SIZE, "%d\n"=
-,
-> > +                               rc =3D sysfs_emit(buf, "%d\n",
-> >                                     (int)new_op->downcall.resp.param.u.=
-value64);
-> >                         }
-> >                 } else {
-> > -                       rc =3D scnprintf(
-> > +                       rc =3D sysfs_emit(
-> >                                 buf,
-> > -                               PAGE_SIZE,
-> >                                 "%s",
-> >                                 new_op->downcall.resp.perf_count.buffer=
-);
-> >                 }
-> >
-> > base-commit: 78f4e737a53e1163ded2687a922fce138aee73f5
-> > --
-> > 2.34.1
-> >
+> So if there were an overflow, the conversion to snprintf() would prevent
+> memory corruption but it would still leave an information leak where we
+> would read beyond the end of "buf".  Use scnprintf() to fix both the
+> write overflow and the read overflow.
+>
+> Fixes: fc08e0b8f099 ("fs/orangefs: use snprintf() instead of sprintf()")
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> ---
+>  fs/orangefs/orangefs-debugfs.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/orangefs/orangefs-debugfs.c b/fs/orangefs/orangefs-debugf=
+s.c
+> index a5fad515815e..e463d3c73533 100644
+> --- a/fs/orangefs/orangefs-debugfs.c
+> +++ b/fs/orangefs/orangefs-debugfs.c
+> @@ -396,7 +396,7 @@ static ssize_t orangefs_debug_read(struct file *file,
+>                 goto out;
+>
+>         mutex_lock(&orangefs_debug_lock);
+> -       sprintf_ret =3D snprintf(buf, ORANGEFS_MAX_DEBUG_STRING_LEN, "%s"=
+, (char *)file->private_data);
+> +       sprintf_ret =3D scnprintf(buf, ORANGEFS_MAX_DEBUG_STRING_LEN, "%s=
+", (char *)file->private_data);
+>         mutex_unlock(&orangefs_debug_lock);
+>
+>         read_ret =3D simple_read_from_buffer(ubuf, count, ppos, buf, spri=
+ntf_ret);
+> --
+> 2.47.2
+>

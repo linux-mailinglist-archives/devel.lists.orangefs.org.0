@@ -2,75 +2,70 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE643B0E23B
-	for <lists+devel-orangefs@lfdr.de>; Tue, 22 Jul 2025 18:57:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C650DB1546C
+	for <lists+devel-orangefs@lfdr.de>; Tue, 29 Jul 2025 22:51:37 +0200 (CEST)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id 0C2ED385332
-	for <lists+devel-orangefs@lfdr.de>; Tue, 22 Jul 2025 12:57:18 -0400 (EDT)
+	by mm1.emwd.com (Postfix) with ESMTP id DAE9354BD3F
+	for <lists+devel-orangefs@lfdr.de>; Tue, 29 Jul 2025 16:51:33 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1753203438; bh=qIau4d6bEVUKXvPUTIztThtAX4c0si40RS1OFrHHDbU=;
-	h=References:In-Reply-To:From:Date:Subject:To:List-Id:List-Archive:
-	 List-Help:List-Owner:List-Post:List-Subscribe:List-Unsubscribe:
-	 From;
-	b=llfUWml01tCJZ3yZk7KKW61RxdnUls1k+Wkpk2ZheSJrab1b19a7ZfEypP8JLtRxa
-	 yvi35DDMngcvk0FVBO+rAkmlr7nWNpW7qT5kKSkkELITfsbeNnjW5sNX8+uNqIbBg4
-	 fRBtrr/n6bV7mAe8mqwcyecersOr5ZSyHZM86MXxkF/VIADqKPf8+eR2149O5NU32X
-	 rfuPmotWumu1PwEo8DOwma9EbD1IT4jSAqBqgF6Sx1xd+gwJcB+0DsYvcY1zto0+6S
-	 qqdQV+B3AYVj98t03neIarR7KsimrdqrQQm8pOg8aA544y51sFeBmb0+koybpGqiGd
-	 vLRnlrvfyraKA==
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
-	by mm1.emwd.com (Postfix) with ESMTPS id B26DA38530F
-	for <devel@lists.orangefs.org>; Tue, 22 Jul 2025 12:57:15 -0400 (EDT)
+	t=1753822293; bh=at7wv7dglQHSffUjEQ1SZQdJS8KUBIGGScGRZm65KvE=;
+	h=From:Date:Subject:To:List-Id:List-Archive:List-Help:List-Owner:
+	 List-Post:List-Subscribe:List-Unsubscribe:From;
+	b=xy7VWgN92+6BjbkqMyLPU4tfVhmIiR8RivzaAuON+VtWhwu7iakaGnZ4a2niAKmuc
+	 sdy9jhLUW4J80sHQZdBBMCs+rrvJH1SDFkxYGSZ20LkSWhQviayb4oGZFez4LGxtsd
+	 dkH4Irp7E0UqXytPJ9woVlhqr/VuMWPnqw5QVp3kXnZdvRppUOjFCrZswvQ3DIvIlJ
+	 Aogved6axX6FpEutfmx0dIBGvAA13xI0JsyJl48bZpdfgDTrn3rhAeOlBjhDDSbnIR
+	 kw0Sg6bcPTzqwety3TCnlCEwMu68ETOIHMP2AwVnzwITItq3M7DgaxBbDALkd61YQ7
+	 fC3NidS1O3YFA==
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+	by mm1.emwd.com (Postfix) with ESMTPS id 6395F54BD27
+	for <devel@lists.orangefs.org>; Tue, 29 Jul 2025 16:51:32 -0400 (EDT)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="jGGqZdnB";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="DOF9ACL+";
 	dkim-atps=neutral
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-b26f7d2c1f1so5731181a12.0
-        for <devel@lists.orangefs.org>; Tue, 22 Jul 2025 09:57:15 -0700 (PDT)
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-b3bdab4bf19so193364a12.2
+        for <devel@lists.orangefs.org>; Tue, 29 Jul 2025 13:51:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753203434; x=1753808234;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=zqluySG0nGW7fbdJM76wn5zr8fZ5BplUhXk3amoupz8=;
-        b=Dh/8L6OZ19oF9zv1Kx0XsLrBXodVZeSzdfD+Ql0NLzW1n52vq1fqaIEAKjcmXYNLZO
-         n8OVjIyFe6LM9jIoQDIsWGgC5569FL4wEhDYp/2tB+rRAFTD0bzXb4JXBjRTcACewkAR
-         LLVsLilF/jEW0UnrPMUDI8g1UTi5JC2JJ1zh/OOyc2v6OJ9q8pm7y73YUYHtHBNvU1VW
-         zOi1DIXfk+BWmpq4Jpgue0AXR60GiLZfX6zAkx4goyFHp7oftGI0oek/WPl+23N9siG4
-         WvDFXPOb8Vd4aUnyMnv4rmY7WcNh27jWVP/RkA3sqAFEyGScMAaeH14E28Fxs1XOlCAK
-         cG8A==
-X-Forwarded-Encrypted: i=1; AJvYcCWLS2/Zs5dptpdDXWhMOsw7dj0y5phdXupSJ/bZDB5mvKEXd1QuB+3QGYOSLRi/IvpRqQ0WKw==@lists.orangefs.org
-X-Gm-Message-State: AOJu0YyIRj7JoCo/FL3sd32MsBXBzTPtjue01JpbCAA+VMKrKDVwhKFV
-	oHzr6ww2EojAQBz7LF7yOFEKisd4igMI/ZPlfZIhdrQxKUaVWY+wlMsDSSeIkYuuG+eeSoMbQYs
-	VsBhtYoVQX7UeSuS3gnEtUwtH7n9Bzivgt21P1imU
-X-Gm-Gg: ASbGncvd6AjRFnGsktG1hdOoZ3+HOvKn/AfQxq7cgQnFqtUyva8bEHEERipP2M19H7m
-	njHUoW3Yu/9kL2LiKWwtPC/O1GYr+r/qT5/UCrIlsI/Xf+xstLAgv274OKKSnCiT//5cztg0rdv
-	3WDYMz2b0v3PnvSc0EIkxOhJZgkMzEfLf9jv8HO/Lp1aXkATikMx79/dUae7NrTgh0NLAwvhei+
-	WHQ7UqXJseivFnjJfs=
-X-Google-Smtp-Source: AGHT+IHxKgBH5aFojjSvEn0wVe4PvgbV7DEyFFVAOU7P9P+DZKmUxbChlgg6OtnUgSk9zIbGVLFCwP5qKYMCNKNCecM=
-X-Received: by 2002:a17:90a:d2cc:b0:31e:4e36:bfcf with SMTP id
- 98e67ed59e1d1-31e4e36bfddmr742936a91.30.1753203434243; Tue, 22 Jul 2025
- 09:57:14 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1753822291; x=1754427091;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=578jKP0hi0tqBVIjYWRvcUwNsc6+UhPS5TGkN9Mmbb8=;
+        b=OsPu1XQqbupAzPgtuQNqR97V+I/CrKt0Ltly9XPm0cMAVS1vhT7UmkLgeHAjLrvifX
+         iDDKPNrDvISC3S4+95x0LvSaX52jhPQT4TKx4lj5YcEb+uKQxj8SIui85nF9zNTLdwDH
+         Xfhcl5U+DnUrQ6xeV2JcIWCyfbA0LWYueDl1Tpw27ptQ4ItcCkg4fjzUSKHZszuF/C1H
+         9BAio6p5tQG3GY3uHgnmKk58I0RiR30P97X9Y+MvRVQVdnsUKl7DyRlfNRtLQVXUkIQN
+         hHmnzGxz663sKzmtef0scgedwdUl4ZknyNQRY5UzhW+aLG+Lc7EC1qbgQ1u3B7hdFpQv
+         QgYg==
+X-Forwarded-Encrypted: i=1; AJvYcCXVycHERQHV1t6NOclsYWrXWNxlI/OQP4HibzNSughznbNUehBAHSCigWBF48CwYWPNchkVdA==@lists.orangefs.org
+X-Gm-Message-State: AOJu0Yx6JcbCgzfj1r/sHrcThBAm0rj9PEKyAaWqfbUSnUFTP5RnYsw1
+	tGQYE0FsdxqzJPqBCGollDBecmx3C2ntW7KUEwpE7qTog/yXQVYCx98Ka8OerZp4U35ZniyJtIW
+	wfGGKtbpUfFv8rXFXE5+LqgfTcsRweg0X3McunWR3
+X-Gm-Gg: ASbGncvde0yZXEVNanMDuUmg+3szXAlA90Pv68XZX98Xo7EmI6ngnCrXrX/gP7Zis1o
+	2r9u5pLYoOgaWAr0HB7sk2Xwdy2Y3f7v2UmXegy8ebMXheX6yKfkAzpcQ6twY0aEqCrEJlH5rnP
+	L25fsjDW4/CtPcp9vUXCFNmueat3CZ+w+iFKtIbcF2KI4tQcHjEhQ1qdTZWbct7ct2XWIoqDh7j
+	k21LYetntNEZhlrvLk=
+X-Google-Smtp-Source: AGHT+IHFddi40TTm6cZBAA9PiJhIK2zNprWK8Gs1f+2BU0iJl2Rwr+HrzlAsoOff6zAq4E0jbc2qWg0bqp+nfvb0+MA=
+X-Received: by 2002:a17:90b:4c8f:b0:312:f88d:25f9 with SMTP id
+ 98e67ed59e1d1-31f5dd8921dmr1025894a91.7.1753822291188; Tue, 29 Jul 2025
+ 13:51:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <CADf5TKvB3FUKvvQVwhzHmLahJRO1rc6oteQmASi_JhBigJT0rg@mail.gmail.com>
- <CAOg9mSQ+BQtxOp_Oz=dgUPFhCnPcnooQeBdWO9WrizUQq5LzaQ@mail.gmail.com>
-In-Reply-To: <CAOg9mSQ+BQtxOp_Oz=dgUPFhCnPcnooQeBdWO9WrizUQq5LzaQ@mail.gmail.com>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Tue, 22 Jul 2025 12:57:03 -0400
-X-Gm-Features: Ac12FXxiVNUJKVeSdKM6DcF3YZ2nZ4TAMbr33nPZa1cY_3v8uqPEDGKeX4Y10w4
-Message-ID: <CAOg9mSSAPZ1Ph1OO3N2vzPspcxu0n0K7CFpiuu3BtzUTMfPKiA@mail.gmail.com>
-Subject: Re: The Orangefs memory corruption bug
-To: Amir Mohammad Jahangirzad <a.jahangirzad@gmail.com>, Mike Marshall <hubcap@omnibond.com>,
-	devel@lists.orangefs.org, Dan Carpenter <dan.carpenter@linaro.org>
+Date: Tue, 29 Jul 2025 16:51:20 -0400
+X-Gm-Features: Ac12FXyFxL81O0IrhpWsHbUNoJI2MevNbfRHash4HpouZZbd8DogRq_OxDQUOf0
+Message-ID: <CAOg9mSSTTgDcyex2gGK5V+JmaNfdXJidWkSkR8XdM+i2SN8NXQ@mail.gmail.com>
+Subject: [GIT PULL] orangefs fixes for 6.17
+To: Linus Torvalds <torvalds@linux-foundation.org>,
+	linux-fsdevel <linux-fsdevel@vger.kernel.org>, Mike Marshall <hubcap@omnibond.com>,
+	devel@lists.orangefs.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: KCS5D437MYUTLJ4CZ4IMB4INSTF56NQI
-X-Message-ID-Hash: KCS5D437MYUTLJ4CZ4IMB4INSTF56NQI
+Message-ID-Hash: 2GBCQ2O52NPKLLYDPU72GEQZKUJM56PB
+X-Message-ID-Hash: 2GBCQ2O52NPKLLYDPU72GEQZKUJM56PB
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/KCS5D437MYUTLJ4CZ4IMB4INSTF56NQI/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/2GBCQ2O52NPKLLYDPU72GEQZKUJM56PB/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -78,61 +73,40 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-I updated my xfstest to test the client debug mask code
-and changed Amir's patch to use scnprintf. It is on linux-next
-now for testing, and I added a patch that Dan sent. I edited
-the commit message in Amir's patch to mention Dan's
-suggested change. If either of you are unhappy with the
-commit message (edited commit message, no sign-off by
-Dan) let me know... and thanks!
+The following changes since commit 347e9f5043c89695b01e66b3ed111755afcf1911:
 
-https://web.git.kernel.org/pub/scm/linux/kernel/git/hubcap/linux.git/
+  Linux 6.16-rc6 (2025-07-13 14:25:58 -0700)
 
--Mike
+are available in the Git repository at:
 
-On Mon, Jul 21, 2025 at 10:43=E2=80=AFAM Mike Marshall <hubcap@omnibond.com=
-> wrote:
->
-> Hi Amir...
->
-> I have had your patch in my linux-next tree for a week or two. Dan
-> Carpenter saw it and suggested to change snprintf to scnprintf,
-> today I am making that change and xfstesting it. I've never written
-> an xfstest before, but your patch prompted me to write an
-> orangefs-specific xfstest that pumps all kinds of valid and invalid
-> strings into /sys/kernel/debug/orangefs/kernel-debug.
->
-> Anyhow, I plan to modify your patch with Dan's suggestion and that's
-> probably what I'll submit to Linus in the merge window.
->
-> I think you should do whatever you think is good for Linux as far
-> as your inclination of reporting it to the Linux CVE team goes. When
-> I wrote the original code years ago I did many manual buffer-overflow
-> tests on it and I think it is good as is. I also think your suggestion
-> and Dan's suggestion are superior since using standard tools like
-> s(c)nprintf is better practice than my "open coded" solution.
->
-> You can see your patch at:
->   https://web.git.kernel.org/pub/scm/linux/kernel/git/hubcap/linux.git
-> ... in my linux-next branch and by tomorrow you will be able to
-> see if I added Dan's suggestion.
->
-> -Mike
->
-> On Sun, Jul 20, 2025 at 10:33=E2=80=AFAM Amir Mohammad Jahangirzad
-> <a.jahangirzad@gmail.com> wrote:
-> >
-> > Hi Mike,
-> >
-> > As you know, I recently submitted a patch for a memory corruption
-> > bug in the orangefs module. I'm considering reporting it to the
-> > Linux CVE team, but I'm unsure if the bug is actually triggerable
-> > from user space.
-> >
-> > I wanted to check with you first to better understand the impact
-> > before proceeding.
-> >
-> > Would appreciate any thoughts or guidance you might have.
-> >
-> > Best regards,
-> > Amir Mohammad Jahangirzad
+  git://git.kernel.org/pub/scm/linux/kernel/git/hubcap/linux.git
+tags/for-linus-6.17-ofs1
+
+for you to fetch changes up to 2138e89cb066b40386b1d9ddd61253347d356474:
+
+  fs/orangefs: Allow 2 more characters in do_c_string() (2025-07-22
+12:39:29 -0400)
+
+----------------------------------------------------------------
+orangefs: fixes for string handling in debugfs and sysfs
+
+Change scnprintf to sysfs_emit in sysfs code.
+
+Change sprintf to scnprintf in debugfs code.
+
+Refactor debugfs mask-to-string code for readability and slightly
+improved functionality.
+
+----------------------------------------------------------------
+Amir Mohammad Jahangirzad (1):
+      fs/orangefs: use snprintf() instead of sprintf()
+
+Dan Carpenter (1):
+      fs/orangefs: Allow 2 more characters in do_c_string()
+
+Shankari Anand (1):
+      fs: orangefs: replace scnprintf() with sysfs_emit()
+
+ fs/orangefs/orangefs-debugfs.c |  8 ++++----
+ fs/orangefs/orangefs-sysfs.c   | 28 ++++++++++------------------
+ 2 files changed, 14 insertions(+), 22 deletions(-)

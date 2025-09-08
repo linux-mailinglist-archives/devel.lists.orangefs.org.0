@@ -2,74 +2,74 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75D56B43D16
-	for <lists+devel-orangefs@lfdr.de>; Thu,  4 Sep 2025 15:25:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B22EB48D91
+	for <lists+devel-orangefs@lfdr.de>; Mon,  8 Sep 2025 14:32:38 +0200 (CEST)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id 096173858FF
-	for <lists+devel-orangefs@lfdr.de>; Thu,  4 Sep 2025 09:25:58 -0400 (EDT)
+	by mm1.emwd.com (Postfix) with ESMTP id EF1353859D6
+	for <lists+devel-orangefs@lfdr.de>; Mon,  8 Sep 2025 08:32:33 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1756992358; bh=FET2Dy1eMz1dRzV3Gr4YyXmMJL5wm2911UuIhuaWBW4=;
+	t=1757334753; bh=bc9uU9H3gR3NuPKdHokEU+VY1IV93gptQcoAS/TdUdQ=;
 	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
 	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
 	 List-Unsubscribe:From;
-	b=lG2qISUjFi9JQ8/gR9rXdnIFdkvDSm18QqperHL8w84FlzKs8gAaStJFTG3j83i4S
-	 8x4MLIKMJsaQKnZ0ws8nQGBwqnGA08RcBW4IJT6omBxJ2svDeUoYX1vdt7WMlFSzO6
-	 PR+ljhNBdkil0aT8Wd/xiJMMQrhsdoqAOh8NTjR37M4NkBwy0F1fp+BOmTJZYnE0PF
-	 Ftic2SK0yvE56liC7kPNgbiib9aCn+oY/rIlmpfF7XG7lvYb6L8SamLnLVVlrTT2Rt
-	 EBuUH9U8gtDcCPFyw2aDyxrpGfp1pbOP94ee/Ss4BcO2jIWHEp/FgNsJku1itDv2xW
-	 no5vq7GgtUciQ==
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
-	by mm1.emwd.com (Postfix) with ESMTPS id 64A93385717
-	for <devel@lists.orangefs.org>; Thu,  4 Sep 2025 09:25:55 -0400 (EDT)
+	b=z+/dBlV6CrArerrRPdsOiOr8VZjyGRe2gIF4cN8BDxEYmOzjdp2Air/0JcbUISoXH
+	 qU2I8k7acELD56ErHkT5om34aSY8aQrnWBPFBxd6pf8FtnFJt3XyCd1vXqjdjcMdUl
+	 6Lm2+2WELWDMKIS8db00sB3BnQiBDj/fDO7MX7Cw8xeWFiumVI8SK2mYvkhY7gO7U5
+	 DJRbe0Iu35yl2NwR2DRy0D9YfeXHJdk9HvdfMUJLLDKYlHOXPLkHcvtYX3o4cyYW25
+	 7jyGqmDqsJx0fAcBBpJfJQ0aTB4sdskCZw+zUP1amr6ijGUYRnDUQaetXVIVnZE5mB
+	 GN6041ULoI6IA==
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+	by mm1.emwd.com (Postfix) with ESMTPS id 2177D3859C0
+	for <devel@lists.orangefs.org>; Mon,  8 Sep 2025 08:32:30 -0400 (EDT)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="TnwQZoxF";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="PrmfE6i8";
 	dkim-atps=neutral
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-77246079bc9so1223918b3a.3
-        for <devel@lists.orangefs.org>; Thu, 04 Sep 2025 06:25:55 -0700 (PDT)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b4755f37c3eso3672385a12.3
+        for <devel@lists.orangefs.org>; Mon, 08 Sep 2025 05:32:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756992354; x=1757597154;
+        d=1e100.net; s=20230601; t=1757334750; x=1757939550;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NRZZq6/C5qBPfOaeYft44zNifMSmgG4Y7WNM0zdplV4=;
-        b=EWjYbqx6R8fKK6m6hjcYDL71bu0XtSpZJwdRcORbWSKXg3aCHuetTNSAY0wqxF/oUP
-         FQOQ2ycORRrMX1iepECR8k+huAJ+dAFqPu4de6rEJQBiUdLuFrDPHzmWN/xbYSnBXqjg
-         UrFOwT5M99jSD4qquanmlFfjK8N+Ldwxb0w33PcXB0pTDPjjHDVQ0Q5TvRbxW8vZDkCM
-         I683ryj4QSc0iFkJvR4zmwid7PfLAHNYaBzmWu4jp7wgsqcvFE5mHZdD708LTO5Gr9oE
-         Mvff/bQj+okBz3knJo/d0tvNdoBSfnk2ZksmZDbZB/yS6yUG7TsG9wBr4GLSGrG+8SSf
-         CltQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUFY8wo/7v7Pcsd8ZXylBKeA2AB7E3PnajkA+IPNqFU7bVErcPsghk+KmWtMbSC7JNCAO8yeQ==@lists.orangefs.org
-X-Gm-Message-State: AOJu0Yyhor8rqXBQBe5aqAgs0AkomYSyPNNoYrrsKQeHcyZp7yD0MZr3
-	z+6B8M2Vfq/3Kq9vu+6JlH90iTrmOifeQozrYplqjc9eK5xHDJmdmUaX/o8w2ffwiO2fM5S8SLK
-	Huijq+oxJNyUy5bsXuhmNkGett/yNqcIs4rHqJMvE
-X-Gm-Gg: ASbGncvdvYj/gqu3Yd1YgDrE6R3lE/SZ8L8wgn/MaGvR6wImxOr2EbNH85mo4SDGSjB
-	SRfwxyB8BEIbYL1zJUa896lxBpZb0rwlKBoBa5rn83yabbEvjgWDsMVQ+poih7DNTcpoklq+rW2
-	s5hrZiBdmI2xZOdQjbmcDmncEnDs/8QKAFsEYNfk0kcnt++4tuIIgFIUHN9OWAoFrWbn4DgKUEA
-	HMdrHZOMS1iKGSfG5/f8Q3FSQoH
-X-Google-Smtp-Source: AGHT+IGyiaYMzvi5j9aruCus8bcNEeFokwTjPIWrKQsm/18pntw68s2I1AyQF2Zxt8FhEfkvbqWfXrg/jqslKhTHXNQ=
-X-Received: by 2002:a05:6a21:6daa:b0:243:a857:4377 with SMTP id
- adf61e73a8af0-243d6dd15b4mr26631320637.4.1756992353176; Thu, 04 Sep 2025
- 06:25:53 -0700 (PDT)
+        bh=Ir+vos1BZa+dXNoYRWaKB8GwBMnEKHvOAm2dhdQz5R8=;
+        b=oM2e5VddtWcsvu3jlsgUz6sfbErThPlilou0I9YiaApnfRJWKPPumKe20kHeyn/a6R
+         OAoQg7Cv21glDl3x68h6hBnQeb+7bJYDIHn6n/ONIaF0B0+FRZxwyrH6JTC/nG//5sSy
+         2weruRCmX7OGl21qLWHik9IKNngI+8LuDmeOhBXutvwNG2J3y2TQRa0woeDQ7cr94RSI
+         N5unp+eCDaTyEewGGVSv1gl4R5im7XhBMF7tsV2f7qO3MK5OO/n9S8Zo9IEB1C8x0L6x
+         QTN0u86MplpVcMh79MIX/+pnb+8W58X/J2oSkcA1pU3/H7XEDx7bGHEp3LUl1vRrflla
+         Lvxw==
+X-Forwarded-Encrypted: i=1; AJvYcCXWSmJu6yUevoRzFjclx4jyPutcOP8hcaXCT+pJbBFI1fcG4DD6bbmaN+U4pFDonBG5TJ2wFQ==@lists.orangefs.org
+X-Gm-Message-State: AOJu0YzIBeo/UnLQp4RCtBwLYCmwScX0d9ekHFNkLasPTv91ZVZg17Li
+	BmhWzIFX+tvMXJXyvbghRUsGTceGnFDY5o3xTFcvxP6Pu9oZWT45siGEuRUAsOgTlBtDxVjTnri
+	8qPfpAm81ZeRtoFVyRLq9pFWYGPwi2emKNJ3wG4pj
+X-Gm-Gg: ASbGncv/eQzuAa6EKul7y5oDX60XUrwMq9hhsnrTpmbPvUeadfKTxPoiWdA7etpigKO
+	Z1zuDPJJZpxGgm7G5Wtvyap9SGV32Y88E3CInOdAgzPt9G/6UFGqc/Ng9DKvVaH9kCQLIfcfLPN
+	5SQXoa0ph7YeF0obYjonq5WSSzBNou+WpnpLLkth1fwctrfLWehfOH2kOd32W2NGpRqHtX7leyy
+	YjblIO6CPioD//I2tRligfkkf40XA==
+X-Google-Smtp-Source: AGHT+IED+V8B0BJhWOGuFt2kxMe3gZOdFrbtqrhzBgmvbbkDWk21p3J98bLPNKoGuctDAkeWHsjRN5YjidCJOLO3p70=
+X-Received: by 2002:a17:902:ec8f:b0:24c:7862:41e2 with SMTP id
+ d9443c01a7336-25171cbdecemr126429645ad.31.1757334749936; Mon, 08 Sep 2025
+ 05:32:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250901025818.1761146-1-zhen.ni@easystack.cn>
-In-Reply-To: <20250901025818.1761146-1-zhen.ni@easystack.cn>
+References: <1ae9e8e9-596d-4510-89b7-799a735d390fn@aisle.com> <20250905153149.GC32734@1wt.eu>
+In-Reply-To: <20250905153149.GC32734@1wt.eu>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Thu, 4 Sep 2025 09:25:42 -0400
-X-Gm-Features: Ac12FXyUTqP87HbJx0OsmqMmk3-PK5czW85B2xMBFthFFBv1XtjYNEQcBXQ1Gq4
-Message-ID: <CAOg9mSS7-CCu6vw0WTFiMfo7TSRvmtV01atJpGsS-0Gu5kkGQA@mail.gmail.com>
-Subject: Re: [PATCH] orangefs: Remove unused type in macro fill_default_sys_attrs
-To: Zhen Ni <zhen.ni@easystack.cn>
+Date: Mon, 8 Sep 2025 08:32:19 -0400
+X-Gm-Features: Ac12FXxlO1CxhYUi0paPaVVnXAUlrmQQeu3iHrgyc3e07C2MwHjsC7IjvZU9Y6U
+Message-ID: <CAOg9mSR6omZ71t8azP3ffY-CjampUq_c_gmaT8g9iimuSmHE_Q@mail.gmail.com>
+Subject: Re: [Security] OrangeFS: infinite loop in xattr_key() enables local DoS
+To: Willy Tarreau <w@1wt.eu>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: A6Y6B25VJPXYQV6G24UI5UEOEVK6VFPH
-X-Message-ID-Hash: A6Y6B25VJPXYQV6G24UI5UEOEVK6VFPH
+Message-ID-Hash: IGHYG5AQ6EVVLRXUGC5PETQTD6PMSDI2
+X-Message-ID-Hash: IGHYG5AQ6EVVLRXUGC5PETQTD6PMSDI2
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: martin@omnibond.com, devel@lists.orangefs.org
+CC: Disclosure <disclosure@aisle.com>, security@kernel.org, devel@lists.orangefs.org
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/A6Y6B25VJPXYQV6G24UI5UEOEVK6VFPH/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/IGHYG5AQ6EVVLRXUGC5PETQTD6PMSDI2/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -77,79 +77,119 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-Hi, I studied your patch. It made me curious to see how
-the code got that way so I looked all the way back to the
-out-of-tree version... anyhow, thanks, and I'll xfstest it and
-plan to put it in my linux-next tree...
+Hello...
 
--Mike
+I see the message about the DOS attack on orangefs. I'll
+look into it and post back to this thread...
 
-On Sun, Aug 31, 2025 at 10:58=E2=80=AFPM Zhen Ni <zhen.ni@easystack.cn> wro=
-te:
+-Mike Marshall (maintainer)
+
+On Fri, Sep 5, 2025 at 11:31=E2=80=AFAM Willy Tarreau <w@1wt.eu> wrote:
 >
-> Remove the unused type parameter from the macro definition and all its
-> callers, making the interface consistent with its actual usage.
+> Hello,
 >
-> Fixes: 69a23de2f3de ("orangefs: clean up fill_default_sys_attrs")
-> Signed-off-by: Zhen Ni <zhen.ni@easystack.cn>
-> ---
->  fs/orangefs/namei.c           | 10 +++-------
->  fs/orangefs/orangefs-kernel.h |  2 +-
->  2 files changed, 4 insertions(+), 8 deletions(-)
+> thanks for your report. OrangeFS maintainer CCed, and I'm keeping the
+> rest of the original message intact below.
 >
-> diff --git a/fs/orangefs/namei.c b/fs/orangefs/namei.c
-> index 82395fe2b956..bec5475de094 100644
-> --- a/fs/orangefs/namei.c
-> +++ b/fs/orangefs/namei.c
-> @@ -38,8 +38,7 @@ static int orangefs_create(struct mnt_idmap *idmap,
+> Willy
 >
->         new_op->upcall.req.create.parent_refn =3D parent->refn;
->
-> -       fill_default_sys_attrs(new_op->upcall.req.create.attributes,
-> -                              ORANGEFS_TYPE_METAFILE, mode);
-> +       fill_default_sys_attrs(new_op->upcall.req.create.attributes, mode=
-);
->
->         strscpy(new_op->upcall.req.create.d_name, dentry->d_name.name);
->
-> @@ -240,9 +239,7 @@ static int orangefs_symlink(struct mnt_idmap *idmap,
->
->         new_op->upcall.req.sym.parent_refn =3D parent->refn;
->
-> -       fill_default_sys_attrs(new_op->upcall.req.sym.attributes,
-> -                              ORANGEFS_TYPE_SYMLINK,
-> -                              mode);
-> +       fill_default_sys_attrs(new_op->upcall.req.sym.attributes, mode);
->
->         strscpy(new_op->upcall.req.sym.entry_name, dentry->d_name.name);
->         strscpy(new_op->upcall.req.sym.target, symname);
-> @@ -316,8 +313,7 @@ static struct dentry *orangefs_mkdir(struct mnt_idmap=
- *idmap, struct inode *dir,
->
->         new_op->upcall.req.mkdir.parent_refn =3D parent->refn;
->
-> -       fill_default_sys_attrs(new_op->upcall.req.mkdir.attributes,
-> -                             ORANGEFS_TYPE_DIRECTORY, mode);
-> +       fill_default_sys_attrs(new_op->upcall.req.mkdir.attributes, mode)=
-;
->
->         strscpy(new_op->upcall.req.mkdir.d_name, dentry->d_name.name);
->
-> diff --git a/fs/orangefs/orangefs-kernel.h b/fs/orangefs/orangefs-kernel.=
-h
-> index 3e153c2f6b82..29c6da43e396 100644
-> --- a/fs/orangefs/orangefs-kernel.h
-> +++ b/fs/orangefs/orangefs-kernel.h
-> @@ -462,7 +462,7 @@ int service_operation(struct orangefs_kernel_op_s *op=
+> On Thu, Sep 04, 2025 at 11:17:55AM -0700, Disclosure wrote:
+> > Dear Linux kernel security team,
+> >
+> > We believe we have identified a local denial-of-service issue in Orange=
+FS
+> > xattr handling and would like to report it for your assessment.
+> >
+> > ### Summary
+> > - **Component**: `fs/orangefs/xattr.c`
+> > - **Issue**: Infinite loop in `xattr_key()` due to testing the pointer
+> > value instead of the character contents
+> > - **Impact**: Local denial of service via spinning/hung kernel thread
+> > during OrangeFS xattr operations
+> > - **Reachability**: Unprivileged users interacting with an OrangeFS-mou=
+nted
+> > filesystem (standard xattr syscalls)
+> > - **Gating**: Requires `CONFIG_ORANGEFS_FS` and an OrangeFS mount in us=
+e
+> >
+> > ### Technical details
+> > The helper `xattr_key()` uses the pointer variable in the loop conditio=
+n
+> > rather than dereferencing it. As `key` is incremented, it remains non-N=
+ULL
+> > (until it runs into unmapped memory), so the loop does not terminate on
+> > valid C strings and will walk memory indefinitely, consuming CPU or han=
+ging
+> > the thread.
+> >
+> > ```c
+> > static unsigned int xattr_key(const char *key)
+> > {
+> >     unsigned int i =3D 0;
+> >     while (key)
+> >         i +=3D *key++;
+> >     return i % 16;
+> > }
+> > ```
+> >
+> > This function is used by multiple xattr paths, making the bug trivially
+> > reachable:
+> >
+> > ```c
+> > h =3D &orangefs_inode->xattr_cache[xattr_key(key)];
+> > hash_add(orangefs_inode->xattr_cache, &cx->node, xattr_key(cx->key));
+> > ```
+> >
+> > ### Affected versions
+> > - Present in current mainline (v6.x). The function appears to date back=
+ to
+> > OrangeFS upstreaming (around v4.15-rc1). Precise introduction not bisec=
+ted.
+> >
+> > ### Proposed fix (minimal, safe)
+> > Check for NULL and test the pointed-to character to terminate on NUL as
+> > expected.
+> >
+> > ```diff
+> > diff --git a/fs/orangefs/xattr.c b/fs/orangefs/xattr.c
+> > index abcdef0..1234567 100644
+> > --- a/fs/orangefs/xattr.c
+> > +++ b/fs/orangefs/xattr.c
+> > @@ -54,7 +54,11 @@ static unsigned int xattr_key(const char *key)
+> >  {
+> >   unsigned int i =3D 0;
+> > - while (key)
+> > + if (!key)
+> > + return 0;
+> > + while (*key)
+> >   i +=3D *key++;
+> >   return i % 16;
+> >  }
+> > ```
+> >
+> > This preserves behavior for normal strings and yields a defined value f=
+or
+> > `key =3D=3D NULL`.
+> >
+> > ### CVSS 3.1 estimate: 6.1 (MEDIUM)
+> > - **Vector**: `CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H`
+> > - **Rationale**:
+> >   - Local attacker on a system with OrangeFS mounted (AV:L)
+> >   - Trivial to trigger via standard xattr syscalls (AC:L, UI:N)
+> >   - No special privileges required beyond access to the mount (PR:N)
+> >   - Availability impact only (A:H), no C/I impact (C:N/I:N), scope
+> > unchanged (S:U)
+> >
+> > ### Notes
+> > - The issue is configuration-gated and specific to OrangeFS deployments=
 ,
->         ((ORANGEFS_SB(inode->i_sb)->flags & ORANGEFS_OPT_INTR) ? \
->                 ORANGEFS_OP_INTERRUPTIBLE : 0)
->
-> -#define fill_default_sys_attrs(sys_attr, type, mode)                   \
-> +#define fill_default_sys_attrs(sys_attr, mode)                 \
->  do {                                                                   \
->         sys_attr.owner =3D from_kuid(&init_user_ns, current_fsuid()); \
->         sys_attr.group =3D from_kgid(&init_user_ns, current_fsgid()); \
-> --
-> 2.20.1
+> > but is trivially reachable where enabled.
+> > - The change is small, low risk, and self-contained.
+> >
+> > Please let us know if you have any questions or need any clarification!
+> >
+> > Best wishes,
+> > Stanislav Fort
+> > Aisle Research
+> >
 >

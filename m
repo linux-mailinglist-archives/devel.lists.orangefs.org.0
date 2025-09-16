@@ -2,74 +2,74 @@ Return-Path: <devel-bounces@lists.orangefs.org>
 X-Original-To: lists+devel-orangefs@lfdr.de
 Delivered-To: lists+devel-orangefs@lfdr.de
 Received: from mm1.emwd.com (mm1.emwd.com [172.104.12.73])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B22EB48D91
-	for <lists+devel-orangefs@lfdr.de>; Mon,  8 Sep 2025 14:32:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35B46B598C8
+	for <lists+devel-orangefs@lfdr.de>; Tue, 16 Sep 2025 16:08:13 +0200 (CEST)
 Received: from mm1.emwd.com (localhost [127.0.0.1])
-	by mm1.emwd.com (Postfix) with ESMTP id EF1353859D6
-	for <lists+devel-orangefs@lfdr.de>; Mon,  8 Sep 2025 08:32:33 -0400 (EDT)
+	by mm1.emwd.com (Postfix) with ESMTP id 3B9CB385905
+	for <lists+devel-orangefs@lfdr.de>; Tue, 16 Sep 2025 10:08:02 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=emwd.com; s=mm1;
-	t=1757334753; bh=bc9uU9H3gR3NuPKdHokEU+VY1IV93gptQcoAS/TdUdQ=;
+	t=1758031682; bh=kRQcsK9SAd4pyDFqtntutLf4Eii0iqU6mX7lc27YYAg=;
 	h=References:In-Reply-To:From:Date:Subject:To:CC:List-Id:
 	 List-Archive:List-Help:List-Owner:List-Post:List-Subscribe:
 	 List-Unsubscribe:From;
-	b=z+/dBlV6CrArerrRPdsOiOr8VZjyGRe2gIF4cN8BDxEYmOzjdp2Air/0JcbUISoXH
-	 qU2I8k7acELD56ErHkT5om34aSY8aQrnWBPFBxd6pf8FtnFJt3XyCd1vXqjdjcMdUl
-	 6Lm2+2WELWDMKIS8db00sB3BnQiBDj/fDO7MX7Cw8xeWFiumVI8SK2mYvkhY7gO7U5
-	 DJRbe0Iu35yl2NwR2DRy0D9YfeXHJdk9HvdfMUJLLDKYlHOXPLkHcvtYX3o4cyYW25
-	 7jyGqmDqsJx0fAcBBpJfJQ0aTB4sdskCZw+zUP1amr6ijGUYRnDUQaetXVIVnZE5mB
-	 GN6041ULoI6IA==
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
-	by mm1.emwd.com (Postfix) with ESMTPS id 2177D3859C0
-	for <devel@lists.orangefs.org>; Mon,  8 Sep 2025 08:32:30 -0400 (EDT)
+	b=mC1QzDdKP3fn/urA3jbdMv1wxe0l+DPvzlID2h7XT18aQxdMs3Obo4IOkNdEZKJn7
+	 Mdd7QrBQdyTENVQtwKKfsXebh0sEc31PmmaChYCfe86NeYYZbrEaCfnpPOWYowf4B+
+	 2KEag0X9S1Mx/AZ34BTeZMIi2ZJECFRs+uVGKRpJdv6f9/JYbnn/N++amW1WEmVRP6
+	 ZBk0jxtPtFEMOsyRya4ExLtWrjLIJRcCaPn22xN4hEVYcu7JeSc3AXKLZyK0zA94GS
+	 9PrObZ4O+Bz+HLbHi0TXzVveWZ0BFe+thsEnUTQKTiWQTGF0uhzFhImtFIggfB2EOF
+	 zOm64SKLxOI2A==
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+	by mm1.emwd.com (Postfix) with ESMTPS id 8E80D38574E
+	for <devel@lists.orangefs.org>; Tue, 16 Sep 2025 10:07:59 -0400 (EDT)
 Authentication-Results: mm1.emwd.com;
-	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="PrmfE6i8";
+	dkim=pass (2048-bit key; unprotected) header.d=omnibond-com.20230601.gappssmtp.com header.i=@omnibond-com.20230601.gappssmtp.com header.b="0ee4TW/2";
 	dkim-atps=neutral
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b4755f37c3eso3672385a12.3
-        for <devel@lists.orangefs.org>; Mon, 08 Sep 2025 05:32:30 -0700 (PDT)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-32e1288eb0cso2240561a91.3
+        for <devel@lists.orangefs.org>; Tue, 16 Sep 2025 07:07:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757334750; x=1757939550;
+        d=1e100.net; s=20230601; t=1758031678; x=1758636478;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Ir+vos1BZa+dXNoYRWaKB8GwBMnEKHvOAm2dhdQz5R8=;
-        b=oM2e5VddtWcsvu3jlsgUz6sfbErThPlilou0I9YiaApnfRJWKPPumKe20kHeyn/a6R
-         OAoQg7Cv21glDl3x68h6hBnQeb+7bJYDIHn6n/ONIaF0B0+FRZxwyrH6JTC/nG//5sSy
-         2weruRCmX7OGl21qLWHik9IKNngI+8LuDmeOhBXutvwNG2J3y2TQRa0woeDQ7cr94RSI
-         N5unp+eCDaTyEewGGVSv1gl4R5im7XhBMF7tsV2f7qO3MK5OO/n9S8Zo9IEB1C8x0L6x
-         QTN0u86MplpVcMh79MIX/+pnb+8W58X/J2oSkcA1pU3/H7XEDx7bGHEp3LUl1vRrflla
-         Lvxw==
-X-Forwarded-Encrypted: i=1; AJvYcCXWSmJu6yUevoRzFjclx4jyPutcOP8hcaXCT+pJbBFI1fcG4DD6bbmaN+U4pFDonBG5TJ2wFQ==@lists.orangefs.org
-X-Gm-Message-State: AOJu0YzIBeo/UnLQp4RCtBwLYCmwScX0d9ekHFNkLasPTv91ZVZg17Li
-	BmhWzIFX+tvMXJXyvbghRUsGTceGnFDY5o3xTFcvxP6Pu9oZWT45siGEuRUAsOgTlBtDxVjTnri
-	8qPfpAm81ZeRtoFVyRLq9pFWYGPwi2emKNJ3wG4pj
-X-Gm-Gg: ASbGncv/eQzuAa6EKul7y5oDX60XUrwMq9hhsnrTpmbPvUeadfKTxPoiWdA7etpigKO
-	Z1zuDPJJZpxGgm7G5Wtvyap9SGV32Y88E3CInOdAgzPt9G/6UFGqc/Ng9DKvVaH9kCQLIfcfLPN
-	5SQXoa0ph7YeF0obYjonq5WSSzBNou+WpnpLLkth1fwctrfLWehfOH2kOd32W2NGpRqHtX7leyy
-	YjblIO6CPioD//I2tRligfkkf40XA==
-X-Google-Smtp-Source: AGHT+IED+V8B0BJhWOGuFt2kxMe3gZOdFrbtqrhzBgmvbbkDWk21p3J98bLPNKoGuctDAkeWHsjRN5YjidCJOLO3p70=
-X-Received: by 2002:a17:902:ec8f:b0:24c:7862:41e2 with SMTP id
- d9443c01a7336-25171cbdecemr126429645ad.31.1757334749936; Mon, 08 Sep 2025
- 05:32:29 -0700 (PDT)
+        bh=5zziBEVuk7a5aOxS+Jo12rA99I9jzlIEUx+qXY0Q3Bc=;
+        b=cCWGx3teBkiBMbkf2Lh/uoi4PrP+7A/SgHCdE5iSB6EN8a17CaJkh6qbT3h15lp6bS
+         VIbd0GfmKknA6qYR7xdzH+5wXk7JQQQUvOu5N3g8ihru7/DFXvuKVwypj2XPsfHtHXAx
+         YHjhxrP4izYvPzYbiZ7yJ62MctFqelGasEG9yi1rGsc4CDcj6B56G7fWNy/SY0lhX3hg
+         hRuqsY7N7zJlztmV/pqSZQZnZXQ3dxyn6rtCNxzCemNsbOA1nJFd/os9u1FZgQe8LM+Y
+         OZ6wMgJQzAC8GpY2fUGceLW1Whs044TNGbFhUObTdHJDaTZsFsjr+w1ABxwyygdIppEx
+         ZycA==
+X-Forwarded-Encrypted: i=1; AJvYcCVQHpyL+N7hgu1/aa/G35TnE12KiwIQJ8QbzEgPPVAr9j4LWgKelNN2YgyyQkysq77AqlP+yA==@lists.orangefs.org
+X-Gm-Message-State: AOJu0YwmOmwfKT3/irA3oVkDPcvoQprc6CQIP0Hq9P5R6Izmo3A+d4tp
+	MNsmhToDgyTBbVd8WcCIyWDSQQNvIKkPg6Pt+BTFOFx4Dp10GosXZlF2CfdPBoHURM1lq0DElFS
+	+JB0aT1Jv0UrSAXsZ8KxM7rqcluGCLkLp5dYwuuYL
+X-Gm-Gg: ASbGnct7YFjVJMCAjIMCkuK1azkFJj7wBma0NDhx2kBO2kPT69qcp1/cb4AJ3jb/CRW
+	zQJlVEsued/njUdeKe0xQ/Tk/Kj4sKWZIrUFp40IeNlyD0boV70BOABwH9IrE8QA22W7SFhDhjX
+	tZ0SRG9rXLOgkTRVTl2EqsfqTSVHkvtvThV476khtqW1slVJxCAfOXGbO57zOYlcP+6BmDTQMPu
+	BHZw7ieQK8NZfvFJRs=
+X-Google-Smtp-Source: AGHT+IEGoGAOtPQiRPxN3yQnEwgHzHqJP/qJT/eOYTxY20OQn9yF9cXboTP1/wrfV1rsMg/Dd1HJRF7XmfmTjc/9bh4=
+X-Received: by 2002:a17:90a:c10e:b0:32e:6bf4:5435 with SMTP id
+ 98e67ed59e1d1-32e6bf4594dmr8448105a91.18.1758031678279; Tue, 16 Sep 2025
+ 07:07:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <1ae9e8e9-596d-4510-89b7-799a735d390fn@aisle.com> <20250905153149.GC32734@1wt.eu>
 In-Reply-To: <20250905153149.GC32734@1wt.eu>
 From: Mike Marshall <hubcap@omnibond.com>
-Date: Mon, 8 Sep 2025 08:32:19 -0400
-X-Gm-Features: Ac12FXxlO1CxhYUi0paPaVVnXAUlrmQQeu3iHrgyc3e07C2MwHjsC7IjvZU9Y6U
-Message-ID: <CAOg9mSR6omZ71t8azP3ffY-CjampUq_c_gmaT8g9iimuSmHE_Q@mail.gmail.com>
+Date: Tue, 16 Sep 2025 10:07:47 -0400
+X-Gm-Features: AS18NWBWOQ2mQi36YDt9ZaAkxYgTeciwlA8D8ztUKYj8negFkpomaA3bnaNPA6I
+Message-ID: <CAOg9mSRNS0f1ui9GJeCGZ_AovvcCvV-3vVjDm=FXGwtbLA3jjQ@mail.gmail.com>
 Subject: Re: [Security] OrangeFS: infinite loop in xattr_key() enables local DoS
 To: Willy Tarreau <w@1wt.eu>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: IGHYG5AQ6EVVLRXUGC5PETQTD6PMSDI2
-X-Message-ID-Hash: IGHYG5AQ6EVVLRXUGC5PETQTD6PMSDI2
+Message-ID-Hash: QGCIUGFM2Y2MQXPYIKWZYBQDBYFANVSZ
+X-Message-ID-Hash: QGCIUGFM2Y2MQXPYIKWZYBQDBYFANVSZ
 X-MailFrom: hubcap@omnibond.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Disclosure <disclosure@aisle.com>, security@kernel.org, devel@lists.orangefs.org
 X-Mailman-Version: 3.3.3
 Precedence: list
 List-Id: <devel.lists.orangefs.org>
-Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/IGHYG5AQ6EVVLRXUGC5PETQTD6PMSDI2/>
+Archived-At: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/message/QGCIUGFM2Y2MQXPYIKWZYBQDBYFANVSZ/>
 List-Archive: <https://lists.orangefs.org/archives/list/devel@lists.orangefs.org/>
 List-Help: <mailto:devel-request@lists.orangefs.org?subject=help>
 List-Owner: <mailto:devel-owner@lists.orangefs.org>
@@ -77,12 +77,30 @@ List-Post: <mailto:devel@lists.orangefs.org>
 List-Subscribe: <mailto:devel-join@lists.orangefs.org>
 List-Unsubscribe: <mailto:devel-leave@lists.orangefs.org>
 
-Hello...
+Thanks for the report on the orangefs xattr problem.
 
-I see the message about the DOS attack on orangefs. I'll
-look into it and post back to this thread...
+I easily reproduced this with setfattr and getfattr, causing a kernel
+oops, hung user processes and corrupted orangefs files. I created a
+patch with Disclosure's suggested fix.
 
--Mike Marshall (maintainer)
+After xattr_key started working right, xfstest generic/069 exposed an
+xattr related memory leak that lead to OOM. xattr_key returns
+a hashed key.  When adding xattrs to the orangefs xattr cache, orangefs
+used hash_add, a kernel hashing macro. hash_add also hashes the key using
+hash_log which resulted in additions to the xattr cache going to the wrong
+hash bucket. (A side effect of?) generic/069 tortures a single file
+with getattrs for a non-existent xattr: "security.capability". Orangefs
+negative caches on getattrs which includes a kmalloc. Since adds to the
+xattr cache were going to the wrong bucket, every getattr for
+"security.capability" resulted in another kmalloc, none of which were
+ever freed.
+
+I changed the two uses of hash_add to hlist_add_head instead
+and the memory leak ceased and generic/069 quit throwing furniture.
+
+I'll have this patch in my linux-next tree shortly.
+
+-Mike Marshall
 
 On Fri, Sep 5, 2025 at 11:31=E2=80=AFAM Willy Tarreau <w@1wt.eu> wrote:
 >
